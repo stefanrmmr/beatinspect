@@ -30,6 +30,9 @@ with header_col3:
     st.image("resources/rs_logo_transparent.png")
 
 
+if st.button('servus'):
+    st.write('hello')
+
 audiofile_upload = st.file_uploader("Please select and upload an audio file (.wav)",type='wav')
 # Set Preferences & Key
 if audiofile_upload is not None:
