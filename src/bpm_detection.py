@@ -22,7 +22,7 @@ import math
 import wave
 
 import numpy
-import PyWavelets as pywt
+import pywt
 from scipy import signal
 
 
