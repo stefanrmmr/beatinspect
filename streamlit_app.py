@@ -10,12 +10,16 @@ import src.bpm_detection as bpm_detection
 # from src.bpm_detection import detect_bpm_main
 
 # Streamlit Design Choices (page layout)
+primary_color = st.get_option("theme.primaryColor")
+
 st.set_page_config(layout="centered",
     page_icon="resources/rs_logo_transparent.png",
     page_title="beat inspector")
 
 hide_decoration_bar_style = '''<style>header {visibility: hidden;}</style>'''
 st.markdown(hide_decoration_bar_style, unsafe_allow_html=True)
+progressbar_design = '''<style> .stProgress .st-bo {background-color: {primary_color};}</style>'''
+st.markdown(progressbar_design, unsafe_allow_html=True)
 
 # Title and Information
 header_col1, header_col2, header_col3 = st.columns([10, 1.7, 3.3])
@@ -56,8 +60,7 @@ if audiofile_upload is not None:
             # y, sr = librosa.load(librosa.ex(audiofile_upload), duration=value)
             # bpm, beats = librosa.beat.beat_track(y=y, sr=sr)
             with pref_col3:
-                primary_color = st.get_option("theme.primaryColor")
-                bpm_output = f'<p style="font-family:sans-serif; color:{primary_color}; font-size: 25.6px;">BPM = {round(bpm, 2)}</p>'
-                st.markdown(bpm_output, unsafe_allow_html=True)
+                # bpm_output = f'<p style="font-family:sans-serif; color:{primary_color}; font-size: 25.6px;">BPM = {round(bpm, 2)}</p>'
+                # st.markdown(bpm_output, unsafe_allow_html=True)
 
-                # st.header(f'BPM = {round(bpm, 2)}')
+                st.header(f'BPM = {round(bpm, 2)}')
