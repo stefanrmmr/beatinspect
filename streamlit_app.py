@@ -54,10 +54,9 @@ if audiofile_upload is not None:
         # Initiate Analysis of bpm
         st.write('')  # add spacing
         st.write('')  # add spacing
+        st.write('')  # add spacing
         if st.button('Detect BPM'):
-
             with pref_col3:
-                st.write('')
                 with st.spinner('Calculating BPM'):
                     bpm = bpm_detection.detect_bpm_main(audiofile_upload, timeframe)
 
@@ -66,5 +65,4 @@ if audiofile_upload is not None:
             with pref_col3:
                 # bpm_output = f'<p style="font-family:sans-serif; color:{primary_color}; font-size: 25.6px;">BPM = {round(bpm, 2)}</p>'
                 # st.markdown(bpm_output, unsafe_allow_html=True)
-
                 st.header(f'BPM = {round(bpm, 2)}')
