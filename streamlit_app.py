@@ -43,4 +43,4 @@ if audiofile_upload is not None:
         # bpm, beats = librosa.beat.beat_track(y=y, sr=sr)
 
         st.header(f'BPM = {round(bpm, 2)}')
-        st.write(f'{audiofile_upload.name} - size: {audiofile_upload.size/8/1024} Mb')
+        st.write(f'Audio file: "{audiofile_upload.name}" - size: {audiofile_upload.size/(1024*8)} Mb')
