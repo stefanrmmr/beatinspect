@@ -3,14 +3,18 @@
 import streamlit as st
 import toml
 
-primaryColor = toml.load("config.toml")['theme']['primaryColor']
+# primaryColor = toml.load("config.toml")['theme']['primaryColor']
 # primaryColor = st.get_option("theme.primaryColor")
 s = f"""
 <style>
-div.stButton > button:first-child {{ border: 5px solid {primaryColor}; border-radius:20px 20px 20px 20px; }}
+div.stButton > button:first-child {background-color: #0099ff; color:#ffffff;}
+div.stButton > button:hover {background-color: #00ff00; color:#ff0000;}
 <style>
 """
 st.markdown(s, unsafe_allow_html=True)
+
+
+
 
 
 
