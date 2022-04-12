@@ -40,10 +40,10 @@ audiofile_upload = st.file_uploader("Please select and upload"
 # Set Preferences for Analytics
 if audiofile_upload is not None:
 
-    pref_col1, pref_col2, pref_col3 = st.columns([10, 5, 5])
+    pref_col1, pref_col2, pref_col3 = st.columns([5, 5, 5])
 
     with pref_col1:
-        complexity = st.radio("Select the complexity of the uploaded audio track",
+        complexity = st.radio("Select complexity of audio track",
             ('basic drum loop', 'advanced track'), help='basic drum loop: simple instrumental drum loop\n,'
              'advanced track: track with vocals and great variation/dynamic')
 
@@ -58,7 +58,7 @@ if audiofile_upload is not None:
         if st.button('Detect BPM'):
 
             with pref_col3:
-                with st.spinner('Calculating BPM ...'):
+                with st.spinner('Calculating BPM'):
                     bpm = bpm_detection.detect_bpm_main(audiofile_upload, timeframe)
 
             # y, sr = librosa.load(librosa.ex(audiofile_upload), duration=value)
