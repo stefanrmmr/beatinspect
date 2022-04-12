@@ -2,6 +2,7 @@
 import streamlit as st
 import sys
 import toml
+import librosa
 
 sys.path.append("src")
 
@@ -36,6 +37,11 @@ if audiofile_upload is not None:
 
     # Initiate Analysis of bpm
     if st.button('Analyse BPM'):
-        bpm = bpm_detection.detect_bpm_main(audiofile_upload, value)
+        # bpm = bpm_detection.detect_bpm_main(audiofile_upload, value)
+
+
+        y, sr = librosa.load(librosa.ex(audiofile_upload), duration=value)
+        bpm, beats = librosa.beat.beat_track(y=y, sr=sr)
+
         st.write(f'BPM = {bpm}')
         st.write(f'Audio file: {audiofile_upload}')
