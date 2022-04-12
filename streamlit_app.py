@@ -11,7 +11,7 @@ header_col1, header_col2, header_col3 = st.columns([10, 1.7, 3.3])
 
 with header_col1:
   st.title('beat inspector ™')
-  st.markdown('by [rs. analytics](https://www.linkedin.com/in/stefanrmmr/) - version 1.0.0 April 2022')
+  st.write('by [rs. analytics](https://www.linkedin.com/in/stefanrmmr/) - version 1.0.0 April 2022')
   st.write('')
 with header_col3:
   st.image("rs_logo_transparent.png")
