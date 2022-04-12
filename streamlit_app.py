@@ -5,7 +5,7 @@ import toml
 
 sys.path.append("src")
 
-# import src.bpm_detection as bpm_detection
+import src.bpm_detection as bpm_detection
 # from src.bpm_detection import detect_bpm_main
 
 
@@ -30,13 +30,11 @@ with header_col3:
 # Audio File Upload
 audiofile_upload = st.file_uploader("Please select and upload"
                                     " an audio file (.wav)",type='wav')
-# Set Preferences & Key
+# Set Preferences for Analytics
 if audiofile_upload is not None:
-    st.write('file upload complete')
-
     value = st.slider('Select size of the the time-window to be scanned (sec)',
-        min_value=5, max_value=30, value=10, step=1)
-        
+        min_value=5, max_value=25, value=10, step=1)
+
     st.write('Value:', value)
 
     #bpm = bpm_detection.detect_bpm_main('data/bounce_back.wav', 10)
