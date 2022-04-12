@@ -34,9 +34,10 @@ audiofile_upload = st.file_uploader("Please select and upload"
 if audiofile_upload is not None:
     st.write('file upload complete')
 
-    values = st.slider(
-    'Select a range of values', 0.0, 100.0, (25.0, 75.0))
-    st.write('Values:', values)
+    value = st.slider('Select size of the the time-window to be scanned (sec)',
+        min_value=5, max_value=30, value=10, step=1)
+        
+    st.write('Value:', value)
 
     #bpm = bpm_detection.detect_bpm_main('data/bounce_back.wav', 10)
     #st.write(f'BPM = {bpm}')
