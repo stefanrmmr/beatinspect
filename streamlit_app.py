@@ -64,5 +64,5 @@ if audiofile_upload is not None:
             with pref_col3:
                 # bpm_output = f'<p style="font-family:sans-serif; color:{primary_color}; font-size: 25.6px;">BPM = {round(bpm, 2)}</p>'
                 # st.markdown(bpm_output, unsafe_allow_html=True)
-                st.metric(label="", value=f"{round(bpm, 2)}", delta='BPM Tempo', delta_color="normal")
+                st.metric(label="Track Tempo", value=f"{round(bpm, 2)} BPM", delta='A Minor Scale', delta_color="#e3fc03")
                 # st.header(f'BPM = {round(bpm, 2)}')
