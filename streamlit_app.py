@@ -7,10 +7,12 @@ import toml
 primaryColor = st.get_option("theme.primaryColor")
 s = f"""
 <style>
-div.stButton > button:first-child {{ border: 5px solid {primaryColor}; border-radius:20px 20px 20px 20px; }}
+div.stButton > button:first-child {border: 5px solid {primaryColor}; border-radius:20px 20px 20px 20px;}
 <style>
 """
 st.markdown(s, unsafe_allow_html=True)
+
+background-color: #00cc00;color:white;font-size:20px;height:3em;width:30em;border-radius:10px 10px 10px 10px;
 
 
 # Streamlit Design Choices (remove red header line)
