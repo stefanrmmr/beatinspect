@@ -36,11 +36,11 @@ if audiofile_upload is not None:
         min_value=0.5, max_value=10.0, value=3.0, step=0.5)
 
     # Initiate Analysis of bpm
-    if st.button('Analyse BPM'):
+    if st.button('Analyze BPM'):
         bpm = bpm_detection.detect_bpm_main(audiofile_upload, value)
 
         # y, sr = librosa.load(librosa.ex(audiofile_upload), duration=value)
         # bpm, beats = librosa.beat.beat_track(y=y, sr=sr)
 
-        st.write(f'BPM = {bpm}')
-        st.write(f'Audio file: {audiofile_upload}')
+        st.header(f'BPM = {round(bpm, 2)}')
+        st.write(f'{audiofile_upload}')
