@@ -1,7 +1,7 @@
 <img width="803" alt="github_header" src="https://user-images.githubusercontent.com/82606558/162949970-146c1afa-29a2-44b9-abfe-d02f9d47e2a0.png">
 
-by [rs. analytics](https://github.com/stefanrmmr)™ - Version April 2022<br/>
-Click here to be re-directed to the [Beat Inspector Web-App](https://share.streamlit.io/stefanrmmr/beat_inspector/main)!
+Click here to be re-directed to the [Beat Inspector Web-App](https://share.streamlit.io/stefanrmmr/beat_inspector/main)<br/>
+You are a music producer? Let's get in touch via [LinkedIn](https://www.linkedin.com/in/stefanrmmr/)
 
 Fundamental Analytics for any uploaded Beat!
 This streamlit-based web application is aimed at music producers and artists who are frequently working with prebuilt audio files or beats. The inherent pain-point of having to do fundamental audio analytics such as identifying bpm rates, musical scales and audio file conversions are automated by using "beat_inspector". 
