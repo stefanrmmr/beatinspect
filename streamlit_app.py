@@ -1,5 +1,10 @@
-# main python file for beat_inspector
+# beat_inspector by stefanrmmr (rs. analytics) - version April 2022
 
 import streamlit as st
+
+# Streamlit Design Choices (remove red header line)
+hide_decoration_bar_style = '''<style>header {visibility: hidden;}</style>'''
+st.markdown(hide_decoration_bar_style, unsafe_allow_html=True)
+
 
 st.write('hello there')
