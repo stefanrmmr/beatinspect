@@ -4,13 +4,13 @@ import streamlit as st
 import toml
 
 # primaryColor = toml.load(".streamlit/config.toml")['theme']['primaryColor']
-# primaryColor = st.get_option("theme.primaryColor")
-# # s = f"""
-# <style>
-# div.stButton > button:first-child {{ border: 5px solid {primaryColor}; border-radius:20px 20px 20px 20px; }}
-# <style>
-# """
-# st.markdown(s, unsafe_allow_html=True)
+primaryColor = st.get_option("theme.primaryColor")
+s = f"""
+<style>
+div.stButton > button:first-child {{ border: 5px solid {primaryColor}; border-radius:20px 20px 20px 20px; }}
+<style>
+"""
+st.markdown(s, unsafe_allow_html=True)
 
 
 # Streamlit Design Choices (remove red header line)
