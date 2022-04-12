@@ -32,7 +32,7 @@ audiofile_upload = st.file_uploader("Please select and upload"
 # Set Preferences for Analytics
 if audiofile_upload is not None:
     value = st.slider('Select size of the the time-window to be scanned (sec)',
-        min_value=0.5, max_value=10, value=3, step=0.5)
+        min_value=0.5, max_value=10.0, value=3.0)
 
     # Initiate Analysis of bpm
     if st.button('Analyse BPM'):
