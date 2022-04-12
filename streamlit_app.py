@@ -8,7 +8,6 @@ sys.path.append("src")
 import src.bpm_detection as bpm_detection
 # from src.bpm_detection import detect_bpm_main
 
-
 # Streamlit Design Choices (page layout)
 st.set_page_config(layout="centered",
     page_icon="resources/rs_logo_transparent.png",
@@ -33,10 +32,10 @@ audiofile_upload = st.file_uploader("Please select and upload"
 # Set Preferences for Analytics
 if audiofile_upload is not None:
     value = st.slider('Select size of the the time-window to be scanned (sec)',
-        min_value=5, max_value=25, value=10, step=1)
+        min_value=0.5, max_value=10, value=3, step=0.5)
 
-    st.write('Value:', value)
-
+    # Initiate Analysis of bpm
     if st.button('Analyse BPM'):
         bpm = bpm_detection.detect_bpm_main(audiofile_upload, value)
         st.write(f'BPM = {bpm}')
+        st.write(f'Audio file: {audiofile_upload}')
