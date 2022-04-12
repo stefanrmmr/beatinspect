@@ -1,7 +1,7 @@
 # beat_inspector by stefanrmmr (rs. analytics) - version April 2022
 
 import streamlit as st
-st.markdown("""
+st.markdown('''
 div.stButton > button:first-child {
 background-color: #00cc00;color:white;font-size:20px;height:3em;width:30em;border-radius:10px 10px 10px 10px;
 }
@@ -24,7 +24,7 @@ box-shadow: none;
 color: #ffffff;
 background-color: #0066cc;
 }
-""", unsafe_allow_html=True)
+''', unsafe_allow_html=True)
 
 # Streamlit Design Choices (remove red header line)
 hide_decoration_bar_style = '''<style>header {visibility: hidden;}</style>'''
