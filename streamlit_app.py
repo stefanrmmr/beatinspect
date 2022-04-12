@@ -22,7 +22,8 @@ st.markdown(hide_decoration_bar_style, unsafe_allow_html=True)
 progressbar_design = '''<style> .stProgress .st-bo {background-color: #e3fc03;}</style>'''
 st.markdown(progressbar_design, unsafe_allow_html=True)
 
-st.markdown("""<style>.stSpinner > div > div {border-top-color: #e3fc03;}</style>""", unsafe_allow_html=True)
+st.markdown('''<style>.stSpinner > div > div {border-top-color: #e3fc03;}</style>''',
+    unsafe_allow_html=True)
 
 # Title and Information
 header_col1, header_col2, header_col3 = st.columns([10, 1.7, 3.3])
@@ -44,11 +45,9 @@ if audiofile_upload is not None:
 
     with pref_col1:
         complexity = st.radio("Select complexity of audio track",
-            ('basic drum loop', 'advanced track'), help='basic drum loop: simple instrumental drum loop\n,'
-             'advanced track: track with vocals and great variation/dynamic')
-
+            ('Basic instrumental loop', 'Advanced dynamic track'))
         timeframe = 5  # Initialize timeframe for audio analytics
-        if 'basic' in complexity:
+        if 'Basic' in complexity:
             timeframe = 2.5
 
     with pref_col2:
@@ -58,6 +57,7 @@ if audiofile_upload is not None:
         if st.button('Detect BPM'):
 
             with pref_col3:
+                st.write('')
                 with st.spinner('Calculating BPM'):
                     bpm = bpm_detection.detect_bpm_main(audiofile_upload, timeframe)
 
