@@ -5,7 +5,7 @@ import toml
 
 sys.path.append("src")
 
-import src.bpm_detection as bpm_detection
+# import src.bpm_detection as bpm_detection
 # from src.bpm_detection import detect_bpm_main
 
 
@@ -38,5 +38,5 @@ if audiofile_upload is not None:
     'Select a range of values', 0.0, 100.0, (25.0, 75.0))
     st.write('Values:', values)
 
-    bpm = bpm_detection.detect_bpm_main('data/bounce_back.wav', 10)
-    st.write(f'BPM = {bpm}')
+    #bpm = bpm_detection.detect_bpm_main('data/bounce_back.wav', 10)
+    #st.write(f'BPM = {bpm}')
