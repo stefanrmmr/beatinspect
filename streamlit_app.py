@@ -3,22 +3,16 @@
 import streamlit as st
 import toml
 
-primaryColor = toml.load("config.toml")['theme']['primaryColor']
-
-
-# Streamlit Design Choices (update button colors)
-button_design = """
+primaryColor = toml.load(".streamlit/config.toml")['theme']['primaryColor']
+# primaryColor = st.get_option("theme.primaryColor")
+s = f"""
 <style>
-div.stButton > button:first-child {
-    background-color: #0099ff;
-    color:#ffffff;
-}
-div.stButton > button:hover {
-    background-color: #00ff00;
-    color:#ff0000;
-    }
-</style>"""
-st.markdown(button_design, unsafe_allow_html=True)
+div.stButton > button:first-child {{ border: 5px solid {primaryColor}; border-radius:20px 20px 20px 20px; }}
+<style>
+"""
+st.markdown(s, unsafe_allow_html=True)
+
+
 
 # Streamlit Design Choices (remove red header line)
 hide_decoration_bar_style = '''<style>header {visibility: hidden;}</style>'''
