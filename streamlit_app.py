@@ -17,7 +17,9 @@ import toml
 # <style>"""
 # st.markdown(s, unsafe_allow_html=True)
 
-st.set_page_config(layout="centered", page_icon=":kiwi-fruit:", page_title="beat inspector")
+st.set_page_config(layout="centered",
+    page_icon="resources/rs_logo_transparent.png",
+    page_title="beat inspector")
 
 
 # get colors from theme config file, or set the colours to altair standards
