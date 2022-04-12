@@ -17,7 +17,7 @@ import toml
 # <style>"""
 # st.markdown(s, unsafe_allow_html=True)
 
-st.set_page_config(layout="normal", page_icon=":speaker:", page_title="beat inspector")
+st.set_page_config(layout="centered", page_icon=":speaker:", page_title="beat inspector")
 
 
 # get colors from theme config file, or set the colours to altair standards
