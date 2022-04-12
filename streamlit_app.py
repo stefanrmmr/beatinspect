@@ -32,15 +32,26 @@ audiofile_upload = st.file_uploader("Please select and upload"
                                     " an audio file (.wav)",type='wav')
 # Set Preferences for Analytics
 if audiofile_upload is not None:
-    value = st.slider('Select size of the the time-window to be scanned (sec)',
-        min_value=0.5, max_value=10.0, value=3.0, step=0.5)
 
-    # Initiate Analysis of bpm
-    if st.button('Analyze BPM'):
-        bpm = bpm_detection.detect_bpm_main(audiofile_upload, value)
+    pref_col1, pref_col2, pref_col3 = st.columns([8, 4, 8])
 
-        # y, sr = librosa.load(librosa.ex(audiofile_upload), duration=value)
-        # bpm, beats = librosa.beat.beat_track(y=y, sr=sr)
+    with pref_col1:
+        complexity = st.radio("Select the complexity of the uploaded audio track",
+            ('basic', 'advanced'), help='basic = simple instrumental drum loop,'
+             'advanced = mtrack with vocals and great variation/dynamic')
 
-        st.header(f'BPM = {round(bpm, 2)}')
-        st.write(f'Audio file: "{audiofile_upload.name}" - size: {audiofile_upload.size/(1000000)} Mb')
+        timeframe = 5  # Initialize timeframe for audio analytics
+        if complexity == 'basic':
+            timeframe = 2.5
+
+    with pref_col3:
+        # Initiate Analysis of bpm
+        if st.button('Analyze BPM'):
+            bpm = bpm_detection.detect_bpm_main(audiofile_upload, timeframe)
+
+            # y, sr = librosa.load(librosa.ex(audiofile_upload), duration=value)
+            # bpm, beats = librosa.beat.beat_track(y=y, sr=sr)
+
+            st.header(f'BPM = {round(bpm, 2)}')
+            st.write(f'Audio file: "{audiofile_upload.name}"'
+                ' - size: {audiofile_upload.size/(1000000)} Mb')
