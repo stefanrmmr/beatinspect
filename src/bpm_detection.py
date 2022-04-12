@@ -17,13 +17,12 @@
 # the Free Software Foundation, Inc., 51 Franklin Street,
 # Boston, MA 02110-1301, USA.
 
-import argparse
 import array
 import math
 import wave
 
 import numpy
-import pywt
+from PyWavelets import pywt
 from scipy import signal
 
 

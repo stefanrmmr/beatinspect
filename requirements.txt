@@ -1,9 +1,5 @@
 streamlit
 pandas
-argparse
-array
-math
-wave
 numpy
-pywavelets
+PyWavelets
 scipy
