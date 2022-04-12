@@ -47,10 +47,15 @@ if audiofile_upload is not None:
     with pref_col2:
         # Initiate Analysis of bpm
         st.write('')  # add spacing
-        if st.button('Analyze BPM'):
+        st.write('')  # add spacing
+        if st.button('Detect BPM'):
             bpm = bpm_detection.detect_bpm_main(audiofile_upload, timeframe)
 
             # y, sr = librosa.load(librosa.ex(audiofile_upload), duration=value)
             # bpm, beats = librosa.beat.beat_track(y=y, sr=sr)
             with pref_col3:
-                st.header(f'BPM = {round(bpm, 2)}')
+                primaryColor = 'green'
+                bpm_output = f'<p style="font-family:sans-serif; color:{primaryColor}; font-size: 42px;">BPM = {round(bpm, 2)}</p>'
+                st.markdown(new_title, unsafe_allow_html=True)
+                
+                # st.header(f'BPM = {round(bpm, 2)}')
