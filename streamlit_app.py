@@ -42,11 +42,11 @@ if audiofile_upload is not None:
 
         timeframe = 5  # Initialize timeframe for audio analytics
         if 'basic' in complexity:
-            st.write('servus')
             timeframe = 2.5
 
     with pref_col2:
         # Initiate Analysis of bpm
+        st.write('')  # add spacing
         if st.button('Analyze BPM'):
             bpm = bpm_detection.detect_bpm_main(audiofile_upload, timeframe)
 
@@ -54,5 +54,3 @@ if audiofile_upload is not None:
             # bpm, beats = librosa.beat.beat_track(y=y, sr=sr)
             with pref_col3:
                 st.header(f'BPM = {round(bpm, 2)}')
-                st.write(f'Audio file: "{audiofile_upload.name}"'
-                    ' - size: {audiofile_upload.size/(1000000)} Mb')
