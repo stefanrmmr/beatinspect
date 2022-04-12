@@ -37,5 +37,6 @@ if audiofile_upload is not None:
 
     st.write('Value:', value)
 
-    #bpm = bpm_detection.detect_bpm_main('data/bounce_back.wav', 10)
-    #st.write(f'BPM = {bpm}')
+    if st.button('Analyse BPM'):
+        bpm = bpm_detection.detect_bpm_main('data/bounce_back.wav', 10)
+        st.write(f'BPM = {bpm}')
