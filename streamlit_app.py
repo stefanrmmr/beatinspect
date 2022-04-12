@@ -41,7 +41,10 @@ audiofile_upload = st.file_uploader("Please select and upload"
 # Set Preferences for Analytics
 if audiofile_upload is not None:
 
-    pref_col1, pref_col2, pref_col3 = st.columns([10, 5, 5])
+    # display audio player UX
+    st.audio(audiofile_upload)
+
+    pref_col1, pref_col2, pref_col3 = st.columns([8, 5, 5])
 
     with pref_col1:
         complexity = st.radio("Select complexity of audio track",
