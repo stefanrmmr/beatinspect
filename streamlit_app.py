@@ -3,26 +3,9 @@
 import streamlit as st
 import toml
 
-# get colors from theme config file, or set the colours to altair standards
-primary_clr = st.get_option("theme.primaryColor")
-txt_clr = st.get_option("theme.textColor")
-
-s = f"""<style>
-div.stButton > button:first-child {{
-color: {primary_clr};
-background-color: #00cc00;
-border: 5px solid #ffffff;
-border-radius:20px 20px 20px 20px;
-font-size:20px;
-height:3em;
-width:30em;}}
-<style>"""
-st.markdown(s, unsafe_allow_html=True)
-
 st.set_page_config(layout="centered",
     page_icon="resources/rs_logo_transparent.png",
     page_title="beat inspector")
-
 
 # Streamlit Design Choices (remove red header line)
 hide_decoration_bar_style = '''<style>header {visibility: hidden;}</style>'''
