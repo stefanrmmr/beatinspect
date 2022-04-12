@@ -49,7 +49,9 @@ if audiofile_upload is not None:
         st.write('')  # add spacing
         st.write('')  # add spacing
         if st.button('Detect BPM'):
-            bpm = bpm_detection.detect_bpm_main(audiofile_upload, timeframe)
+
+            with st.spinner('Calculating BPM ...'):
+                bpm = bpm_detection.detect_bpm_main(audiofile_upload, timeframe)
 
             # y, sr = librosa.load(librosa.ex(audiofile_upload), duration=value)
             # bpm, beats = librosa.beat.beat_track(y=y, sr=sr)
