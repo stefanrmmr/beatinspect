@@ -20,8 +20,8 @@ with header_col3:
     st.image("resources/rs_logo_transparent.png")
 
 # Audio File Upload
-audiofile_upload = st.
-    file_uploader("Please select and upload an audio file (.wav)",type='wav')
+audiofile_upload = st.file_uploader("Please select and upload"
+                                    " an audio file (.wav)",type='wav')
 # Set Preferences & Key
 if audiofile_upload is not None:
     st.write('file upload complete')
