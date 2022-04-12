@@ -40,7 +40,7 @@ audiofile_upload = st.file_uploader("Please select and upload"
 # Set Preferences for Analytics
 if audiofile_upload is not None:
 
-    pref_col1, pref_col2, pref_col3 = st.columns([10, 4, 6])
+    pref_col1, pref_col2 = st.columns([10, 6])
 
     with pref_col1:
         complexity = st.radio("Select the complexity of the uploaded audio track",
@@ -62,7 +62,7 @@ if audiofile_upload is not None:
 
             # y, sr = librosa.load(librosa.ex(audiofile_upload), duration=value)
             # bpm, beats = librosa.beat.beat_track(y=y, sr=sr)
-            with pref_col3:
+            with pref_col2:
                 # bpm_output = f'<p style="font-family:sans-serif; color:{primary_color}; font-size: 25.6px;">BPM = {round(bpm, 2)}</p>'
                 # st.markdown(bpm_output, unsafe_allow_html=True)
 
