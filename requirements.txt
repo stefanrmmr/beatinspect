@@ -1,1 +1,9 @@
-PyWavelets==1.2.0
+streamlit
+pandas
+argparse
+array
+math
+wave
+numpy
+pywt
+scipy
