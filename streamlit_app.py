@@ -6,6 +6,7 @@ import streamlit as st
 hide_decoration_bar_style = '''<style>header {visibility: hidden;}</style>'''
 st.markdown(hide_decoration_bar_style, unsafe_allow_html=True)
 
-
+# TITLE and information 
 st.title('beat inspector™')
-st.markdown('by [rs. analytics](https://www.linkedin.com/in/stefanrmmr/) - V1.0.0 April 2022')
+st.markdown('by [rs. analytics](https://www.linkedin.com/in/stefanrmmr/) - version 1.0.0 April 2022')
+st.write('')
