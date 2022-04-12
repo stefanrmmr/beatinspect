@@ -18,7 +18,7 @@ st.set_page_config(layout="centered",
 
 hide_decoration_bar_style = '''<style>header {visibility: hidden;}</style>'''
 st.markdown(hide_decoration_bar_style, unsafe_allow_html=True)
-progressbar_design = '''<style> .stProgress .st-bo {background-color: {primary_color};}</style>'''
+progressbar_design = '''<style> .stProgress .st-bo {background-color: #e3fc03;}</style>'''
 st.markdown(progressbar_design, unsafe_allow_html=True)
 
 # Title and Information
