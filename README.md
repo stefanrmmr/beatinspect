@@ -1,6 +1,6 @@
-# beat_inspector 
-by [rs. analytics](https://github.com/stefanrmmr)™ - Version April 2022
+<img width="803" alt="github_header" src="https://user-images.githubusercontent.com/82606558/162949970-146c1afa-29a2-44b9-abfe-d02f9d47e2a0.png">
 
+by [rs. analytics](https://github.com/stefanrmmr)™ - Version April 2022<br/>
 Click here to be re-directed to the [Beat Inspector Web-App](https://share.streamlit.io/stefanrmmr/beat_inspector/main)!
 
 Fundamental Analytics for any uploaded Beat!
