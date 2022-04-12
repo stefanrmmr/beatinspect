@@ -1,4 +1,5 @@
-streamlit==1.7
-PyWavelets==1.3.0
+streamlit
+matplotlib
 numpy
 scipy
+PyWavelets
