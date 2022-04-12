@@ -3,7 +3,7 @@
 import streamlit as st
 import toml
 
-primaryColor = toml.load(".streamlit/config.toml")['theme']['primaryColor']
+primaryColor = toml.load("config.toml")['theme']['primaryColor']
 # primaryColor = st.get_option("theme.primaryColor")
 s = f"""
 <style>
