@@ -33,12 +33,12 @@ audiofile_upload = st.file_uploader("Please select and upload"
 # Set Preferences for Analytics
 if audiofile_upload is not None:
 
-    pref_col1, pref_col2, pref_col3 = st.columns([14, 2, 4])
+    pref_col1, pref_col2, pref_col3 = st.columns([14, 3, 3])
 
     with pref_col1:
         complexity = st.radio("Select the complexity of the uploaded audio track",
-            ('basic drum loop', 'advanced track'), help='basic = simple instrumental drum loop,'
-             'advanced = mtrack with vocals and great variation/dynamic')
+            ('basic drum loop', 'advanced track'), help='basic drum loop: simple instrumental drum loop\n,'
+             'advanced track: track with vocals and great variation/dynamic')
 
         timeframe = 5  # Initialize timeframe for audio analytics
         if complexity == 'basic drum loop':
