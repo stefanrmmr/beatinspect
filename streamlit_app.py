@@ -6,7 +6,7 @@ import streamlit as st
 hide_decoration_bar_style = '''<style>header {visibility: hidden;}</style>'''
 st.markdown(hide_decoration_bar_style, unsafe_allow_html=True)
 
-# TITLE and information 
+# TITLE and information
 header_col1, header_col2, header_col3 = st.columns([10, 1.7, 3.3])
 
 with header_col1:
@@ -14,8 +14,4 @@ with header_col1:
   st.write('by rs. analytics (github @stefanrmmr) - version 1.0.0 April 2022')
   st.write('')
 with header_col3:
-  st.image("rs_logo_transparent.png")
-
-
-
-
+  st.image("resources/rs_logo_transparent.png")
