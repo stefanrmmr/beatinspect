@@ -36,8 +36,9 @@ with header_col3:
     st.image("resources/rs_logo_transparent.png")
 
 # Audio File Upload
-audiofile_upload = st.file_uploader("Please select and upload"
-                                    " an audio file (.wav)",type='wav')
+with st.expander("Audio File Upload Section", expanded=True):
+    audiofile_upload = st.file_uploader("Please select and upload"
+                                        " an audio file (.wav)",type='wav')
 # Set Preferences for Analytics
 if audiofile_upload is not None:
 
