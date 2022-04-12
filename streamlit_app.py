@@ -1,8 +1,13 @@
 # beat_inspector by stefanrmmr (rs. analytics) - version April 2022
 import streamlit as st
+import sys
 import toml
 
+sys.path.append("src")
+
 import src.bpm_detection as bpm_detection
+# from src.bpm_detection import detect_bpm_main
+
 
 # Streamlit Design Choices (page layout)
 st.set_page_config(layout="centered",

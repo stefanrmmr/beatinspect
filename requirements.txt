@@ -5,5 +5,5 @@ array
 math
 wave
 numpy
-pywt
+pywavelets
 scipy
