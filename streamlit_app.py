@@ -54,8 +54,8 @@ if audiofile_upload is not None:
             # y, sr = librosa.load(librosa.ex(audiofile_upload), duration=value)
             # bpm, beats = librosa.beat.beat_track(y=y, sr=sr)
             with pref_col3:
-                primaryColor = 'green'
-                bpm_output = f'<p style="font-family:sans-serif; color:{primaryColor}; font-size: 42px;">BPM = {round(bpm, 2)}</p>'
-                st.markdown(new_title, unsafe_allow_html=True)
-                
+
+                bpm_output = f'<p style="font-family:sans-serif; color:Green; font-size: 42px;">BPM = {round(bpm, 2)}</p>'
+                st.markdown(bpm_output, unsafe_allow_html=True)
+
                 # st.header(f'BPM = {round(bpm, 2)}')
