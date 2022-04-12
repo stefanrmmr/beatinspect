@@ -2,6 +2,8 @@
 import streamlit as st
 import toml
 
+from src import detect_bpm_main
+
 # Streamlit Design Choices (page layout)
 st.set_page_config(layout="centered",
     page_icon="resources/rs_logo_transparent.png",
@@ -26,3 +28,7 @@ audiofile_upload = st.file_uploader("Please select and upload"
 # Set Preferences & Key
 if audiofile_upload is not None:
     st.write('file upload complete')
+
+    values = st.slider(
+    'Select a range of values', 0.0, 100.0, (25.0, 75.0))
+    st.write('Values:', values)
