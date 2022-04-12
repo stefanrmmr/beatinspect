@@ -9,7 +9,7 @@ txt_clr = st.get_option("theme.textColor")
 
 s = f"""<style>
 
-header {visibility: hidden;}
+header {{visibility: hidden;}}
 
 div.stButton > button:first-child {{
 color:white;
