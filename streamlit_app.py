@@ -17,13 +17,12 @@ import toml
 # <style>"""
 # st.markdown(s, unsafe_allow_html=True)
 
-st.set_page_config(layout="wide", page_icon=":art:", page_title="beat inspector")
+st.set_page_config(layout="normal", page_icon=":speaker:", page_title="beat inspector")
 
 
 # get colors from theme config file, or set the colours to altair standards
 primary_clr = st.get_option("theme.primaryColor")
 txt_clr = st.get_option("theme.textColor")
-
 
 
 # Streamlit Design Choices (remove red header line)
