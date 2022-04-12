@@ -8,18 +8,14 @@ primary_clr = st.get_option("theme.primaryColor")
 txt_clr = st.get_option("theme.textColor")
 
 s = f"""<style>
-
-header {{visibility: hidden;}}
-
 div.stButton > button:first-child {{
-color:white;
+color: {primary_clr};
 background-color: #00cc00;
 border: 5px solid #ffffff;
 border-radius:20px 20px 20px 20px;
 font-size:20px;
 height:3em;
 width:30em;}}
-
 <style>"""
 st.markdown(s, unsafe_allow_html=True)
 
@@ -29,8 +25,8 @@ st.set_page_config(layout="centered",
 
 
 # Streamlit Design Choices (remove red header line)
-# hide_decoration_bar_style = '''<style>header {visibility: hidden;}</style>'''
-# st.markdown(hide_decoration_bar_style, unsafe_allow_html=True)
+hide_decoration_bar_style = '''<style>header {visibility: hidden;}</style>'''
+st.markdown(hide_decoration_bar_style, unsafe_allow_html=True)
 
 # TITLE and information
 header_col1, header_col2, header_col3 = st.columns([10, 1.7, 3.3])
