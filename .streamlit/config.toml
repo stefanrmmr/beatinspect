@@ -1,18 +1,19 @@
 [theme]
 
-# Primary accent for interactive elements
-primaryColor = '#ffffff'
+# Used to style primary interface elements. It's the color displayed most frequently across your app's
+# screens and components. Examples of widgets using this color are st.slider and st.checkbox.
+primaryColor = "#919e8b" # green
 
-# Background color for the main content area
-backgroundColor = '#ffffff'
+# Background color for the main container.
+backgroundColor = "rgba(254,248,239,1)" # sepia yellow
 
-# Background color for sidebar and most interactive widgets
-secondaryBackgroundColor = '#B9F1C0'
+# Used as the background for most widgets. Examples of widgets with this background are st.sidebar,
+# st.text_input, st.date_input.
+secondaryBackgroundColor =  "#ebd2b9" # wheat  "#d7ab82" # yellow <-- not enough contrast
 
-# Color used for almost all text
-textColor = '#FFFFFF'
+# Font color for the page.
+textColor = "#6e7074" # grey
 
-# Font family for all text in the app, except code blocks
-# Accepted values (serif | sans serif | monospace)
+# Font family (serif | sans serif | mono) for the page. Will not impact code areas.
 # Default: "sans serif"
 font = "sans serif"
