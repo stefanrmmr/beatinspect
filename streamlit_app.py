@@ -42,7 +42,6 @@ audiofile_upload = st.file_uploader("Please select and upload"
 if audiofile_upload is not None:
 
     pref_col1, pref_col2, pref_col3 = st.columns([10, 5, 5])
-    res_col1, res_col2 = st.columns([5, 5])
 
     with pref_col1:
         complexity = st.radio("Select complexity of audio track",
@@ -55,25 +54,16 @@ if audiofile_upload is not None:
         # Initiate Analysis of bpm
         st.write('')  # add spacing
         st.write('')  # add spacing
-        if st.button('Detect BPM'):
-            with res_col1:
-                with st.spinner('Calculating Scale'):
-                     # TODO !!!!!!!!!
+        if st.button('Get Analytics'):
+            with pref_col3:
+                with st.spinner('Calculating BPM Tempo'):
                     bpm = bpm_detection.detect_bpm_main(audiofile_upload, timeframe)
-            with res_col2:
-                with st.spinner('Calculating BPM'):
-                    bpm = bpm_detection.detect_bpm_main(audiofile_upload, timeframe)
+                with st.spinner('Analysis of Scale'):
+                    scale = bpm_detection.detect_bpm_main(audiofile_upload, timeframe)
+
+    res_col1, res_col2 = st.columns([5, 5])
 
     with res_col1:
-        # y, sr = librosa.load(librosa.ex(audiofile_upload), duration=value)
-        # bpm, beats = librosa.beat.beat_track(y=y, sr=sr)
-
-        # bpm_output = f'<p style="font-family:sans-serif; color:{primary_color}; font-size: 25.6px;">BPM = {round(bpm, 2)}</p>'
-        # st.markdown(bpm_output, unsafe_allow_html=True)
-        st.metric(label="Track Tempo", value=f"{round(bpm, 2)} BPM", delta='A Minor Scale', delta_color="off")
-        # st.header(f'BPM = {round(bpm, 2)}')
-
-    with res_col2:
         # y, sr = librosa.load(librosa.ex(audiofile_upload), duration=value)
         # bpm, beats = librosa.beat.beat_track(y=y, sr=sr)
 
