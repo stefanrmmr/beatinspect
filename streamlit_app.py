@@ -5,17 +5,25 @@ import toml
 
 primaryColor = toml.load("config.toml")['theme']['primaryColor']
 
-s = f"""
+
+# Streamlit Design Choices (update button colors)
+button_design = """
 <style>
-header {visibility: hidden;}
-div.stButton > button:first-child {{ border: 5px solid {primaryColor}; border-radius:20px 20px 20px 20px; }}
-<style>
-"""
-st.markdown(s, unsafe_allow_html=True)
+div.stButton > button:first-child {
+    background-color: #0099ff;
+    color:#ffffff;
+}
+div.stButton > button:hover {
+    background-color: #00ff00;
+    color:#ff0000;
+    }
+</style>"""
+st.markdown(button_design, unsafe_allow_html=True)
 
 # Streamlit Design Choices (remove red header line)
-# hide_decoration_bar_style = '''<style></style>'''
-# st.markdown(hide_decoration_bar_style, unsafe_allow_html=True)
+hide_decoration_bar_style = '''<style>header {visibility: hidden;}</style>'''
+st.markdown(hide_decoration_bar_style, unsafe_allow_html=True)
+
 
 # TITLE and information
 header_col1, header_col2, header_col3 = st.columns([10, 1.7, 3.3])
