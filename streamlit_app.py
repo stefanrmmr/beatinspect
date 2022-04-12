@@ -14,7 +14,7 @@ with header_col1:
   st.markdown('by [rs. analytics](https://www.linkedin.com/in/stefanrmmr/) - version 1.0.0 April 2022')
   st.write('')
 with header_col3:
-  st.image("https://static.streamlit.io/examples/dog.jpg")
+  st.image("Screenshot_4_black")
 
 
 
