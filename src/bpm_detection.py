@@ -22,7 +22,6 @@ import array
 import math
 import wave
 
-import matplotlib.pyplot as plt
 import numpy
 import pywt
 from scipy import signal
