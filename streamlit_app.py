@@ -35,10 +35,6 @@ with header_col1:
 with header_col3:
     st.image("resources/rs_logo_transparent.png")
 
-if st.button('Say hello'):
-    st.write('Why hello there')
- else:
-    st.write('Goodbye')
 
 audiofile_upload = st.file_uploader("Please select and upload an audio file (.wav)",type='wav')
 # Set Preferences & Key
