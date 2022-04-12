@@ -18,8 +18,11 @@ st.set_page_config(layout="centered",
 
 hide_decoration_bar_style = '''<style>header {visibility: hidden;}</style>'''
 st.markdown(hide_decoration_bar_style, unsafe_allow_html=True)
+
 progressbar_design = '''<style> .stProgress .st-bo {background-color: #e3fc03;}</style>'''
 st.markdown(progressbar_design, unsafe_allow_html=True)
+
+st.markdown("""<style>.stSpinner > div > div {border-top-color: #e3fc03;}</style>""", unsafe_allow_html=True)
 
 # Title and Information
 header_col1, header_col2, header_col3 = st.columns([10, 1.7, 3.3])
