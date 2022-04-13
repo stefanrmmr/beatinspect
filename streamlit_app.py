@@ -59,10 +59,8 @@ if audiofile_upload is not None:
                 with st.spinner('Calculating BPM'):
                     bpm = bpm_detection.detect_bpm_main(audiofile_upload, timeframe)
 
-            # y, sr = librosa.load(librosa.ex(audiofile_upload), duration=value)
-            # bpm, beats = librosa.beat.beat_track(y=y, sr=sr)
             with pref_col3:
-                # bpm_output = f'<p style="font-family:sans-serif; color:{primary_color}; font-size: 25.6px;">BPM = {round(bpm, 2)}</p>'
-                # st.markdown(bpm_output, unsafe_allow_html=True)
+                bpm_output = f'<p style="font-family:sans-serif; color:{primary_color}; font-size: 25.6px;">BPM = {round(bpm, 2)}</p>'
+                st.markdown(bpm_output, unsafe_allow_html=True)
                 st.metric(label="Track Tempo", value=f"{round(bpm, 2)} BPM", delta='A Minor Scale', delta_color="off")
-                # st.header(f'BPM = {round(bpm, 2)}')
+                st.header(f'BPM = {round(bpm, 2)}')
