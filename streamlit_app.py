@@ -57,10 +57,13 @@ if audiofile_upload is not None:
         if st.button('Detect BPM'):
             with pref_col3:
                 with st.spinner('Calculating BPM'):
-                    bpm = bpm_detection.detect_bpm_main(audiofile_upload, timeframe)
+                    bpm, sampling_freq, sample_width, channels = bpm_detection.detect_bpm_main(audiofile_upload, timeframe)
 
             with pref_col3:
+                st.write(f'sampling freq: {sampling_freq}')
+                st.write(f'sample_width: {sampling_width}')
+                st.write(f'channels: {channels}')
+                
+                st.metric(label="Track Tempo", value=f"{round(bpm, 2)} BPM", delta='A Minor Scale', delta_color="off")
                 bpm_output = f'<p style="font-family:sans-serif; color:{primary_color}; font-size: 25.6px;">BPM = {round(bpm, 2)}</p>'
                 st.markdown(bpm_output, unsafe_allow_html=True)
-                st.metric(label="Track Tempo", value=f"{round(bpm, 2)} BPM", delta='A Minor Scale', delta_color="off")
-                st.header(f'BPM = {round(bpm, 2)}')

@@ -38,8 +38,14 @@ def read_wav(filename):
     nsamps = wf.getnframes()
     assert nsamps > 0
 
-    fs = wf.getframerate()
-    assert fs > 0
+    sampling_freq = wf.getframerate()
+    assert sampling_freq > 0
+
+    channels = wf.getnchannels()
+    # Returns number of audio channels (1 for mono, 2 for stereo).
+    sample_width = wf.getsampwidth()
+    # Returns sample width in bytes.
+
 
     # Read entire file and make into an array
     samps = list(array.array("i", wf.readframes(nsamps)))
@@ -49,7 +55,7 @@ def read_wav(filename):
     except AssertionError:
         print(nsamps, "not equal to", len(samps))
 
-    return samps, fs
+    return samps, sampling_freq, sample_width, channels
 
 
 # print an error when no data can be found
@@ -130,11 +136,10 @@ def detect_bpm_main(filename, window):
     # INPUT window (float): Size of the the window (seconds) to be scanned
     # RETURN: bpm (float)
 
-    samps, fs = read_wav(filename)
+    samps, fs, sample_width, channels = read_wav(filename)
     data = []
     correl = []
     bpm = 0
-    n = 0
     nsamps = len(samps)
     window_samps = int(window * fs)
     samps_ndx = 0  # First sample in window_ndx
@@ -159,9 +164,6 @@ def detect_bpm_main(filename, window):
         # Iterate at the end of the loop
         samps_ndx = samps_ndx + window_samps
 
-        # Counter for debug...
-        n = n + 1
-
     bpm = numpy.median(bpms)
     print("Completed!  Estimated Beats Per Minute:", bpm)
-    return bpm
+    return bpm, fs, sample_width, channels
