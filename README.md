@@ -1,4 +1,5 @@
-<img width="803" alt="github_header" src="https://user-images.githubusercontent.com/82606558/162949970-146c1afa-29a2-44b9-abfe-d02f9d47e2a0.png">
+<img width="788" alt="header" src="https://user-images.githubusercontent.com/82606558/163088998-7d83f91e-f0d3-4789-8ccb-a4a7f5d39c5e.png">
+
 
 Click here to be re-directed to the [Beat Inspector Web-App](https://share.streamlit.io/stefanrmmr/beat_inspector/main)<br/>
 You are a music producer? Let's get in touch via [LinkedIn](https://www.linkedin.com/in/stefanrmmr/)
