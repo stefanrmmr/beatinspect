@@ -37,12 +37,8 @@ with header_col3:
 
 # Audio File Upload
 with st.expander("Please select and upload an audio file (.wav)",expanded=True):
-
-    exp_col1, exp_col2 = st.columns([1,1])
-    with exp_col1:
-        audiofile_upload = st.file_uploader("", type='wav')
-    with exp_col2:
-        st.audio(audiofile_upload)  # display audio player UX
+    audiofile_upload = st.file_uploader("", type='wav')
+    st.audio(audiofile_upload)  # display audio player UX
 
 # Set Preferences for Analytics
 if audiofile_upload is not None:
