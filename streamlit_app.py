@@ -40,7 +40,7 @@ with st.expander("Audio File Upload Section",expanded=True):
 # Set Preferences for Analytics
 if audiofile_upload is not None:
 
-    pref_col1, pref_col2, pref_col3 = st.columns([8, 5, 5])
+    pref_col1, pref_col2, pref_col3 = st.columns([8, 5, 8])
 
     with pref_col1:
         complexity = st.radio("Select complexity of audio track",
@@ -67,5 +67,5 @@ if audiofile_upload is not None:
                 st.write(f'Audio Channels: {channels}')
 
                 st.metric(label="Track Tempo", value=f"{round(bpm, 2)} BPM", delta='A Minor Scale', delta_color="off")
-                bpm_output = f'<p style="font-family:sans-serif; color:{primary_color}; font-size: 25.6px;">BPM = {round(bpm, 2)}</p>'
+                bpm_output = f'<p style="font-family:sans-serif; color:{primary_color}; font-size: 25.6px;">{round(bpm, 2)} BPM</p>'
                 st.markdown(bpm_output, unsafe_allow_html=True)
