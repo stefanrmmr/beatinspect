@@ -13,14 +13,11 @@ import src.bpm_detection as bpm_detection
 primary_color = st.get_option("theme.primaryColor")
 
 st.set_page_config(layout="centered",
-    page_icon="resources/rs_logo_transparent.png",
-    page_title="beat inspector")
+                   page_icon="resources/rs_logo_transparent.png",
+                   page_title="beat inspector")
 
 hide_decoration_bar_style = '''<style>header {visibility: hidden;}</style>'''
 st.markdown(hide_decoration_bar_style, unsafe_allow_html=True)
-
-progressbar_design = '''<style> .stProgress .st-bo {background-color: #e3fc03;}</style>'''
-st.markdown(progressbar_design, unsafe_allow_html=True)
 
 st.markdown('''<style>.stSpinner > div > div {border-top-color: #e3fc03;}</style>''',
     unsafe_allow_html=True)
@@ -36,9 +33,10 @@ with header_col3:
     st.image("resources/rs_logo_transparent.png")
 
 # Audio File Upload
-with st.expander("Please select and upload an audio file (.wav)",expanded=True):
-    audiofile_upload = st.file_uploader("", type='wav')
-    st.audio(audiofile_upload)  # display audio player UX
+with st.expander("Audio File Upload Section",expanded=True):
+    audiofile_upload = st.file_uploader("Please select and upload an audio file (.WAV)", type='wav')
+    if audiofile_upload is not None:
+        st.audio(audiofile_upload)  # display audio player UX
 
 # Set Preferences for Analytics
 if audiofile_upload is not None:
