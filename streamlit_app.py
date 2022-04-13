@@ -63,7 +63,7 @@ if audiofile_upload is not None:
                     elif int(channels) == 2:  # double channel .wav
                         channels = 'Stereo'
                     else:  # multi channel .wav
-                        channels = str(channels) + 'Channel'
+                        channels = str(channels) + ' Channel Audio'
 
             with pref_col3:  # Output Analytics Results
                 st.metric(label="Audio File Technical Specifications", value=f"{round(bpm, 1)} BPM", delta=f'{channels} - {sampling_freq} Hz', delta_color="off")
