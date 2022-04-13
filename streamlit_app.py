@@ -45,9 +45,9 @@ if audiofile_upload is not None:
     with pref_col1:
         complexity = st.radio("Select complexity of audio track",
             ('Basic instrumental loop', 'Advanced dynamic track'))
-        timeframe = 5  # Initialize timeframe for audio analytics
+        timeframe = 6  # Initialize timeframe for audio analytics
         if 'Basic' in complexity:
-            timeframe = 2.5
+            timeframe = 3
 
     with pref_col2:
         # Initiate Analysis of bpm
