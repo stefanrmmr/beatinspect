@@ -12,7 +12,7 @@ import src.bpm_detection as bpm_detection
 primary_color = st.get_option("theme.primaryColor")
 
 st.set_page_config(layout="centered",
-                   page_icon="resources/rs_logo_transparent.png",
+                   page_icon="resources/rs_logo_transparent_yellow.png",
                    page_title="beat inspector")
 
 hide_decoration_bar_style = '''<style>header {visibility: hidden;}</style>'''
@@ -29,7 +29,7 @@ with header_col1:
              ' - version 1.0.0 - April 2022')
     st.write('')
 with header_col3:
-    st.image("resources/rs_logo_transparent.png")
+    st.image("resources/rs_logo_transparent_yellow.png")
 
 # Audio File Upload
 with st.expander("Audio File Upload Section",expanded=True):
