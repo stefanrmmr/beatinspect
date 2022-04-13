@@ -65,6 +65,6 @@ if audiofile_upload is not None:
                         channels = str(channels) + 'Channel'
 
             with pref_col3:  # Output Analytics Results
-                st.metric(label="Audio File Technical Specifications", value=f"{round(bpm, 2)} BPM", delta=f'{channels} - {sampling_freq} Hz', delta_color="off")
+                st.metric(label="Audio File Technical Specifications", value=f"{round(bpm, 1)} BPM", delta=f'{channels} - {sampling_freq} Hz', delta_color="off")
                 bpm_output = f'<p style="font-family:sans-serif; color:{primary_color}; font-size: 25.6px;">Musical Scale (soon)</p>'
                 st.markdown(bpm_output, unsafe_allow_html=True)
