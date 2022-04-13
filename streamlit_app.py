@@ -57,11 +57,11 @@ if audiofile_upload is not None:
             with pref_col3:
                 with st.spinner('Calculating BPM'):
                     bpm, sampling_freq, channels = bpm_detection.detect_bpm_main(audiofile_upload, timeframe)
-                    if channels == 1:  # single channel .wav
+                    if int(channels) == 1:  # single channel .wav
                         channels = 'Mono'
-                    if channels == 2:  # double channel .wav
+                    elif int(channels) == 2:  # double channel .wav
                         channels = 'Stereo'
-                    if channels > 2:   # multi channel .wav
+                    else:  # multi channel .wav
                         channels = str(channels) + 'Channel'
 
             with pref_col3:  # Output Analytics Results
