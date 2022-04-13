@@ -37,6 +37,7 @@ with st.expander("Audio File Upload Section",expanded=True):
     if audiofile_upload is not None:
         st.audio(audiofile_upload)  # display audio player UX
 
+st.write('')  # add spacing
 # Set Preferences for Analytics
 if audiofile_upload is not None:
 
