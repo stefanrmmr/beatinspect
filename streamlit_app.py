@@ -55,15 +55,9 @@ if audiofile_upload is not None:
         st.write('')  # add spacing
         st.write('')  # add spacing
         if st.button('Detect BPM'):
-            try:  # try with selected timeframe settings
-                with pref_col3:
-                    with st.spinner('Calculating BPM'):
-                        bpm, sampling_freq, channels = bpm_detection.detect_bpm_main(audiofile_upload, timeframe)
-            except:  # if error run with extended timeframe for advanced tracks
-                timeframe = 5
-                with pref_col3:
-                    with st.spinner('Calculating BPM'):
-                        bpm, sampling_freq, channels = bpm_detection.detect_bpm_main(audiofile_upload, timeframe)
+            with pref_col3:
+                with st.spinner('Calculating BPM'):
+                    bpm, sampling_freq, channels = bpm_detection.detect_bpm_main(audiofile_upload, timeframe)
 
             with pref_col3:
                 st.write(f'Sampling Frequency: {sampling_freq} Hz')
