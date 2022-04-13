@@ -55,7 +55,7 @@ def read_wav(filename):
     except AssertionError:
         print(nsamps, "not equal to", len(samps))
 
-    return samps, sampling_freq, sample_width, channels
+    return samps, sampling_freq, channels
 
 
 # print an error when no data can be found
@@ -136,7 +136,7 @@ def detect_bpm_main(filename, window):
     # INPUT window (float): Size of the the window (seconds) to be scanned
     # RETURN: bpm (float)
 
-    samps, fs, sample_width, channels = read_wav(filename)
+    samps, fs, channels = read_wav(filename)
     data = []
     correl = []
     bpm = 0
@@ -166,4 +166,4 @@ def detect_bpm_main(filename, window):
 
     bpm = numpy.median(bpms)
     print("Completed!  Estimated Beats Per Minute:", bpm)
-    return bpm, fs, sample_width, channels
+    return bpm, fs, channels
