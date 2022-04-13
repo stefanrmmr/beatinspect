@@ -57,15 +57,14 @@ if audiofile_upload is not None:
             with pref_col3:
                 with st.spinner('Calculating BPM'):
                     bpm, sampling_freq, channels = bpm_detection.detect_bpm_main(audiofile_upload, timeframe)
+                    if channels == 1:  # single channel .wav
+                        channels = 'Mono'
+                    if channels == 2:  # double channel .wav
+                        channels = 'Stereo'
+                    if channels > 2:   # multi channel .wav
+                        channels = str(channels) + 'Channel'
 
-            with pref_col3:
-                st.write(f'Sampling Frequency: {sampling_freq} Hz')
-                if channels == 1:
-                    channels = 'Mono'
-                if channels == 2:
-                    channels = 'Stereo'
-                st.write(f'Audio Channels: {channels}')
-
-                st.metric(label="Track Tempo", value=f"{round(bpm, 2)} BPM", delta='A Minor Scale', delta_color="off")
-                bpm_output = f'<p style="font-family:sans-serif; color:{primary_color}; font-size: 25.6px;">{round(bpm, 2)} BPM</p>'
+            with pref_col3:  # Output Analytics Results
+                st.metric(label="Audio File Insights", value=f"{round(bpm, 2)} BPM", delta=f'{channels} - {sampling_freq} Hz', delta_color="off")
+                bpm_output = f'<p style="font-family:sans-serif; color:{primary_color}; font-size: 25.6px;">Musical Scale (soon)</p>'
                 st.markdown(bpm_output, unsafe_allow_html=True)
