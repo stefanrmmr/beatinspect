@@ -3,8 +3,7 @@ import streamlit as st
 import sys
 import toml
 # import librosa
-
-sys.path.append("src")
+# sys.path.append("src")
 
 import src.bpm_detection as bpm_detection
 # from src.bpm_detection import detect_bpm_main
