@@ -1,4 +1,4 @@
-<img width="788" alt="header" src="https://user-images.githubusercontent.com/82606558/163088998-7d83f91e-f0d3-4789-8ccb-a4a7f5d39c5e.png">
+![header_final](https://user-images.githubusercontent.com/82606558/163090911-3c6c7484-2d61-4e1c-89e8-cd70ebae5947.png)
 
 
 Click here to be re-directed to the [Beat Inspector Web-App](https://share.streamlit.io/stefanrmmr/beat_inspector/main)<br/>
