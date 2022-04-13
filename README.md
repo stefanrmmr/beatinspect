@@ -16,4 +16,4 @@ To insure that the implemented functionality provides real value to aspiring art
   - Meta information encoded in the output file
   - Conversion to .wav file with predefined settings<br/>(provided by using convertio.co's API features)
 
-<img width="1141" alt="screenshot_beat_inspector" src="https://user-images.githubusercontent.com/82606558/163081930-2412ad9e-c91e-4c5a-b46f-6f6336e859e7.png">
+[<img width="1141" alt="screenshot_beat_inspector" src="https://user-images.githubusercontent.com/82606558/163081930-2412ad9e-c91e-4c5a-b46f-6f6336e859e7.png">](https://share.streamlit.io/stefanrmmr/beat_inspector/main)
