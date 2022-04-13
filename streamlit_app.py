@@ -53,7 +53,7 @@ if audiofile_upload is not None:
         # Initiate Analysis of bpm
         st.write('')  # add spacing
         st.write('')  # add spacing
-        if st.button('Detect BPM'):
+        if st.button('Start Anlysis'):
             with pref_col3:
                 with st.spinner('Calculating BPM'):
                     bpm, sampling_freq, channels = bpm_detection.detect_bpm_main(audiofile_upload, timeframe)
