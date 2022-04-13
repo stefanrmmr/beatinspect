@@ -40,7 +40,7 @@ with st.expander("Audio File Upload Section",expanded=True):
 # Set Preferences for Analytics
 if audiofile_upload is not None:
 
-    pref_col1, pref_col2, pref_col3 = st.columns([8, 5, 8])
+    pref_col1, pref_col2, pref_col3 = st.columns([8, 8, 8])
 
     with pref_col1:
         complexity = st.radio("Select complexity of audio track",
