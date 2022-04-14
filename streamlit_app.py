@@ -55,8 +55,8 @@ if audiofile is not None:
 
         with tech_col1:
             if st.button('Analyze Audio'):
-                with tech_col2:
-                    with st.spinner('Calculating BPM'):
+                with st.spinner('Calculating BPM'):
+                    with tech_col2:
                         # extract tech Specifications about wav file
                         sampling_freq, channels = wav_techspecs.read_wav(audiofile)
                         # BPM estimation powered by essentia library
@@ -76,7 +76,7 @@ if audiofile is not None:
                         bpm_output = f'<p style="font-family:sans-serif; color:{primary_color}; font-size: 25.6px;">Musical Scale (SOON!)</p>'
                         st.markdown(bpm_output, unsafe_allow_html=True)
 
-foot_col1, foot_col2, foot_col3 = st.columns([2, 1, 5])
+foot_col1, foot_col2, foot_col3 = st.columns([2, 1, 10])
 with foot_col1:
     st.write('powered by')
 with foot_col2:
