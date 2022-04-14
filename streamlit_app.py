@@ -45,39 +45,34 @@ if audiofile is not None:
         f.write(audiofile.getbuffer())
 
     # Inspect Audio File Specifications
-    with st.expander("SECTION - Audio File Inspection", expanded=False):
+    with st.expander("SECTION - Waveform and Spectrogram Insights", expanded=False):
         st.audio(audiofile)  # display audio player UX
 
-    st.write('')  # add spacing
-    pref_col1, pref_col2, pref_col3 = st.columns([8, 5, 8])
+    # Musical and Tech Specs Overview
+    with st.expander("SECTION - Musical & Technical Specifications", expanded=True):
 
-    with pref_col1:
-        st.write('')
+        with st.spinner('Calculating BPM'):
+            # extract tech Specifications about wav file
+            sampling_freq, channels = wav_techspecs.read_wav(audiofile)
+            # BPM estimation powered by essentia library
+            es_audio = es.MonoLoader(filename=audiofile.name)()
+            rhythm_extractor = es.RhythmExtractor2013(method="multifeature")
+            bpm_essentia, es_beats, beats_confidence, _, beats_intervals = rhythm_extractor(es_audio)
 
-    with pref_col2:
-        # Initiate Analysis of bpm
-        st.write('')  # add spacing
-        st.write('')  # add spacing
-        if st.button('Start Analysis'):
-            with pref_col3:
-                with st.spinner('Calculating BPM'):
+            # channel information description
+            if int(channels) == 1:  # single channel .wav
+                channels = 'Mono'
+            elif int(channels) == 2:  # double channel .wav
+                channels = 'Stereo'
+            else:  # multi channel .wav
+                channels = str(channels) + ' Channel Audio'
 
-                    # extract tech Specifications about wav file
-                    sampling_freq, channels = wav_techspecs.read_wav(audiofile)
+        st.metric(label="Audio File Technical Specifications", value=f"{round(bpm_essentia, 1)} BPM", delta=f'{channels} - WAV {sampling_freq} Hz', delta_color="off")
+        bpm_output = f'<p style="font-family:sans-serif; color:{primary_color}; font-size: 25.6px;">Musical Scale (SOON!)</p>'
+        st.markdown(bpm_output, unsafe_allow_html=True)
 
-                    # BPM estimation using essentia library
-                    es_audio = es.MonoLoader(filename=audiofile.name)()
-                    rhythm_extractor = es.RhythmExtractor2013(method="multifeature")
-                    bpm_essentia, es_beats, beats_confidence, _, beats_intervals = rhythm_extractor(es_audio)
-
-                    if int(channels) == 1:  # single channel .wav
-                        channels = 'Mono'
-                    elif int(channels) == 2:  # double channel .wav
-                        channels = 'Stereo'
-                    else:  # multi channel .wav
-                        channels = str(channels) + ' Channel Audio'
-
-            with pref_col3:  # Output Analytics Results
-                st.metric(label="Audio File Technical Specifications", value=f"{round(bpm_essentia, 1)} BPM", delta=f'{channels} - WAV {sampling_freq} Hz', delta_color="off")
-                bpm_output = f'<p style="font-family:sans-serif; color:{primary_color}; font-size: 25.6px;">Musical Scale (SOON!)</p>'
-                st.markdown(bpm_output, unsafe_allow_html=True)
+foot_col1, foot_col2, foot_col3 = st.columns([1, 1, 5])
+with foot_col1:
+    st.write('powered by essentia by upf.')
+with foot_col2:
+    st.image('resources/essentia_logo.png')
