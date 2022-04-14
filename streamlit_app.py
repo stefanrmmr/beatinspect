@@ -75,7 +75,7 @@ if audiofile is not None:
                     # BPM estimation using librosa library
                     start = time.time()
                     y, sr = librosa.load(audiofile.name, duration=60)  # TODO change duration via input selection
-                    bpm_librosa, lib_beats = librosa.beat.beat_track(y=y, sr=sr)
+                    bpm_librosa, lib_beats = librosa.beat.beat_track(y=y, sr=sr, start_bpm=100)
                     end = time.time()
                     st.write('LIBROSA time:', (end-start))
 
