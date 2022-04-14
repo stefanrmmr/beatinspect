@@ -57,6 +57,8 @@ if audiofile is not None:
             with st.spinner('Calculating Scale'):
                 time.sleep(0.5)
             scale_text = f'<p style="font-family:sans-serif; color:{primary_color}; font-size: 25.6px;">Musical Scale</p>'
+            st.write('')
+            st.write('')
             st.markdown(scale_text, unsafe_allow_html=True)
             st.write('')  # add spacing
 
