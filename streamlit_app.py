@@ -51,7 +51,7 @@ if audiofile is not None:
     # Musical and Tech Specs Overview
     with st.expander("SECTION - Musical & Technical Specifications", expanded=True):
 
-        pref_col1, pref_col2 = st.columns([1,1 ,1])
+        pref_col1, pref_col2, pref_col3 = st.columns([1, 1, 1])
 
         with pref_col1:  # output: column for music scale evaluation
             with spinner('Calculating Scale'):
