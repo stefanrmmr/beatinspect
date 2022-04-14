@@ -9,6 +9,7 @@ import essentia.standard as es
 
 # import src.bpm_detection as bpm_detection
 import src.wav_techspecs as wav_techspecs
+import src.detect_keyscale as detect_keyscale
 
 # Streamlit Design Choices (page layout)
 primary_color = st.get_option("theme.primaryColor")
