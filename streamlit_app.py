@@ -42,8 +42,8 @@ if audiofile is not None:
     # extract audiofile name
     audiofile_name = audiofile.name
     # Save audiofile to tmp directory to be called via path
-    with open(os.path.join("tmp",uploadedfile.name),"wb") as f:
-        f.write(uploadedfile.getbuffer())
+    with open(os.path.join("tmp",audiofile.name),"wb") as f:
+        f.write(audiofile.getbuffer())
 
     # Inspect Audio File Specifications
     with st.expander("SECTION - Audio File Inspection", expanded=False):
