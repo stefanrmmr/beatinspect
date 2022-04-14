@@ -49,4 +49,4 @@ def read_wav(filename):
     except AssertionError:
         print(nsamps, "not equal to", len(samps))
 
-    return samps, sampling_freq, channels
+    return sampling_freq, channels

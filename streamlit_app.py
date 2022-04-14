@@ -7,7 +7,7 @@ import time
 import librosa
 import essentia.standard as es
 
-import src.bpm_detection as bpm_detection
+# import src.bpm_detection as bpm_detection
 import src.wav_techspecs as wav_techspecs
 
 # Streamlit Design Choices (page layout)
@@ -52,11 +52,7 @@ if audiofile is not None:
     pref_col1, pref_col2, pref_col3 = st.columns([8, 5, 8])
 
     with pref_col1:
-        complexity = st.radio("Select complexity of audio track",
-            ('Basic instrumental loop', 'Advanced dynamic track'))
-        timeframe = 6  # Initialize timeframe for audio analytics
-        if 'Basic' in complexity:
-            timeframe = 3
+        st.write('')
 
     with pref_col2:
         # Initiate Analysis of bpm
@@ -67,7 +63,7 @@ if audiofile is not None:
                 with st.spinner('Calculating BPM'):
 
                     # extract tech Specifications about wav file
-                    _, sampling_freq, channels = wav_techspecs(audiofile)
+                    sampling_freq, channels = wav_techspecs(audiofile.name)
 
                     # BPM estimation using essentia library
                     es_audio = es.MonoLoader(filename=audiofile.name)()
@@ -85,4 +81,3 @@ if audiofile is not None:
                 st.metric(label="Audio File Technical Specifications", value=f"{round(bpm_essentia, 1)} BPM", delta=f'{channels} - WAV {sampling_freq} Hz', delta_color="off")
                 bpm_output = f'<p style="font-family:sans-serif; color:{primary_color}; font-size: 25.6px;">Musical Scale (SOON!)</p>'
                 st.markdown(bpm_output, unsafe_allow_html=True)
-                
