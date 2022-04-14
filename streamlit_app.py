@@ -51,30 +51,36 @@ if audiofile is not None:
     # Musical and Tech Specs Overview
     with st.expander("SECTION - Musical & Technical Specifications", expanded=True):
 
-        pref_col1, pref_col2 = st.columns([1,1])
-        with pref_col1:
+        pref_col1, pref_col2 = st.columns([1,1 ,1])
 
-            with st.spinner('Calculating BPM'):
+        with pref_col1:  # output: column for music scale evaluation
+            with spinner('Calculating Scale'):
+                time.sleep(0.5)
+            scale_text = f'<p style="font-family:sans-serif; color:{primary_color}; font-size: 25.6px;">Musical Scale (SOON!)</p>'
+            st.markdown(scale_text, unsafe_allow_html=True)
+
+        with pref_col2:  # metrics: generating insights on tech specs
+            with st.spinner('Fetching Tech Specs'):
                 time.sleep(0.5)
                 # extract tech Specifications about wav file
                 sampling_freq, channels = wav_techspecs.read_wav(audiofile)
+                # assign audio channel description
+                if int(channels) == 1:  # single channel .wav
+                    channels = 'MONO Audio Signal'
+                elif int(channels) == 2:  # double channel .wav
+                    channels = 'STEREO Audio signal'
+                else:  # multi channel .wav
+                    channels = str(channels) + ' Channel Audio Signal'
+            st.metric(label="", value=f"WAV {sampling_freq} Hz", delta=f'{channels}', delta_color="off")
+
+        with pref_col3:  # metrics: calculcation of tempo
+            with st.spinner('Calculating BPM'):
+                time.sleep(0.5)
                 # BPM estimation using essentia library
                 es_audio = es.MonoLoader(filename=audiofile.name)()
                 rhythm_extractor = es.RhythmExtractor2013(method="multifeature")
                 bpm_essentia, es_beats, beats_confidence, _, beats_intervals = rhythm_extractor(es_audio)
-
-                # assign audio channel description
-                if int(channels) == 1:  # single channel .wav
-                    channels = 'Mono'
-                elif int(channels) == 2:  # double channel .wav
-                    channels = 'Stereo'
-                else:  # multi channel .wav
-                    channels = str(channels) + ' Channel Audio'
-
-        with pref_col2:  # Output Analytics Results
-            st.metric(label="Audio File Technical Specifications", value=f"{round(bpm_essentia, 1)} BPM", delta=f'{channels} - WAV {sampling_freq} Hz', delta_color="off")
-            bpm_output = f'<p style="font-family:sans-serif; color:{primary_color}; font-size: 25.6px;">Musical Scale (SOON!)</p>'
-            st.markdown(bpm_output, unsafe_allow_html=True)
+            st.metric(label="", value=f"{round(bpm_essentia, 1)} BPM", delta=f'', delta_color="off")
 
 
 foot_col1, foot_col2, foot_col3, foot_col4 = st.columns([3,1.5,1.5,3])
