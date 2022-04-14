@@ -42,8 +42,8 @@ with st.expander("SECTION - Audio File Upload",expanded=True):
 # Audio File Analytics
 if audiofile is not None:
 
+    # extract audiofile name
     audiofile_name = audiofile.name
-    st.write(audiofile_name)
 
     # Inspect Audio File Specifications
     with st.expander("SECTION - Audio File Inspection", expanded=False):
@@ -82,9 +82,9 @@ if audiofile is not None:
 
                     # BPM estimation using essentia library
                     start = time.time()
-                    es_audio = es.MonoLoader(filename=audiofile_name)()
-                    rhythm_extractor = es.RhythmExtractor2013(method="multifeature")
-                    bpm_essentia, es_beats, beats_confidence, _, beats_intervals = rhythm_extractor(es_audio)
+                    # es_audio = es.MonoLoader(filename=audiofile_name)()
+                    # rhythm_extractor = es.RhythmExtractor2013(method="multifeature")
+                    bpm_essentia, es_beats, beats_confidence, _, beats_intervals = rhythm_extractor(audiofile)
                     end = time.time()
                     st.write('Essentia time:', (end-start))
 
