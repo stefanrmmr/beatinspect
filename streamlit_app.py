@@ -59,7 +59,6 @@ if audiofile is not None:
             st.write('')
             st.write('')
             if st.button('Analyze Audio'):
-
                 with st.spinner('Calculating BPM'):
                     # extract tech Specifications about wav file
                     sampling_freq, channels = wav_techspecs.read_wav(audiofile)
@@ -76,7 +75,7 @@ if audiofile is not None:
                     else:  # multi channel .wav
                         channels = str(channels) + ' Channel Audio'
 
-                with tech_col2:
+                    with tech_col2:
                         st.metric(label="", value=f"{round(bpm_essentia, 1)} BPM", delta=f'{channels} - WAV {sampling_freq} Hz', delta_color="off")
                         bpm_output = f'<p style="font-family:sans-serif; color:{primary_color}; font-size: 25.6px;">Musical Scale (SOON!)</p>'
                         st.markdown(bpm_output, unsafe_allow_html=True)
