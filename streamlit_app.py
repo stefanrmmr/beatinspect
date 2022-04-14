@@ -32,7 +32,6 @@ with header_col1:
 with header_col3:
     st.write('')
     st.image("resources/rs_logo_transparent_yellow.png")
-    st.write('powered by')
     st.image("resources/essentia_logo.png")
 
 # Audio File Upload
