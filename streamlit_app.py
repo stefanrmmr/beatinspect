@@ -54,7 +54,7 @@ if audiofile is not None:
         pref_col1, pref_col2, pref_col3 = st.columns([1, 1, 1])
 
         with pref_col1:  # output: column for music scale evaluation
-            with spinner('Calculating Scale'):
+            with st.spinner('Calculating Scale'):
                 time.sleep(0.5)
             scale_text = f'<p style="font-family:sans-serif; color:{primary_color}; font-size: 25.6px;">Musical Scale (SOON!)</p>'
             st.markdown(scale_text, unsafe_allow_html=True)
