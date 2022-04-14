@@ -6,10 +6,7 @@ import time
 import librosa
 import essentia.standard as es
 
-# sys.path.append("src")
-
 import src.bpm_detection as bpm_detection
-# from src.bpm_detection import detect_bpm_main
 
 # Streamlit Design Choices (page layout)
 primary_color = st.get_option("theme.primaryColor")
@@ -44,6 +41,9 @@ if audiofile is not None:
 
     # extract audiofile name
     audiofile_name = audiofile.name
+    # Save audiofile to tmp directory to be called via path
+    with open(os.path.join("tmp",uploadedfile.name),"wb") as f:
+        f.write(uploadedfile.getbuffer())
 
     # Inspect Audio File Specifications
     with st.expander("SECTION - Audio File Inspection", expanded=False):
@@ -75,7 +75,7 @@ if audiofile is not None:
 
                     # BPM estimation using librosa library
                     start = time.time()
-                    y, sr = librosa.load(audiofile, duration=10)  # TODO change duration via input selection
+                    y, sr = librosa.load(f'tmp\{audiofile_name}', duration=10)  # TODO change duration via input selection
                     bpm_librosa, lib_beats = librosa.beat.beat_track(y=y, sr=sr)
                     end = time.time()
                     st.write('LIBROSA time:', (end-start))
