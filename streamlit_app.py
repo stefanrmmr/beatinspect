@@ -52,20 +52,18 @@ if audiofile is not None:
     with st.expander("SECTION - Musical & Technical Specifications", expanded=True):
 
         pref_col1, pref_col2 = st.columns([1,1])
-
         with pref_col1:
 
             with st.spinner('Calculating BPM'):
-
                 time.sleep(0.5)
                 # extract tech Specifications about wav file
                 sampling_freq, channels = wav_techspecs.read_wav(audiofile)
-
                 # BPM estimation using essentia library
                 es_audio = es.MonoLoader(filename=audiofile.name)()
                 rhythm_extractor = es.RhythmExtractor2013(method="multifeature")
                 bpm_essentia, es_beats, beats_confidence, _, beats_intervals = rhythm_extractor(es_audio)
 
+                # assign audio channel description
                 if int(channels) == 1:  # single channel .wav
                     channels = 'Mono'
                 elif int(channels) == 2:  # double channel .wav
@@ -82,4 +80,5 @@ foot_col1, foot_col2, foot_col3, foot_col4 = st.columns([3,1.5,0.5,3])
 with foot_col2:
     st.image('resources/powered_by.png')
 with foot_col3:
+    st.write('')  # add spacing
     st.image('resources/utility_studio.png')
