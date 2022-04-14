@@ -67,9 +67,9 @@ if audiofile is not None:
             else:  # multi channel .wav
                 channels = str(channels) + ' Channel Audio'
 
-        st.metric(label="Audio File Technical Specifications", value=f"{round(bpm_essentia, 1)} BPM", delta=f'{channels} - WAV {sampling_freq} Hz', delta_color="off")
-        bpm_output = f'<p style="font-family:sans-serif; color:{primary_color}; font-size: 25.6px;">Musical Scale (SOON!)</p>'
-        st.markdown(bpm_output, unsafe_allow_html=True)
+            st.metric(label="", value=f"{round(bpm_essentia, 1)} BPM", delta=f'{channels} - WAV {sampling_freq} Hz', delta_color="off")
+            bpm_output = f'<p style="font-family:sans-serif; color:{primary_color}; font-size: 25.6px;">Musical Scale (SOON!)</p>'
+            st.markdown(bpm_output, unsafe_allow_html=True)
 
 foot_col1, foot_col2, foot_col3 = st.columns([2, 1, 5])
 with foot_col1:
