@@ -8,6 +8,7 @@ import librosa
 import essentia.standard as es
 
 import src.bpm_detection as bpm_detection
+import src.wav_techspecs as wav_techspecs
 
 # Streamlit Design Choices (page layout)
 primary_color = st.get_option("theme.primaryColor")
@@ -65,20 +66,13 @@ if audiofile is not None:
             with pref_col3:
                 with st.spinner('Calculating BPM'):
 
-
-                    start = time.time()
-                    bpm, sampling_freq, channels = bpm_detection.detect_bpm_main(audiofile, timeframe)
-                    end = time.time()
-                    st.write('Algocalc time:', (end-start))
+                    # extract tech Specifications about wav file
+                    _, sampling_freq, channels = wav_techspecs(audiofile)
 
                     # BPM estimation using essentia library
-                    start = time.time()
                     es_audio = es.MonoLoader(filename=audiofile.name)()
                     rhythm_extractor = es.RhythmExtractor2013(method="multifeature")
                     bpm_essentia, es_beats, beats_confidence, _, beats_intervals = rhythm_extractor(es_audio)
-                    end = time.time()
-                    st.write('Essentia time:', (end-start))
-
 
                     if int(channels) == 1:  # single channel .wav
                         channels = 'Mono'
@@ -88,9 +82,7 @@ if audiofile is not None:
                         channels = str(channels) + ' Channel Audio'
 
             with pref_col3:  # Output Analytics Results
-                st.metric(label="Audio File Technical Specifications", value=f"{round(bpm, 1)} BPM", delta=f'{channels} - WAV {sampling_freq} Hz', delta_color="off")
+                st.metric(label="Audio File Technical Specifications", value=f"{round(bpm_essentia, 1)} BPM", delta=f'{channels} - WAV {sampling_freq} Hz', delta_color="off")
                 bpm_output = f'<p style="font-family:sans-serif; color:{primary_color}; font-size: 25.6px;">Musical Scale (SOON!)</p>'
                 st.markdown(bpm_output, unsafe_allow_html=True)
-                st.write('bpm essentia:', bpm_essentia)
-                # st.write('bpm librosa: ', bpm_librosa)
-                st.write('bpm calcalg: ', bpm)
+                
