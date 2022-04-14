@@ -3,6 +3,8 @@ import streamlit as st
 import sys
 import toml
 import librosa
+import essentia.standard as es
+
 # sys.path.append("src")
 
 import src.bpm_detection as bpm_detection
@@ -42,6 +44,9 @@ if audiofile_upload is not None:
     # Inspect Audio File Specifications
     with st.expander("SECTION - Audio File Inspection", expanded=False):
         st.audio(audiofile_upload)  # display audio player UX
+        bpm_output = f'<p style="font-family:sans-serif; color:{primary_color};'
+            'font-size: 25.6px;">track overview + EQ frequency preivew for slected section soon</p>'
+        st.markdown(bpm_output, unsafe_allow_html=True)
 
     st.write('')  # add spacing
     pref_col1, pref_col2, pref_col3 = st.columns([8, 5, 8])
@@ -61,6 +66,17 @@ if audiofile_upload is not None:
             with pref_col3:
                 with st.spinner('Calculating BPM'):
                     bpm, sampling_freq, channels = bpm_detection.detect_bpm_main(audiofile_upload, timeframe)
+
+                    # BPM estimation using librosa library
+                    y, sr = librosa.load(librosa.ex('choice'), duration=10)
+                    bpm_librosa, lib_beats = librosa.beat.beat_track(y=y, sr=sr)
+
+                    # BPM estimation using essentia library
+                    es_audio = es.MonoLoader(filename=audiofile_upload)()
+                    rhythm_extractor = es.RhythmExtractor2013(method="multifeature")
+                    bpm_essentia, es_beats, beats_confidence, _, beats_intervals = rhythm_extractor(es_audio)
+
+
                     if int(channels) == 1:  # single channel .wav
                         channels = 'Mono'
                     elif int(channels) == 2:  # double channel .wav
@@ -72,3 +88,6 @@ if audiofile_upload is not None:
                 st.metric(label="Audio File Technical Specifications", value=f"{round(bpm, 1)} BPM", delta=f'{channels} - WAV {sampling_freq} Hz', delta_color="off")
                 bpm_output = f'<p style="font-family:sans-serif; color:{primary_color}; font-size: 25.6px;">Musical Scale (SOON!)</p>'
                 st.markdown(bpm_output, unsafe_allow_html=True)
+                st.write('bpm essentia:', bpm_essentia)
+                st.write('bpm librosa: ', bpm_librosa)
+                st.write('bpm calcalg: ', bpm)
