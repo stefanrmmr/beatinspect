@@ -32,6 +32,8 @@ with header_col1:
 with header_col3:
     st.write('')
     st.image("resources/rs_logo_transparent_yellow.png")
+    st.write('powered by')
+    st.image("resources/essentia_logo.png")
 
 # Audio File Upload
 with st.expander("SECTION - Audio File Upload",expanded=True):
@@ -71,13 +73,6 @@ if audiofile is not None:
                     bpm, sampling_freq, channels = bpm_detection.detect_bpm_main(audiofile, timeframe)
                     end = time.time()
                     st.write('Algocalc time:', (end-start))
-
-                    # BPM estimation using librosa library
-                    """start = time.time()
-                    y, sr = librosa.load(audiofile.name, duration=60)  # TODO change duration via input selection
-                    bpm_librosa, lib_beats = librosa.beat.beat_track(y=y, sr=sr, start_bpm=100)
-                    end = time.time()
-                    st.write('LIBROSA time:', (end-start))"""
 
                     # BPM estimation using essentia library
                     start = time.time()
