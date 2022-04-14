@@ -26,13 +26,11 @@ st.markdown('''<style>.stSpinner > div > div {border-top-color: #e3fc03;}</style
 header_col1, header_col2, header_col3 = st.columns([10, 2.5, 2.5])
 with header_col1:
     st.title('beat inspector ™')
-    st.write('by rs. analytics (github @stefanrmmr)'
-             ' - version 1.0.0 - April 2022')
-    st.write('')
+    st.write('version 1.0.0 - April 2022 - github @stefanrmmr')
+
 with header_col3:
     st.write('')
     st.image("resources/rs_logo_transparent_yellow.png")
-    st.image("resources/essentia_logo.png")
 
 # Audio File Upload
 with st.expander("SECTION - Audio File Upload",expanded=True):
