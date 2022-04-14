@@ -133,7 +133,7 @@ def bpm_detector(data, fs):
 def detect_bpm_main(filename, window):
 
     # INPUT filename (str): path to .wav file that will be analyzed
-    # INPUT window (float): Size of the the window (seconds) to be scanned
+    # INPUT window (float): Size of the the window (sec) that will be scanned
     # RETURN: bpm (float)
 
     samps, fs, channels = read_wav(filename)

@@ -2,7 +2,7 @@
 import streamlit as st
 import sys
 import toml
-# import librosa
+import librosa
 # sys.path.append("src")
 
 import src.bpm_detection as bpm_detection
@@ -37,8 +37,9 @@ with st.expander("Audio File Upload Section",expanded=True):
     if audiofile_upload is not None:
         st.audio(audiofile_upload)  # display audio player UX
 
-st.write('')  # add spacing
+
 # Set Preferences for Analytics
+st.write('')  # add spacing
 if audiofile_upload is not None:
 
     pref_col1, pref_col2, pref_col3 = st.columns([8, 5, 8])
