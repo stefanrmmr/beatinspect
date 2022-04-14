@@ -45,8 +45,7 @@ if audiofile_upload is not None:
     # Inspect Audio File Specifications
     with st.expander("SECTION - Audio File Inspection", expanded=False):
         st.audio(audiofile_upload)  # display audio player UX
-        bpm_output = f'<p style="font-family:sans-serif; color:{primary_color};'
-            'font-size: 25.6px;">track overview + EQ frequency preivew for slected section soon</p>'
+        bpm_output = f'<p style="font-family:sans-serif; color:{primary_color};font-size: 25.6px;">track overview + EQ frequency preivew for slected section soon</p>'
         st.markdown(bpm_output, unsafe_allow_html=True)
 
     st.write('')  # add spacing
