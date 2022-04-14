@@ -22,13 +22,14 @@ st.markdown('''<style>.stSpinner > div > div {border-top-color: #e3fc03;}</style
     unsafe_allow_html=True)
 
 # Title and Information
-header_col1, header_col2, header_col3 = st.columns([10, 2, 3])
+header_col1, header_col2, header_col3 = st.columns([10, 2.5, 2.5])
 with header_col1:
     st.title('beat inspector ™')
     st.write('by rs. analytics (github @stefanrmmr)'
              ' - version 1.0.0 - April 2022')
     st.write('')
 with header_col3:
+    st.write('')
     st.image("resources/rs_logo_transparent_yellow.png")
 
 # Audio File Upload
