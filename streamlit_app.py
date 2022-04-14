@@ -54,7 +54,7 @@ if audiofile is not None:
 
 
     st.write('')  # add spacing
-    pref_col1, pref_col2, pref_col3 = st.columns([8, 5, 8])
+    pref_col1, pref_col2, pref_col3 = st.columns([8, 5, 18])
 
 
     with pref_col2:
