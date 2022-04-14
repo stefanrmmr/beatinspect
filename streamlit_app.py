@@ -35,13 +35,14 @@ with header_col3:
 with st.expander("Audio File Upload Section",expanded=True):
     audiofile_upload = st.file_uploader("Please select and upload an audio file (.WAV)", type='wav')
 
-st.write('')  # add spacing
+# Audio File Analytics
 if audiofile_upload is not None:
 
     # Inspect Audio File Specifications
     with st.expander("Audio File Inspection Section", expanded=False):
         st.audio(audiofile_upload)  # display audio player UX
 
+    st.write('')  # add spacing
     pref_col1, pref_col2, pref_col3 = st.columns([8, 5, 8])
 
     with pref_col1:
