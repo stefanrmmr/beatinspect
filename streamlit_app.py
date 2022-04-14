@@ -38,7 +38,7 @@ with header_col3:
 # Audio File Upload
 with st.expander("SECTION - Audio File Upload",expanded=True):
     audiofile = st.file_uploader("Please select and upload an audio file (.WAV)", type='wav')
-    audiofile_name = audiofile.filename
+    audiofile_name = audiofile['name']
     st.write(audiofile_name)
 
 # Audio File Analytics
