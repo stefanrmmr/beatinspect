@@ -84,12 +84,13 @@ if audiofile is not None:
                 es_audio = es.MonoLoader(filename=audiofile.name)()
                 rhythm_extractor = es.RhythmExtractor2013(method="multifeature")
                 bpm_essentia, es_beats, beats_confidence, _, beats_intervals = rhythm_extractor(es_audio)
-            st.metric(label="", value=f"{round(bpm_essentia, 1)}", delta=f'BPM Tempo', delta_color="off")
+            st.metric(label="", value=f"{round(bpm_essentia, 1)} BPM", delta=f'Beat Tempo', delta_color="off")
             st.write('')  # add spacing
 
 
 foot_col1, foot_col2, foot_col3, foot_col4 = st.columns([3,1.5,1.5,3])
 with foot_col2:
     st.image('resources/powered_by_essentia.png')
+    st.markdown("[![Foo]('resources/powered_by_essentia.png')](http://google.com.au/)")
 with foot_col3:
     st.image('resources/coop_utility_studio.png')
