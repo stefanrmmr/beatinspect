@@ -63,7 +63,7 @@ if audiofile is not None:
                 with st.spinner('Calculating BPM'):
 
                     # extract tech Specifications about wav file
-                    sampling_freq, channels = wav_techspecs(audiofile.name)
+                    sampling_freq, channels = wav_techspecs.read_wav(audiofile)
 
                     # BPM estimation using essentia library
                     es_audio = es.MonoLoader(filename=audiofile.name)()
