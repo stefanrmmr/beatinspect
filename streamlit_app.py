@@ -40,10 +40,8 @@ with st.expander("SECTION - Audio File Upload",expanded=True):
 # Audio File Analytics
 if audiofile is not None:
 
-    # extract audiofile name
-    audiofile_name = audiofile.name
     # Save audiofile to tmp directory to be called via path
-    with open(os.path.join("tmp", audiofile_name),"wb") as f:
+    with open(audiofile.name,"wb") as f:
         f.write(audiofile.getbuffer())
 
     # Inspect Audio File Specifications
@@ -76,7 +74,7 @@ if audiofile is not None:
 
                     # BPM estimation using librosa library
                     start = time.time()
-                    y, sr = librosa.load(f'tmp\{audiofile_name}', duration=10)  # TODO change duration via input selection
+                    y, sr = librosa.load(audiofile.name, duration=10)  # TODO change duration via input selection
                     bpm_librosa, lib_beats = librosa.beat.beat_track(y=y, sr=sr)
                     end = time.time()
                     st.write('LIBROSA time:', (end-start))
