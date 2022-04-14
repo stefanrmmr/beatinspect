@@ -64,8 +64,10 @@ if audiofile is not None:
         if st.button('Start Analysis'):
 
             with pref_col3:
+
                 with st.spinner('Calculating BPM'):
 
+                    time.sleep(1)
                     # extract tech Specifications about wav file
                     sampling_freq, channels = wav_techspecs.read_wav(audiofile)
 
