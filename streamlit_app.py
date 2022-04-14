@@ -56,8 +56,9 @@ if audiofile is not None:
         with pref_col1:  # output: column for music scale evaluation
             with st.spinner('Calculating Scale'):
                 time.sleep(0.5)
-            scale_text = f'<p style="font-family:sans-serif; color:{primary_color}; font-size: 25.6px;">Musical Scale (SOON!)</p>'
+            scale_text = f'<p style="font-family:sans-serif; color:{primary_color}; font-size: 25.6px;">Musical Scale</p>'
             st.markdown(scale_text, unsafe_allow_html=True)
+            st.write('')  # add spacing
 
         with pref_col2:  # metrics: generating insights on tech specs
             with st.spinner('Fetching Tech Specs'):
@@ -72,6 +73,7 @@ if audiofile is not None:
                 else:  # multi channel .wav
                     channels = str(channels) + ' Channel Signal'
             st.metric(label="", value=f"{sampling_freq} Hz", delta=f'WAV - {channels}', delta_color="off")
+            st.write('')  # add spacing
 
         with pref_col3:  # metrics: calculcation of tempo
             with st.spinner('Calculating BPM'):
@@ -81,6 +83,7 @@ if audiofile is not None:
                 rhythm_extractor = es.RhythmExtractor2013(method="multifeature")
                 bpm_essentia, es_beats, beats_confidence, _, beats_intervals = rhythm_extractor(es_audio)
             st.metric(label="", value=f"{round(bpm_essentia, 1)}", delta=f'BPM Tempo', delta_color="off")
+            st.write('')  # add spacing
 
 
 foot_col1, foot_col2, foot_col3, foot_col4 = st.columns([3,1.5,1.5,3])
