@@ -30,7 +30,7 @@ with header_col1:
     st.write('Version 1.1.0 - April 2022 - Github @stefanrmmr')
 
 with header_col3:
-    st.write('')
+    st.write('')  # add spacing
     st.image("resources/rs_logo_transparent_yellow.png")
 
 # Audio File Upload
@@ -54,11 +54,14 @@ if audiofile is not None:
         pref_col0, pref_col1, pref_col2, pref_col3 = st.columns([0.2, 1, 1, 1])
 
         with pref_col1:  # output: column for music scale evaluation
-            with st.spinner('Calculating Scale'):
+            with st.spinner('Finding Key & Scale'):
                 time.sleep(0.5)
-            scale_text = f'<p style="font-family:sans-serif; color:{primary_color}; font-size: 32px;">SCALE ...</p>'
-            st.write('')
-            st.write('')
+                # call utility function that calculates key,scale using essentia
+                key, scale = detect_keyscale.detect_ks(audiofile.name)
+
+            scale_text = f'<p style="font-family:sans-serif; color:{primary_color}; font-size: 32px;">{key} {scale}</p>'
+            st.write('')  # add spacing
+            st.write('')  # add spacing
             st.markdown(scale_text, unsafe_allow_html=True)
             st.write('')  # add spacing
 
