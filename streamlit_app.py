@@ -91,6 +91,6 @@ if audiofile is not None:
 foot_col1, foot_col2, foot_col3, foot_col4 = st.columns([3,1.5,1.5,3])
 with foot_col2:
     st.image('resources/powered_by_essentia.png')
-    st.markdown("[![Foo](http://www.google.com.au/images/nav_logo7.png)](http://google.com.au/)")
+    st.markdown("[![Foo]('resources/powered_by_essentia.png')](http://google.com.au/)")
 with foot_col3:
     st.image('resources/coop_utility_studio.png')
