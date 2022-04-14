@@ -22,7 +22,7 @@ st.markdown('''<style>.stSpinner > div > div {border-top-color: #e3fc03;}</style
     unsafe_allow_html=True)
 
 # Title and Information
-header_col1, header_col2, header_col3 = st.columns([10, 1.7, 3.3])
+header_col1, header_col2, header_col3 = st.columns([10, 2, 3])
 with header_col1:
     st.title('beat inspector ™')
     st.write('by rs. analytics (github @stefanrmmr)'
@@ -56,7 +56,7 @@ if audiofile_upload is not None:
         # Initiate Analysis of bpm
         st.write('')  # add spacing
         st.write('')  # add spacing
-        if st.button('Start Anlysis'):
+        if st.button('Start Analysis'):
             with pref_col3:
                 with st.spinner('Calculating BPM'):
                     bpm, sampling_freq, channels = bpm_detection.detect_bpm_main(audiofile_upload, timeframe)
