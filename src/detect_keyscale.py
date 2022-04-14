@@ -29,7 +29,7 @@ def detect_ks(audio_file):
                         nonLinear=False,
                         windowSize=1.)
 
-    key = ess.Key(profileType='edma', # Use profile for electronic music.
+    key = ess.Key(profileType='bgate',
                   numHarmonics=4,
                   pcpSize=36,
                   slope=0.6,
