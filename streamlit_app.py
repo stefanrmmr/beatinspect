@@ -76,6 +76,7 @@ if audiofile is not None:
             bpm_output = f'<p style="font-family:sans-serif; color:{primary_color}; font-size: 25.6px;">Musical Scale (SOON!)</p>'
             st.markdown(bpm_output, unsafe_allow_html=True)
 
+st.write('in cooperation with')
 foot_col1, foot_col2, foot_col3, foot_col4 = st.columns([3,1.5,0.5,3])
 with foot_col2:
     st.image('resources/powered_by.png')
