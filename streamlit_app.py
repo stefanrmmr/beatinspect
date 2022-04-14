@@ -62,6 +62,10 @@ if audiofile is not None:
         st.write('')  # add spacing
         st.write('')  # add spacing
         if st.button('Start Analysis'):
+
+            with st.spinner('servus'):
+                time.sleep(5)
+
             with pref_col3:
                 with st.spinner('Calculating BPM'):
 
