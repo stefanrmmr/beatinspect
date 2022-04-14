@@ -51,12 +51,12 @@ if audiofile is not None:
     # Musical and Tech Specs Overview
     with st.expander("SECTION - Musical & Technical Specifications", expanded=True):
 
-        pref_col0, pref_col1, pref_col2, pref_col3 = st.columns([1, 1, 1, 1])
+        pref_col0, pref_col1, pref_col2, pref_col3 = st.columns([0.2, 1, 1, 1])
 
         with pref_col1:  # output: column for music scale evaluation
             with st.spinner('Calculating Scale'):
                 time.sleep(0.5)
-            scale_text = f'<p style="font-family:sans-serif; color:{primary_color}; font-size: 30px;">Gb Major</p>'
+            scale_text = f'<p style="font-family:sans-serif; color:{primary_color}; font-size: 32px;">Gb Major</p>'
             st.write('')
             st.write('')
             st.markdown(scale_text, unsafe_allow_html=True)
