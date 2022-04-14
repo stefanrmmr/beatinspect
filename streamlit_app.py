@@ -2,6 +2,7 @@
 import streamlit as st
 import sys
 import toml
+import time
 import librosa
 import essentia.standard as es
 
@@ -65,16 +66,27 @@ if audiofile_upload is not None:
         if st.button('Start Analysis'):
             with pref_col3:
                 with st.spinner('Calculating BPM'):
+
+
+                    start = time.time()
                     bpm, sampling_freq, channels = bpm_detection.detect_bpm_main(audiofile_upload, timeframe)
+                    end = time.time()
+                    st.write('Algocalc time:', (end-start))
 
                     # BPM estimation using librosa library
+                    start = time.time()
                     y, sr = librosa.load(librosa.ex('choice'), duration=10)
                     bpm_librosa, lib_beats = librosa.beat.beat_track(y=y, sr=sr)
+                    end = time.time()
+                    st.write('LIBROSA time:', (end-start))
 
                     # BPM estimation using essentia library
+                    start = time.time()
                     es_audio = es.MonoLoader(filename=audiofile_upload)()
                     rhythm_extractor = es.RhythmExtractor2013(method="multifeature")
                     bpm_essentia, es_beats, beats_confidence, _, beats_intervals = rhythm_extractor(es_audio)
+                    end = time.time()
+                    st.write('Essentia time:', (end-start))
 
 
                     if int(channels) == 1:  # single channel .wav
