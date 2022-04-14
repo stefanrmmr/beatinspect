@@ -1,5 +1,6 @@
 # beat_inspector by stefanrmmr (rs. analytics) - version April 2022
 import streamlit as st
+import os
 import sys
 import toml
 import time
