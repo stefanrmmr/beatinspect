@@ -91,6 +91,5 @@ if audiofile is not None:
 foot_col1, foot_col2, foot_col3, foot_col4 = st.columns([3,1.5,1.5,3])
 with foot_col2:
     st.image('resources/powered_by_essentia.png')
-    st.markdown("[![this is an image link](./resources/powered_by_essentia.png)](https://streamlit.io)")
 with foot_col3:
     st.image('resources/coop_utility_studio.png')
