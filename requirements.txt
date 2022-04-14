@@ -4,5 +4,4 @@ numpy
 scipy
 PyWavelets
 SoundFile
-sndfile
 librosa
