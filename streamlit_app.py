@@ -73,19 +73,19 @@ if audiofile is not None:
                     st.write('Algocalc time:', (end-start))
 
                     # BPM estimation using librosa library
-                    start = time.time()
+                    """start = time.time()
                     y, sr = librosa.load(audiofile.name, duration=60)  # TODO change duration via input selection
                     bpm_librosa, lib_beats = librosa.beat.beat_track(y=y, sr=sr, start_bpm=100)
                     end = time.time()
-                    st.write('LIBROSA time:', (end-start))
+                    st.write('LIBROSA time:', (end-start))"""
 
-                    """# BPM estimation using essentia library
+                    # BPM estimation using essentia library
                     start = time.time()
-                    es_audio = es.MonoLoader(filename=audiofile_name)()
+                    es_audio = es.MonoLoader(filename=audiofile.name)()
                     rhythm_extractor = es.RhythmExtractor2013(method="multifeature")
                     bpm_essentia, es_beats, beats_confidence, _, beats_intervals = rhythm_extractor(es_audio)
                     end = time.time()
-                    st.write('Essentia time:', (end-start))"""
+                    st.write('Essentia time:', (end-start))
 
 
                     if int(channels) == 1:  # single channel .wav
@@ -99,6 +99,6 @@ if audiofile is not None:
                 st.metric(label="Audio File Technical Specifications", value=f"{round(bpm, 1)} BPM", delta=f'{channels} - WAV {sampling_freq} Hz', delta_color="off")
                 bpm_output = f'<p style="font-family:sans-serif; color:{primary_color}; font-size: 25.6px;">Musical Scale (SOON!)</p>'
                 st.markdown(bpm_output, unsafe_allow_html=True)
-                # st.write('bpm essentia:', bpm_essentia)
-                st.write('bpm librosa: ', bpm_librosa)
+                st.write('bpm essentia:', bpm_essentia)
+                # st.write('bpm librosa: ', bpm_librosa)
                 st.write('bpm calcalg: ', bpm)
