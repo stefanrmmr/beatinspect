@@ -77,3 +77,6 @@ if audiofile is not None:
             st.metric(label="Audio File Technical Specifications", value=f"{round(bpm_essentia, 1)} BPM", delta=f'{channels} - WAV {sampling_freq} Hz', delta_color="off")
             bpm_output = f'<p style="font-family:sans-serif; color:{primary_color}; font-size: 25.6px;">Musical Scale (SOON!)</p>'
             st.markdown(bpm_output, unsafe_allow_html=True)
+
+
+st.write('powered by upf.\'s')
