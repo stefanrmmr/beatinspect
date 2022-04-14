@@ -66,12 +66,12 @@ if audiofile is not None:
                 sampling_freq, channels = wav_techspecs.read_wav(audiofile)
                 # assign audio channel description
                 if int(channels) == 1:  # single channel .wav
-                    channels = 'MONO Audio Signal'
+                    channels = 'MONO Signal'
                 elif int(channels) == 2:  # double channel .wav
-                    channels = 'STEREO Audio signal'
+                    channels = 'STEREO Signal'
                 else:  # multi channel .wav
-                    channels = str(channels) + ' Channel Audio Signal'
-            st.metric(label="", value=f"WAV {sampling_freq} Hz", delta=f'{channels}', delta_color="off")
+                    channels = str(channels) + ' Channel Signal'
+            st.metric(label="", value=f"{sampling_freq} Hz", delta=f'WAV - {channels}', delta_color="off")
 
         with pref_col3:  # metrics: calculcation of tempo
             with st.spinner('Calculating BPM'):
@@ -80,7 +80,7 @@ if audiofile is not None:
                 es_audio = es.MonoLoader(filename=audiofile.name)()
                 rhythm_extractor = es.RhythmExtractor2013(method="multifeature")
                 bpm_essentia, es_beats, beats_confidence, _, beats_intervals = rhythm_extractor(es_audio)
-            st.metric(label="", value=f"{round(bpm_essentia, 1)} BPM", delta=f'', delta_color="off")
+            st.metric(label="", value=f"{round(bpm_essentia, 1)}", delta=f'BPM Tempo', delta_color="off")
 
 
 foot_col1, foot_col2, foot_col3, foot_col4 = st.columns([3,1.5,1.5,3])
