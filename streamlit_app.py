@@ -37,14 +37,16 @@ with header_col3:
 
 # Audio File Upload
 with st.expander("SECTION - Audio File Upload",expanded=True):
-    audiofile_upload = st.file_uploader("Please select and upload an audio file (.WAV)", type='wav')
+    audiofile = st.file_uploader("Please select and upload an audio file (.WAV)", type='wav')
+    audiofile_name = audiofile.name
+    st.write(audiofile_name)
 
 # Audio File Analytics
-if audiofile_upload is not None:
+if audiofile is not None:
 
     # Inspect Audio File Specifications
     with st.expander("SECTION - Audio File Inspection", expanded=False):
-        st.audio(audiofile_upload)  # display audio player UX
+        st.audio(audiofile)  # display audio player UX
 
     st.write('')  # add spacing
     pref_col1, pref_col2, pref_col3 = st.columns([8, 5, 8])
@@ -66,7 +68,7 @@ if audiofile_upload is not None:
 
 
                     start = time.time()
-                    bpm, sampling_freq, channels = bpm_detection.detect_bpm_main(audiofile_upload, timeframe)
+                    bpm, sampling_freq, channels = bpm_detection.detect_bpm_main(audiofile, timeframe)
                     end = time.time()
                     st.write('Algocalc time:', (end-start))
 
@@ -79,7 +81,7 @@ if audiofile_upload is not None:
 
                     # BPM estimation using essentia library
                     start = time.time()
-                    es_audio = es.MonoLoader(filename=audiofile_upload)()
+                    es_audio = es.MonoLoader(filename=audiofile_name)()
                     rhythm_extractor = es.RhythmExtractor2013(method="multifeature")
                     bpm_essentia, es_beats, beats_confidence, _, beats_intervals = rhythm_extractor(es_audio)
                     end = time.time()
