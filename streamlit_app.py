@@ -30,18 +30,17 @@ with header_col1:
     st.write('')
 with header_col3:
     st.write('')
-    st.write('')
     st.image("resources/rs_logo_transparent_yellow.png")
 
 # Audio File Upload
-with st.expander("Audio File Upload Section",expanded=True):
+with st.expander("SECTION - Audio File Upload",expanded=True):
     audiofile_upload = st.file_uploader("Please select and upload an audio file (.WAV)", type='wav')
 
 # Audio File Analytics
 if audiofile_upload is not None:
 
     # Inspect Audio File Specifications
-    with st.expander("Audio File Inspection Section", expanded=False):
+    with st.expander("SECTION - Audio File Inspection", expanded=False):
         st.audio(audiofile_upload)  # display audio player UX
 
     st.write('')  # add spacing
