@@ -30,6 +30,7 @@ with header_col1:
     st.write('')
 with header_col3:
     st.write('')
+    st.write('')
     st.image("resources/rs_logo_transparent_yellow.png")
 
 # Audio File Upload
