@@ -11,10 +11,11 @@ To insure that the implemented functionality provides real value to aspiring art
 
 
 ### Functionality Overview
-- Musical Attributes Analytics (BPM rate classification, Musical scale detection)
-- Technical Overview (Audio file format, quality, resolution, trackId, meta data)
-- Audio File Format Processing
+- Musical Attributes Analytics (BPM rate classification, Musical key & scale detection)
+- Technical Overview (Audio file format, quality, resolution, audio channels dimension)<br/><br/>
+- SOON: Waveform and Spectrogram Insights (Mastering EQ Analytics for selected timeframes)
+- SOON: Audio File Format Processing 
   - Meta information encoded in the output file
-  - Conversion to .wav file with predefined settings<br/>(provided by using convertio.co's API features)
+  - Conversion to .wav file with predefined settings<br/>(provided by using convertio.co's API features)<br/><br/>
 
-[<img width="1134" alt="screenshot_beat_inspector" src="https://user-images.githubusercontent.com/82606558/163088758-8ec833d4-0984-4f5d-a255-eb38c17a1f85.png">](https://share.streamlit.io/stefanrmmr/beat_inspector/main)
+<img width="1036" alt="ux_screenshot" src="https://user-images.githubusercontent.com/82606558/163571878-aca8b2a8-ca24-4992-be74-71452bb8fa61.png">
