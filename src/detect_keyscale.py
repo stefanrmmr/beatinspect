@@ -3,7 +3,7 @@
 import essentia.streaming as ess
 import essentia
 
-def detect_ks(audio_file):
+def detect_ks(audio_file, profile_type):
     # Input: Audio File Path
 
     # Initialize algorithms we will use.
@@ -29,7 +29,7 @@ def detect_ks(audio_file):
                         nonLinear=False,
                         windowSize=1.)
 
-    key = ess.Key(profileType='bgate',
+    key = ess.Key(profileType=profile_type,
                   numHarmonics=4,
                   pcpSize=36,
                   slope=0.6,

@@ -57,14 +57,17 @@ if audiofile is not None:
         with pref_col1:  # output: column for music scale evaluation
             with st.spinner('Finding Key & Scale'):
                 time.sleep(0.5)
-                # call utility function that calculates key,scale using essentia
-                key, scale = detect_keyscale.detect_ks(audiofile.name)
 
-            scale_text = f'<p style="font-family:sans-serif; color:{primary_color}; font-size: 32px;">{key} {scale}</p>'
-            st.write('')  # add spacing
-            st.write('')  # add spacing
-            st.markdown(scale_text, unsafe_allow_html=True)
-            st.write('')  # add spacing
+                attr_list =['diatonic', 'krumhansl', 'temperley', 'weichai', 'tonictriad', 'temperley2005', 'thpcp', 'shaath', 'gomez', 'noland', 'edmm', 'edma', 'bgate', 'braw']
+                for attr in attr_list:
+                    # call utility function that calculates key,scale using essentia
+                    key, scale = detect_keyscale.detect_ks(audiofile.name, attr)
+
+                    scale_text = f'<p style="font-family:sans-serif; color:{primary_color}; font-size: 32px;">{key} {scale}</p>'
+                    st.write('')  # add spacing
+                    st.write('')  # add spacing
+                    st.markdown(scale_text, unsafe_allow_html=True)
+                    st.write('')  # add spacing
 
         with pref_col2:  # metrics: generating insights on tech specs
             with st.spinner('Fetching Tech Specs'):
