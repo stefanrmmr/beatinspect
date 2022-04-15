@@ -24,7 +24,7 @@ st.markdown(hide_decoration_bar_style, unsafe_allow_html=True)
 st.markdown('''<style>.stSpinner > div > div {border-top-color: #e3fc03;}</style>''',
     unsafe_allow_html=True)
 
-st.markdown('''<style>.stMetricValue > div {color: green;}</style>''',
+st.markdown('''<style>.stMetricValue > {color: green;}</style>''',
     unsafe_allow_html=True)
 
 # Title and Information
