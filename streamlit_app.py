@@ -36,7 +36,7 @@ with header_col3:
 
 # Audio File Upload
 with st.expander("SECTION - Audio File Upload",expanded=True):
-    audiofile = st.file_uploader("Please select and upload an audio file (.WAV)", type='wav')
+    audiofile = st.file_uploader("Please upload an audio file (.WAV)", type='wav')
 
 # Audio File Analytics
 if audiofile is not None:
@@ -61,11 +61,13 @@ if audiofile is not None:
                 # https://essentia.upf.edu/reference/streaming_Key.html
                 key, scale, key_strength = detect_keyscale.detect_ks(audiofile.name, 'diatonic')
 
-            # scale_text = f'<p style="font-family:sans-serif; color:{primary_color}; font-size: 32px;">{key}-{scale}</p>'
-            # conf_text = f'<p style="font-family:sans-serif; color: white; font-size: 18px;">Confidence {round(key_strength, 2)}</p>'
+            # scale_text = f'<p color:{primary_color}; font-size: 32px;">{key}-{scale}</p>'
+            # conf_text = f'<p  color: white; font-size: 18px;">{round(key_strength, 2)}</p>'
             # st.markdown(scale_text, unsafe_allow_html=True)
             # st.markdown(conf_text, unsafe_allow_html=True)
-            st.metric(label="", value=f"{key}-{scale}", delta=f"Confidence {round(key_strength, 2)}", delta_color="off")
+            st.metric(label="", value=f"{key}-{scale}",
+                      delta=f"Confidence {round(key_strength, 2)}",
+                      delta_color="off")
             st.write('')  # add spacing
 
         with pref_col2:  # metrics: generating insights on tech specs
@@ -75,12 +77,13 @@ if audiofile is not None:
                 sampling_freq, channels = wav_techspecs.read_wav(audiofile)
                 # assign audio channel description
                 if int(channels) == 1:  # single channel .wav
-                    channels = 'MONO Signal'
+                    channels = 'MONO'
                 elif int(channels) == 2:  # double channel .wav
-                    channels = 'STEREO Signal'
+                    channels = 'STEREO'
                 else:  # multi channel .wav
-                    channels = str(channels) + ' Channel Signal'
-            st.metric(label="", value=f"{sampling_freq} Hz", delta=f'WAV - {channels}', delta_color="off")
+                    channels = str(channels) + ' Channel'
+            st.metric(label="", value=f"{sampling_freq} Hz",
+                      delta=f'WAV - {channels}', delta_color="off")
             st.write('')  # add spacing
 
         with pref_col3:  # metrics: calculcation of tempo
@@ -89,8 +92,9 @@ if audiofile is not None:
                 # BPM estimation using essentia library
                 es_audio = es.MonoLoader(filename=audiofile.name)()
                 rhythm_extractor = es.RhythmExtractor2013(method="multifeature")
-                bpm_essentia, es_beats, beats_confidence, _, beats_intervals = rhythm_extractor(es_audio)
-            st.metric(label="", value=f"{round(bpm_essentia, 1)} BPM", delta=f'Beat Tempo', delta_color="off")
+                bpm_essentia, _, _, _, _ = rhythm_extractor(es_audio)
+            st.metric(label="", value=f"{round(bpm_essentia, 1)} BPM",
+                      delta=f'Beat Tempo', delta_color="off")
             st.write('')  # add spacing
 
 
