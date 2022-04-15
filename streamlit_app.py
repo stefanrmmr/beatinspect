@@ -7,37 +7,33 @@ import time
 import librosa
 import essentia.standard as es
 
-# import src.bpm_detection as bpm_detection
 import src.wav_techspecs as wav_techspecs
 import src.detect_keyscale as detect_keyscale
 
-# Streamlit Design Choices (page layout)
+# DESIGN CHOICES
+# get primaryColor from streamlit
 primary_color = st.get_option("theme.primaryColor")
-
+# Design page layout and browser window details
 st.set_page_config(layout="centered",
                    page_icon="resources/rs_logo_transparent_yellow.png",
                    page_title="beat inspector")
-
+# Design hide top header line
 hide_decoration_bar_style = '''<style>header {visibility: hidden;}</style>'''
 st.markdown(hide_decoration_bar_style, unsafe_allow_html=True)
-
+# Design change spinner color to primary color
 st.markdown('''<style>.stSpinner > div > div {border-top-color: #e3fc03;}</style>''',
     unsafe_allow_html=True)
-
-st.markdown('''<style>.css-1xarl3l.e16fv1kl1 {color: green;}</style>''',
+# Design change stMetricsValue to primary color via specific css-element
+st.markdown('''<style>.css-1xarl3l.e16fv1kl1 {color: #e3fc03;}</style>''',
     unsafe_allow_html=True)
 
 
-
-# st.markdown('''<style>.stMetricValue {color: green;}</style>''',
-# unsafe_allow_html=True)
 
 # Title and Information
 header_col1, header_col2, header_col3 = st.columns([10, 2.5, 2.5])
 with header_col1:
     st.title('beat inspector ™')
     st.write('Version 1.1.0 - April 2022 - Github @stefanrmmr')
-
 with header_col3:
     st.write('')  # add spacing
     st.image("resources/rs_logo_transparent_yellow.png")
@@ -105,7 +101,7 @@ if audiofile is not None:
                       delta=f'Beat Tempo', delta_color="off")
             st.write('')  # add spacing
 
-
+# FOOTER Content and Coop logos etc
 foot_col1, foot_col2, foot_col3, foot_col4 = st.columns([3,1.5,1.5,3])
 with foot_col2:
     st.image('resources/powered_by_essentia.png')
