@@ -14,7 +14,7 @@ def detect_ks(audio_file, profile_type):
     spectralpeaks = ess.SpectralPeaks(orderBy='magnitude',
                                       magnitudeThreshold=0.00001,
                                       minFrequency=20,
-                                      maxFrequency=3500,
+                                      maxFrequency=5000,
                                       maxPeaks=60)
 
     # Use default HPCP parameters for plots.
@@ -24,7 +24,7 @@ def detect_ks(audio_file, profile_type):
                         referenceFrequency=440, # Assume tuning frequency is 44100.
                         bandPreset=False,
                         minFrequency=20,
-                        maxFrequency=3500,
+                        maxFrequency=5000,
                         weightType='cosine',
                         nonLinear=False,
                         windowSize=1.)
@@ -34,7 +34,7 @@ def detect_ks(audio_file, profile_type):
                   pcpSize=36,
                   slope=0.6,
                   usePolyphony=True,
-                  useThreeChords=True)
+                  useThreeChords=False)
 
     # Use pool to store data.
     pool = essentia.Pool()
