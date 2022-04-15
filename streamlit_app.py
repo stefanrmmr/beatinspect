@@ -59,19 +59,15 @@ if audiofile is not None:
                 time.sleep(0.5)
                 # call utility function that calculates key,scale using essentia
                 # https://essentia.upf.edu/reference/streaming_Key.html
-                # AMBIENT DIATONIC Diatonic' - binary profile with diatonic notes of both modes. Could be useful for ambient music or diatonic music which is not strictly 'tonal functional'.
-                # CLASSIC 'Temperley' - key profiles extracted from corpus analysis of euroclassical music. Therefore, they perform best on this repertoire (especially in minor).
-                # ELECTRONIC 'edmm' - automatic profiles extracted from corpus analysis of electronic dance music and manually tweaked according to heuristic observation.
-                #    It will report major modes (which are poorly represented in EDM) as minor, but improve performance otherwise [3].
-                key, scale, key_strength = detect_keyscale.detect_ks(audiofile.name, 'edmm')
+                key, scale, key_strength = detect_keyscale.detect_ks(audiofile.name, 'diatonic')
 
-            scale_text = f'<p style="font-family:sans-serif; color:{primary_color}; font-size: 32px;">{key}-{scale}</p>'
+            """scale_text = f'<p style="font-family:sans-serif; color:{primary_color}; font-size: 32px;">{key}-{scale}</p>'
             conf_text = f'<p style="font-family:sans-serif; color: white; font-size: 18px;">Confidence {round(key_strength, 2)}</p>'
-
             st.write('')  # add spacing
             st.write('')  # add spacing
             st.markdown(scale_text, unsafe_allow_html=True)
-            st.markdown(conf_text, unsafe_allow_html=True)
+            st.markdown(conf_text, unsafe_allow_html=True)"""
+            st.metric(label="", value=f"{key}-{scale}", delta=f"Confidence {round(key_strength, 2)}", delta_color="off")
             st.write('')  # add spacing
 
         with pref_col2:  # metrics: generating insights on tech specs
