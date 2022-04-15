@@ -61,12 +61,10 @@ if audiofile is not None:
                 # https://essentia.upf.edu/reference/streaming_Key.html
                 key, scale, key_strength = detect_keyscale.detect_ks(audiofile.name, 'diatonic')
 
-            """scale_text = f'<p style="font-family:sans-serif; color:{primary_color}; font-size: 32px;">{key}-{scale}</p>'
-            conf_text = f'<p style="font-family:sans-serif; color: white; font-size: 18px;">Confidence {round(key_strength, 2)}</p>'
-            st.write('')  # add spacing
-            st.write('')  # add spacing
-            st.markdown(scale_text, unsafe_allow_html=True)
-            st.markdown(conf_text, unsafe_allow_html=True)"""
+            # scale_text = f'<p style="font-family:sans-serif; color:{primary_color}; font-size: 32px;">{key}-{scale}</p>'
+            # conf_text = f'<p style="font-family:sans-serif; color: white; font-size: 18px;">Confidence {round(key_strength, 2)}</p>'
+            # st.markdown(scale_text, unsafe_allow_html=True)
+            # st.markdown(conf_text, unsafe_allow_html=True)
             st.metric(label="", value=f"{key}-{scale}", delta=f"Confidence {round(key_strength, 2)}", delta_color="off")
             st.write('')  # add spacing
 
