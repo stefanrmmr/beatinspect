@@ -57,4 +57,4 @@ def detect_ks(audio_file, profile_type):
     essentia.run(loader)
 
     print("Estimated key and scale:", pool['tonal.key_key'] + " " + pool['tonal.key_scale'])
-    return pool['tonal.key_key'], pool['tonal.key_scale']
+    return pool['tonal.key_key'], pool['tonal.key_scale'], pool['tonal.key_strength']

@@ -63,9 +63,9 @@ if audiofile is not None:
                 # CLASSIC 'Temperley' - key profiles extracted from corpus analysis of euroclassical music. Therefore, they perform best on this repertoire (especially in minor).
                 # ELECTRONIC 'edmm' - automatic profiles extracted from corpus analysis of electronic dance music and manually tweaked according to heuristic observation.
                 #    It will report major modes (which are poorly represented in EDM) as minor, but improve performance otherwise [3].
-                key, scale = detect_keyscale.detect_ks(audiofile.name, 'edmm')
+                key, scale, key_strength = detect_keyscale.detect_ks(audiofile.name, 'diatonic')
 
-            scale_text = f'<p style="font-family:sans-serif; color:{primary_color}; font-size: 32px;">{key} {scale}</p>'
+            scale_text = f'<p style="font-family:sans-serif; color:{primary_color}; font-size: 32px;">{key} {scale} {key_strength}</p>'
             st.write('')  # add spacing
             st.write('')  # add spacing
             st.markdown(scale_text, unsafe_allow_html=True)
