@@ -57,20 +57,19 @@ if audiofile is not None:
         with pref_col1:  # output: column for music scale evaluation
             with st.spinner('Finding Key & Scale'):
                 time.sleep(0.5)
+                # call utility function that calculates key,scale using essentia
+                # https://essentia.upf.edu/reference/streaming_Key.html
+                # AMBIENT DIATONIC Diatonic' - binary profile with diatonic notes of both modes. Could be useful for ambient music or diatonic music which is not strictly 'tonal functional'.
+                # CLASSIC 'Temperley' - key profiles extracted from corpus analysis of euroclassical music. Therefore, they perform best on this repertoire (especially in minor).
+                # ELECTRONIC 'edmm' - automatic profiles extracted from corpus analysis of electronic dance music and manually tweaked according to heuristic observation.
+                #    It will report major modes (which are poorly represented in EDM) as minor, but improve performance otherwise [3].
+                key, scale = detect_keyscale.detect_ks(audiofile.name, 'edmm')
 
-                attr_list =['diatonic', 'krumhansl', 'temperley', 'shaath','edmm']
-                for attr in attr_list:
-                    start = time.time()
-                    # call utility function that calculates key,scale using essentia
-                    key, scale = detect_keyscale.detect_ks(audiofile.name, attr)
-
-                    scale_text = f'<p style="font-family:sans-serif; color:{primary_color}; font-size: 32px;">{key} {scale}</p>'
-                    st.write('')  # add spacing
-                    st.write('')  # add spacing
-                    st.markdown(scale_text, unsafe_allow_html=True)
-                    st.write('')  # add spacing
-                    end = time.time()
-                    st.write(f'{attr}{end-start}')
+            scale_text = f'<p style="font-family:sans-serif; color:{primary_color}; font-size: 32px;">{key} {scale}</p>'
+            st.write('')  # add spacing
+            st.write('')  # add spacing
+            st.markdown(scale_text, unsafe_allow_html=True)
+            st.write('')  # add spacing
 
         with pref_col2:  # metrics: generating insights on tech specs
             with st.spinner('Fetching Tech Specs'):
