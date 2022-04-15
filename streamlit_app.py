@@ -10,6 +10,7 @@ import essentia.standard as es
 # import src.bpm_detection as bpm_detection
 import src.wav_techspecs as wav_techspecs
 import src.detect_keyscale as detect_keyscale
+import src.bpm_deepdetect as bpm_deepdetect
 
 # Streamlit Design Choices (page layout)
 primary_color = st.get_option("theme.primaryColor")
@@ -84,6 +85,12 @@ if audiofile is not None:
         with pref_col3:  # metrics: calculcation of tempo
             with st.spinner('Calculating BPM'):
                 time.sleep(0.5)
+                # BPM Deep Learning bpm_detection
+                deep_bpm, deep_local_bpm, deep_local_bpm_probas = bpm_deepdetect.deep_bpm(audiofile.name, "src/models/deepsquare-k16-3.pb")
+                st.write(deep_bpm, deep_local_bpm, deep_local_bpm_probas)
+
+
+
                 # BPM estimation using essentia library
                 es_audio = es.MonoLoader(filename=audiofile.name)()
                 rhythm_extractor = es.RhythmExtractor2013(method="multifeature")
