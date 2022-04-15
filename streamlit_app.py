@@ -58,7 +58,7 @@ if audiofile is not None:
             with st.spinner('Finding Key & Scale'):
                 time.sleep(0.5)
 
-                attr_list =['diatonic', 'krumhansl', 'temperley', 'weichai', 'tonictriad', 'temperley2005', 'thpcp', 'shaath', 'gomez', 'noland', 'edmm', 'edma', 'bgate', 'braw']
+                attr_list =['diatonic', 'krumhansl', 'temperley', 'shaath','edmm']
                 for attr in attr_list:
                     # call utility function that calculates key,scale using essentia
                     key, scale = detect_keyscale.detect_ks(audiofile.name, attr)
