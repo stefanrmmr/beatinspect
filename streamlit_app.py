@@ -60,6 +60,7 @@ if audiofile is not None:
 
                 attr_list =['diatonic', 'krumhansl', 'temperley', 'shaath','edmm']
                 for attr in attr_list:
+                    start = time.time()
                     # call utility function that calculates key,scale using essentia
                     key, scale = detect_keyscale.detect_ks(audiofile.name, attr)
 
@@ -68,6 +69,8 @@ if audiofile is not None:
                     st.write('')  # add spacing
                     st.markdown(scale_text, unsafe_allow_html=True)
                     st.write('')  # add spacing
+                    end = time.time()
+                    st.write(f'{attr}{end-start}')
 
         with pref_col2:  # metrics: generating insights on tech specs
             with st.spinner('Fetching Tech Specs'):
