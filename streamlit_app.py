@@ -10,6 +10,7 @@ import essentia.standard as es
 import src.wav_techspecs as wav_techspecs
 import src.detect_keyscale as detect_keyscale
 
+
 # DESIGN CHOICES
 # get primaryColor from streamlit
 primary_color = st.get_option("theme.primaryColor")
@@ -28,7 +29,6 @@ st.markdown('''<style>.css-1xarl3l.e16fv1kl1 {color: #e3fc03;}</style>''',
     unsafe_allow_html=True)
 
 
-
 # Title and Information
 header_col1, header_col2, header_col3 = st.columns([10, 2.5, 2.5])
 with header_col1:
@@ -45,13 +45,20 @@ with st.expander("SECTION - Audio File Upload",expanded=True):
 # Audio File Analytics
 if audiofile is not None:
 
-    # Save audiofile to tmp directory to be called via path
+    # Save audiofile to main directory to be called via path
     with open(audiofile.name,"wb") as f:
         f.write(audiofile.getbuffer())
 
     # Inspect Audio File Specifications
     with st.expander("SECTION - Waveform and Spectrogram Insights", expanded=False):
         st.audio(audiofile)  # display audio player UX
+
+        # TODO select a section of the track (or the whole track) and analyze for sections that are above ZERO level
+        # TODO for these sections that are "übersteuern" --> find out in which frequency bands they need to be decreased in amplitude
+        # PLOT amplitude over frequency --> classical EQ view --> Spectrogram
+        # Step 1 Select slider timeframe from overall plotted audio file (AMP oder time)
+        # Step 2 Use the timeframe to calculate the Spectrogram (AMP(frequency))
+        # Step 3 Plot Spectrogram plot with yellow vertical bars at frequencies where AMP too high!
 
     # Musical and Tech Specs Overview
     with st.expander("SECTION - Musical & Technical Specifications", expanded=True):
@@ -100,6 +107,7 @@ if audiofile is not None:
             st.metric(label="", value=f"{round(bpm_essentia, 1)} BPM",
                       delta=f'Beat Tempo', delta_color="off")
             st.write('')  # add spacing
+
 
 # FOOTER Content and Coop logos etc
 foot_col1, foot_col2, foot_col3, foot_col4 = st.columns([3,1.5,1.5,3])
