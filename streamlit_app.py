@@ -24,8 +24,13 @@ st.markdown(hide_decoration_bar_style, unsafe_allow_html=True)
 st.markdown('''<style>.stSpinner > div > div {border-top-color: #e3fc03;}</style>''',
     unsafe_allow_html=True)
 
-st.markdown('''<style>.stMetricValue {color: green;}</style>''',
+st.markdown('''<style>.css-1xarl3l.e16fv1kl1 {color: green;}</style>''',
     unsafe_allow_html=True)
+
+
+
+# st.markdown('''<style>.stMetricValue {color: green;}</style>''',
+# unsafe_allow_html=True)
 
 # Title and Information
 header_col1, header_col2, header_col3 = st.columns([10, 2.5, 2.5])
