@@ -21,6 +21,19 @@ def design_setup():
                             </style>"""
     st.markdown(hide_streamlit_footer, unsafe_allow_html=True)
 
+
+
+
+    footer="""<style> your css code put here</style>
+            <div class='footer'>
+            <p>the word you want to tell<a style='display:block;text-align:center;'
+            href='https://www.streamlit.io' target='_blank'>your email address put here</a></p>
+            </div>"""
+    st.markdown(footer, unsafe_allow_html=True)
+
+
+
+
     # Design change spinner color to primary color
     st.markdown('''<style>.stSpinner > div > div {border-top-color: #e3fc03;}</style>''',
         unsafe_allow_html=True)
