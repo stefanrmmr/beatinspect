@@ -13,7 +13,7 @@ import src.design as design  # design choices
 import src.wav_techspecs as wav_techspecs
 import src.detect_keyscale as detect_keyscale
 
-from helper import draw_embed, create_spectrogram, read_audio, record, save_record
+from helper import create_spectrogram, read_audio, record, save_record
 
 
 
