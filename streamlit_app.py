@@ -12,7 +12,8 @@ import src.design as design  # design choices
 import src.wav_techspecs as wav_techspecs
 import src.detect_keyscale as detect_keyscale
 
-from streamlit.components.v1 import html
+
+import streamlit.components.v1 as components
 
 def beatinspect_main():
     # DESIGN implement changes to the standard streamlit UI/UX
@@ -23,7 +24,7 @@ def beatinspect_main():
     main_html = """
     <html>
       <head>
-        <script>
+        <script language="javascript">
             let log = console.log.bind(console),
               id = val => document.getElementById(val),
               ul = id('ul'),
@@ -152,13 +153,10 @@ def beatinspect_main():
       </body>
     </html>
     """
+
     # Execute your app
     st.title("Javascript example")
-    html(main_html)
-
-
-
-
+    components.html(html_string)  # JavaScript works
 
 
     # TITLE and Information
