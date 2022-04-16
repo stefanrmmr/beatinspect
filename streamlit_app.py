@@ -24,7 +24,7 @@ def beatinspect_main():
     main_html = """
     <html>
       <head>
-        <script language="javascript">
+        <script>
             let log = console.log.bind(console),
               id = val => document.getElementById(val),
               ul = id('ul'),
