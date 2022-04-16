@@ -1,7 +1,7 @@
 ![header_final](https://user-images.githubusercontent.com/82606558/163090911-3c6c7484-2d61-4e1c-89e8-cd70ebae5947.png)
 
 
-Click here to be re-directed to the [Beat Inspector Web-App](https://share.streamlit.io/stefanrmmr/beat_inspector/main)<br/>
+Click here to be re-directed to the [Beat Inspect Streamlit Web-App](https://share.streamlit.io/stefanrmmr/beat_inspector/main)<br/>
 You are a music producer? Let's get in touch via [LinkedIn](https://www.linkedin.com/in/stefanrmmr/)
 
 Fundamental Analytics for any uploaded Beat!
