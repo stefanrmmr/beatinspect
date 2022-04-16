@@ -6,8 +6,7 @@ PyWavelets
 SoundFile
 librosa
 essentia
-pyaudio
-portaudio
+PyAudio
 audioread
 blinker
 webencodings
