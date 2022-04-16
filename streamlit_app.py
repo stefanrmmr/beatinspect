@@ -7,7 +7,7 @@ import time
 import base64
 import essentia.standard as es
 
-from src.utils import *  # utility functions
+import src.utils as utils  # utility functions
 import src.design  # app design choices
 import src.wav_techspecs as wav_techspecs
 import src.detect_keyscale as detect_keyscale
@@ -114,7 +114,7 @@ def beatinspect_main():
     with foot_col2:
         # st.image('resources/powered_by_essentia.png')
 
-        gif_html = get_img_with_href('resources/powered_by_essentia.png', 'https://docs.streamlit.io')
+        gif_html = utils.get_img_with_href('resources/powered_by_essentia.png', 'https://docs.streamlit.io')
         st.markdown(gif_html, unsafe_allow_html=True)
 
     with foot_col3:
