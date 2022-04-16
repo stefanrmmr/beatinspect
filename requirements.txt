@@ -3,7 +3,8 @@ matplotlib
 numpy
 scipy
 PyWavelets
-SoundFile
 librosa
 essentia
 SoundFile
+sounddevice
+wavio

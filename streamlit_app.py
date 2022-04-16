@@ -13,6 +13,9 @@ import src.design as design  # design choices
 import src.wav_techspecs as wav_techspecs
 import src.detect_keyscale as detect_keyscale
 
+from helper import draw_embed, create_spectrogram, read_audio, record, save_record
+
+
 
 def beatinspect_main():
     # DESIGN implement changes to the standard streamlit UI/UX
@@ -42,8 +45,29 @@ def beatinspect_main():
             if 'Upload' in choice:
                 audiofile = st.file_uploader("", type='wav')
             elif 'Record' in choice:
-                st.write('SOON1')  # TODO SOON
-                audiofile = None
+                # st.write('SOON1')  # TODO SOON
+
+
+                filename = 'custom_recording'
+                if st.button(f"Click to Record"):
+
+                    record_state = st.text("Recording...")
+                    duration = 5  # seconds
+                    fs = 48000
+                    myrecording = record(duration, fs)
+                    record_state.text(f"Saving sample as {filename}.mp3")
+
+                    path_myrecording = f"./samples/{filename}.mp3"
+
+                    save_record(path_myrecording, myrecording, fs)
+                    record_state.text(f"Done! Saved sample as {filename}.mp3")
+
+                    audiofile = read_audio(path_myrecording)
+                    st.audio(read_audio(path_myrecording))
+
+                    fig = create_spectrogram(path_myrecording)
+                    st.pyplot(fig)
+
             else:
                 st.write('SOON2')  # TODO SOON
                 audiofile = None
