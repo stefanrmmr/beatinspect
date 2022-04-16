@@ -45,21 +45,6 @@ def beatinspect_main():
             elif 'Record' in choice:
                 st.write('SOON1')  # TODO SOON
                 audiofile = None
-                """if st.button('Record'):
-                    with st.spinner(f'Recording for {DURATION} seconds ....'):
-                        record_audio.sound.record()
-                    st.success("Recording completed")
-
-                if st.button('Play'):
-                    # sound.play()
-                    try:
-                        audio_file = open(WAVE_OUTPUT_FILE, 'rb')
-                        # audio_bytes = audio_file.read()
-                        # st.audio(audio_bytes, format='audio/wav')
-                    except:
-                        st.write("Please record sound first")"""
-                # audiofile = None
-                # https://github.com/ayushkumarshah/Guitar-Chords-recognition/blob/master/src/sound.py
             else:
                 st.write('SOON2')  # TODO SOON
                 audiofile = None
