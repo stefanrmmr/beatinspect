@@ -7,6 +7,8 @@ import time
 import base64
 import essentia.standard as es
 
+import sounddevice as sd
+
 import src.utils as utils  # utility functions
 import src.design as design  # design choices
 # import src.record_audio as record_audio
@@ -20,6 +22,9 @@ from helper import create_spectrogram, read_audio, record, save_record
 def beatinspect_main():
     # DESIGN implement changes to the standard streamlit UI/UX
     design.design_setup()  # switch to primaryColor for accents
+
+    heast = sd.query_devices()
+    st.write(heast)
 
     # TITLE and Information
     header_col1, header_col2, header_col3 = st.columns([10, 2.5, 2.5])
