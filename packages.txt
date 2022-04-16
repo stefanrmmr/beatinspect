@@ -1,3 +1,2 @@
 libsndfile1-dev
 libportaudio2
-PortAudio19-dev
