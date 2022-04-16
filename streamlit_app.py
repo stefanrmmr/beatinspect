@@ -4,7 +4,6 @@ import os
 import sys
 import toml
 import time
-import librosa
 import essentia.standard as es
 
 import src.wav_techspecs as wav_techspecs
