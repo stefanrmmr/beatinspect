@@ -8,14 +8,17 @@ import base64
 import essentia.standard as es
 
 import src.utils as utils  # utility functions
-import src.design  # app design choices
+import src.design as design  # design choices
 import src.wav_techspecs as wav_techspecs
 import src.detect_keyscale as detect_keyscale
 
 
 def beatinspect_main():
 
-    # Title and Information
+    # DESIGN implement changes to the standard streamlit UI/UX
+    design.design_setup()  # switch to primaryColor for accents
+
+    # TITLE and Information
     header_col1, header_col2, header_col3 = st.columns([10, 2.5, 2.5])
     with header_col1:
         st.title('beat inspect ™')
@@ -24,7 +27,7 @@ def beatinspect_main():
         st.write('')  # add spacing
         st.image("resources/rs_logo_transparent_yellow.png")
 
-    # Audio File Upload
+    # AUDIO SOURCE File Upload Selection
     with st.expander("SECTION - Select prefered Audio Input Option",expanded=True):
 
         audio_col0, audio_col1, audio_col2 = st.columns([0.03,0.5,1])
@@ -43,7 +46,7 @@ def beatinspect_main():
                 st.write('SOON2')  # TODO SOON
                 audiofile = None
 
-    # Audio File Analytics
+    # ANALYTICS for Audio File
     if audiofile is not None:
 
         # Save audiofile to main directory to be called via path
@@ -73,10 +76,6 @@ def beatinspect_main():
                     # https://essentia.upf.edu/reference/streaming_Key.html
                     key, scale, key_strength = detect_keyscale.detect_ks(audiofile.name, 'diatonic')
 
-                # scale_text = f'<p color:{primary_color}; font-size: 32px;">{key}-{scale}</p>'
-                # conf_text = f'<p  color: white; font-size: 18px;">{round(key_strength, 2)}</p>'
-                # st.markdown(scale_text, unsafe_allow_html=True)
-                # st.markdown(conf_text, unsafe_allow_html=True)
                 st.metric(label="", value=f"{key}-{scale}",
                           delta=f"Confidence {round(key_strength, 2)}",
                           delta_color="off")
@@ -109,16 +108,20 @@ def beatinspect_main():
                           delta=f'Beat Tempo', delta_color="off")
                 st.write('')  # add spacing
 
+
     # FOOTER Content and Coop logos etc
     foot_col1, foot_col2, foot_col3, foot_col4 = st.columns([3,1.5,1.5,3])
     with foot_col2:
+        essentia_html = utils.get_img_with_href('resources/powered_by_essentia.png',
+                                                'https://essentia.upf.edu/')
+        st.markdown(essentia_html, unsafe_allow_html=True)
         # st.image('resources/powered_by_essentia.png')
-
-        gif_html = utils.get_img_with_href('resources/powered_by_essentia.png', 'https://docs.streamlit.io')
-        st.markdown(gif_html, unsafe_allow_html=True)
-
     with foot_col3:
-        st.image('resources/coop_utility_studio.png')
+        ustu_html = utils.get_img_with_href('resources/coop_utility_studio.png',
+                                            'https://utility-studio.com/')
+        st.markdown(ustu_html, unsafe_allow_html=True)
+        # st.image('resources/coop_utility_studio.png')
+
 
 if __name__ == '__main__':
     # call main function
