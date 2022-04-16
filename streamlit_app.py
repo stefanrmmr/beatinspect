@@ -28,7 +28,7 @@ st.markdown('''<style>.stSpinner > div > div {border-top-color: #e3fc03;}</style
 st.markdown('''<style>.css-1xarl3l.e16fv1kl1 {color: #e3fc03;}</style>''',
     unsafe_allow_html=True)
 # Design change radio button inner point to be dark grey via custom css
-st.markdown('''<style>.st-da {color: black;}</style>''',
+st.markdown('''<style>.st-d9 {background-color: black;}</style>''',
     unsafe_allow_html=True)
 
 # Title and Information
