@@ -1,3 +1,5 @@
+essentia
+PyWavelets
 absl-py==0.10.0
 altair==4.1.0
 appdirs==1.4.4
