@@ -45,7 +45,7 @@ with st.expander("SECTION - Select prefered Audio Input Option",expanded=True):
     with audio_col1:
         choice = st.radio('', ['Audio File Upload', 'Record via Microphone', 'Read from Audio Chip'])
 
-    with foot_col2:
+    with audio_col2:
         if 'Upload' in choice:
             audiofile = st.file_uploader("Please upload an audio file (.WAV)", type='wav')
         elif 'Record' in choice:
