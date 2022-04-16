@@ -1,3 +1,4 @@
+libsndfile1-dev
 streamlit
 matplotlib
 numpy
