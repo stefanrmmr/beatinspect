@@ -1,5 +1,5 @@
 # import logging
-import pyaudio, wave, pylab
+import pyaudio, wave
 import numpy as np
 # import librosa, librosa.display
 # import matplotlib.pyplot as plt
