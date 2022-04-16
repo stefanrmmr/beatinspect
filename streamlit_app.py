@@ -7,24 +7,15 @@ import time
 import base64
 import essentia.standard as es
 
-import sounddevice as sd
-
 import src.utils as utils  # utility functions
 import src.design as design  # design choices
-# import src.record_audio as record_audio
 import src.wav_techspecs as wav_techspecs
 import src.detect_keyscale as detect_keyscale
-
-from helper import create_spectrogram, read_audio, record, save_record
-
 
 
 def beatinspect_main():
     # DESIGN implement changes to the standard streamlit UI/UX
     design.design_setup()  # switch to primaryColor for accents
-
-    heast = sd.query_devices()
-    st.write('devices: ', heast)
 
     # TITLE and Information
     header_col1, header_col2, header_col3 = st.columns([10, 2.5, 2.5])
@@ -50,25 +41,7 @@ def beatinspect_main():
                 audiofile = st.file_uploader("", type='wav')
             elif 'Record' in choice:
                 audiofile = None
-                filename = 'custom_recording'
 
-                if st.button(f"Click to Record"):
-                    record_state = st.text("Recording...")
-                    duration = 5  # seconds
-                    fs = 48000
-                    myrecording = record(duration, fs)
-                    record_state.text(f"Saving sample as {filename}.mp3")
-
-                    path_myrecording = f"./tmp/{filename}.mp3"
-
-                    save_record(path_myrecording, myrecording, fs)
-                    record_state.text(f"Done! Saved sample as {filename}.mp3")
-
-                    audiofile = read_audio(path_myrecording)
-                    st.audio(read_audio(path_myrecording))
-
-                    fig = create_spectrogram(path_myrecording)
-                    st.pyplot(fig)
 
     # ANALYTICS for Audio File
     if audiofile is not None:
