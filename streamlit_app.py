@@ -55,7 +55,7 @@ def beatinspect_main():
                     myrecording = record(duration, fs)
                     record_state.text(f"Saving sample as {filename}.mp3")
 
-                    path_myrecording = f"./samples/{filename}.mp3"
+                    path_myrecording = f"./tmp/{filename}.mp3"
 
                     save_record(path_myrecording, myrecording, fs)
                     record_state.text(f"Done! Saved sample as {filename}.mp3")
