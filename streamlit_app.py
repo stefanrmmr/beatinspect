@@ -156,7 +156,7 @@ def beatinspect_main():
 
     # Execute your app
     st.title("Javascript example")
-    components.html(main_html, height='500px')  # JavaScript works
+    components.html(main_html, height=500)  # JavaScript works
 
 
     # TITLE and Information
