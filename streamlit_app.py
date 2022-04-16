@@ -37,8 +37,7 @@ def beatinspect_main():
         audio_col0, audio_col1, audio_col2 = st.columns([0.03,0.5,1])
         with audio_col1:
             choice = st.radio('',[' Audio File Upload',
-                                  ' Record via Microphone',
-                                  ' Read from Audio Chip'])
+                                  ' Record via Microphone'])
             st.write('')  # add spacing
 
         with audio_col2:
