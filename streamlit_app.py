@@ -43,9 +43,9 @@ def beatinspect_main():
             if 'Upload' in choice:
                 audiofile = st.file_uploader("", type='wav')
             elif 'Record' in choice:
-                # st.write('SOON1')  # TODO SOON
-
-                if st.button('Record'):
+                st.write('SOON1')  # TODO SOON
+                audiofile = None
+                """if st.button('Record'):
                     with st.spinner(f'Recording for {DURATION} seconds ....'):
                         record_audio.sound.record()
                     st.success("Recording completed")
@@ -57,13 +57,7 @@ def beatinspect_main():
                         # audio_bytes = audio_file.read()
                         # st.audio(audio_bytes, format='audio/wav')
                     except:
-                        st.write("Please record sound first")
-
-
-
-
-
-
+                        st.write("Please record sound first")"""
                 # audiofile = None
                 # https://github.com/ayushkumarshah/Guitar-Chords-recognition/blob/master/src/sound.py
             else:
