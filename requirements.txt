@@ -7,3 +7,6 @@ SoundFile
 librosa
 essentia
 pyaudio
+audioread
+resampy
+blinker
