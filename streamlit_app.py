@@ -44,7 +44,6 @@ text-align: center;
 <p>Developed with ❤ by <a style='display: block; text-align: center;' href="https://www.heflin.dev/" target="_blank">Heflin Stephen Raj S</a></p>
 </div>
 """
-st.markdown(footer,unsafe_allow_html=True)
 
 
 
