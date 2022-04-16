@@ -7,4 +7,3 @@ SoundFile
 librosa
 essentia
 SoundFile
-htbuilder
