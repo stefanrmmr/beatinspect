@@ -7,7 +7,7 @@ import time
 import base64
 import essentia.standard as es
 
-import src.utils  # utility functions
+from src.utils import *  # utility functions
 import src.design  # app design choices
 import src.wav_techspecs as wav_techspecs
 import src.detect_keyscale as detect_keyscale
