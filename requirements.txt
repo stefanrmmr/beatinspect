@@ -101,7 +101,7 @@ click
 argon2-cffi-bindings
 nbformat
 ipykernel
-argon2-cff
+argon2-cffi
 altair
 nbclient
 nbconvert
