@@ -30,6 +30,10 @@ st.markdown('''<style>.css-1xarl3l.e16fv1kl1 {color: #e3fc03;}</style>''',
 # Design change radio button inner point to be dark grey via custom css
 st.markdown('''<style>.st-d9 {background-color: black;}</style>''',
     unsafe_allow_html=True)
+st.markdown('''<style>.st-db {width: 8px;}</style>''',
+    unsafe_allow_html=True)
+st.markdown('''<style>.st-da {height: 8px;}</style>''',
+    unsafe_allow_html=True)
 
 # Title and Information
 header_col1, header_col2, header_col3 = st.columns([10, 2.5, 2.5])
@@ -45,7 +49,7 @@ with st.expander("SECTION - Select prefered Audio Input Option",expanded=True):
 
     audio_col0, audio_col1, audio_col2 = st.columns([0.03,0.5,1])
     with audio_col1:
-        choice = st.radio('',['Audio File Upload', 'Record via Microphone', 'Read from Audio Chip'])
+        choice = st.radio('',[' Audio File Upload', ' Record via Microphone', ' Read from Audio Chip'])
         st.write('')  # add spacing
 
     with audio_col2:
