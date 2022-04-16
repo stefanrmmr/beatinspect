@@ -142,17 +142,17 @@ def layout(*args):
 def footer():
     # use relative path to show my png instead of url
     ######
-    with open('footer_st_logo.png', 'rb') as f:
+    with open('resources/essentia_logo.png', 'rb') as f:
         img_logo = f.read()
     logo_cache = st.image(img_logo)
     logo_cache.empty()
     ######
     myargs = [
-        "沪ICP备2077777777号-1	Made in ",
-        image('media/ccb3c3657680f3d36265f4183c1cedde710d7242e401ab56e34bd1eb.png',
+        "This application has been made in",
+        image('resources/essentia_logo.png',
               width=px(25), height=px(25)),
-        " with ❤️ by ",
-        link("https://www.zhihu.com/people/Gu.meng.old-dream", "@wangnov"),
+        " with :D by ",
+        link("https://www.google.com", "@stefanrmmr"),
     ]
     layout(*myargs)
 
