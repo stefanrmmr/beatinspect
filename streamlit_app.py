@@ -41,7 +41,7 @@ with header_col3:
 # Audio File Upload
 with st.expander("SECTION - Select prefered Audio Input Option",expanded=True):
 
-    audio_col0, audio_col1, audio_col2 = st.columns([0.1,0.4,1])
+    audio_col0, audio_col1, audio_col2 = st.columns([0.05,0.5,1])
     with audio_col1:
         choice = st.radio('', ['Audio File Upload', 'Record via Microphone', 'Read from Audio Chip'])
         st.write('')  # add spacing
