@@ -27,7 +27,9 @@ st.markdown('''<style>.stSpinner > div > div {border-top-color: #e3fc03;}</style
 # Design change stMetricsValue to primary color via specific css-element
 st.markdown('''<style>.css-1xarl3l.e16fv1kl1 {color: #e3fc03;}</style>''',
     unsafe_allow_html=True)
-
+# Design change radio button inner point to be dark grey via custom css
+st.markdown('''<style>.st-da {color: black;}</style>''',
+    unsafe_allow_html=True)
 
 # Title and Information
 header_col1, header_col2, header_col3 = st.columns([10, 2.5, 2.5])
@@ -52,6 +54,7 @@ with st.expander("SECTION - Select prefered Audio Input Option",expanded=True):
         elif 'Record' in choice:
             st.write('SOON1')  # TODO SOON
             audiofile = None
+            # https://github.com/ayushkumarshah/Guitar-Chords-recognition/blob/master/src/sound.py
         else:
             st.write('SOON2')  # TODO SOON
             audiofile = None
