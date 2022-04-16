@@ -142,14 +142,14 @@ def layout(*args):
 def footer():
     # use relative path to show my png instead of url
     ######
-    with open('src/essentia_logo.png', 'rb') as f:
+    with open('resources/essentia_logo.png', 'rb') as f:
         img_logo = f.read()
     logo_cache = st.image(img_logo)
     logo_cache.empty()
     ######
     myargs = [
         "沪ICP备2077777777号-1	Made in ",
-        image('src/essentia_logo.png',
+        image('resources/essentia_logo.png',
               width=px(25), height=px(25)),
         " with :D by ",
         link("https://www.zhihu.com/people/Gu.meng.old-dream", "@wangnov"),
