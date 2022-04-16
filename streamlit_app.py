@@ -156,7 +156,7 @@ def beatinspect_main():
 
     # Execute your app
     st.title("Javascript example")
-    components.html(html_string)  # JavaScript works
+    components.html(main_html)  # JavaScript works
 
 
     # TITLE and Information
