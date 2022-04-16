@@ -26,7 +26,7 @@ def get_img_with_href(local_img_path, target_url):
     bin_str = get_base64_of_bin_file(local_img_path)
     html_code = f'''
         <a href="{target_url}">
-            <img src="data:image/{img_format};base64,{bin_str}" width="500" height="600" />
+            <img src="data:image/{img_format};base64,{bin_str}" width="200" height="100" />
         </a>'''
     return html_code
 
