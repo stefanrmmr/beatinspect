@@ -4,10 +4,37 @@ import os
 import sys
 import toml
 import time
+import base64
 import essentia.standard as es
 
 import src.wav_techspecs as wav_techspecs
 import src.detect_keyscale as detect_keyscale
+
+
+
+
+
+@st.cache(allow_output_mutation=True)
+def get_base64_of_bin_file(bin_file):
+    with open(bin_file, 'rb') as f:
+        data = f.read()
+    return base64.b64encode(data).decode()
+
+@st.cache(allow_output_mutation=True)
+def get_img_with_href(local_img_path, target_url):
+    img_format = os.path.splitext(local_img_path)[-1].replace('.', '')
+    bin_str = get_base64_of_bin_file(local_img_path)
+    html_code = f'''
+        <a href="{target_url}">
+            <img src="data:image/{img_format};base64,{bin_str}" />
+        </a>'''
+    return html_code
+
+
+
+
+
+
 
 
 # DESIGN CHOICES
@@ -134,7 +161,11 @@ def beatinspect_main():
     # FOOTER Content and Coop logos etc
     foot_col1, foot_col2, foot_col3, foot_col4 = st.columns([3,1.5,1.5,3])
     with foot_col2:
-        st.image('resources/powered_by_essentia.png')
+        # st.image('resources/powered_by_essentia.png')
+
+        gif_html = get_img_with_href('resources/powered_by_essentia.png', 'https://docs.streamlit.io')
+        st.markdown(gif_html, unsafe_allow_html=True)
+
     with foot_col3:
         st.image('resources/coop_utility_studio.png')
 
