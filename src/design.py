@@ -20,7 +20,7 @@ def design_setup():
     # Design change radio button inner point to be dark grey via custom css
     st.markdown('''<style>.st-d9 {background-color: black;}</style>''',
         unsafe_allow_html=True)
-    st.markdown('''<style>.st-db {width: 8px;}</style>''',
+    st.markdown('''<style>.st-db {height: 8px; width: 8px;}</style>''',
         unsafe_allow_html=True)
-    st.markdown('''<style>.st-da {height: 8px;}</style>''',
+    st.markdown('''<style>.st-da {height: 8px; width: 8px;}</style>''',
         unsafe_allow_html=True)
