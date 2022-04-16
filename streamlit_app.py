@@ -45,12 +45,10 @@ def beatinspect_main():
             if 'Upload' in choice:
                 audiofile = st.file_uploader("", type='wav')
             elif 'Record' in choice:
-                # st.write('SOON1')  # TODO SOON
-
-
+                audiofile = None
                 filename = 'custom_recording'
-                if st.button(f"Click to Record"):
 
+                if st.button(f"Click to Record"):
                     record_state = st.text("Recording...")
                     duration = 5  # seconds
                     fs = 48000
@@ -67,10 +65,6 @@ def beatinspect_main():
 
                     fig = create_spectrogram(path_myrecording)
                     st.pyplot(fig)
-
-            else:
-                st.write('SOON2')  # TODO SOON
-                audiofile = None
 
     # ANALYTICS for Audio File
     if audiofile is not None:
