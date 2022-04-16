@@ -24,7 +24,7 @@ def beatinspect_main():
     design.design_setup()  # switch to primaryColor for accents
 
     heast = sd.query_devices()
-    st.write(heast)
+    st.write('devices: ', heast)
 
     # TITLE and Information
     header_col1, header_col2, header_col3 = st.columns([10, 2.5, 2.5])
