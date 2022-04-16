@@ -7,59 +7,10 @@ import time
 import base64
 import essentia.standard as es
 
+import src.utils  # utility functions
+import src.design  # app design choices
 import src.wav_techspecs as wav_techspecs
 import src.detect_keyscale as detect_keyscale
-
-
-
-
-
-@st.cache(allow_output_mutation=True)
-def get_base64_of_bin_file(bin_file):
-    with open(bin_file, 'rb') as f:
-        data = f.read()
-    return base64.b64encode(data).decode()
-
-@st.cache(allow_output_mutation=True)
-def get_img_with_href(local_img_path, target_url):
-    img_format = os.path.splitext(local_img_path)[-1].replace('.', '')
-    bin_str = get_base64_of_bin_file(local_img_path)
-    html_code = f'''
-        <a href="{target_url}">
-            <img src="data:image/{img_format};base64,{bin_str}" width="100%" height="100%" />
-        </a>'''
-    return html_code
-
-
-
-
-
-
-
-
-# DESIGN CHOICES
-# get primaryColor from streamlit
-primary_color = st.get_option("theme.primaryColor")
-# Design page layout and browser window details
-st.set_page_config(layout="centered",
-                   page_icon="resources/rs_logo_transparent_yellow.png",
-                   page_title="beat inspect")
-# Design hide top header line
-hide_decoration_bar_style = '''<style>header {visibility: hidden;}</style>'''
-st.markdown(hide_decoration_bar_style, unsafe_allow_html=True)
-# Design change spinner color to primary color
-st.markdown('''<style>.stSpinner > div > div {border-top-color: #e3fc03;}</style>''',
-    unsafe_allow_html=True)
-# Design change stMetricsValue to primary color via specific css-element
-st.markdown('''<style>.css-1xarl3l.e16fv1kl1 {color: #e3fc03;}</style>''',
-    unsafe_allow_html=True)
-# Design change radio button inner point to be dark grey via custom css
-st.markdown('''<style>.st-d9 {background-color: black;}</style>''',
-    unsafe_allow_html=True)
-st.markdown('''<style>.st-db {width: 8px;}</style>''',
-    unsafe_allow_html=True)
-st.markdown('''<style>.st-da {height: 8px;}</style>''',
-    unsafe_allow_html=True)
 
 
 def beatinspect_main():
