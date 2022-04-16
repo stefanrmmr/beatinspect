@@ -39,8 +39,19 @@ with header_col3:
     st.image("resources/rs_logo_transparent_yellow.png")
 
 # Audio File Upload
-with st.expander("SECTION - Audio File Upload",expanded=True):
-    audiofile = st.file_uploader("Please upload an audio file (.WAV)", type='wav')
+with st.expander("SECTION - Select prefered Audio Input Option",expanded=True):
+
+    audio_col1, audio_col2 = st.columns([1,1])
+    with audio_col1:
+        choice = st.radio('', ['Audio File Upload', 'Record via Microphone', 'Read from Audio Chip'])
+
+    with foot_col2:
+        if 'Upload' in choice:
+            audiofile = st.file_uploader("Please upload an audio file (.WAV)", type='wav')
+        elif 'Record' in choice:
+            st.write('SOON1')
+        else:
+            st.write('SOON2')
 
 # Audio File Analytics
 if audiofile is not None:
