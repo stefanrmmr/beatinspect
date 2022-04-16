@@ -7,5 +7,3 @@ SoundFile
 librosa
 essentia
 SoundFile
-librosa
-essentia
