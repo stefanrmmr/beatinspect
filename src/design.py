@@ -17,6 +17,9 @@ def design_setup():
     # Design change stMetricsValue to primary color via specific css-element
     st.markdown('''<style>.css-1xarl3l.e16fv1kl1 {color: #e3fc03;}</style>''',
         unsafe_allow_html=True)
+    # Design change st.Audio to fixed height of 40 pixels
+    st.markdown('''<style>.stAudio {height: 40px;}</style>''',
+        unsafe_allow_html=True)
     # Design change radio button inner point to be dark grey via custom css
     st.markdown('''<style>.st-d9 {background-color: black;}</style>''',
         unsafe_allow_html=True)
