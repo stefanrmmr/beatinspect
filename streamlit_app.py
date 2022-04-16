@@ -17,7 +17,7 @@ primary_color = st.get_option("theme.primaryColor")
 # Design page layout and browser window details
 st.set_page_config(layout="centered",
                    page_icon="resources/rs_logo_transparent_yellow.png",
-                   page_title="beat inspector")
+                   page_title="beat inspect")
 # Design hide top header line
 hide_decoration_bar_style = '''<style>header {visibility: hidden;}</style>'''
 st.markdown(hide_decoration_bar_style, unsafe_allow_html=True)
@@ -38,8 +38,8 @@ st.markdown('''<style>.st-da {height: 8px;}</style>''',
 # Title and Information
 header_col1, header_col2, header_col3 = st.columns([10, 2.5, 2.5])
 with header_col1:
-    st.title('beat inspector ™')
-    st.write('Version 1.1.0 - April 2022 - Github @stefanrmmr')
+    st.title('beat inspect ™')
+    st.write('Version 1.2.0 - April 2022 - Github @stefanrmmr')
 with header_col3:
     st.write('')  # add spacing
     st.image("resources/rs_logo_transparent_yellow.png")
