@@ -14,10 +14,50 @@ import src.wav_techspecs as wav_techspecs
 import src.detect_keyscale as detect_keyscale
 
 
+
+
+
+footer="""<style>
+a:link , a:visited{
+color: blue;
+background-color: transparent;
+text-decoration: underline;
+}
+
+a:hover,  a:active {
+color: red;
+background-color: transparent;
+text-decoration: underline;
+}
+
+.footer {
+position: fixed;
+left: 0;
+bottom: 0;
+width: 100%;
+background-color: white;
+color: black;
+text-align: center;
+}
+</style>
+<div class="footer">
+<p>Developed with ❤ by <a style='display: block; text-align: center;' href="https://www.heflin.dev/" target="_blank">Heflin Stephen Raj S</a></p>
+</div>
+"""
+st.markdown(footer,unsafe_allow_html=True)
+
+
+
+
+
+
+
 def beatinspect_main():
 
     # DESIGN implement changes to the standard streamlit UI/UX
     design.design_setup()  # switch to primaryColor for accents
+
+    st.markdown(footer,unsafe_allow_html=True)
 
     # TITLE and Information
     header_col1, header_col2, header_col3 = st.columns([10, 2.5, 2.5])
