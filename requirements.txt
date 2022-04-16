@@ -6,3 +6,5 @@ PyWavelets
 SoundFile
 librosa
 essentia
+pyaudio
+pylab
