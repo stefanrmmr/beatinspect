@@ -2,8 +2,6 @@
 import streamlit as st
 
 def design_setup():
-    # get primaryColor from streamlit
-    primary_color = st.get_option("theme.primaryColor")
 
     # Design page layout and browser window details
     st.set_page_config(layout="centered",
