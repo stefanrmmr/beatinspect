@@ -28,11 +28,14 @@ def beatinspect_main():
         st.image("resources/rs_logo_transparent_yellow.png")
 
     # AUDIO SOURCE File Upload Selection
-    with st.expander("SECTION - Select prefered Audio Input Option",expanded=True):
+    with st.expander("SECTION - Select prefered Audio Input Option",
+                     expanded=True):
 
         audio_col0, audio_col1, audio_col2 = st.columns([0.03,0.5,1])
         with audio_col1:
-            choice = st.radio('',[' Audio File Upload', ' Record via Microphone', ' Read from Audio Chip'])
+            choice = st.radio('',[' Audio File Upload',
+                                  ' Record via Microphone',
+                                  ' Read from Audio Chip'])
             st.write('')  # add spacing
 
         with audio_col2:
@@ -54,7 +57,8 @@ def beatinspect_main():
             f.write(audiofile.getbuffer())
 
         # Inspect Audio File Specifications
-        with st.expander("SECTION - Waveform and Spectrogram Insights", expanded=False):
+        with st.expander("SECTION - Waveform and Spectrogram Insights",
+                         expanded=False):
             st.audio(audiofile)  # display audio player UX
 
             # TODO select a section of the track (or the whole track) and analyze for sections that are above ZERO level
@@ -65,7 +69,8 @@ def beatinspect_main():
             # Step 3 Plot Spectrogram plot with yellow vertical bars at frequencies where AMP too high!
 
         # Musical and Tech Specs Overview
-        with st.expander("SECTION - Musical & Technical Specifications", expanded=True):
+        with st.expander("SECTION - Musical & Technical Specifications",
+                         expanded=True):
 
             pref_col0, pref_col1, pref_col2, pref_col3 = st.columns([0.2, 1, 1, 1])
 
