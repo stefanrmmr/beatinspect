@@ -19,180 +19,17 @@ def beatinspect_main():
     design.design_setup()  # switch to primaryColor for accents
 
 
-
-
-
-
-
     # Define your javascript
     my_js = """
-    'use strict'
-
-    let log = console.log.bind(console),
-      id = val => document.getElementById(val),
-      ul = id('ul'),
-      gUMbtn = id('gUMbtn'),
-      start = id('start'),
-      stop = id('stop'),
-      stream,
-      recorder,
-      counter=1,
-      chunks,
-      media;
-
-
-    gUMbtn.onclick = e => {
-      let mv = id('mediaVideo'),
-          mediaOptions = {
-            video: {
-              tag: 'video',
-              type: 'video/webm',
-              ext: '.mp4',
-              gUM: {video: true, audio: true}
-            },
-            audio: {
-              tag: 'audio',
-              type: 'audio/ogg',
-              ext: '.ogg',
-              gUM: {audio: true}
-            }
-          };
-      media = mv.checked ? mediaOptions.video : mediaOptions.audio;
-      navigator.mediaDevices.getUserMedia(media.gUM).then(_stream => {
-        stream = _stream;
-        id('gUMArea').style.display = 'none';
-        id('btns').style.display = 'inherit';
-        start.removeAttribute('disabled');
-        recorder = new MediaRecorder(stream);
-        recorder.ondataavailable = e => {
-          chunks.push(e.data);
-          if(recorder.state == 'inactive')  makeLink();
-        };
-        log('got media successfully');
-      }).catch(log);
-    }
-
-    start.onclick = e => {
-      start.disabled = true;
-      stop.removeAttribute('disabled');
-      chunks=[];
-      recorder.start();
-    }
-
-
-    stop.onclick = e => {
-      stop.disabled = true;
-      recorder.stop();
-      start.removeAttribute('disabled');
-    }
-
-
-
-    function makeLink(){
-      let blob = new Blob(chunks, {type: media.type })
-        , url = URL.createObjectURL(blob)
-        , li = document.createElement('li')
-        , mt = document.createElement(media.tag)
-        , hf = document.createElement('a')
-      ;
-      mt.controls = true;
-      mt.src = url;
-      hf.href = url;
-      hf.download = `${counter++}${media.ext}`;
-      hf.innerHTML = `donwload ${hf.download}`;
-      li.appendChild(mt);
-      li.appendChild(hf);
-      ul.appendChild(li);
-    }
+    alert("Hola mundo");
     """
 
     # Wrapt the javascript as html code
-    my_html = """
+    my_html = f"<script>{my_js}</script>"
+
+    main_html = """
     <html>
-        <head>
-
-            <script>
-                'use strict'
-
-                let log = console.log.bind(console),
-                  id = val => document.getElementById(val),
-                  ul = id('ul'),
-                  gUMbtn = id('gUMbtn'),
-                  start = id('start'),
-                  stop = id('stop'),
-                  stream,
-                  recorder,
-                  counter=1,
-                  chunks,
-                  media;
-
-
-                gUMbtn.onclick = e => {
-                  let mv = id('mediaVideo'),
-                      mediaOptions = {
-                        video: {
-                          tag: 'video',
-                          type: 'video/webm',
-                          ext: '.mp4',
-                          gUM: {video: true, audio: true}
-                        },
-                        audio: {
-                          tag: 'audio',
-                          type: 'audio/ogg',
-                          ext: '.ogg',
-                          gUM: {audio: true}
-                        }
-                      };
-                  media = mv.checked ? mediaOptions.video : mediaOptions.audio;
-                  navigator.mediaDevices.getUserMedia(media.gUM).then(_stream => {
-                    stream = _stream;
-                    id('gUMArea').style.display = 'none';
-                    id('btns').style.display = 'inherit';
-                    start.removeAttribute('disabled');
-                    recorder = new MediaRecorder(stream);
-                    recorder.ondataavailable = e => {
-                      chunks.push(e.data);
-                      if(recorder.state == 'inactive')  makeLink();
-                    };
-                    log('got media successfully');
-                  }).catch(log);
-                }
-
-                start.onclick = e => {
-                  start.disabled = true;
-                  stop.removeAttribute('disabled');
-                  chunks=[];
-                  recorder.start();
-                }
-
-
-                stop.onclick = e => {
-                  stop.disabled = true;
-                  recorder.stop();
-                  start.removeAttribute('disabled');
-                }
-
-
-
-                function makeLink(){
-                  let blob = new Blob(chunks, {type: media.type })
-                    , url = URL.createObjectURL(blob)
-                    , li = document.createElement('li')
-                    , mt = document.createElement(media.tag)
-                    , hf = document.createElement('a')
-                  ;
-                  mt.controls = true;
-                  mt.src = url;
-                  hf.href = url;
-                  hf.download = `${counter++}${media.ext}`;
-                  hf.innerHTML = `donwload ${hf.download}`;
-                  li.appendChild(mt);
-                  li.appendChild(hf);
-                  ul.appendChild(li);
-
-                  }
-            </script>
-
+      <head>
         <title>MediaRecorder API - Sample</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -217,8 +54,8 @@ def beatinspect_main():
             margin: 100px;
           }
         </style>
-        </head>
-        <body>
+      </head>
+      <body>
         <h1> MediaRecorder API example</h1>
 
         <p> For now it is supported only in Firefox(v25+) and Chrome(v47+)</p>
@@ -240,12 +77,12 @@ def beatinspect_main():
         <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
         <script src="script.js"></script>
-        </body>
-        </html>"""
-
+      </body>
+    </html>
+    """
     # Execute your app
     st.title("Javascript example")
-    html(my_html)
+    html(main_html)
 
 
 
