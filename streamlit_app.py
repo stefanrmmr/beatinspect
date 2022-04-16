@@ -49,9 +49,11 @@ with st.expander("SECTION - Select prefered Audio Input Option",expanded=True):
         if 'Upload' in choice:
             audiofile = st.file_uploader("Please upload an audio file (.WAV)", type='wav')
         elif 'Record' in choice:
-            st.write('SOON1')
+            st.write('SOON1')  # TODO SOON
+            audiofile = None
         else:
-            st.write('SOON2')
+            st.write('SOON2')  # TODO SOON
+            audiofile = None
 
 # Audio File Analytics
 if audiofile is not None:
