@@ -1,12 +1,9 @@
 streamlit
-matplotlib
 numpy
-scipy
 PyWavelets
 SoundFile
 librosa
 essentia
-pyaudio
 absl-py==0.9.0
 altair==4.1.0
 appnope==0.1.0
@@ -66,7 +63,6 @@ nbconvert==5.6.1
 nbformat==5.0.5
 notebook==6.0.3
 numba==0.48.0
-numpy==1.18.1
 packaging==20.3
 pandas==1.0.3
 pandocfilters==1.4.2
@@ -97,7 +93,6 @@ scikit-learn==0.22.1
 scipy==1.4.1
 Send2Trash==1.5.0
 six==1.14.0
-streamlit==0.57.3
 termcolor==1.1.0
 terminado==0.8.3
 testpath==0.4.4
