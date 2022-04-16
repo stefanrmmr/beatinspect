@@ -1,5 +1,8 @@
 # import logging
 import pyaudio, wave
+# pyaudio is a wrapper for portaudio functionality
+# portaudio is not a Python package, it’s a C library
+# portaudio is entirely independent of Python, so you can’t install it via pip.
 import numpy as np
 # import librosa, librosa.display
 # import matplotlib.pyplot as plt
