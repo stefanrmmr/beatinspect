@@ -1,5 +1,7 @@
 # beat_inspector by stefanrmmr (rs. analytics) - version April 2022
 import streamlit as st
+import streamlit.components.v1 as components
+
 import os
 import sys
 import toml
@@ -15,10 +17,9 @@ import src.design as design  # design choices
 import src.wav_specs as wav_specs
 import src.detect_keyscale as detect_keyscale
 
-import streamlit.components.v1 as components
-
 
 def beatinspect_main():
+
     # DESIGN implement changes to the standard streamlit UI/UX
     design.design_setup()  # switch to primaryColor for accents
 
@@ -134,8 +135,6 @@ def beatinspect_main():
         with st.expander("SECTION - Musical & Technical Specifications",
                          expanded=True):
 
-
-
             pref_col0, pref_col1, pref_col2, pref_col3 = st.columns([0.2, 1, 1, 1])
 
             with pref_col1:  # output: column for music scale evaluation
@@ -175,7 +174,6 @@ def beatinspect_main():
                 st.metric(label="", value=f"{round(bpm_essentia, 1)} BPM",
                           delta=f'Beat Tempo', delta_color="off")
                 st.write('')  # add spacing
-
 
     # FOOTER Content and Coop logos etc
     foot_col1, foot_col2, foot_col3, foot_col4, foot_col5 = st.columns([2,1.5,1.5,1.5,2])
