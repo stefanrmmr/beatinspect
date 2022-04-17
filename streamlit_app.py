@@ -75,7 +75,7 @@ def beatinspect_main():
             fig.set_size_inches(8, 3, forward=True)
             fig.set_dpi(400)
             plt.ylabel('Amplitude')
-            ax.set_ylim([-1.05, 1.05])
+            ax.set_ylim([-1.1, 1.1])
 
             # GUIDELINES multiple lines all full height
             plt.vlines(x=[0], ymin=-1, ymax=1, colors='lightgrey', ls='--', lw=0.5)
