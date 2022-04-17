@@ -16,6 +16,8 @@ import src.detect_keyscale as detect_keyscale
 import streamlit.components.v1 as components
 
 import matplotlib.pyplot as plt
+plt.rcParams['text.color'] = 'white'
+
 
 def beatinspect_main():
     # DESIGN implement changes to the standard streamlit UI/UX
@@ -78,10 +80,10 @@ def beatinspect_main():
             plt.vlines(x=[0], ymin=-0.5, ymax=0.5, colors='lightgrey', ls='--', lw=1)
 
 
-            fig.patch.set_facecolor('blue')
-            fig.patch.set_alpha(0.7)
-            # ax.patch.set_facecolor('red')
-            # ax.patch.set_alpha(0.5)
+            fig.patch.set_facecolor('black')
+            fig.patch.set_alpha(0.0)
+            ax.patch.set_facecolor('black')
+            ax.patch.set_alpha(0.0)
 
             filename = os.path.join(os.getcwd(), audiofile.name)
 
