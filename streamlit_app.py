@@ -4,8 +4,8 @@ import os
 import sys
 import toml
 import time
-import librosa
 import base64
+import librosa
 import essentia.standard as es
 
 import src.utils as utils  # utility functions
@@ -62,21 +62,24 @@ def beatinspect_main():
         # extract tech Specifications about wav file
         sampling_freq, channels = wav_techspecs.read_wav(audiofile)
 
-        audiofile_path = os.path.join(os.getcwd(), audiofile.name)
-
         # Inspect Audio File Specifications
         with st.expander("SECTION - Waveform and Spectrogram Insights",
                          expanded=False):
             st.audio(audiofile)  # display audio player UX
 
+
+
             fig, ax = plt.subplots(1, 1)
             plt.ylabel('Amplitude')
             plt.title(audiofile.name)
 
-            y,sr = librosa.load(audiofile_path, sr=None)
+            filename = os.path.join(os.getcwd(), audiofile.name)
+
+            y,sr = librosa.load(filename, sr=22050)
             librosa.display.waveplot(y, sr, ax=ax, x_axis='time')
 
             streamlit.pyplot(fig)
+            # streamlit.audio(i.sample, format='audio/wav')
 
 
 
