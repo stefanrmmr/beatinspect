@@ -34,7 +34,9 @@ def design_setup():
     # Design change radio button inner point to be dark grey via custom css
     st.markdown('''<style>.st-d9 {background-color: black;}</style>''',
         unsafe_allow_html=True)
-    st.markdown('''<style>progress-bar {color: green;}</style>''',
-        unsafe_allow_html=True)
     st.markdown('''<style>.st-da {height: 8px; width: 8px;}</style>''',
+        unsafe_allow_html=True)
+
+    # Design Loading bar
+    st.markdown('''<style>.st-dp {color: #e3fc03;}</style>''',
         unsafe_allow_html=True)

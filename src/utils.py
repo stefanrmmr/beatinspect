@@ -27,30 +27,3 @@ def get_img_with_href(local_img_path, target_url):
 
 
 # PLOTTING Spectrogram analytics
-def create_spectrogram(voice_sample):
-    """
-    Creates and saves a spectrogram plot for a sound sample.
-    Parameters:
-        voice_sample (str): path to sample of sound
-    Return:
-        fig
-    """
-
-    # in_fpath = Path(voice_sample.replace('"', "").replace("'", ""))
-    original_wav, sampling_rate = librosa.load(voice_sample)
-
-    # Plot the signal read from wav file
-    fig = plt.figure()
-    plt.subplot(211)
-    plt.title(f"Spectrogram of file {voice_sample}")
-
-    plt.plot(original_wav)
-    plt.xlabel("Sample")
-    plt.ylabel("Amplitude")
-
-    plt.subplot(212)
-    plt.specgram(original_wav, Fs=sampling_rate)
-    plt.xlabel("Time")
-    plt.ylabel("Frequency")
-    # plt.savefig(voice_sample.split(".")[0] + "_spectogram.png")
-    return fig
