@@ -162,10 +162,10 @@ def beatinspect_main():
                 st.pyplot(fig)
 
 
-            appointment = st.slider(
-                 "Schedule your appointment:",
-                 value=(time(0,0,0), time(1, 0,0)))
-            st.write("You're scheduled for:", appointment)
+            values = st.slider(
+                'Select a range of values',
+                0.0, 100.0, (25.0, 75.0))
+            st.write('Values:', values)
 
             # STREAMLIT double sided slider mit info dass max 20sec
             # nur wenn kleiner gleich 20 sec wird das zweite bild generiert
