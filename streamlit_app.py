@@ -103,12 +103,12 @@ def beatinspect_main():
             ax.spines['right'].set_visible(False)   # Hide the right and top spines
             ax.spines['top'].set_visible(False)     # Hide the right and top spines
 
-            ax.set(xlabel=None)
-
             filename = os.path.join(os.getcwd(), audiofile.name)
 
             y,sr = librosa.load(filename, sr=sampling_freq)
             librosa.display.waveshow(y, sr, ax=ax, color='grey', x_axis='time')
+
+            ax.xlabel('')
 
             st.pyplot(fig)
             # streamlit.audio(i.sample, format='audio/wav')
