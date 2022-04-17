@@ -110,7 +110,7 @@ def beatinspect_main():
             filename = os.path.join(os.getcwd(), audiofile.name)
 
             y,sr = librosa.load(filename, sr=sampling_freq)
-            librosa.display.waveshow(y, sr, ax=ax, color='grey', x_axis='time')
+            librosa.display.waveshow(y, sr, ax=ax1, color='grey', x_axis='time')
 
             plt.xlabel('')
 
