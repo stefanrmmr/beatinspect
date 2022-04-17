@@ -83,13 +83,20 @@ def beatinspect_main():
                 times = librosa.times_like(rms) #extracting rms timestamps
 
             # Generate graphs/plots for RMS & Amplitude over time
-            with st.spinner('generating RMS amplitude plots'):
-                # display audio player UX
-                st.audio(audiofile)
-                # generate rms spectrum plots
-                # plots.amprms_spectrum(y, sr, times, rms)
-                plots.amp_spectrum(y,sr)
-                plots.rms_spectrum(times, rms)
+            st.audio(audiofile)  # display audio player UX
+            spectrum_coice = st.radio(label="", ['AMP Spectrum', 'RMS Spectrum'])
+            if 'AMP' in spectrum_coice:
+                with st.spinner('generating RMS spectrum plot'):
+                    # generate amp spectrum plots
+                    # plots.amprms_spectrum(y, sr, times, rms)
+                    plots.amp_spectrum(y,sr)
+            else:
+                with st.spinner('generating RMS spectrum plot'):
+
+                    st.audio(audiofile)
+                    # generate rms spectrum plots
+                    # plots.amprms_spectrum(y, sr, times, rms)
+                    plots.rms_spectrum(times, rms)
 
 
             # img2 = librosa.display.specshow(scale_db, ax=ax2, sr=sr, x_axis='time', y_axis='log')
