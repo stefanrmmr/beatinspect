@@ -75,7 +75,6 @@ def beatinspect_main():
             fig.set_size_inches(8, 3, forward=True)
             fig.set_dpi(400)
             plt.ylabel('Amplitude')
-            plt.xlabel('')
             ax.set_ylim([-1.1, 1.1])
 
             # GUIDELINES multiple lines all full height
@@ -103,6 +102,8 @@ def beatinspect_main():
 
             ax.spines['right'].set_visible(False)   # Hide the right and top spines
             ax.spines['top'].set_visible(False)     # Hide the right and top spines
+
+            ax.set(xlabel=None)
 
             filename = os.path.join(os.getcwd(), audiofile.name)
 
