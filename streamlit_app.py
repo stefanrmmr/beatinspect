@@ -6,6 +6,7 @@ import toml
 import time
 import base64
 import librosa
+import librosa.display
 import essentia.standard as es
 
 import src.utils as utils  # utility functions
@@ -75,7 +76,7 @@ def beatinspect_main():
 
             filename = os.path.join(os.getcwd(), audiofile.name)
 
-            y,sr = librosa.load(filename, sr=22050)
+            y,sr = librosa.load(filename, sr=sampling_freq)
             librosa.display.waveshow(y, sr, ax=ax, x_axis='time')
 
             streamlit.pyplot(fig)
