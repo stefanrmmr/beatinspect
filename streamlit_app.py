@@ -102,11 +102,10 @@ def beatinspect_main():
 
             # radio button selection for spectrum plot over time
             st.write('<style>div.row-widget.stRadio > div{flex-direction:row;} </style>', unsafe_allow_html=True)
-            st.write('<style>div.st-bf{flex-direction:column;} div.st-ag{padding-left:2px;}</style>', unsafe_allow_html=True)
 
             sradio_col1, sradio_col2 = st.columns([0.03, 1.5])
             with sradio_col2:
-                st.session_state.spectrum = st.radio('', ['AMP Spectrum', 'RMS Spectrum'])
+                st.session_state.spectrum = st.radio('', ['AMP Spectrum  ', 'RMS Spectrum  '])
 
 
 
