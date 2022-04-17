@@ -116,6 +116,10 @@ def beatinspect_main():
                 ax1.axhline(y=1.0, color='#e3fc03', linestyle='--', lw=0.75)
                 ax1.axhline(y=-1.0, color='#e3fc03', linestyle='--', lw=0.75)
 
+                ax2.vlines(x=[0], ymin=-1, ymax=1, colors='lightgrey', ls='--', lw=0.75)
+                ax2.axhline(y=0, color='white', linestyle='--', lw=0.75)
+
+
                 # AX1 wavshow overview spectrogram
                 ax1.patch.set_facecolor('black')
                 ax1.patch.set_alpha(0.0)
@@ -135,6 +139,7 @@ def beatinspect_main():
                 # AX2 RMS Energy Visualizer
                 ax2.patch.set_facecolor('black')
                 ax2.patch.set_alpha(0.0)
+                ax2.set_ylim([-10000, 10])                 # setting lower bounds for y axis
                 ax2.xaxis.label.set_color('white')        #setting up X-axis label color to yellow
                 ax2.yaxis.label.set_color('white')          #setting up Y-axis label color to blue
                 ax2.tick_params(axis='x', colors='white')    #setting up X-axis tick color to red
@@ -143,8 +148,8 @@ def beatinspect_main():
                 ax2.spines['top'].set_color('white')         #setting up above X-axis tick color to red
                 ax2.spines['right'].set_color('white')        # setting up Y-axis tick color to red
                 ax2.spines['bottom'].set_color('white')         #setting up above X-axis tick color to red
-                ax2.spines['bottom'].set_visible(False)   # Hide the right and top spines
-                ax2.spines['right'].set_visible(False)     # Hide the right and top spines
+                ax2.spines['right'].set_visible(False)   # Hide the right and top spines
+                ax2.spines['top'].set_visible(False)     # Hide the right and top spines
 
                 ax2.semilogy(times, rms[0], label='RMS Energy', color='#e3fc03')
 
