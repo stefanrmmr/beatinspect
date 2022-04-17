@@ -69,6 +69,9 @@ def beatinspect_main():
         with st.expander("SECTION - Waveform and Spectrogram Insights",
                          expanded=False):
 
+            # Generate graphs/plots for RMS & Amplitude over time
+            st.audio(audiofile)  # display audio player UX
+
             # calculate the necessray data for further plotting
             with st.spinner('calculating spectrogram insights'):
                 # extract tech Specifications about wav file
@@ -82,34 +85,26 @@ def beatinspect_main():
                 rms = librosa.feature.rms(S=spectrogram_magn)  # calculating rms
                 times = librosa.times_like(rms) #extracting rms timestamps
 
-            # Generate graphs/plots for RMS & Amplitude over time
-            st.audio(audiofile)  # display audio player UX
-
             # display the selected spectrum plot
             spectrum_coice = st.session_state.spectrum
             # due to the session state only updating after Selection
             # these plot calls need to be inversed/swapped like below
-            if 'AMP' in spectrum_coice:
+            if 'AMP' in spectrum_coice:  # generate rms spectrum plots
                 with st.spinner('generating RMS spectrum plot'):
-                    # generate rms spectrum plots
-                    # plots.amprms_spectrum(y, sr, times, rms)
                     plots.rms_spectrum(times, rms)
-            else:
+            else:  # generate amp spectrum plots
                 with st.spinner('generating AMP spectrum plot'):
-                    # generate amp spectrum plots
-                    # plots.amprms_spectrum(y, sr, times, rms)
                     plots.amp_spectrum(y,sr)
 
             # radio button selection for spectrum plot over time
-            # change radio button layout to be horizontally aligned
             st.write('<style>div.row-widget.stRadio > div{flex-direction:row;} </style>',
                      unsafe_allow_html=True)
+            # change radio button layout to be horizontally aligned
             sradio_col1, sradio_col2 = st.columns([0.03, 1.5])
             with sradio_col2:
                 st.session_state.spectrum = st.radio('Please select your spectrum of choice',
                                                      ['AMP Spectrum  ', 'RMS Spectrum  '])
             st.write('')  # add spacing
-
 
             # img2 = librosa.display.specshow(scale_db, ax=ax2, sr=sr, x_axis='time', y_axis='log')
             # fig.colorbar(img2, ax=ax2, format="%+2.f dB")
