@@ -127,6 +127,7 @@ def beatinspect_main():
 
                 librosa.display.waveshow(y, sr, ax=ax1, color='grey', x_axis='time')
 
+                librosa.feature.rms(y=y, ax=ax2, color='#e3fc03')
 
                 # img2 = librosa.display.specshow(scale_db, ax=ax2, sr=sr, x_axis='time', y_axis='log')
                 # fig.colorbar(img2, ax=ax2, format="%+2.f dB")
