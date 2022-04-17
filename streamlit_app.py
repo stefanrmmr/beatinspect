@@ -12,7 +12,7 @@ import essentia.standard as es
 import src.plots as plots  # plotting framework
 import src.utils as utils  # utility functions
 import src.design as design  # design choices
-import src.wav_techspecs as wav_techspecs
+import src.wav_specs as wav_specs
 import src.detect_keyscale as detect_keyscale
 
 import streamlit.components.v1 as components
