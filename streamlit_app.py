@@ -72,13 +72,12 @@ def beatinspect_main():
 
 
             fig, ax = plt.subplots(1, 1)
+            fig.set_size_inches(8, 4, forward=True)
             plt.ylabel('Amplitude')
-            plt.title(audiofile.name)
-            ax.set_ylim([-0.55, 0.55])
+            ax.set_ylim([-0.6, 0.6])
 
             # multiple lines all full height
-            plt.vlines(x=[0], ymin=-0.5, ymax=0.5, colors='lightgrey', ls='--', lw=1)
-
+            plt.vlines(x=[0], ymin=-0.6, ymax=0.6, colors='lightgrey', ls='--', lw=1)
 
             fig.patch.set_facecolor('black')
             fig.patch.set_alpha(0.0)
@@ -99,7 +98,7 @@ def beatinspect_main():
             filename = os.path.join(os.getcwd(), audiofile.name)
 
             y,sr = librosa.load(filename, sr=sampling_freq)
-            librosa.display.waveshow(y, sr, ax=ax, color='grey', x_axis='s')
+            librosa.display.waveshow(y, sr, ax=ax, color='grey', x_axis='time')
 
             st.pyplot(fig)
             # streamlit.audio(i.sample, format='audio/wav')
