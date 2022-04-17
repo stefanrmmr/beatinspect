@@ -61,20 +61,18 @@ def beatinspect_main():
         # extract tech Specifications about wav file
         sampling_freq, channels = wav_techspecs.read_wav(audiofile)
 
+        audiofile_path = os.path.join(os.getcwd(), audiofile.name)
+
         # Inspect Audio File Specifications
         with st.expander("SECTION - Waveform and Spectrogram Insights",
                          expanded=False):
             st.audio(audiofile)  # display audio player UX
 
-
-
             fig, ax = plt.subplots(1, 1)
             plt.ylabel('Amplitude')
             plt.title(audiofile.name)
 
-            # filename = os.path.join(os.getcwd() + audiofile.name)
-
-            y,sr = librosa.load(audiofile.name, sr=sampling_freq)
+            y,sr = librosa.load(audiofile_path, sr=sampling_freq)
             librosa.display.waveplot(y, sr, ax=ax, x_axis='time')
 
             streamlit.pyplot(fig)
