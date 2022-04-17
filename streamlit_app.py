@@ -64,6 +64,7 @@ def beatinspect_main():
         # Save audiofile to main directory to be called via path
         with open(audiofile.name,"wb") as f:
             f.write(audiofile.getbuffer())
+        filename = os.path.join(os.getcwd(), audiofile.name)
 
         # extract tech Specifications about wav file
         sampling_freq, channels = wav_techspecs.read_wav(audiofile)
@@ -114,11 +115,9 @@ def beatinspect_main():
             ax1.spines['right'].set_visible(False)   # Hide the right and top spines
             ax1.spines['top'].set_visible(False)     # Hide the right and top spines
 
-            filename = os.path.join(os.getcwd(), audiofile.name)
 
 
             librosa.display.waveshow(y, sr, ax=ax1, color='grey', x_axis='time')
-
 
             img2 = librosa.display.specshow(scale_db, ax=ax2, x_axis='time', y_axis='linear')
             fig.colorbar(img2, ax=ax2, format="%+2.f dB")
