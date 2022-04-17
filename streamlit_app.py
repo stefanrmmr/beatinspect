@@ -128,7 +128,7 @@ def beatinspect_main():
                 ax1.patch.set_facecolor('black')
                 ax1.patch.set_alpha(0.0)
                 ax1.set_ylabel('Amplitude')
-                ax1.set_xlabel('Time [sec]')
+                ax1.set_xlabel('Time [minutes/sec]')
                 ax1.set_ylim([-1.1, 1.1])
                 ax1.xaxis.label.set_color('white')        #setting up X-axis label color to yellow
                 ax1.yaxis.label.set_color('white')          #setting up Y-axis label color to blue
@@ -147,7 +147,7 @@ def beatinspect_main():
                 ax2.patch.set_facecolor('black')
                 ax2.patch.set_alpha(0.0)
                 ax2.set_ylabel('RMS Energy [log]')
-                ax2.set_xlabel('Time [sec]')
+                #ax2.set_xlabel('Time [sec]')
                 ax2.xaxis.set_ticks_position('top') # the rest is the same
                 ax2.set_ylim(bottom=0.0001)                 # setting lower bounds for y axis
                 ax2.xaxis.label.set_color('white')        #setting up X-axis label color to yellow
