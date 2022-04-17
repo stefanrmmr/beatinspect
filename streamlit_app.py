@@ -118,6 +118,10 @@ def beatinspect_main():
 
                 ax2.vlines(x=[0], ymin=-1, ymax=1, colors='lightgrey', ls='--', lw=0.75)
                 ax2.axhline(y=0, color='white', linestyle='--', lw=0.75)
+                ax2.axhline(y=0.1, color='white', linestyle='--', lw=0.75)
+                ax2.axhline(y=0.01, color='white', linestyle='--', lw=0.75)
+                ax2.axhline(y=0.001, color='white', linestyle='--', lw=0.75)
+                ax2.axhline(y=0.0001, color='white', linestyle='--', lw=0.75)
 
 
                 # AX1 wavshow overview spectrogram
@@ -141,7 +145,7 @@ def beatinspect_main():
 
                 ax2.patch.set_facecolor('black')
                 ax2.patch.set_alpha(0.0)
-                ax2.set_ylim(ymin=-0.0001)                 # setting lower bounds for y axis
+                # ax2.set_ylim(ymin=-0.0001)                 # setting lower bounds for y axis
                 ax2.xaxis.label.set_color('white')        #setting up X-axis label color to yellow
                 ax2.yaxis.label.set_color('white')          #setting up Y-axis label color to blue
                 ax2.tick_params(axis='x', colors='white')    #setting up X-axis tick color to red
