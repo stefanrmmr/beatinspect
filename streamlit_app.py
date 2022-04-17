@@ -13,6 +13,8 @@ import src.wav_techspecs as wav_techspecs
 import src.detect_keyscale as detect_keyscale
 import streamlit.components.v1 as components
 
+import matplotlib.pyplot as plt
+
 def beatinspect_main():
     # DESIGN implement changes to the standard streamlit UI/UX
     design.design_setup()  # switch to primaryColor for accents
@@ -56,10 +58,26 @@ def beatinspect_main():
         with open(audiofile.name,"wb") as f:
             f.write(audiofile.getbuffer())
 
+        # extract tech Specifications about wav file
+        sampling_freq, channels = wav_techspecs.read_wav(audiofile)
+
         # Inspect Audio File Specifications
         with st.expander("SECTION - Waveform and Spectrogram Insights",
                          expanded=False):
             st.audio(audiofile)  # display audio player UX
+
+
+
+            fig, ax = plt.subplots(1, 1)
+            plt.ylabel('Amplitude')
+            plt.title(i.name)
+
+            filename = os.path.join(os.getcwd() + audiofile.name)
+
+            y,sr = librosa.load(filename, sr=sampling_freq)
+            librosa.display.waveplot(y, sr, ax=ax, x_axis='time')
+
+            streamlit.pyplot(fig)
 
 
 
@@ -74,6 +92,8 @@ def beatinspect_main():
         # Musical and Tech Specs Overview
         with st.expander("SECTION - Musical & Technical Specifications",
                          expanded=True):
+
+
 
             pref_col0, pref_col1, pref_col2, pref_col3 = st.columns([0.2, 1, 1, 1])
 
@@ -93,8 +113,6 @@ def beatinspect_main():
             with pref_col2:  # metrics: generating insights on tech specs
                 with st.spinner('Fetching Tech Specs'):
                     time.sleep(0.5)
-                    # extract tech Specifications about wav file
-                    sampling_freq, channels = wav_techspecs.read_wav(audiofile)
                     # assign audio channel description
                     if int(channels) == 1:  # single channel .wav
                         channels = 'MONO'

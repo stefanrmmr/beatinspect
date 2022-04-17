@@ -19,6 +19,10 @@ def design_setup():
                             </style>"""
     st.markdown(hide_streamlit_footer, unsafe_allow_html=True)
 
+    # Design Audio Uploader Status Loading Bar Color
+    st.markdown('''<style>.st-dp {background-color: #e3fc03;}</style>''',
+        unsafe_allow_html=True)
+
     # Design change spinner color to primary color
     st.markdown('''<style>.stSpinner > div > div {border-top-color: #e3fc03;}</style>''',
         unsafe_allow_html=True)
@@ -35,8 +39,4 @@ def design_setup():
     st.markdown('''<style>.st-d9 {background-color: black;}</style>''',
         unsafe_allow_html=True)
     st.markdown('''<style>.st-da {height: 8px; width: 8px;}</style>''',
-        unsafe_allow_html=True)
-
-    # Design Loading bar
-    st.markdown('''<style>.st-dp {background-color: #e3fc03;}</style>''',
         unsafe_allow_html=True)
