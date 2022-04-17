@@ -162,12 +162,6 @@ def beatinspect_main():
                 st.pyplot(fig)
 
 
-            values = st.slider(
-                'Select a range of values',
-                time(minute=0, second=0), time(minute=1, second=0), time(minute=0, second=20), time(minute=0, second=40))
-
-            st.write('Values:', values)
-
             # STREAMLIT double sided slider mit info dass max 20sec
             # nur wenn kleiner gleich 20 sec wird das zweite bild generiert
             # das mel spektrum gibt es nur für bestimmte abschnitte nicht ganzer track!
