@@ -61,7 +61,7 @@ def beatinspect_main():
                          expanded=False):
             st.audio(audiofile)  # display audio player UX
 
-            utils.create_spectrogram(audiofile)
+            utils.create_spectrogram(audiofile.name)
 
             # TODO select a section of the track (or the whole track) and analyze for sections that are above ZERO level
             # TODO for these sections that are "übersteuern" --> find out in which frequency bands they need to be decreased in amplitude
