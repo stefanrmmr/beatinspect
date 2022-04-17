@@ -5,6 +5,7 @@ import sys
 import toml
 import time
 import base64
+import numpy as np
 import librosa
 import librosa.display
 import essentia.standard as es
@@ -47,6 +48,8 @@ def beatinspect_main():
                 audiofile = st.file_uploader("", type='wav')
             elif 'Record' in choice:
                 audiofile = None
+                st.write('')
+                st.write('SOON to be implemented!')
                 # https://www.youtube.com/watch?v=BuD3gILJW-Q&ab_channel=Streamlit
                 # USE streamlit custom component that implements a custom html/css/react element
                 # input data can be passed to this component and it returns data
@@ -75,8 +78,8 @@ def beatinspect_main():
             # plt.rc('axes', labelsize=9)
             plt.rcParams['figure.dpi'] = 400
 
-            fig, ax1 = plt.subplots(1,1)
-            fig.set_size_inches(8, 3, forward=True)
+            fig1, ax1 = plt.subplots(1,1)
+            fig1.set_size_inches(8, 3, forward=True)
             plt.ylabel('Amplitude')
             ax1.set_ylim([-1.1, 1.1])
 
@@ -87,8 +90,8 @@ def beatinspect_main():
             ax1.axhline(y=1.0, color='#e3fc03', linestyle='--', lw=0.75)
             ax1.axhline(y=-1.0, color='#e3fc03', linestyle='--', lw=0.75)
 
-            fig.patch.set_facecolor('black')
-            fig.patch.set_alpha(0.0)
+            fig1.patch.set_facecolor('black')
+            fig1.patch.set_alpha(0.0)
             ax1.patch.set_facecolor('black')
             ax1.patch.set_alpha(0.0)
 
@@ -112,9 +115,18 @@ def beatinspect_main():
             librosa.display.waveshow(y, sr, ax=ax1, color='grey', x_axis='time')
 
             plt.xlabel('')
+            st.pyplot(fig1)
 
-            st.pyplot(fig)
-            # streamlit.audio(i.sample, format='audio/wav')
+
+            y_stft = librosa.stft(y)  # STFT of y
+            scale_db = librosa.amplitude_to_db(np.abs(y_stft), ref=np.max)
+
+            fig2, ax2 = plt.subplots(1,1)
+            fig2.set_size_inches(8, 8, forward=True)
+            img2 = librosa.display.specshow(scale_db, cmap='viridis', y_axis='log', x_axis='time', ax=a2)
+            ax2.set(title='Viridis lol')
+            fig2.colorbar(img2, ax=ax2, format="%+2.f dB")
+            st.pyplot(fig2)
 
 
 
