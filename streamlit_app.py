@@ -75,12 +75,13 @@ def beatinspect_main():
             ax.set_ylim([-0.55, 0.55])
 
             # multiple lines all full height
-            plt.vlines(x=[0], ymin=-0.5, ymax=0.5, colors='lightgrey', ls='--', lw=2)
+            plt.vlines(x=[0], ymin=-0.5, ymax=0.5, colors='lightgrey', ls='--', lw=1)
 
 
-
-            ax.patch.set_facecolor('red')
-            ax.patch.set_alpha(0.5)
+            plt.patch.facecolor('blue')
+            plt.patch.alpha(0.5)
+            # ax.patch.set_facecolor('red')
+            # ax.patch.set_alpha(0.5)
 
             filename = os.path.join(os.getcwd(), audiofile.name)
 
