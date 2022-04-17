@@ -87,6 +87,8 @@ def beatinspect_main():
 
             # display the selected spectrum plot
             spectrum_coice = st.session_state.spectrum
+            # due to the session state only updating after Selection
+            # these plot calls need to be inversed/swapped like below
             if 'AMP' in spectrum_coice:
                 with st.spinner('generating RMS spectrum plot'):
                     # generate rms spectrum plots
@@ -99,6 +101,9 @@ def beatinspect_main():
                     plots.amp_spectrum(y,sr)
 
             # radio button selection for spectrum plot over time
+            st.write('<style>div.row-widget.stRadio > div{flex-direction:row;justify-content: center;} </style>', unsafe_allow_html=True)
+            st.write('<style>div.st-bf{flex-direction:column;} div.st-ag{font-weight:bold;padding-left:2px;}</style>', unsafe_allow_html=True)
+
             sradio_col1, sradio_col2 = st.columns([0.03, 1.5])
             with sradio_col2:
                 st.session_state.spectrum = st.radio('', ['AMP Spectrum', 'RMS Spectrum'])
