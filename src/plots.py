@@ -52,7 +52,7 @@ def amp_spectrum(y, sr):
     # global plotting settings
     plt.rc('xtick', labelsize=9)
     plt.rc('ytick', labelsize=9)
-    plt.rc('axes', labelsize=9)
+    plt.rc('axes', labelsize=10)
     plt.rcParams['figure.dpi'] = 400
     plt.rcParams['text.color'] = 'white'
 
