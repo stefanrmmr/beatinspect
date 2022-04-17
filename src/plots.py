@@ -2,6 +2,13 @@
 import streamlit as st
 import librosa.display
 import matplotlib.pyplot as plt
+import matplotlib.ticker as tkr
+# has classes for tick-locating and -formatting
+
+def numfmt(x, pos):
+    # your custom formatter function: divide by 2
+    s = '{}'.format(x / 2)
+    return s
 
 def rms_spectrum(times, rms):
 
@@ -42,6 +49,12 @@ def rms_spectrum(times, rms):
     ax2.spines['bottom'].set_color('white')         #setting up above X-axis tick color to red
     ax2.spines['right'].set_visible(False)      # Hide the right and top spines
     # ax2.spines['bottom'].set_visible(False)     # Hide the right and bottom spines
+
+    # change ax2 xlabels to be half the value 
+    yfmt = tkr.FuncFormatter(numfmt)
+    # create your custom formatter function
+    # your existing code can be inserted here
+    ax2.xaxis.set_major_formatter(yfmt)
 
     plt.tight_layout()
     st.pyplot(fig)
