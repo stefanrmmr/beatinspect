@@ -86,7 +86,6 @@ def beatinspect_main():
             st.audio(audiofile)  # display audio player UX
 
             # display the selected spectrum plot
-            spectrum_coice = st.session_state.spectrum
             if 'AMP' in spectrum_coice:
                 with st.spinner('generating RMS spectrum plot'):
                     # generate amp spectrum plots
@@ -98,8 +97,9 @@ def beatinspect_main():
                     # plots.amprms_spectrum(y, sr, times, rms)
                     plots.rms_spectrum(times, rms)
 
-            # radio button selection for spectrum plot over time 
+            # radio button selection for spectrum plot over time
             sradio_col1, sradio_col2 = st.columns([0.03, 1.5])
+            spectrum_coice = st.session_state.spectrum
             with sradio_col2:
                 st.session_state.spectrum = st.radio('', ['AMP Spectrum', 'RMS Spectrum'])
 
