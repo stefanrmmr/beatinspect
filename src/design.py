@@ -44,3 +44,6 @@ def design_setup():
     # Design change radio button padding for horizontal alignment
     st.markdown('''<style>.st-de {padding-left: 8px; padding-right: 8px;}</style>''',
         unsafe_allow_html=True)
+    # Design change radio button title div size to zero height 
+    st.markdown('''<style>.css-16huue1 {min-height: 0rem;}</style>''',
+        unsafe_allow_html=True)
