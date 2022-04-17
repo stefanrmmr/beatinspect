@@ -1,12 +1,14 @@
 # PLOTTING FRAMEWORK
+import matplotlib.pyplot as plt
 
-def plot_rms_spectrum(y, sr, times, rms):
+def rms_spectrum(y, sr, times, rms):
 
     # global plotting settings
     plt.rc('xtick', labelsize=9)
     plt.rc('ytick', labelsize=9)
     plt.rc('axes', labelsize=9)
     plt.rcParams['figure.dpi'] = 400
+    plt.rcParams['text.color'] = 'white'
 
     # create 2x subplots for overview RMS
     fig, (ax1, ax2) = plt.subplots(2)

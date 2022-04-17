@@ -10,15 +10,13 @@ import librosa
 import librosa.display
 import essentia.standard as es
 
+import src.plots as plots  # plotting framework
 import src.utils as utils  # utility functions
 import src.design as design  # design choices
 import src.wav_techspecs as wav_techspecs
 import src.detect_keyscale as detect_keyscale
-import src.visualization as visualization
-import streamlit.components.v1 as components
 
-import matplotlib.pyplot as plt
-plt.rcParams['text.color'] = 'white'
+import streamlit.components.v1 as components
 
 
 def beatinspect_main():
@@ -91,7 +89,7 @@ def beatinspect_main():
                 # display audio player UX
                 st.audio(audiofile)
                 # generate rms spectrum plots
-                visualization.plot_rms_spectrum(y, sr, times, rms)
+                plots.rms_spectrum(y, sr, times, rms)
 
 
             # img2 = librosa.display.specshow(scale_db, ax=ax2, sr=sr, x_axis='time', y_axis='log')
