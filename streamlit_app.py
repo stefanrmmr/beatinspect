@@ -81,8 +81,10 @@ def beatinspect_main():
                 y,sr = librosa.load(filename, sr=sampling_freq)
                 y_stft = librosa.stft(y)  # STFT of y
                 scale_db = librosa.amplitude_to_db(np.abs(y_stft), ref=np.max)
-                rms = librosa.feature.rms(y=y, )  # calculating rms
+                spectrogram_magn, phase = librosa.magphase(librosa.stft(y))
+                rms = librosa.feature.rms(S=spectrogram_magn)  # calculating rms
                 times = librosa.times_like(rms) #extracting rms timestamps
+
 
             with st.spinner('generating RMS amplitude plots'):
 
@@ -140,7 +142,7 @@ def beatinspect_main():
                 ax2.patch.set_alpha(0.0)
                 ax2.set_ylabel('RMS Energy [log]')
                 ax2.xaxis.set_ticks_position('top') # the rest is the same
-                ax2.get_xaxis().set_visible(False)
+                # ax2.get_xaxis().set_visible(False)
                 ax2.set_ylim(bottom=0.0001)                 # setting lower bounds for y axis
                 ax2.xaxis.label.set_color('white')        #setting up X-axis label color to yellow
                 ax2.yaxis.label.set_color('white')          #setting up Y-axis label color to blue
