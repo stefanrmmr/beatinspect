@@ -81,6 +81,8 @@ def beatinspect_main():
                 y,sr = librosa.load(filename, sr=sampling_freq)
                 y_stft = librosa.stft(y)  # STFT of y
                 scale_db = librosa.amplitude_to_db(np.abs(y_stft), ref=np.max)
+                rms = librosa.feature.rms(y=y)  # calculating rms
+                times = librosa.times_like(rms) #extracting rms timestamps
 
             with st.spinner('generating RMS amplitude plots'):
 
@@ -95,7 +97,15 @@ def beatinspect_main():
 
                 # create 2x subplots for overview RMS
                 fig, (ax1, ax2) = plt.subplots(2)
+                fig.patch.set_facecolor('black')
+                fig.patch.set_alpha(0.0)
                 #fig.set_size_inches(8, 10, forward=True)
+
+
+
+
+
+
                 ax1.set_ylabel('Amplitude')
                 ax1.set_ylim([-1.1, 1.1])
 
@@ -106,37 +116,42 @@ def beatinspect_main():
                 ax1.axhline(y=1.0, color='#e3fc03', linestyle='--', lw=0.75)
                 ax1.axhline(y=-1.0, color='#e3fc03', linestyle='--', lw=0.75)
 
-                fig.patch.set_facecolor('black')
-                fig.patch.set_alpha(0.0)
+                # AX1 wavshow overview spectrogram
                 ax1.patch.set_facecolor('black')
                 ax1.patch.set_alpha(0.0)
-
                 ax1.xaxis.label.set_color('white')        #setting up X-axis label color to yellow
                 ax1.yaxis.label.set_color('white')          #setting up Y-axis label color to blue
-
                 ax1.tick_params(axis='x', colors='white')    #setting up X-axis tick color to red
                 ax1.tick_params(axis='y', colors='white')  #setting up Y-axis tick color to black
-
                 ax1.spines['left'].set_color('white')        # setting up Y-axis tick color to red
                 ax1.spines['top'].set_color('white')         #setting up above X-axis tick color to red
                 ax1.spines['right'].set_color('white')        # setting up Y-axis tick color to red
                 ax1.spines['bottom'].set_color('white')         #setting up above X-axis tick color to red
-
                 ax1.spines['right'].set_visible(False)   # Hide the right and top spines
                 ax1.spines['top'].set_visible(False)     # Hide the right and top spines
 
                 librosa.display.waveshow(y, sr, ax=ax1, color='grey', x_axis='time')
 
+                # AX2 RMS Energy Visualizer
+                ax2.patch.set_facecolor('black')
+                ax2.patch.set_alpha(0.0)
+                ax2.xaxis.label.set_color('white')        #setting up X-axis label color to yellow
+                ax2.yaxis.label.set_color('white')          #setting up Y-axis label color to blue
+                ax2.tick_params(axis='x', colors='white')    #setting up X-axis tick color to red
+                ax2.tick_params(axis='y', colors='white')  #setting up Y-axis tick color to black
+                ax2.spines['left'].set_color('white')        # setting up Y-axis tick color to red
+                ax2.spines['top'].set_color('white')         #setting up above X-axis tick color to red
+                ax2.spines['right'].set_color('white')        # setting up Y-axis tick color to red
+                ax2.spines['bottom'].set_color('white')         #setting up above X-axis tick color to red
+                ax2.spines['bottom'].set_visible(False)   # Hide the right and top spines
+                ax2.spines['right'].set_visible(False)     # Hide the right and top spines
 
-
-                rms = librosa.feature.rms(y=y)
-                times = librosa.times_like(rms)
-                ax2.semilogy(times, rms[0], label='RMS Energy')
+                ax2.semilogy(times, rms[0], label='RMS Energy', color='#e3fc03')
 
 
                 # img2 = librosa.display.specshow(scale_db, ax=ax2, sr=sr, x_axis='time', y_axis='log')
                 # fig.colorbar(img2, ax=ax2, format="%+2.f dB")
-
+                plt.tight_layout()
                 st.pyplot(fig)
 
 
