@@ -106,8 +106,7 @@ def beatinspect_main():
 
 
 
-                ax1.set_ylabel('Amplitude')
-                ax1.set_ylim([-1.1, 1.1])
+
 
                 # GUIDELINES multiple lines all full height
                 ax1.vlines(x=[0], ymin=-1, ymax=1, colors='lightgrey', ls='--', lw=0.75)
@@ -117,11 +116,10 @@ def beatinspect_main():
                 ax1.axhline(y=-1.0, color='#e3fc03', linestyle='--', lw=0.75)
 
                 ax2.vlines(x=[0], ymin=-1, ymax=1, colors='lightgrey', ls='--', lw=0.75)
-                ax2.axhline(y=0, color='white', linestyle='--', lw=0.75)
-                ax2.axhline(y=0.1, color='white', linestyle='--', lw=0.75)
-                ax2.axhline(y=0.01, color='white', linestyle='--', lw=0.75)
-                ax2.axhline(y=0.001, color='white', linestyle='--', lw=0.75)
-                
+                ax2.axhline(y=1, color='white', linestyle='--', lw=0.75)
+                ax2.axhline(y=0.1, color='lightgrey', linestyle='--', lw=0.75)
+                ax2.axhline(y=0.01, color='lightgrey', linestyle='--', lw=0.75)
+
 
 
                 # AX1 wavshow overview spectrogram
@@ -129,6 +127,9 @@ def beatinspect_main():
 
                 ax1.patch.set_facecolor('black')
                 ax1.patch.set_alpha(0.0)
+                ax1.set_ylabel('Amplitude')
+                ax1.set_xlabel('Time [sec]')
+                ax1.set_ylim([-1.1, 1.1])
                 ax1.xaxis.label.set_color('white')        #setting up X-axis label color to yellow
                 ax1.yaxis.label.set_color('white')          #setting up Y-axis label color to blue
                 ax1.tick_params(axis='x', colors='white')    #setting up X-axis tick color to red
@@ -145,6 +146,8 @@ def beatinspect_main():
 
                 ax2.patch.set_facecolor('black')
                 ax2.patch.set_alpha(0.0)
+                ax2.set_ylabel('RMS Energy [log]')
+                ax2.set_xlabel('Time [sec]')
                 ax2.set_ylim(bottom=0.0001)                 # setting lower bounds for y axis
                 ax2.xaxis.label.set_color('white')        #setting up X-axis label color to yellow
                 ax2.yaxis.label.set_color('white')          #setting up Y-axis label color to blue
@@ -174,6 +177,8 @@ def beatinspect_main():
 
             # also oben rms + Overview figure mit 2x ax subplots
             # darunter custom select max 20 sec spectrum viewer !
+
+            # INTERACTVE 3D spectrogram (turn and zoom in) for the selected timeframe
 
             # https://librosa.org/doc/0.9.1/generated/librosa.feature.rms.html
 
