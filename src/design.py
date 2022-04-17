@@ -38,5 +38,5 @@ def design_setup():
         unsafe_allow_html=True)
 
     # Design Loading bar
-    st.markdown('''<style>.st-dp {color: #e3fc03;}</style>''',
+    st.markdown('''<style>.st-dp {background-color: #e3fc03;}</style>''',
         unsafe_allow_html=True)
