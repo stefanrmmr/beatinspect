@@ -78,8 +78,8 @@ def beatinspect_main():
             plt.vlines(x=[0], ymin=-0.5, ymax=0.5, colors='lightgrey', ls='--', lw=1)
 
 
-            plt.patch.facecolor('blue')
-            plt.patch.alpha(0.5)
+            fig.facecolor('blue')
+            fig.alpha(0.5)
             # ax.patch.set_facecolor('red')
             # ax.patch.set_alpha(0.5)
 
