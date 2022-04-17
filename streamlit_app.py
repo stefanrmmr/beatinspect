@@ -72,9 +72,9 @@ def beatinspect_main():
             plt.ylabel('Amplitude')
             plt.title(audiofile.name)
 
-            filename = os.path.join(os.getcwd() + audiofile.name)
+            # filename = os.path.join(os.getcwd() + audiofile.name)
 
-            y,sr = librosa.load(filename, sr=sampling_freq)
+            y,sr = librosa.load(audiofile.name, sr=sampling_freq)
             librosa.display.waveplot(y, sr, ax=ax, x_axis='time')
 
             streamlit.pyplot(fig)
