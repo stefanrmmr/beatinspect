@@ -82,7 +82,7 @@ def beatinspect_main():
                 y_stft = librosa.stft(y)  # STFT of y
                 scale_db = librosa.amplitude_to_db(np.abs(y_stft), ref=np.max)
 
-            with st.spinner('generating RMS amplitude plots')
+            with st.spinner('generating RMS amplitude plots'):
 
                 # global plotting settings
                 plt.rc('xtick', labelsize=9)
