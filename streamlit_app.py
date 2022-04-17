@@ -123,9 +123,9 @@ def beatinspect_main():
 
             fig2, ax2 = plt.subplots(1,1)
             fig2.set_size_inches(8, 8, forward=True)
-            img2 = librosa.display.specshow(scale_db, cmap='viridis', y_axis='log', x_axis='time', ax=ax2)
-            ax2.set(title='Viridis lol')
-            fig2.colorbar(img2, ax=ax2, format="%+2.f dB")
+            librosa.display.specshow(scale_db, cmap='viridis', y_axis='log', x_axis='time', ax=ax2)
+            # ax2.set(title='Viridis lol')
+            # fig2.colorbar(img2, ax=ax2, format="%+2.f dB")
             st.pyplot(fig2)
 
 
