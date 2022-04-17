@@ -78,9 +78,9 @@ def beatinspect_main():
             # plt.rc('axes', labelsize=9)
             plt.rcParams['figure.dpi'] = 400
 
-            fig1, ax1 = plt.subplots(1,1)
-            fig1.set_size_inches(8, 3, forward=True)
-            plt.ylabel('Amplitude')
+            fig1, (ax1, ax2) = plt.subplots(2)
+            fig1.set_size_inches(8, 10, forward=True)
+            ax1.set_ylabel('Amplitude')
             ax1.set_ylim([-1.1, 1.1])
 
             # GUIDELINES multiple lines all full height
@@ -114,19 +114,19 @@ def beatinspect_main():
             y,sr = librosa.load(filename, sr=sampling_freq)
             librosa.display.waveshow(y, sr, ax=ax1, color='grey', x_axis='time')
 
-            plt.xlabel('')
-            st.pyplot(fig1)
+
 
 
             y_stft = librosa.stft(y)  # STFT of y
             scale_db = librosa.amplitude_to_db(np.abs(y_stft), ref=np.max)
 
-            fig2, ax2 = plt.subplots(1,1)
-            fig2.set_size_inches(8, 8, forward=True)
+            # fig1, ax2 = plt.subplots(1,1)
             librosa.display.specshow(scale_db, cmap='viridis', y_axis='log', x_axis='time', ax=ax2)
             # ax2.set(title='Viridis lol')
             # fig2.colorbar(img2, ax=ax2, format="%+2.f dB")
-            st.pyplot(fig2)
+
+            plt.xlabel('')
+            st.pyplot(fig1)
 
 
 
