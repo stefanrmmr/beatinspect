@@ -203,7 +203,7 @@ if __name__ == '__main__':
 
     # initialize spectrum choice session state
     if "spectrum" not in st.session_state:
-        st.session_state.spectrum = 'AMP Spectrum'
+        st.session_state.spectrum = 'RMS Spectrum'
 
     # call main function
     beatinspect_main()
