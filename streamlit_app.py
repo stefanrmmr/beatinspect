@@ -7,7 +7,6 @@ import time
 import base64
 import numpy as np
 import librosa
-import librosa.display
 import essentia.standard as es
 
 import src.plots as plots  # plotting framework
@@ -64,7 +63,6 @@ def beatinspect_main():
         with open(audiofile.name,"wb") as f:
             f.write(audiofile.getbuffer())
         filename = os.path.join(os.getcwd(), audiofile.name)
-
 
 
         # Inspect Audio File Specifications

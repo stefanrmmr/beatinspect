@@ -1,4 +1,5 @@
 # PLOTTING FRAMEWORK
+import librosa.display
 import matplotlib.pyplot as plt
 
 def rms_spectrum(y, sr, times, rms):
