@@ -78,9 +78,9 @@ def beatinspect_main():
             ax.set_ylim([-0.6, 0.6])
 
             # GUIDELINES multiple lines all full height
-            plt.vlines(x=[0], ymin=-0.6, ymax=0.6, colors='lightgrey', ls='--', lw=1)
-            plt.axhline(y=0.5, color='lightgrey', linestyle='--', lw=1)
-            plt.axhline(y=-0.5, color='lightgrey', linestyle='--', lw=1)
+            plt.vlines(x=[0], ymin=-0.6, ymax=0.6, colors='lightgrey', ls='--', lw=0.5)
+            plt.axhline(y=0.5, color='lightgrey', linestyle='--', lw=0.5)
+            plt.axhline(y=-0.5, color='lightgrey', linestyle='--', lw=0.5)
 
             fig.patch.set_facecolor('black')
             fig.patch.set_alpha(0.0)
