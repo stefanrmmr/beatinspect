@@ -36,9 +36,9 @@ def create_spectrogram(voice_sample):
         fig
     """
 
-    in_fpath = Path(voice_sample.replace('"', "").replace("'", ""))
-    original_wav, sampling_rate = librosa.load(str(in_fpath))
-    
+    # in_fpath = Path(voice_sample.replace('"', "").replace("'", ""))
+    original_wav, sampling_rate = librosa.load(voice_sample)
+
     # Plot the signal read from wav file
     fig = plt.figure()
     plt.subplot(211)
