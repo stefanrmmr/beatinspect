@@ -70,9 +70,9 @@ def beatinspect_main():
                          expanded=False):
             st.audio(audiofile)  # display audio player UX
 
-
-            plt.rc('ytick', labelsize=10)
-            plt.rc('axes', labelsize=10)
+            plt.rc('xtick', labelsize=9)
+            plt.rc('ytick', labelsize=9)
+            plt.rc('axes', labelsize=9)
             plt.rcParams['figure.dpi'] = 400
 
             fig, ax1 = plt.subplots(1,1)
