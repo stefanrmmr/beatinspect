@@ -4,6 +4,7 @@ import os
 import sys
 import toml
 import time
+import librosa
 import base64
 import essentia.standard as es
 
