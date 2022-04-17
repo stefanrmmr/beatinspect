@@ -142,7 +142,7 @@ def beatinspect_main():
                 ax1.spines['top'].set_visible(False)     # Hide the right and top spines
 
                 # AX2 RMS Energy Visualizer
-                ax2.semilogy(times, rms[0], label='RMS Energy', color='#e3fc03')
+                ax2.semilogy(times, rms[0], label='RMS Energy', color='grey')
 
                 ax2.patch.set_facecolor('black')
                 ax2.patch.set_alpha(0.0)
