@@ -164,8 +164,8 @@ def beatinspect_main():
 
             values = st.slider(
                 'Select a range of values',
-                time(0.0), time(100.0), (time(25.0), time(75.0))),
-                
+                time(0.0), time(100.0), (time(25.0), time(75.0)))
+
             st.write('Values:', values)
 
             # STREAMLIT double sided slider mit info dass max 20sec
