@@ -139,7 +139,7 @@ def beatinspect_main():
                 # AX2 RMS Energy Visualizer
                 ax2.patch.set_facecolor('black')
                 ax2.patch.set_alpha(0.0)
-                ax2.set_ylim([-0.00001, 0.1])                 # setting lower bounds for y axis
+                ax2.set_ylim([-0.00001, 0])                 # setting lower bounds for y axis
                 ax2.xaxis.label.set_color('white')        #setting up X-axis label color to yellow
                 ax2.yaxis.label.set_color('white')          #setting up Y-axis label color to blue
                 ax2.tick_params(axis='x', colors='white')    #setting up X-axis tick color to red
