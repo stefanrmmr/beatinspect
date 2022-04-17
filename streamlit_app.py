@@ -82,9 +82,9 @@ def beatinspect_main():
             st.audio(audiofile)
 
             # plt.rc('xtick', labelsize=9)
-            plt.rc('ytick', labelsize=9)
+            # plt.rc('ytick', labelsize=9)
             # plt.rc('axes', labelsize=9)
-            plt.rcParams['figure.dpi'] = 400
+            # plt.rcParams['figure.dpi'] = 400
 
             fig, (ax1, ax2) = plt.subplots(2)
             fig.set_size_inches(8, 10, forward=True)
@@ -123,10 +123,9 @@ def beatinspect_main():
 
             # img2 = librosa.display.specshow(scale_db, ax=ax2, x_axis='time', y_axis='linear')
             img2 = librosa.display.specshow(scale_db, ax=ax2, sr=sr, x_axis='time', y_axis='linear')
-            fig.colorbar(img2, ax=ax2, format="%+2.f dB")
+            # fig.colorbar(img2, ax=ax2, format="%+2.f dB")
 
-
-            plt.xlabel('')
+            # plt.xlabel('')
             st.pyplot(fig)
 
 
