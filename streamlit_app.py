@@ -66,67 +66,72 @@ def beatinspect_main():
             f.write(audiofile.getbuffer())
         filename = os.path.join(os.getcwd(), audiofile.name)
 
-        # extract tech Specifications about wav file
-        sampling_freq, channels = wav_techspecs.read_wav(audiofile)
 
-        # calc spectrum data for plotting framework
-        y,sr = librosa.load(filename, sr=sampling_freq)
-        y_stft = librosa.stft(y)  # STFT of y
-        scale_db = librosa.amplitude_to_db(np.abs(y_stft), ref=np.max)
 
         # Inspect Audio File Specifications
         with st.expander("SECTION - Waveform and Spectrogram Insights",
                          expanded=False):
 
-            # display audio player UX
-            st.audio(audiofile)
+            # calculate the necessray data for further plotting
+            with st.spinner('calculating spectrogram insights'):
+                # extract tech Specifications about wav file
+                sampling_freq, channels = wav_techspecs.read_wav(audiofile)
 
-            # plt.rc('xtick', labelsize=9)
-            # plt.rc('ytick', labelsize=9)
-            # plt.rc('axes', labelsize=9)
-            # plt.rcParams['figure.dpi'] = 400
+                # calc spectrum data for plotting framework
+                y,sr = librosa.load(filename, sr=sampling_freq)
+                y_stft = librosa.stft(y)  # STFT of y
+                scale_db = librosa.amplitude_to_db(np.abs(y_stft), ref=np.max)
 
-            fig, (ax1, ax2) = plt.subplots(2)
-            #fig.set_size_inches(8, 10, forward=True)
-            ax1.set_ylabel('Amplitude')
-            ax1.set_ylim([-1.1, 1.1])
+            with st.spinner('generating RMS amplitude plots')
 
-            # GUIDELINES multiple lines all full height
-            ax1.vlines(x=[0], ymin=-1, ymax=1, colors='lightgrey', ls='--', lw=0.75)
-            ax1.axhline(y=0.5, color='lightgrey', linestyle='--', lw=0.75)
-            ax1.axhline(y=-0.5, color='lightgrey', linestyle='--', lw=0.75)
-            ax1.axhline(y=1.0, color='#e3fc03', linestyle='--', lw=0.75)
-            ax1.axhline(y=-1.0, color='#e3fc03', linestyle='--', lw=0.75)
+                # global plotting settings
+                plt.rc('xtick', labelsize=9)
+                plt.rc('ytick', labelsize=9)
+                plt.rc('axes', labelsize=9)
+                plt.rcParams['figure.dpi'] = 400
 
-            fig.patch.set_facecolor('black')
-            fig.patch.set_alpha(0.0)
-            ax1.patch.set_facecolor('black')
-            ax1.patch.set_alpha(0.0)
+                # display audio player UX
+                st.audio(audiofile)
 
-            ax1.xaxis.label.set_color('white')        #setting up X-axis label color to yellow
-            ax1.yaxis.label.set_color('white')          #setting up Y-axis label color to blue
+                # create 2x subplots for overview RMS
+                fig, (ax1, ax2) = plt.subplots(2)
+                #fig.set_size_inches(8, 10, forward=True)
+                ax1.set_ylabel('Amplitude')
+                ax1.set_ylim([-1.1, 1.1])
 
-            ax1.tick_params(axis='x', colors='white')    #setting up X-axis tick color to red
-            ax1.tick_params(axis='y', colors='white')  #setting up Y-axis tick color to black
+                # GUIDELINES multiple lines all full height
+                ax1.vlines(x=[0], ymin=-1, ymax=1, colors='lightgrey', ls='--', lw=0.75)
+                ax1.axhline(y=0.5, color='lightgrey', linestyle='--', lw=0.75)
+                ax1.axhline(y=-0.5, color='lightgrey', linestyle='--', lw=0.75)
+                ax1.axhline(y=1.0, color='#e3fc03', linestyle='--', lw=0.75)
+                ax1.axhline(y=-1.0, color='#e3fc03', linestyle='--', lw=0.75)
 
-            ax1.spines['left'].set_color('white')        # setting up Y-axis tick color to red
-            ax1.spines['top'].set_color('white')         #setting up above X-axis tick color to red
-            ax1.spines['right'].set_color('white')        # setting up Y-axis tick color to red
-            ax1.spines['bottom'].set_color('white')         #setting up above X-axis tick color to red
+                fig.patch.set_facecolor('black')
+                fig.patch.set_alpha(0.0)
+                ax1.patch.set_facecolor('black')
+                ax1.patch.set_alpha(0.0)
 
-            ax1.spines['right'].set_visible(False)   # Hide the right and top spines
-            ax1.spines['top'].set_visible(False)     # Hide the right and top spines
+                ax1.xaxis.label.set_color('white')        #setting up X-axis label color to yellow
+                ax1.yaxis.label.set_color('white')          #setting up Y-axis label color to blue
+
+                ax1.tick_params(axis='x', colors='white')    #setting up X-axis tick color to red
+                ax1.tick_params(axis='y', colors='white')  #setting up Y-axis tick color to black
+
+                ax1.spines['left'].set_color('white')        # setting up Y-axis tick color to red
+                ax1.spines['top'].set_color('white')         #setting up above X-axis tick color to red
+                ax1.spines['right'].set_color('white')        # setting up Y-axis tick color to red
+                ax1.spines['bottom'].set_color('white')         #setting up above X-axis tick color to red
+
+                ax1.spines['right'].set_visible(False)   # Hide the right and top spines
+                ax1.spines['top'].set_visible(False)     # Hide the right and top spines
+
+                librosa.display.waveshow(y, sr, ax=ax1, color='grey', x_axis='time')
 
 
+                # img2 = librosa.display.specshow(scale_db, ax=ax2, sr=sr, x_axis='time', y_axis='log')
+                # fig.colorbar(img2, ax=ax2, format="%+2.f dB")
 
-            librosa.display.waveshow(y, sr, ax=ax1, color='grey', x_axis='time')
-
-            # img2 = librosa.display.specshow(scale_db, ax=ax2, x_axis='time', y_axis='linear')
-            img2 = librosa.display.specshow(scale_db, ax=ax2, sr=sr, x_axis='time', y_axis='log')
-            fig.colorbar(img2, ax=ax2, format="%+2.f dB")
-
-            # plt.xlabel('')
-            st.pyplot(fig)
+                st.pyplot(fig)
 
 
             # STREAMLIT double sided slider mit info dass max 20sec
@@ -196,7 +201,7 @@ def beatinspect_main():
 
 
     # FOOTER Content and Coop logos etc
-    foot_col1, foot_col2, foot_col3, foot_col4 = st.columns([3,1.5,1.5,3])
+    foot_col1, foot_col2, foot_col3, foot_col4, foot_col5 = st.columns([3,1.5,1.5,1.5,3])
     with foot_col2:
         essentia_html = utils.get_img_with_href('resources/powered_by_essentia.png',
                                                 'https://essentia.upf.edu/')
@@ -207,7 +212,11 @@ def beatinspect_main():
                                             'https://utility-studio.com/')
         st.markdown(ustu_html, unsafe_allow_html=True)
         # st.image('resources/coop_utility_studio.png')
-
+    with foot_col3:
+        librosa_html = utils.get_img_with_href('resources/powered_by_librosa.png',
+                                            'https://librosa.org/')
+        st.markdown(librosa_html, unsafe_allow_html=True)
+        # st.image('resources/coop_utility_studio.png')
 
 if __name__ == '__main__':
     # call main function
