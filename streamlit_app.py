@@ -77,7 +77,9 @@ def beatinspect_main():
         # Inspect Audio File Specifications
         with st.expander("SECTION - Waveform and Spectrogram Insights",
                          expanded=False):
-            st.audio(audiofile)  # display audio player UX
+
+            # display audio player UX
+            st.audio(audiofile)
 
             # plt.rc('xtick', labelsize=9)
             plt.rc('ytick', labelsize=9)
@@ -119,8 +121,8 @@ def beatinspect_main():
 
             librosa.display.waveshow(y, sr, ax=ax1, color='grey', x_axis='time')
 
-            img2 = librosa.display.specshow(scale_db, ax=ax2, x_axis='time', y_axis='linear')
-            fig.colorbar(img2, ax=ax2, format="%+2.f dB")
+            # img2 = librosa.display.specshow(scale_db, ax=ax2, x_axis='time', y_axis='linear')
+            # fig.colorbar(img2, ax=ax2, format="%+2.f dB")
 
 
             plt.xlabel('')
