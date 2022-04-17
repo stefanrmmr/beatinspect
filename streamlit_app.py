@@ -98,8 +98,8 @@ def beatinspect_main():
             ax1.axhline(y=1.0, color='#e3fc03', linestyle='--', lw=0.75)
             ax1.axhline(y=-1.0, color='#e3fc03', linestyle='--', lw=0.75)
 
-            #fig.patch.set_facecolor('black')
-            #fig.patch.set_alpha(0.0)
+            fig.patch.set_facecolor('black')
+            fig.patch.set_alpha(0.0)
             ax1.patch.set_facecolor('black')
             ax1.patch.set_alpha(0.0)
 
@@ -122,13 +122,23 @@ def beatinspect_main():
             librosa.display.waveshow(y, sr, ax=ax1, color='grey', x_axis='time')
 
             # img2 = librosa.display.specshow(scale_db, ax=ax2, x_axis='time', y_axis='linear')
-            img2 = librosa.display.specshow(scale_db, ax=ax2, sr=sr, x_axis='time', y_axis='linear')
+            img2 = librosa.display.specshow(scale_db, ax=ax2, sr=sr, x_axis='time', y_axis='log')
             fig.colorbar(img2, ax=ax2, format="%+2.f dB")
 
             # plt.xlabel('')
             st.pyplot(fig)
 
 
+            # STREAMLIT double sided slider mit info dass max 20sec
+            # nur wenn kleiner gleich 20 sec wird das zweite bild generiert
+            # das mel spektrum gibt es nur für bestimmte abschnitte nicht ganzer track!
+
+            # + RMS function for the whole track plot
+
+            # also oben rms + Overview figure mit 2x ax subplots
+            # darunter custom select max 20 sec spectrum viewer !
+
+            # https://librosa.org/doc/0.9.1/generated/librosa.feature.rms.html
 
 
             # TODO select a section of the track (or the whole track) and analyze for sections that are above ZERO level
