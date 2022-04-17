@@ -85,6 +85,17 @@ def beatinspect_main():
             ax.patch.set_facecolor('black')
             ax.patch.set_alpha(0.0)
 
+            ax.xaxis.label.set_color('white')        #setting up X-axis label color to yellow
+            ax.yaxis.label.set_color('white')          #setting up Y-axis label color to blue
+
+            ax.tick_params(axis='x', colors='white')    #setting up X-axis tick color to red
+            ax.tick_params(axis='y', colors='white')  #setting up Y-axis tick color to black
+
+            ax.spines['left'].set_color('white')        # setting up Y-axis tick color to red
+            ax.spines['top'].set_color('white')         #setting up above X-axis tick color to red
+            ax.spines['right'].set_color('white')        # setting up Y-axis tick color to red
+            ax.spines['bottom'].set_color('white')         #setting up above X-axis tick color to red
+
             filename = os.path.join(os.getcwd(), audiofile.name)
 
             y,sr = librosa.load(filename, sr=sampling_freq)
