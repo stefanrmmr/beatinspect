@@ -24,6 +24,3 @@ def get_img_with_href(local_img_path, target_url):
             <img src="data:image/{img_format};base64,{bin_str}" width="100%" height="100%" />
         </a>'''
     return html_code
-
-
-# PLOTTING Spectrogram analytics

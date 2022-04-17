@@ -14,6 +14,7 @@ import src.utils as utils  # utility functions
 import src.design as design  # design choices
 import src.wav_techspecs as wav_techspecs
 import src.detect_keyscale as detect_keyscale
+import src.visualization as visualization
 import streamlit.components.v1 as components
 
 import matplotlib.pyplot as plt
@@ -85,84 +86,16 @@ def beatinspect_main():
                 rms = librosa.feature.rms(S=spectrogram_magn)  # calculating rms
                 times = librosa.times_like(rms) #extracting rms timestamps
 
-
+            # Generate graphs/plots for RMS & Amplitude over time
             with st.spinner('generating RMS amplitude plots'):
-
-                # global plotting settings
-                plt.rc('xtick', labelsize=9)
-                plt.rc('ytick', labelsize=9)
-                plt.rc('axes', labelsize=9)
-                plt.rcParams['figure.dpi'] = 400
-
                 # display audio player UX
                 st.audio(audiofile)
-
-                # create 2x subplots for overview RMS
-                fig, (ax1, ax2) = plt.subplots(2)
-                fig.patch.set_facecolor('black')
-                fig.patch.set_alpha(0.0)
-                #fig.set_size_inches(8, 10, forward=True)
+                # generate rms spectrum plots
+                visualization.plot_rms_spectrum(y, sr, times, rms)
 
 
-                # GUIDELINES multiple lines all full height
-                ax1.vlines(x=[0], ymin=-1, ymax=1, colors='lightgrey', ls='--', lw=0.75)
-                ax1.axhline(y=0.5, color='lightgrey', linestyle='--', lw=0.75)
-                ax1.axhline(y=-0.5, color='lightgrey', linestyle='--', lw=0.75)
-                ax1.axhline(y=1.0, color='#e3fc03', linestyle='--', lw=0.75)
-                ax1.axhline(y=-1.0, color='#e3fc03', linestyle='--', lw=0.75)
-
-                ax2.vlines(x=[0], ymin=-1, ymax=1, colors='lightgrey', ls='--', lw=0.75)
-                ax2.axhline(y=1, color='#e3fc03', linestyle='--', lw=0.75)
-                ax2.axhline(y=0.1, color='lightgrey', linestyle='--', lw=0.75)
-                ax2.axhline(y=0.01, color='lightgrey', linestyle='--', lw=0.75)
-
-                # AX1 wavshow overview spectrogram
-                librosa.display.waveshow(y, sr, ax=ax1, color='grey', x_axis='time', label='Time [min]')
-
-                ax1.patch.set_facecolor('black')
-                ax1.patch.set_alpha(0.0)
-                ax1.set_ylabel('Amplitude')
-                ax1.set_xlabel('Time [minutes/sec]')
-                ax1.set_ylim([-1.1, 1.1])
-                ax1.xaxis.label.set_color('white')        #setting up X-axis label color to yellow
-                ax1.yaxis.label.set_color('white')          #setting up Y-axis label color to blue
-                ax1.tick_params(axis='x', colors='white')    #setting up X-axis tick color to red
-                ax1.tick_params(axis='y', colors='white')  #setting up Y-axis tick color to black
-                ax1.spines['left'].set_color('white')        # setting up Y-axis tick color to red
-                ax1.spines['top'].set_color('white')         #setting up above X-axis tick color to red
-                ax1.spines['right'].set_color('white')        # setting up Y-axis tick color to red
-                ax1.spines['bottom'].set_color('white')         #setting up above X-axis tick color to red
-                ax1.spines['right'].set_visible(False)   # Hide the right and top spines
-                ax1.spines['top'].set_visible(False)     # Hide the right and top spines
-
-                # AX2 RMS Energy Visualizer
-                ax2.semilogy(times, rms[0], label='RMS Energy', color='#e3fc03')
-
-                ax2.patch.set_facecolor('black')
-                ax2.patch.set_alpha(0.0)
-                ax2.set_ylabel('RMS Energy [log]')
-                ax2.xaxis.set_ticks_position('top') # the rest is the same
-                # ax2.get_xaxis().set_visible(False)
-                ax2.set_ylim(bottom=0.0001)                 # setting lower bounds for y axis
-                ax2.xaxis.label.set_color('white')        #setting up X-axis label color to yellow
-                ax2.yaxis.label.set_color('white')          #setting up Y-axis label color to blue
-                ax2.tick_params(axis='x', colors='white')    #setting up X-axis tick color to red
-                ax2.tick_params(axis='y', colors='white')  #setting up Y-axis tick color to black
-                ax2.spines['left'].set_color('white')        # setting up Y-axis tick color to red
-                ax2.spines['top'].set_color('white')         #setting up above X-axis tick color to red
-                ax2.spines['right'].set_color('white')        # setting up Y-axis tick color to red
-                ax2.spines['bottom'].set_color('white')         #setting up above X-axis tick color to red
-                ax2.spines['right'].set_visible(False)      # Hide the right and top spines
-                ax2.spines['bottom'].set_visible(False)     # Hide the right and bottom spines
-
-
-
-
-                # img2 = librosa.display.specshow(scale_db, ax=ax2, sr=sr, x_axis='time', y_axis='log')
-                # fig.colorbar(img2, ax=ax2, format="%+2.f dB")
-                plt.tight_layout()
-                st.pyplot(fig)
-
+            # img2 = librosa.display.specshow(scale_db, ax=ax2, sr=sr, x_axis='time', y_axis='log')
+            # fig.colorbar(img2, ax=ax2, format="%+2.f dB")
 
             # STREAMLIT double sided slider mit info dass max 20sec
             # nur wenn kleiner gleich 20 sec wird das zweite bild generiert
