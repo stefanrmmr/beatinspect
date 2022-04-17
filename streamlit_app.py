@@ -68,6 +68,11 @@ def beatinspect_main():
         # extract tech Specifications about wav file
         sampling_freq, channels = wav_techspecs.read_wav(audiofile)
 
+        # calc spectrum data for plotting framework
+        y,sr = librosa.load(filename, sr=sampling_freq)
+        y_stft = librosa.stft(y)  # STFT of y
+        scale_db = librosa.amplitude_to_db(np.abs(y_stft), ref=np.max)
+
         # Inspect Audio File Specifications
         with st.expander("SECTION - Waveform and Spectrogram Insights",
                          expanded=False):
@@ -78,8 +83,8 @@ def beatinspect_main():
             # plt.rc('axes', labelsize=9)
             plt.rcParams['figure.dpi'] = 400
 
-            fig1, (ax1, ax2) = plt.subplots(2)
-            fig1.set_size_inches(8, 10, forward=True)
+            fig, (ax1, ax2) = plt.subplots(2)
+            fig.set_size_inches(8, 10, forward=True)
             ax1.set_ylabel('Amplitude')
             ax1.set_ylim([-1.1, 1.1])
 
@@ -90,8 +95,8 @@ def beatinspect_main():
             ax1.axhline(y=1.0, color='#e3fc03', linestyle='--', lw=0.75)
             ax1.axhline(y=-1.0, color='#e3fc03', linestyle='--', lw=0.75)
 
-            fig1.patch.set_facecolor('black')
-            fig1.patch.set_alpha(0.0)
+            fig.patch.set_facecolor('black')
+            fig.patch.set_alpha(0.0)
             ax1.patch.set_facecolor('black')
             ax1.patch.set_alpha(0.0)
 
@@ -111,22 +116,16 @@ def beatinspect_main():
 
             filename = os.path.join(os.getcwd(), audiofile.name)
 
-            y,sr = librosa.load(filename, sr=sampling_freq)
+
             librosa.display.waveshow(y, sr, ax=ax1, color='grey', x_axis='time')
 
 
+            img2 = librosa.display.specshow(scale_db, ax=ax2, x_axis='time', y_axis='linear')
+            fig.colorbar(img2, ax=ax2, format="%+2.f dB")
 
-
-            y_stft = librosa.stft(y)  # STFT of y
-            scale_db = librosa.amplitude_to_db(np.abs(y_stft), ref=np.max)
-
-            # fig1, ax2 = plt.subplots(1,1)
-            librosa.display.specshow(scale_db, cmap='viridis', y_axis='log', x_axis='time', ax=ax2)
-            # ax2.set(title='Viridis lol')
-            # fig2.colorbar(img2, ax=ax2, format="%+2.f dB")
 
             plt.xlabel('')
-            st.pyplot(fig1)
+            st.pyplot(fig)
 
 
 
