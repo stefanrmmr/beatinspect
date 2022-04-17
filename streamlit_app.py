@@ -73,7 +73,7 @@ def beatinspect_main():
 
             fig, ax = plt.subplots(1, 1)
             fig.set_size_inches(8, 3, forward=True)
-            git.set_dpi(400)
+            fig.set_dpi(400)
             plt.ylabel('Amplitude')
             ax.set_ylim([-0.6, 0.6])
 
