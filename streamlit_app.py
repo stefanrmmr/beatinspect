@@ -123,12 +123,12 @@ def beatinspect_main():
 
 
                 # AX1 wavshow overview spectrogram
-                librosa.display.waveshow(y, sr, ax=ax1, color='grey', x_axis='time')
+                librosa.display.waveshow(y, sr, ax=ax1, color='grey', x_axis='time', label='Time [min]')
 
                 ax1.patch.set_facecolor('black')
                 ax1.patch.set_alpha(0.0)
                 ax1.set_ylabel('Amplitude')
-                # ax1.set_xlabel('Time [sec]')
+                ax1.set_xlabel('Time [sec]')
                 ax1.set_ylim([-1.1, 1.1])
                 ax1.xaxis.label.set_color('white')        #setting up X-axis label color to yellow
                 ax1.yaxis.label.set_color('white')          #setting up Y-axis label color to blue
