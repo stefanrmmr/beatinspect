@@ -102,12 +102,6 @@ def beatinspect_main():
                 #fig.set_size_inches(8, 10, forward=True)
 
 
-
-
-
-
-
-
                 # GUIDELINES multiple lines all full height
                 ax1.vlines(x=[0], ymin=-1, ymax=1, colors='lightgrey', ls='--', lw=0.75)
                 ax1.axhline(y=0.5, color='lightgrey', linestyle='--', lw=0.75)
@@ -119,8 +113,6 @@ def beatinspect_main():
                 ax2.axhline(y=1, color='#e3fc03', linestyle='--', lw=0.75)
                 ax2.axhline(y=0.1, color='lightgrey', linestyle='--', lw=0.75)
                 ax2.axhline(y=0.01, color='lightgrey', linestyle='--', lw=0.75)
-
-
 
                 # AX1 wavshow overview spectrogram
                 librosa.display.waveshow(y, sr, ax=ax1, color='grey', x_axis='time', label='Time [min]')
@@ -142,7 +134,7 @@ def beatinspect_main():
                 ax1.spines['top'].set_visible(False)     # Hide the right and top spines
 
                 # AX2 RMS Energy Visualizer
-                ax2.semilogy(times, rms[0], label='RMS Energy', color='grey')
+                ax2.semilogy(times, rms[0], label='RMS Energy', color='#e3fc03')
 
                 ax2.patch.set_facecolor('black')
                 ax2.patch.set_alpha(0.0)
@@ -169,6 +161,11 @@ def beatinspect_main():
                 plt.tight_layout()
                 st.pyplot(fig)
 
+
+            appointment = st.slider(
+                 "Schedule your appointment:",
+                 value=(time(0,0,0), time(1, 0,0)))
+            st.write("You're scheduled for:", appointment)
 
             # STREAMLIT double sided slider mit info dass max 20sec
             # nur wenn kleiner gleich 20 sec wird das zweite bild generiert
