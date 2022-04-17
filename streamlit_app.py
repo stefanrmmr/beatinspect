@@ -72,7 +72,12 @@ def beatinspect_main():
             fig, ax = plt.subplots(1, 1)
             plt.ylabel('Amplitude')
             plt.title(audiofile.name)
-            ax.set_ylim([-0.5, 0.5])
+            ax.set_ylim([-0.55, 0.55])
+
+            # multiple lines all full height
+            plt.vlines(x=[0], ymin=-0.5, ymax=0.5, colors='lightgrey', ls='--', lw=2)
+
+
 
             ax.patch.set_facecolor('red')
             ax.patch.set_alpha(0.5)
