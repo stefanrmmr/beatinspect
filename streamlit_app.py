@@ -106,7 +106,7 @@ def beatinspect_main():
                      unsafe_allow_html=True)
             sradio_col1, sradio_col2 = st.columns([0.03, 1.5])
             with sradio_col2:
-                st.session_state.spectrum = st.radio('', ['AMP Spectrum  ', 'RMS Spectrum  '])
+                st.session_state.spectrum = st.radio('Please select your spectrum of choice', ['AMP Spectrum  ', 'RMS Spectrum  '])
             st.write('')  # add spacing
 
 
