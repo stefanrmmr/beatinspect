@@ -101,6 +101,7 @@ def beatinspect_main():
                     plots.amp_spectrum(y,sr)
 
             # radio button selection for spectrum plot over time
+            # change radio button layout to be horizontally aligned 
             st.write('<style>div.row-widget.stRadio > div{flex-direction:row;} </style>', unsafe_allow_html=True)
 
             sradio_col1, sradio_col2 = st.columns([0.03, 1.5])

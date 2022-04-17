@@ -40,3 +40,7 @@ def design_setup():
         unsafe_allow_html=True)
     st.markdown('''<style>.st-da {height: 8px; width: 8px;}</style>''',
         unsafe_allow_html=True)
+
+    # Design change radio button padding for horizontal alignment
+    st.markdown('''<style>.st-de {padding-left: 8px; padding-right: 8px;}</style>''',
+        unsafe_allow_html=True)
