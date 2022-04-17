@@ -71,16 +71,20 @@ def beatinspect_main():
             st.audio(audiofile)  # display audio player UX
 
 
-            fig, ax = plt.subplots(1, 1)
+            plt.rc('ytick', labelsize=12)
+            plt.rc('axes', labelsize=12)
+            plt.rcParams['figure.dpi'] = 400
+
+            fig, (ax1, ax2) = plt.subplots(2)
             fig.set_size_inches(8, 3, forward=True)
-            fig.set_dpi(800)
+            # fig.set_dpi(400)
             plt.ylabel('Amplitude')
             ax.set_ylim([-1.1, 1.1])
 
             # GUIDELINES multiple lines all full height
-            plt.vlines(x=[0], ymin=-1, ymax=1, colors='lightgrey', ls='--', lw=0.5)
-            plt.axhline(y=0.5, color='lightgrey', linestyle='--', lw=0.5)
-            plt.axhline(y=-0.5, color='lightgrey', linestyle='--', lw=0.5)
+            plt.vlines(x=[0], ymin=-1, ymax=1, colors='lightgrey', ls='--', lw=0.75)
+            plt.axhline(y=0.5, color='lightgrey', linestyle='--', lw=0.75)
+            plt.axhline(y=-0.5, color='lightgrey', linestyle='--', lw=0.75)
             plt.axhline(y=1.0, color='#e3fc03', linestyle='--', lw=0.75)
             plt.axhline(y=-1.0, color='#e3fc03', linestyle='--', lw=0.75)
 
