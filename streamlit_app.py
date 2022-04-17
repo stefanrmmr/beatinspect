@@ -72,7 +72,7 @@ def beatinspect_main():
             # calculate the necessray data for further plotting
             with st.spinner('calculating spectrogram insights'):
                 # extract tech Specifications about wav file
-                sampling_freq, channels = wav_techspecs.read_wav(audiofile)
+                sampling_freq, channels = wav_specs.read_wav(audiofile)
 
                 # calc spectrum data for plotting framework
                 y,sr = librosa.load(filename, sr=sampling_freq)
