@@ -87,7 +87,9 @@ def beatinspect_main():
                 # display audio player UX
                 st.audio(audiofile)
                 # generate rms spectrum plots
-                plots.rms_spectrum(y, sr, times, rms)
+                # plots.amprms_spectrum(y, sr, times, rms)
+                plots.amp_spectrum(y,sr)
+                plots.rms_spectrum(times, rms)
 
 
             # img2 = librosa.display.specshow(scale_db, ax=ax2, sr=sr, x_axis='time', y_axis='log')
