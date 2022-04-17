@@ -79,7 +79,7 @@ def beatinspect_main():
             y,sr = librosa.load(filename, sr=sampling_freq)
             librosa.display.waveshow(y, sr, ax=ax, x_axis='time')
 
-            streamlit.pyplot(fig)
+            st.pyplot(fig)
             # streamlit.audio(i.sample, format='audio/wav')
 
 
