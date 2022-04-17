@@ -164,7 +164,7 @@ def beatinspect_main():
 
             values = st.slider(
                 'Select a range of values',
-                time(0.0), time(100.0), (time(25.0), time(75.0)))
+                time(minute=0, second=0), time(minute=1, second=0), time(minute=0, second=20), time(minute=0, second=40))
 
             st.write('Values:', values)
 
