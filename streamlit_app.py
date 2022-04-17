@@ -116,7 +116,7 @@ def beatinspect_main():
                 ax1.axhline(y=-1.0, color='#e3fc03', linestyle='--', lw=0.75)
 
                 ax2.vlines(x=[0], ymin=-1, ymax=1, colors='lightgrey', ls='--', lw=0.75)
-                ax2.axhline(y=1, color='white', linestyle='--', lw=0.75)
+                ax2.axhline(y=1, color='#e3fc03', linestyle='--', lw=0.75)
                 ax2.axhline(y=0.1, color='lightgrey', linestyle='--', lw=0.75)
                 ax2.axhline(y=0.01, color='lightgrey', linestyle='--', lw=0.75)
 
@@ -128,7 +128,7 @@ def beatinspect_main():
                 ax1.patch.set_facecolor('black')
                 ax1.patch.set_alpha(0.0)
                 ax1.set_ylabel('Amplitude')
-                ax1.set_xlabel('Time [sec]')
+                # ax1.set_xlabel('Time [sec]')
                 ax1.set_ylim([-1.1, 1.1])
                 ax1.xaxis.label.set_color('white')        #setting up X-axis label color to yellow
                 ax1.yaxis.label.set_color('white')          #setting up Y-axis label color to blue
