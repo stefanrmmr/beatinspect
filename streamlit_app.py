@@ -201,7 +201,7 @@ def beatinspect_main():
 
 
     # FOOTER Content and Coop logos etc
-    foot_col1, foot_col2, foot_col3, foot_col4, foot_col5 = st.columns([3,1.5,1.5,1.5,3])
+    foot_col1, foot_col2, foot_col3, foot_col4, foot_col5 = st.columns([2,1.5,1.5,1.5,2])
     with foot_col2:
         essentia_html = utils.get_img_with_href('resources/powered_by_essentia.png',
                                                 'https://essentia.upf.edu/')
@@ -212,7 +212,7 @@ def beatinspect_main():
                                             'https://utility-studio.com/')
         st.markdown(ustu_html, unsafe_allow_html=True)
         # st.image('resources/coop_utility_studio.png')
-    with foot_col3:
+    with foot_col4:
         librosa_html = utils.get_img_with_href('resources/powered_by_librosa.png',
                                             'https://librosa.org/')
         st.markdown(librosa_html, unsafe_allow_html=True)
