@@ -46,7 +46,7 @@ def beatinspect_main():
                 audiofile = st.file_uploader("", type='wav')
             elif 'Record' in choice:
                 audiofile = None
-                st.write('')
+                st.write('')  # ad spacing
                 st.write('SOON to be implemented!')
                 # https://www.youtube.com/watch?v=BuD3gILJW-Q&ab_channel=Streamlit
                 # USE streamlit custom component that implements a custom html/css/react element
@@ -107,7 +107,7 @@ def beatinspect_main():
             sradio_col1, sradio_col2 = st.columns([0.03, 1.5])
             with sradio_col2:
                 st.session_state.spectrum = st.radio('', ['AMP Spectrum  ', 'RMS Spectrum  '])
-
+            st.write('')  # add spacing
 
 
             # img2 = librosa.display.specshow(scale_db, ax=ax2, sr=sr, x_axis='time', y_axis='log')
@@ -201,7 +201,7 @@ def beatinspect_main():
 
 if __name__ == '__main__':
 
-    # initialize page session state
+    # initialize spectrum choice session state
     if "spectrum" not in st.session_state:
         st.session_state.spectrum = 'AMP Spectrum'
 
