@@ -70,7 +70,7 @@ def beatinspect_main():
 
             fig, ax = plt.subplots(1, 1)
             plt.ylabel('Amplitude')
-            plt.title(i.name)
+            plt.title(audiofile.name)
 
             filename = os.path.join(os.getcwd() + audiofile.name)
 
