@@ -72,12 +72,15 @@ def beatinspect_main():
 
 
             fig, ax = plt.subplots(1, 1)
-            fig.set_size_inches(8, 4, forward=True)
+            fig.set_size_inches(8, 3, forward=True)
+            git.set_dpi(400)
             plt.ylabel('Amplitude')
             ax.set_ylim([-0.6, 0.6])
 
-            # multiple lines all full height
+            # GUIDELINES multiple lines all full height
             plt.vlines(x=[0], ymin=-0.6, ymax=0.6, colors='lightgrey', ls='--', lw=1)
+            plt.axhline(y=0.5, color='lightgrey', linestyle='--', lw=1)
+            plt.axhline(y=-0.5, color='lightgrey', linestyle='--', lw=1)
 
             fig.patch.set_facecolor('black')
             fig.patch.set_alpha(0.0)
