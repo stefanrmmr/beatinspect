@@ -16,7 +16,7 @@ def rms_spectrum(times, rms):
     fig, ax2 = plt.subplots(1)
     fig.patch.set_facecolor('black')
     fig.patch.set_alpha(0.0)
-    #fig.set_size_inches(8, 10, forward=True)
+    fig.set_size_inches(8, 3, forward=True)
 
     ax2.vlines(x=[0], ymin=-1, ymax=1, colors='lightgrey', ls='--', lw=0.75)
     ax2.axhline(y=1, color='#e3fc03', linestyle='--', lw=0.75)
@@ -59,7 +59,7 @@ def amp_spectrum(y, sr):
     fig, ax1 = plt.subplots(1)
     fig.patch.set_facecolor('black')
     fig.patch.set_alpha(0.0)
-    #fig.set_size_inches(8, 10, forward=True)
+    fig.set_size_inches(8, 3, forward=True)
 
     # GUIDELINES multiple lines all full height
     ax1.vlines(x=[0], ymin=-1, ymax=1, colors='lightgrey', ls='--', lw=0.75)
