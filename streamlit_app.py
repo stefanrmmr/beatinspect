@@ -79,14 +79,14 @@ def beatinspect_main():
             fig.set_size_inches(8, 3, forward=True)
             # fig.set_dpi(400)
             plt.ylabel('Amplitude')
-            ax.set_ylim([-1.1, 1.1])
+            ax1.set_ylim([-1.1, 1.1])
 
             # GUIDELINES multiple lines all full height
-            plt.vlines(x=[0], ymin=-1, ymax=1, colors='lightgrey', ls='--', lw=0.75)
-            plt.axhline(y=0.5, color='lightgrey', linestyle='--', lw=0.75)
-            plt.axhline(y=-0.5, color='lightgrey', linestyle='--', lw=0.75)
-            plt.axhline(y=1.0, color='#e3fc03', linestyle='--', lw=0.75)
-            plt.axhline(y=-1.0, color='#e3fc03', linestyle='--', lw=0.75)
+            ax1.vlines(x=[0], ymin=-1, ymax=1, colors='lightgrey', ls='--', lw=0.75)
+            ax1.axhline(y=0.5, color='lightgrey', linestyle='--', lw=0.75)
+            ax1.axhline(y=-0.5, color='lightgrey', linestyle='--', lw=0.75)
+            ax1.axhline(y=1.0, color='#e3fc03', linestyle='--', lw=0.75)
+            ax1.axhline(y=-1.0, color='#e3fc03', linestyle='--', lw=0.75)
 
             fig.patch.set_facecolor('black')
             fig.patch.set_alpha(0.0)
