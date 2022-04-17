@@ -72,6 +72,10 @@ def beatinspect_main():
             fig, ax = plt.subplots(1, 1)
             plt.ylabel('Amplitude')
             plt.title(audiofile.name)
+            ax.set_ylim([-0.5, 0.5])
+
+            ax.patch.set_facecolor('red')
+            ax.patch.set_alpha(0.5)
 
             filename = os.path.join(os.getcwd(), audiofile.name)
 
