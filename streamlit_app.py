@@ -121,6 +121,8 @@ def beatinspect_main():
 
 
                 # AX1 wavshow overview spectrogram
+                librosa.display.waveshow(y, sr, ax=ax1, color='grey', x_axis='time')
+
                 ax1.patch.set_facecolor('black')
                 ax1.patch.set_alpha(0.0)
                 ax1.xaxis.label.set_color('white')        #setting up X-axis label color to yellow
@@ -134,9 +136,9 @@ def beatinspect_main():
                 ax1.spines['right'].set_visible(False)   # Hide the right and top spines
                 ax1.spines['top'].set_visible(False)     # Hide the right and top spines
 
-                librosa.display.waveshow(y, sr, ax=ax1, color='grey', x_axis='time')
-
                 # AX2 RMS Energy Visualizer
+                ax2.semilogy(times, rms[0], label='RMS Energy', color='#e3fc03')
+
                 ax2.patch.set_facecolor('black')
                 ax2.patch.set_alpha(0.0)
                 ax2.set_ylim(bottom=-0.0001)                 # setting lower bounds for y axis
@@ -151,7 +153,7 @@ def beatinspect_main():
                 ax2.spines['right'].set_visible(False)   # Hide the right and top spines
                 ax2.spines['top'].set_visible(False)     # Hide the right and top spines
 
-                ax2.semilogy(times, rms[0], label='RMS Energy', color='#e3fc03')
+
 
 
                 # img2 = librosa.display.specshow(scale_db, ax=ax2, sr=sr, x_axis='time', y_axis='log')
