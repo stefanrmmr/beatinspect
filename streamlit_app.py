@@ -75,7 +75,7 @@ def beatinspect_main():
             plt.rc('axes', labelsize=12)
             plt.rcParams['figure.dpi'] = 400
 
-            fig, (ax1, ax2) = plt.subplots(2)
+            fig, ax1 = plt.subplots(1,1)
             fig.set_size_inches(8, 3, forward=True)
             # fig.set_dpi(400)
             plt.ylabel('Amplitude')
