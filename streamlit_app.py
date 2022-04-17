@@ -158,8 +158,8 @@ def beatinspect_main():
                 ax2.spines['top'].set_color('white')         #setting up above X-axis tick color to red
                 ax2.spines['right'].set_color('white')        # setting up Y-axis tick color to red
                 ax2.spines['bottom'].set_color('white')         #setting up above X-axis tick color to red
-                ax2.spines['right'].set_visible(False)   # Hide the right and top spines
-                ax2.spines['top'].set_visible(False)     # Hide the right and top spines
+                ax2.spines['right'].set_visible(False)      # Hide the right and top spines
+                ax2.spines['bottom'].set_visible(False)     # Hide the right and bottom spines
 
 
 
