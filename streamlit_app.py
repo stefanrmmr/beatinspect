@@ -84,7 +84,7 @@ def beatinspect_main():
 
             # Generate graphs/plots for RMS & Amplitude over time
             st.audio(audiofile)  # display audio player UX
-            spectrum_coice = st.radio(label="", ['AMP Spectrum', 'RMS Spectrum'])
+            spectrum_coice = st.radio('', ['AMP Spectrum', 'RMS Spectrum'])
             if 'AMP' in spectrum_coice:
                 with st.spinner('generating RMS spectrum plot'):
                     # generate amp spectrum plots
@@ -92,8 +92,6 @@ def beatinspect_main():
                     plots.amp_spectrum(y,sr)
             else:
                 with st.spinner('generating RMS spectrum plot'):
-
-                    st.audio(audiofile)
                     # generate rms spectrum plots
                     # plots.amprms_spectrum(y, sr, times, rms)
                     plots.rms_spectrum(times, rms)
