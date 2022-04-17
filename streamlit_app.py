@@ -71,13 +71,12 @@ def beatinspect_main():
             st.audio(audiofile)  # display audio player UX
 
 
-            plt.rc('ytick', labelsize=12)
-            plt.rc('axes', labelsize=12)
+            plt.rc('ytick', labelsize=9)
+            plt.rc('axes', labelsize=9)
             plt.rcParams['figure.dpi'] = 400
 
             fig, ax1 = plt.subplots(1,1)
             fig.set_size_inches(8, 3, forward=True)
-            # fig.set_dpi(400)
             plt.ylabel('Amplitude')
             ax1.set_ylim([-1.1, 1.1])
 
