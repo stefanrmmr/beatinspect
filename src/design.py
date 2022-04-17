@@ -36,5 +36,5 @@ def design_setup():
         unsafe_allow_html=True)
     #st.markdown('''<style>.st-db {height: 8px; width: 8px;}</style>''',
     #    unsafe_allow_html=True)
-    #st.markdown('''<style>.st-da {height: 8px; width: 8px;}</style>''',
-    #    unsafe_allow_html=True)
+    st.markdown('''<style>.st-da {height: 8px; width: 8px;}</style>''',
+        unsafe_allow_html=True)
