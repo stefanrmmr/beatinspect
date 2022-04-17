@@ -12,7 +12,6 @@ def rms_spectrum(times, rms):
     plt.rcParams['figure.dpi'] = 400
     plt.rcParams['text.color'] = 'white'
 
-    # create 2x subplots for overview RMS
     fig, ax2 = plt.subplots(1)
     fig.patch.set_facecolor('black')
     fig.patch.set_alpha(0.0)
@@ -29,8 +28,9 @@ def rms_spectrum(times, rms):
     ax2.patch.set_facecolor('black')
     ax2.patch.set_alpha(0.0)
     ax2.set_ylabel('RMS Energy [log]')
+    ax2.set_xlabel('Time [sec]')
     ax2.xaxis.set_ticks_position('top') # the rest is the same
-    ax2.get_xaxis().set_visible(False)
+    # ax2.get_xaxis().set_visible(False)
     ax2.set_ylim(bottom=0.0001)                 # setting lower bounds for y axis
     ax2.xaxis.label.set_color('white')        #setting up X-axis label color to yellow
     ax2.yaxis.label.set_color('white')          #setting up Y-axis label color to blue
@@ -69,7 +69,7 @@ def amp_spectrum(y, sr):
     ax1.axhline(y=-1.0, color='#e3fc03', linestyle='--', lw=0.75)
 
     # AX1 wavshow overview spectrogram
-    librosa.display.waveshow(y, sr, ax=ax1, color='grey', x_axis='time', label='Time [min]')
+    librosa.display.waveshow(y, sr, ax=ax1, color='lightgrey', x_axis='time', label='Time [min]')
 
     ax1.patch.set_facecolor('black')
     ax1.patch.set_alpha(0.0)
