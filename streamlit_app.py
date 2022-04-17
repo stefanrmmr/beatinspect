@@ -87,7 +87,7 @@ def beatinspect_main():
             # plt.rcParams['figure.dpi'] = 400
 
             fig, (ax1, ax2) = plt.subplots(2)
-            fig.set_size_inches(8, 10, forward=True)
+            #fig.set_size_inches(8, 10, forward=True)
             ax1.set_ylabel('Amplitude')
             ax1.set_ylim([-1.1, 1.1])
 
@@ -98,8 +98,8 @@ def beatinspect_main():
             ax1.axhline(y=1.0, color='#e3fc03', linestyle='--', lw=0.75)
             ax1.axhline(y=-1.0, color='#e3fc03', linestyle='--', lw=0.75)
 
-            fig.patch.set_facecolor('black')
-            fig.patch.set_alpha(0.0)
+            #fig.patch.set_facecolor('black')
+            #fig.patch.set_alpha(0.0)
             ax1.patch.set_facecolor('black')
             ax1.patch.set_alpha(0.0)
 
@@ -119,11 +119,11 @@ def beatinspect_main():
 
 
 
-            librosa.display.waveshow(y, sr, ax=ax1, color='grey', x_axis='time')
+            #librosa.display.waveshow(y, sr, ax=ax1, color='grey', x_axis='time')
 
             # img2 = librosa.display.specshow(scale_db, ax=ax2, x_axis='time', y_axis='linear')
-            img2 = librosa.display.specshow(scale_db, ax=ax2, sr=sr, x_axis='time', y_axis='linear')
-            # fig.colorbar(img2, ax=ax2, format="%+2.f dB")
+            img2 = librosa.display.specshow(scale_db, ax=ax1, sr=sr, x_axis='time', y_axis='linear')
+            fig.colorbar(img2, ax=ax1, format="%+2.f dB")
 
             # plt.xlabel('')
             st.pyplot(fig)
