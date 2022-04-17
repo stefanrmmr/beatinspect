@@ -1,4 +1,5 @@
 # PLOTTING FRAMEWORK
+import streamlit as st
 import librosa.display
 import matplotlib.pyplot as plt
 
