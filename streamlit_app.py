@@ -85,7 +85,7 @@ def beatinspect_main():
             # Generate graphs/plots for RMS & Amplitude over time
             st.audio(audiofile)  # display audio player UX
             sradio_col1, sradio_col2 = st.columns([0.03, 1.5])
-            spectrum_coice = 'AMP'
+            spectrum_coice = st.session_state.spectrum
             if 'AMP' in spectrum_coice:
                 with st.spinner('generating RMS spectrum plot'):
                     # generate amp spectrum plots
@@ -97,7 +97,8 @@ def beatinspect_main():
                     # plots.amprms_spectrum(y, sr, times, rms)
                     plots.rms_spectrum(times, rms)
             with sradio_col2:
-                spectrum_coice = st.radio('', ['AMP Spectrum', 'RMS Spectrum'])
+                st.session_state.spectrum = st.radio('', ['AMP Spectrum', 'RMS Spectrum'])
+                
 
 
             # img2 = librosa.display.specshow(scale_db, ax=ax2, sr=sr, x_axis='time', y_axis='log')
@@ -190,5 +191,10 @@ def beatinspect_main():
         # st.image('resources/coop_utility_studio.png')
 
 if __name__ == '__main__':
+
+    # initialize page session state
+    if "spectrum" not in st.session_state:
+        st.session_state.spectrum = 'AMP Spectrum'
+
     # call main function
     beatinspect_main()
