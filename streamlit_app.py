@@ -72,7 +72,6 @@ def beatinspect_main():
                          expanded=True):
 
             pref_col0, pref_col1, pref_col2, pref_col3 = st.columns([0.2, 1, 1, 1])
-
             # extract tech Specifications about wav file
             sampling_freq, channels = wav_specs.read_wav(audiofile)
 
@@ -177,7 +176,7 @@ def beatinspect_main():
             # Step 2 Use the timeframe to calculate the Spectrogram (AMP(frequency))
             # Step 3 Plot Spectrogram plot with yellow vertical bars at frequencies where AMP too high!
 
-def display_footer():
+
     # FOOTER Content and Coop logos etc
     foot_col1, foot_col2, foot_col3, foot_col4, foot_col5 = st.columns([2,1.5,1.5,1.5,2])
     with foot_col2:
@@ -204,4 +203,3 @@ if __name__ == '__main__':
 
     # call main function
     beatinspect_main()
-    display_footer()
