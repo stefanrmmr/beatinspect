@@ -83,7 +83,7 @@ def beatinspect_main():
                     # call utility function that calculates key,scale using essentia
                     # https://essentia.upf.edu/reference/streaming_Key.html
                     key, scale, key_strength = detect_keyscale.detect_ks(
-                        audiofile.name, 'diatonic')
+                        audiofile.name, 'shaath')
 
                 st.metric(label="", value=f"{key}-{scale}",
                           delta=f"Confidence {round(key_strength, 2)}",
