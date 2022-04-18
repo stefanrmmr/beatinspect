@@ -32,7 +32,7 @@ def beatinspect_main():
         st.markdown('Version 1.3.1 - April 2022 - Github [@stefanrmmr](https://github.com/stefanrmmr/beatinspect)')
     with header_col3:
         st.write('')  # add spacing
-        st.image("resources/rs_logo_transparent_yellow.png")
+        st.image("img/rs_logo_transparent_yellow.png")
 
     # AUDIO SOURCE File Upload Selection
     with st.expander("SECTION - Select prefered Audio Input Option",
@@ -180,20 +180,20 @@ def beatinspect_main():
     # FOOTER Content and Coop logos etc
     foot_col1, foot_col2, foot_col3, foot_col4, foot_col5 = st.columns([2,1.5,1.5,1.5,2])
     with foot_col2:
-        essentia_html = utils.get_img_with_href('resources/powered_by_essentia.png',
+        essentia_html = utils.get_img_with_href('img/powered_by_essentia.png',
                                                 'https://essentia.upf.edu/')
         st.markdown(essentia_html, unsafe_allow_html=True)
-        # st.image('resources/powered_by_essentia.png')
+        # st.image('img/powered_by_essentia.png')
     with foot_col3:
-        ustu_html = utils.get_img_with_href('resources/coop_utility_studio.png',
+        ustu_html = utils.get_img_with_href('img/coop_utility_studio.png',
                                             'https://utility-studio.com/')
         st.markdown(ustu_html, unsafe_allow_html=True)
-        # st.image('resources/coop_utility_studio.png')
+        # st.image('img/coop_utility_studio.png')
     with foot_col4:
-        librosa_html = utils.get_img_with_href('resources/powered_by_librosa.png',
+        librosa_html = utils.get_img_with_href('img/powered_by_librosa.png',
                                             'https://librosa.org/')
         st.markdown(librosa_html, unsafe_allow_html=True)
-        # st.image('resources/coop_utility_studio.png')
+        # st.image('img/coop_utility_studio.png')
 
 if __name__ == '__main__':
 
