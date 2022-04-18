@@ -42,8 +42,6 @@ def design_setup():
     st.markdown('''<style>.stAudio {height: 40px;}</style>''',
         unsafe_allow_html=True)
 
-def radiobutton_horizontal():
-
     # Design change radio button inner point to be dark grey via custom css
     st.markdown('''<style>.st-d9 {background-color: black;}</style>''',
         unsafe_allow_html=True)
@@ -57,6 +55,7 @@ def radiobutton_horizontal():
     st.markdown('''<style>.css-16huue1 {min-height: 0rem;}</style>''',
         unsafe_allow_html=True)
 
+def radiobutton_horizontal():
     # Design change radio button layout to be horizontally aligned
     st.markdown('<style>div.row-widget.stRadio > div{flex-direction:row;} </style>',
              unsafe_allow_html=True)
