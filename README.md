@@ -18,4 +18,4 @@ To insure that the implemented functionality provides real value to aspiring art
   - Meta information encoded in the output file
   - Conversion to .wav file with predefined settings<br/>(provided by using convertio.co's API features)<br/><br/>
 
-<img width="1036" alt="ux_screenshot" src="https://user-images.githubusercontent.com/82606558/163571878-aca8b2a8-ca24-4992-be74-71452bb8fa61.png">
+<img width="658" alt="ux_screenshot" src="https://user-images.githubusercontent.com/82606558/163827628-f27058de-5d44-4002-a12d-a3c041720231.png">
