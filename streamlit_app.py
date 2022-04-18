@@ -37,27 +37,14 @@ def beatinspect_main():
     # AUDIO SOURCE File Upload Selection
     with st.expander("SECTION - Select prefered Audio Input Option",
                      expanded=True):
-
-        audio_col0, audio_col1, audio_col2 = st.columns([0.03,0.5,1])
-        with audio_col1:
-            choice = st.radio('',[' Audio File Upload',
-                                  ' Record via Microphone'])
-            st.write('')  # add spacing
-
-        with audio_col2:
-            if 'Upload' in choice:
-                audiofile = st.file_uploader("", type='wav')
-            elif 'Record' in choice:
-                audiofile = None
-                st.write('')  # ad spacing
-                st.write('SOON to be implemented!')
-                # https://www.youtube.com/watch?v=BuD3gILJW-Q&ab_channel=Streamlit
-                # USE streamlit custom component that implements a custom html/css/react element
-                # input data can be passed to this component and it returns data
-                # TODO build a component that uses the html/script code of above (for demo webapp rec tool)
-                # the component should show up in case the radio button record mic is selected
-                # the component should return a path to a audiofile
-                # clean existing audio files bevore saving the new audio file! (tmp dictonary)
+        audiofile = st.file_uploader("", type='wav')
+        # https://www.youtube.com/watch?v=BuD3gILJW-Q&ab_channel=Streamlit
+        # USE streamlit custom component that implements a custom html/css/react element
+        # input data can be passed to this component and it returns data
+        # TODO build a component that uses the html/script code of above (for demo webapp rec tool)
+        # the component should show up in case the radio button record mic is selected
+        # the component should return a path to a audiofile
+        # clean existing audio files bevore saving the new audio file! (tmp dictonary)
 
     # ANALYTICS for Audio File
     if audiofile is not None:
@@ -143,7 +130,7 @@ def beatinspect_main():
                     plots.amp_spectrum(y,sr)
 
             # radio button selection for spectrum plot over time
-            design.radiobutton_horizontal()  # switch alignment 
+            design.radiobutton_horizontal()  # switch alignment
             sradio_col1, sradio_col2 = st.columns([0.03, 1.5])
             with sradio_col2:
                 st.session_state.spectrum = st.radio('Please select your spectrum of choice',
