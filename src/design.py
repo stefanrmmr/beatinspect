@@ -59,5 +59,5 @@ def radiobutton_horizontal():
     # Design change radio button layout to be horizontally aligned
     st.markdown('<style>div.row-widget.stRadio > div{flex-direction:row;} </style>',
              unsafe_allow_html=True)
-    st.markdown('<style>div.row-widget.stRadio {margin-top: -4rem;} </style>',
+    st.markdown('<style>div.row-widget.stRadio {margin-top: -3rem;} </style>',
              unsafe_allow_html=True)
