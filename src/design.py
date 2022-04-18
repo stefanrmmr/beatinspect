@@ -32,7 +32,7 @@ def design_setup():
         unsafe_allow_html=True)
 
     # Design change hyperlink href link color
-    st.markdown('''<style>.css-v37k9u {color: #e3fc03;}</style>''',
+    st.markdown('''<style>.css-v37k9u a {color: #e3fc03;}</style>''',
         unsafe_allow_html=True)
 
     # Design change stMetricsValue to primary color via specific css-element
