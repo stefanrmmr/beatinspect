@@ -43,7 +43,6 @@ def beatinspect_main():
             choice = st.radio('',[' Audio File Upload',
                                   ' Record via Microphone'])
             st.write('')  # add spacing
-
         with audio_col2:
             if 'Upload' in choice:
                 audiofile = st.file_uploader("", type='wav')
@@ -58,6 +57,9 @@ def beatinspect_main():
                 # the component should show up in case the radio button record mic is selected
                 # the component should return a path to a audiofile
                 # clean existing audio files bevore saving the new audio file! (tmp dictonary)
+
+        if audiofile is not None:
+            st.audio(audiofile)  # display audio player UX
 
     # ANALYTICS for Audio File
     if audiofile is not None:
@@ -119,9 +121,6 @@ def beatinspect_main():
         with st.expander("SECTION - Waveform and Spectrogram Insights",
                          expanded=False):
 
-            # Generate graphs/plots for RMS & Amplitude over time
-            st.audio(audiofile)  # display audio player UX
-
             # calculate the necessray data for further plotting
             with st.spinner('calculating spectrogram insights'):
                 # calc spectrum data for plotting framework
@@ -142,6 +141,9 @@ def beatinspect_main():
             else:  # generate amp spectrum plots
                 with st.spinner('generating AMP spectrum plot'):
                     plots.amp_spectrum(y,sr)
+
+            # Generate graphs/plots for RMS & Amplitude over time
+            st.audio(audiofile)  # display audio player UX
 
             # radio button selection for spectrum plot over time
             st.write('<style>div.row-widget.stRadio > div{flex-direction:row;} </style>',
@@ -176,7 +178,6 @@ def beatinspect_main():
             # Step 1 Select slider timeframe from overall plotted audio file (AMP oder time)
             # Step 2 Use the timeframe to calculate the Spectrogram (AMP(frequency))
             # Step 3 Plot Spectrogram plot with yellow vertical bars at frequencies where AMP too high!
-
 
 
     # FOOTER Content and Coop logos etc
