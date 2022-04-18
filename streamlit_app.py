@@ -29,7 +29,7 @@ def beatinspect_main():
     header_col1, header_col2, header_col3 = st.columns([10, 2.5, 2.5])
     with header_col1:
         st.title('beat inspect ™')
-        st.write('Version 1.2.0 - April 2022 - Github @stefanrmmr')
+        st.markdown('Version 1.2.0 - April 2022 - Github [@stefanrmmr](www.google.com)')
     with header_col3:
         st.write('')  # add spacing
         st.image("resources/rs_logo_transparent_yellow.png")
