@@ -143,6 +143,7 @@ def beatinspect_main():
                     plots.amp_spectrum(y,sr)
 
             # radio button selection for spectrum plot over time
+            design.radiobutton_horizontal()  # switch alignment 
             sradio_col1, sradio_col2 = st.columns([0.03, 1.5])
             with sradio_col2:
                 st.session_state.spectrum = st.radio('Please select your spectrum of choice',
