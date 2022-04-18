@@ -67,6 +67,50 @@ def beatinspect_main():
             f.write(audiofile.getbuffer())
         filename = os.path.join(os.getcwd(), audiofile.name)
 
+        # Musical and Tech Specs Overview
+        with st.expander("SECTION - Musical & Technical Specifications",
+                         expanded=True):
+
+            pref_col0, pref_col1, pref_col2, pref_col3 = st.columns([0.2, 1, 1, 1])
+
+            with pref_col1:  # output: column for music scale evaluation
+                with st.spinner('Finding Key & Scale'):
+                    time.sleep(0.5)
+                    # call utility function that calculates key,scale using essentia
+                    # https://essentia.upf.edu/reference/streaming_Key.html
+                    key, scale, key_strength = detect_keyscale.detect_ks(
+                        audiofile.name, 'diatonic')
+
+                st.metric(label="", value=f"{key}-{scale}",
+                          delta=f"Confidence {round(key_strength, 2)}",
+                          delta_color="off")
+                st.write('')  # add spacing
+
+            with pref_col2:  # metrics: generating insights on tech specs
+                with st.spinner('Fetching Tech Specs'):
+                    time.sleep(0.5)
+                    # assign audio channel description
+                    if int(channels) == 1:  # single channel .wav
+                        channels = 'MONO'
+                    elif int(channels) == 2:  # double channel .wav
+                        channels = 'STEREO'
+                    else:  # multi channel .wav
+                        channels = str(channels) + ' Channel'
+                st.metric(label="", value=f"{sampling_freq} Hz",
+                          delta=f'WAV - {channels}', delta_color="off")
+                st.write('')  # add spacing
+
+            with pref_col3:  # metrics: calculcation of tempo
+                with st.spinner('Calculating BPM'):
+                    time.sleep(0.5)
+                    # BPM estimation using essentia library
+                    es_audio = es.MonoLoader(filename=audiofile.name)()
+                    rhythm_extractor = es.RhythmExtractor2013(method="multifeature")
+                    bpm_essentia, _, _, _, _ = rhythm_extractor(es_audio)
+                st.metric(label="", value=f"{round(bpm_essentia, 1)} BPM",
+                          delta=f'Beat Tempo', delta_color="off")
+                st.write('')  # add spacing
+
 
         # Inspect Audio File Specifications
         with st.expander("SECTION - Waveform and Spectrogram Insights",
@@ -133,49 +177,7 @@ def beatinspect_main():
             # Step 2 Use the timeframe to calculate the Spectrogram (AMP(frequency))
             # Step 3 Plot Spectrogram plot with yellow vertical bars at frequencies where AMP too high!
 
-        # Musical and Tech Specs Overview
-        with st.expander("SECTION - Musical & Technical Specifications",
-                         expanded=True):
 
-            pref_col0, pref_col1, pref_col2, pref_col3 = st.columns([0.2, 1, 1, 1])
-
-            with pref_col1:  # output: column for music scale evaluation
-                with st.spinner('Finding Key & Scale'):
-                    time.sleep(0.5)
-                    # call utility function that calculates key,scale using essentia
-                    # https://essentia.upf.edu/reference/streaming_Key.html
-                    key, scale, key_strength = detect_keyscale.detect_ks(
-                        audiofile.name, 'diatonic')
-
-                st.metric(label="", value=f"{key}-{scale}",
-                          delta=f"Confidence {round(key_strength, 2)}",
-                          delta_color="off")
-                st.write('')  # add spacing
-
-            with pref_col2:  # metrics: generating insights on tech specs
-                with st.spinner('Fetching Tech Specs'):
-                    time.sleep(0.5)
-                    # assign audio channel description
-                    if int(channels) == 1:  # single channel .wav
-                        channels = 'MONO'
-                    elif int(channels) == 2:  # double channel .wav
-                        channels = 'STEREO'
-                    else:  # multi channel .wav
-                        channels = str(channels) + ' Channel'
-                st.metric(label="", value=f"{sampling_freq} Hz",
-                          delta=f'WAV - {channels}', delta_color="off")
-                st.write('')  # add spacing
-
-            with pref_col3:  # metrics: calculcation of tempo
-                with st.spinner('Calculating BPM'):
-                    time.sleep(0.5)
-                    # BPM estimation using essentia library
-                    es_audio = es.MonoLoader(filename=audiofile.name)()
-                    rhythm_extractor = es.RhythmExtractor2013(method="multifeature")
-                    bpm_essentia, _, _, _, _ = rhythm_extractor(es_audio)
-                st.metric(label="", value=f"{round(bpm_essentia, 1)} BPM",
-                          delta=f'Beat Tempo', delta_color="off")
-                st.write('')  # add spacing
 
     # FOOTER Content and Coop logos etc
     foot_col1, foot_col2, foot_col3, foot_col4, foot_col5 = st.columns([2,1.5,1.5,1.5,2])
