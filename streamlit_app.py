@@ -29,6 +29,7 @@ def beatinspect_main():
     header_col1, header_col2, header_col3 = st.columns([10, 2.5, 2.5])
     with header_col1:
         st.title('beat inspect ™')
+        st.write('Version 1.2.0 - April 2022 - Github @stefanrmmr')
     with header_col3:
         st.write('')  # add spacing
         st.image("resources/rs_logo_transparent_yellow.png")
@@ -177,7 +178,6 @@ def beatinspect_main():
 
 
     # FOOTER Content and Coop logos etc
-    st.write('Version 1.2.0 - April 2022 - Github @stefanrmmr')
     foot_col1, foot_col2, foot_col3, foot_col4, foot_col5 = st.columns([2,1.5,1.5,1.5,2])
     with foot_col2:
         essentia_html = utils.get_img_with_href('resources/powered_by_essentia.png',
