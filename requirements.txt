@@ -8,3 +8,5 @@ essentia
 SoundFile
 sounddevice
 wavio
+pydub
+ffmpeg
