@@ -8,6 +8,10 @@ def design_setup():
                        page_icon="resources/rs_logo_transparent_yellow.png",
                        page_title="beat inspect")
 
+    # Design move app further up and remove top padding
+    st.markdown('''<style>.css-1egvi7u {margin-top: -8rem;}</style>''',
+        unsafe_allow_html=True)
+
     # Design hide top header line
     hide_decoration_bar_style = '''<style>header {visibility: hidden;}</style>'''
     st.markdown(hide_decoration_bar_style, unsafe_allow_html=True)
@@ -44,6 +48,6 @@ def design_setup():
     # Design change radio button padding for horizontal alignment
     st.markdown('''<style>.st-de {padding-left: 8px; padding-right: 8px;}</style>''',
         unsafe_allow_html=True)
-    # Design change radio button title div size to zero height 
+    # Design change radio button title div size to zero height
     st.markdown('''<style>.css-16huue1 {min-height: 0rem;}</style>''',
         unsafe_allow_html=True)
