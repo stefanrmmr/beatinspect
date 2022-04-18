@@ -73,6 +73,9 @@ def beatinspect_main():
 
             pref_col0, pref_col1, pref_col2, pref_col3 = st.columns([0.2, 1, 1, 1])
 
+            # extract tech Specifications about wav file
+            sampling_freq, channels = wav_specs.read_wav(audiofile)
+
             with pref_col1:  # output: column for music scale evaluation
                 with st.spinner('Finding Key & Scale'):
                     time.sleep(0.5)
@@ -121,9 +124,6 @@ def beatinspect_main():
 
             # calculate the necessray data for further plotting
             with st.spinner('calculating spectrogram insights'):
-                # extract tech Specifications about wav file
-                sampling_freq, channels = wav_specs.read_wav(audiofile)
-
                 # calc spectrum data for plotting framework
                 y,sr = librosa.load(filename, sr=sampling_freq)
                 y_stft = librosa.stft(y)  # STFT of y
