@@ -31,6 +31,10 @@ def design_setup():
     st.markdown('''<style>.stSpinner > div > div {border-top-color: #e3fc03;}</style>''',
         unsafe_allow_html=True)
 
+    # Design change hyperlink href link color
+    st.markdown('''<style>.css-v37k9u.a {color: #e3fc03;}</style>''',
+        unsafe_allow_html=True)
+
     # Design change stMetricsValue to primary color via specific css-element
     st.markdown('''<style>.css-1xarl3l.e16fv1kl1 {color: #e3fc03;}</style>''',
         unsafe_allow_html=True)
