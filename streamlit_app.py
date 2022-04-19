@@ -61,6 +61,16 @@ def beatinspect_main():
                 # the component should return a path to a audiofile
                 # clean existing audio files bevore saving the new audio file! (tmp dictonary)
 
+
+    # wenn audio file nicht changed dann bleiben alle bpm etc konstant
+    # wenn button für file upload geclickt wird dann werden alle session states reseted
+    # wenn etwas wie bpm berechnet werden soll dann zuerst check ob der audio file session state verändert ist
+    #   wenn verändert --> calc new stMetricsValue
+    #   wennn nicht verändert --> load value from session state
+    # wenn session state für eine bpm value noch nicht existiert dann mit wert initialisieren
+
+    # alle values initialisieren --> audio upload
+
     # ANALYTICS for Audio File
     if audiofile is not None:
 
@@ -73,13 +83,13 @@ def beatinspect_main():
         with st.expander("SECTION - Musical & Technical Specifications",
                          expanded=True):
 
-            pref_col0, pref_col1, pref_col2, pref_col3 = st.columns([0.2, 1, 1, 1])
             # extract tech Specifications about wav file
             sampling_freq, channels = wav_specs.read_wav(audiofile)
 
+            pref_col0, pref_col1, pref_col2, pref_col3 = st.columns([0.2, 1, 1, 1])
             with pref_col1:  # output: column for music scale evaluation
                 with st.spinner('Finding Key & Scale'):
-                    time.sleep(0.5)
+                    time.sleep(0.1)
                     # call utility function that calculates key,scale using essentia
                     # https://essentia.upf.edu/reference/streaming_Key.html
                     key, scale, key_strength = detect_keyscale.detect_ks(
@@ -92,7 +102,7 @@ def beatinspect_main():
 
             with pref_col2:  # metrics: generating insights on tech specs
                 with st.spinner('Fetching Tech Specs'):
-                    time.sleep(0.5)
+                    time.sleep(0.1)
                     # assign audio channel description
                     if int(channels) == 1:  # single channel .wav
                         channels = 'MONO'
@@ -106,7 +116,7 @@ def beatinspect_main():
 
             with pref_col3:  # metrics: calculcation of tempo
                 with st.spinner('Calculating BPM'):
-                    time.sleep(0.5)
+                    time.sleep(0.1)
                     # BPM estimation using essentia library
                     es_audio = es.MonoLoader(filename=audiofile.name)()
                     rhythm_extractor = es.RhythmExtractor2013(method="multifeature")
@@ -159,13 +169,8 @@ def beatinspect_main():
             # nur wenn kleiner gleich 20 sec wird das zweite bild generiert
             # das mel spektrum gibt es nur für bestimmte abschnitte nicht ganzer track!
 
-            # + RMS function for the whole track plot
-
-            # also oben rms + Overview figure mit 2x ax subplots
             # darunter custom select max 20 sec spectrum viewer !
-
             # INTERACTVE 3D spectrogram (turn and zoom in) for the selected timeframe
-
             # https://librosa.org/doc/0.9.1/generated/librosa.feature.rms.html
 
 
