@@ -88,30 +88,23 @@ def beatinspect_main():
             # extract tech Specifications about wav file
             sampling_freq, channels = wav_specs.read_wav(audiofile)
 
-            # audio datei name in session state abspeichern
-            # wenn die hochgeladene audiodatei.name anders ist als die im session state
-            #    dann wird alles neu berechnet un die ergebnisse in session states abgespeichert
-            # wenn die hochgeladene audiodatei.name GLEICH ist als die im session state
-            #   dann alles aus session states laden anstatt zu berechnen
-
             pref_col0, pref_col1, pref_col2, pref_col3 = st.columns([0.2, 1, 1, 1])
 
             with pref_col1:  # metrics : column for music scale evaluation
-                with st.spinner('Finding Key & Scale'):
-                    time.sleep(0.3)  # buffer for loading the spinner
-                    # utility funct that calculates key & scale via essentia
-                    # https://essentia.upf.edu/reference/streaming_Key.html
-
-                    if new_audiofile:  # new audiofile --> update session sates
+                if new_audiofile:  # new audiofile --> update session sates
+                    with st.spinner('Finding Key & Scale'):
+                        time.sleep(0.3)  # buffer for loading the spinner
+                        # utility funct that calculates key & scale via essentia
+                        # https://essentia.upf.edu/reference/streaming_Key.html
                         key, scale, key_strength = detect_keyscale.detect_ks(
                             audiofile.name, 'diatonic')
                         st.session_state.key = key
                         st.session_state.scale = scale
                         st.session_state.key_strength = key_strength
-                    else:  # same audiofile --> load from session_state
-                        key = st.session_state.key
-                        scale = st.session_state.scale
-                        key_strength = st.session_state.key_strength
+                else:  # same audiofile --> load from session_state
+                    key = st.session_state.key
+                    scale = st.session_state.scale
+                    key_strength = st.session_state.key_strength
 
                 st.metric(label="", value=f"{key}-{scale}",
                           delta=f"Confidence {round(key_strength, 2)}",
@@ -119,33 +112,28 @@ def beatinspect_main():
                 st.write('')  # add spacing
 
             with pref_col2:  # metrics: generating insights on tech specs
-                with st.spinner('Fetching Tech Specs'):
-                    time.sleep(0.3)  # buffer for loading the spinner
-
-                    # assign audio channel description
-                    if int(channels) == 1:  # single channel .wav
-                        channels = 'MONO'
-                    elif int(channels) == 2:  # double channel .wav
-                        channels = 'STEREO'
-                    else:  # multi channel .wav
-                        channels = str(channels) + ' Channel'
+                if int(channels) == 1:  # single channel .wav
+                    channels = 'MONO'
+                elif int(channels) == 2:  # double channel .wav
+                    channels = 'STEREO'
+                else:  # multi channel .wav
+                    channels = str(channels) + ' Channel'
 
                 st.metric(label="", value=f"{sampling_freq} Hz",
                           delta=f'WAV - {channels}', delta_color="off")
                 st.write('')  # add spacing
 
             with pref_col3:  # metrics: calculcation of tempo
-                with st.spinner('Calculating BPM'):
-                    time.sleep(0.3)  # buffer for loading the spinner
-                    # BPM estimation using essentia library
-
-                    if new_audiofile:  # new audiofile --> update session sates
+                if new_audiofile:  # new audiofile --> update session sates
+                    with st.spinner('Calculating BPM'):
+                        time.sleep(0.3)  # buffer for loading the spinner
+                        # BPM estimation using essentia library
                         es_audio = es.MonoLoader(filename=audiofile.name)()
                         rhythm_extractor = es.RhythmExtractor2013(method="multifeature")
                         bpm_essentia, _, _, _, _ = rhythm_extractor(es_audio)
                         st.session_state.bpm_essentia = bpm_essentia
-                    else:  # same audiofile --> load from session_state
-                        bpm_essentia = st.session_state.bpm_essentia
+                else:  # same audiofile --> load from session_state
+                    bpm_essentia = st.session_state.bpm_essentia
 
                 st.metric(label="", value=f"{round(bpm_essentia, 1)} BPM",
                           delta=f'Beat Tempo', delta_color="off")
