@@ -85,8 +85,14 @@ def beatinspect_main():
         with st.expander("SECTION - Musical & Technical Specifications",
                          expanded=True):
 
-            # extract tech Specifications about wav file
-            sampling_freq, channels = wav_specs.read_wav(audiofile)
+            if new_audiofile:  # new audiofile --> update session sates
+                # extract tech Specifications about wav file
+                sampling_freq, channels = wav_specs.read_wav(audiofile)
+                st.session_state.sampling_freq = sampling_freq
+                st.session_state.channels = channels
+            else:  # same audiofile --> load from session_state
+                sampling_freq = st.session_state.sampling_freq
+                channels = st.session_state.channels
 
             pref_col0, pref_col1, pref_col2, pref_col3 = st.columns([0.2, 1, 1, 1])
 
