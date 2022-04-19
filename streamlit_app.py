@@ -61,16 +61,6 @@ def beatinspect_main():
                 # the component should return a path to a audiofile
                 # clean existing audio files bevore saving the new audio file! (tmp dictonary)
 
-
-    # wenn audio file nicht changed dann bleiben alle bpm etc konstant
-    # wenn button für file upload geclickt wird dann werden alle session states reseted
-    # wenn etwas wie bpm berechnet werden soll dann zuerst check ob der audio file session state verändert ist
-    #   wenn verändert --> calc new stMetricsValue
-    #   wennn nicht verändert --> load value from session state
-    # wenn session state für eine bpm value noch nicht existiert dann mit wert initialisieren
-
-    # alle values initialisieren --> audio upload
-
     # ANALYTICS for Audio File
     if audiofile is not None:
 
@@ -79,6 +69,13 @@ def beatinspect_main():
             f.write(audiofile.getbuffer())
         filename = os.path.join(os.getcwd(), audiofile.name)
 
+        # evaluate whether the input audiofile has changed
+        new_audiofile = False
+        if audiofile.name != st.session_state.audiofile_name:
+            # update session state and order new calc of attr
+            st.session_state.audiofile_name = audiofile.name
+            new_audiofile = True
+
         # Musical and Tech Specs Overview
         with st.expander("SECTION - Musical & Technical Specifications",
                          expanded=True):
@@ -86,14 +83,30 @@ def beatinspect_main():
             # extract tech Specifications about wav file
             sampling_freq, channels = wav_specs.read_wav(audiofile)
 
+            # audio datei name in session state abspeichern
+            # wenn die hochgeladene audiodatei.name anders ist als die im session state
+            #    dann wird alles neu berechnet un die ergebnisse in session states abgespeichert
+            # wenn die hochgeladene audiodatei.name GLEICH ist als die im session state
+            #   dann alles aus session states laden anstatt zu berechnen
+
             pref_col0, pref_col1, pref_col2, pref_col3 = st.columns([0.2, 1, 1, 1])
-            with pref_col1:  # output: column for music scale evaluation
+
+            with pref_col1:  # metrics : column for music scale evaluation
                 with st.spinner('Finding Key & Scale'):
-                    time.sleep(0.1)
-                    # call utility function that calculates key,scale using essentia
+                    time.sleep(0.5)  # buffer for loading the spinner
+                    # utility funct that calculates key & scale via essentia
                     # https://essentia.upf.edu/reference/streaming_Key.html
-                    key, scale, key_strength = detect_keyscale.detect_ks(
-                        audiofile.name, 'diatonic')
+
+                    if new_audiofile:  # new audiofile --> update session sates
+                        key, scale, key_strength = detect_keyscale.detect_ks(
+                            audiofile.name, 'diatonic')
+                        st.session_state.key = key
+                        st.session_state.scale = scale
+                        st.session_state.key_strength = key_strength
+                    else:  # same audiofile --> load from session_state
+                        key = st.session_state.key
+                        scale = st.session_state.scale
+                        key_strength = st.session_state.key_strength
 
                 st.metric(label="", value=f"{key}-{scale}",
                           delta=f"Confidence {round(key_strength, 2)}",
@@ -102,7 +115,8 @@ def beatinspect_main():
 
             with pref_col2:  # metrics: generating insights on tech specs
                 with st.spinner('Fetching Tech Specs'):
-                    time.sleep(0.1)
+                    time.sleep(0.5)  # buffer for loading the spinner
+
                     # assign audio channel description
                     if int(channels) == 1:  # single channel .wav
                         channels = 'MONO'
@@ -110,17 +124,24 @@ def beatinspect_main():
                         channels = 'STEREO'
                     else:  # multi channel .wav
                         channels = str(channels) + ' Channel'
+
                 st.metric(label="", value=f"{sampling_freq} Hz",
                           delta=f'WAV - {channels}', delta_color="off")
                 st.write('')  # add spacing
 
             with pref_col3:  # metrics: calculcation of tempo
                 with st.spinner('Calculating BPM'):
-                    time.sleep(0.1)
+                    time.sleep(0.5)  # buffer for loading the spinner
                     # BPM estimation using essentia library
-                    es_audio = es.MonoLoader(filename=audiofile.name)()
-                    rhythm_extractor = es.RhythmExtractor2013(method="multifeature")
-                    bpm_essentia, _, _, _, _ = rhythm_extractor(es_audio)
+
+                    if new_audiofile:  # new audiofile --> update session sates
+                        es_audio = es.MonoLoader(filename=audiofile.name)()
+                        rhythm_extractor = es.RhythmExtractor2013(method="multifeature")
+                        bpm_essentia, _, _, _, _ = rhythm_extractor(es_audio)
+                        st.session_state.bpm_essentia = bpm_essentia
+                    else:  # same audiofile --> load from session_state
+                        bpm_essentia = st.session_state.bpm_essentia
+
                 st.metric(label="", value=f"{round(bpm_essentia, 1)} BPM",
                           delta=f'Beat Tempo', delta_color="off")
                 st.write('')  # add spacing
@@ -205,6 +226,30 @@ if __name__ == '__main__':
     # initialize spectrum choice session state
     if "spectrum" not in st.session_state:
         st.session_state.spectrum = 'RMS Spectrum'
+
+    # initialize session state for audiofile.name
+    if "audiofile_name" not in st.session_state:
+        st.session_state.audiofile_name = None
+
+    # initialize session states for attributes
+    if "key" not in st.session_state:
+        st.session_state.key = None
+    if "scale" not in st.session_state:
+        st.session_state.scale = None
+    if "channels" not in st.session_state:
+        st.session_state.channels = None
+    if "bpm_essentia" not in st.session_state:
+        st.session_state.bpm_essentia = None
+    if "key_strength" not in st.session_state:
+        st.session_state.key_strength = None
+    if "sampling_freq" not in st.session_state:
+        st.session_state.sampling_freq = None
+
+    # initialize session states for plots
+    if "plot_spectrum_amp" not in st.session_state:
+        st.session_state.plot_spectrum_amp = None
+    if "plot_spectrum_rms" not in st.session_state:
+        st.session_state.plot_spectrum_rms = None
 
     # call main function
     beatinspect_main()

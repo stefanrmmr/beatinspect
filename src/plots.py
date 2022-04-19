@@ -50,10 +50,9 @@ def rms_spectrum(times, rms):
     ax2.spines['right'].set_visible(False)      # Hide the right and top spines
     # ax2.spines['bottom'].set_visible(False)     # Hide the right and bottom spines
 
-    # change ax2 xlabels to be half the value 
+    # change ax2 xlabels to be half the value
     yfmt = tkr.FuncFormatter(numfmt)
     # create your custom formatter function
-    # your existing code can be inserted here
     ax2.xaxis.set_major_formatter(yfmt)
 
     plt.tight_layout()
