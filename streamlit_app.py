@@ -1,4 +1,9 @@
 # beat_inspector by stefanrmmr (rs. analytics) - version April 2022
+
+# Version 1.1 add bpm detection, build page structure
+# Version 1.2 add music scale detection & design tweaks
+# Version 1.3 add amp & rms spectrum, session states
+
 import streamlit as st
 import streamlit.components.v1 as components
 
@@ -19,7 +24,6 @@ import src.design as design  # design choices
 import src.wav_specs as wav_specs
 import src.detect_keyscale as detect_keyscale
 
-
 def beatinspect_main():
 
     # DESIGN implement changes to the standard streamlit UI/UX
@@ -29,7 +33,7 @@ def beatinspect_main():
     header_col1, header_col2, header_col3 = st.columns([10, 2.5, 2.5])
     with header_col1:
         st.title('beat inspect ™')
-        st.markdown('Version 1.3.1 - April 2022 - Github'
+        st.markdown('Version 1.3.2 - April 2022 - Github '
             '[@stefanrmmr](https://github.com/stefanrmmr/beatinspect)')
     with header_col3:
         st.write('')  # add spacing
