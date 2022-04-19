@@ -96,7 +96,19 @@ def beatinspect_main():
 
             pref_col0, pref_col1, pref_col2, pref_col3 = st.columns([0.2, 1, 1, 1])
 
-            with pref_col1:  # metrics : column for music scale evaluation
+            with pref_col1:  # metrics: generating insights on tech specs
+                if int(channels) == 1:  # single channel .wav
+                    channels = 'MONO'
+                elif int(channels) == 2:  # double channel .wav
+                    channels = 'STEREO'
+                else:  # multi channel .wav
+                    channels = str(channels) + ' Channel'
+
+                st.metric(label="", value=f"{sampling_freq} Hz",
+                          delta=f'WAV - {channels}', delta_color="off")
+                st.write('')  # add spacing
+
+            with pref_col2:  # metrics : column for music scale evaluation
                 if new_audiofile:  # new audiofile --> update session sates
                     with st.spinner('Finding Key & Scale'):
                         time.sleep(0.3)  # buffer for loading the spinner
@@ -115,18 +127,6 @@ def beatinspect_main():
                 st.metric(label="", value=f"{key}-{scale}",
                           delta=f"Confidence {round(key_strength, 2)}",
                           delta_color="off")
-                st.write('')  # add spacing
-
-            with pref_col2:  # metrics: generating insights on tech specs
-                if int(channels) == 1:  # single channel .wav
-                    channels = 'MONO'
-                elif int(channels) == 2:  # double channel .wav
-                    channels = 'STEREO'
-                else:  # multi channel .wav
-                    channels = str(channels) + ' Channel'
-
-                st.metric(label="", value=f"{sampling_freq} Hz",
-                          delta=f'WAV - {channels}', delta_color="off")
                 st.write('')  # add spacing
 
             with pref_col3:  # metrics: calculcation of tempo
