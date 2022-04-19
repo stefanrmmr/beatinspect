@@ -93,7 +93,7 @@ def beatinspect_main():
 
             with pref_col1:  # metrics : column for music scale evaluation
                 with st.spinner('Finding Key & Scale'):
-                    time.sleep(0.5)  # buffer for loading the spinner
+                    time.sleep(0.3)  # buffer for loading the spinner
                     # utility funct that calculates key & scale via essentia
                     # https://essentia.upf.edu/reference/streaming_Key.html
 
@@ -115,7 +115,7 @@ def beatinspect_main():
 
             with pref_col2:  # metrics: generating insights on tech specs
                 with st.spinner('Fetching Tech Specs'):
-                    time.sleep(0.5)  # buffer for loading the spinner
+                    time.sleep(0.3)  # buffer for loading the spinner
 
                     # assign audio channel description
                     if int(channels) == 1:  # single channel .wav
@@ -131,7 +131,7 @@ def beatinspect_main():
 
             with pref_col3:  # metrics: calculcation of tempo
                 with st.spinner('Calculating BPM'):
-                    time.sleep(0.5)  # buffer for loading the spinner
+                    time.sleep(0.3)  # buffer for loading the spinner
                     # BPM estimation using essentia library
 
                     if new_audiofile:  # new audiofile --> update session sates
