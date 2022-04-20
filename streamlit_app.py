@@ -76,9 +76,9 @@ def beatinspect_main():
 
         # evaluate whether the input audiofile has changed
         new_audiofile = False
-        if audiofile.name != st.session_state.audiofile_name:
+        if filename != st.session_state.filenname:
             # update session state and order new calc of attr
-            st.session_state.audiofile_name = audiofile.name
+            st.session_state.filename = filename
             new_audiofile = True
 
         # Musical and Tech Specs Overview
@@ -115,7 +115,7 @@ def beatinspect_main():
                         # utility funct that calculates key & scale via essentia
                         # https://essentia.upf.edu/reference/streaming_Key.html
                         key, scale, key_strength = detect_keyscale.detect_ks(
-                            audiofile.name, 'diatonic')
+                            filename, 'diatonic')
                         st.session_state.key = key
                         st.session_state.scale = scale
                         st.session_state.key_strength = key_strength
@@ -134,7 +134,7 @@ def beatinspect_main():
                     with st.spinner('Calculating BPM'):
                         time.sleep(0.3)  # buffer for loading the spinner
                         # BPM estimation using essentia library
-                        es_audio = es.MonoLoader(filename=audiofile.name)()
+                        es_audio = es.MonoLoader(filename=filename)()
                         rhythm_ex = es.RhythmExtractor2013(method="multifeature")
                         bpm_essentia, _, _, _, _ = rhythm_ex(es_audio)
                         st.session_state.bpm_essentia = bpm_essentia
@@ -233,8 +233,8 @@ if __name__ == '__main__':
         st.session_state.spectrum = 'RMS Spectrum'
 
     # initialize session state for audiofile.name
-    if "audiofile_name" not in st.session_state:
-        st.session_state.audiofile_name = None
+    if "filename" not in st.session_state:
+        st.session_state.filename = None
 
     # initialize session states for attributes
     if "key" not in st.session_state:
