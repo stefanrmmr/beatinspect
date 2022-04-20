@@ -6,6 +6,7 @@
 
 import streamlit as st
 import streamlit.components.v1 as components
+from my_component import my_component
 
 import os
 import sys
@@ -58,6 +59,7 @@ def beatinspect_main():
                 audiofile = None
                 st.write('')  # ad spacing
                 st.write('SOON to be implemented!')
+                my_component('servus')
 
                 # https://www.youtube.com/watch?v=BuD3gILJW-Q&ab_channel=Streamlit
                 # USE streamlit custom component that implements a custom html/css/react element
