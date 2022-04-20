@@ -67,7 +67,8 @@ def beatinspect_main():
 
 
 
-                _component_func(name='servus', key=None, default=0)
+                component_returnvalue = _component_func(name='servus', key=None, default=0)
+                st.write(component_returnvalue)
 
 
                 # https://www.youtube.com/watch?v=BuD3gILJW-Q&ab_channel=Streamlit
