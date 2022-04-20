@@ -10,6 +10,7 @@ interface State {
   isFocused: boolean
 }
 
+
 /**
  * This is a React-based component template. The `render()` function is called
  * automatically when your component should be re-rendered.
@@ -17,7 +18,9 @@ interface State {
 class MyComponent extends StreamlitComponentBase<State> {
   public state = { numClicks: 0, isFocused: false }
 
+  // RENDER FUNCTION
   public render = (): ReactNode => {
+
     // Arguments that are passed to the plugin in Python are accessible
     // via `this.props.args`. Here, we access the "name" arg.
     const name = this.props.args["name"]
