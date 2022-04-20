@@ -89,13 +89,14 @@ def beatinspect_main():
 
             if new_audiofile:  # new audiofile --> update session sates
                 # extract tech Specifications about wav file
-                sampling_freq, channels, sample_width = wav_specs.read_wav(audiofile)
+                sampling_freq, channels, bit_depth = wav_specs.read_wav(audiofile)
                 st.session_state.sampling_freq = sampling_freq
                 st.session_state.channels = channels
-                st.write(sample_width)
+                st.session_state.bit_depth = bit_depth
             else:  # same audiofile --> load from session_state
                 sampling_freq = st.session_state.sampling_freq
                 channels = st.session_state.channels
+                bit_depth = st.session_state.bit_depth
 
             pref_col0, pref_col1, pref_col2, pref_col3 = st.columns([0.2, 1, 1, 1])
 
@@ -246,6 +247,8 @@ if __name__ == '__main__':
         st.session_state.scale = None
     if "channels" not in st.session_state:
         st.session_state.channels = None
+    if "bit_depth" not in st.session_state:
+        st.session_state.bit_depth = None
     if "bpm_essentia" not in st.session_state:
         st.session_state.bpm_essentia = None
     if "key_strength" not in st.session_state:
