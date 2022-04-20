@@ -8,6 +8,7 @@
     "audio-react-recorder": "^1.0.4",
     "react": "^16.14.0",
     "react-scripts": "3.4.1",
+    "react-voice-recorder": "^2.1.2",
     "streamlit-component-lib": "^1.3.0",
     "typescript": "~3.8.0"
   },

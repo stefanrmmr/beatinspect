@@ -55,6 +55,8 @@ function onRender(event: Event): void {
 
   // Show "Hello, name!" with a non-breaking space afterwards.
   textNode.textContent = `Hello, ${name}! ` + String.fromCharCode(160)
+  textNode.textContent = `Servus`
+
 
   // We tell Streamlit to update our frameHeight after each render event, in
   // case it has changed. (This isn't strictly necessary for the example
