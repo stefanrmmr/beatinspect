@@ -19,6 +19,13 @@
 
 import array
 import wave
+import soundfile as sf
+
+"""ob = sf.SoundFile('example.wav')
+print('Sample rate: {}'.format(ob.samplerate))
+print('Channels: {}'.format(ob.channels))
+print('Subtype: {}'.format(ob.subtype))"""
+
 
 def read_wav(filename):
     # open file, get metadata for audio
@@ -49,4 +56,4 @@ def read_wav(filename):
     except AssertionError:
         print(nsamps, "not equal to", len(samps))
 
-    return sampling_freq, channels
+    return sampling_freq, channels, sample_width

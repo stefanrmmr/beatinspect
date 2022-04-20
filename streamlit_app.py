@@ -89,9 +89,10 @@ def beatinspect_main():
 
             if new_audiofile:  # new audiofile --> update session sates
                 # extract tech Specifications about wav file
-                sampling_freq, channels = wav_specs.read_wav(audiofile)
+                sampling_freq, channels, sample_width = wav_specs.read_wav(audiofile)
                 st.session_state.sampling_freq = sampling_freq
                 st.session_state.channels = channels
+                st.write(sample_width)
             else:  # same audiofile --> load from session_state
                 sampling_freq = st.session_state.sampling_freq
                 channels = st.session_state.channels
