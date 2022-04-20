@@ -16,6 +16,7 @@ import base64
 import ffmpeg
 import librosa
 import numpy as np
+import soundfile as sf
 import essentia.standard as es
 
 import src.plots as plots  # plotting framework
@@ -89,7 +90,11 @@ def beatinspect_main():
 
             if new_audiofile:  # new audiofile --> update session sates
                 # extract tech Specifications about wav file
-                sampling_freq, channels, bit_depth = wav_specs.read_wav(audiofile_path)
+                ob = sf.SoundFile(audiofile_path)
+                subtype = ob.subtype
+                bit_depth = str(subtype)
+
+                sampling_freq, channels = wav_specs.read_wav(filename)
                 st.session_state.sampling_freq = sampling_freq
                 st.session_state.channels = channels
                 st.session_state.bit_depth = bit_depth

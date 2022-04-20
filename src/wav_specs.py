@@ -37,8 +37,7 @@ def read_wav(filename):
     sample_width = wf.getsampwidth()
     # Returns sample width in bytes.
 
-    ob = sf.SoundFile(filename)
-    subtype = ob.subtype
 
 
-    return sampling_freq, channels, subtype
+
+    return sampling_freq, channels
