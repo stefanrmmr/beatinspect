@@ -62,7 +62,7 @@ def beatinspect_main():
                 import streamlit.components.v1 as components
 
                 # Declare the component & use it:
-                my_component = components.declare_component("my_component", path=os.path.join(os.getcwd(), 'frontend/build'))
+                my_component = components.declare_component("my_component", path='frontend/build'))
                 # my_component(greeting="Hello", name="World")
                 my_component()
 
