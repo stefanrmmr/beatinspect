@@ -135,8 +135,8 @@ def beatinspect_main():
                         time.sleep(0.3)  # buffer for loading the spinner
                         # BPM estimation using essentia library
                         es_audio = es.MonoLoader(filename=audiofile.name)()
-                        rhythm_extractor = es.RhythmExtractor2013(method="multifeature")
-                        bpm_essentia, _, _, _, _ = rhythm_extractor(es_audio)
+                        rhythm_ex = es.RhythmExtractor2013(method="multifeature")
+                        bpm_essentia, _, _, _, _ = rhythm_ex(es_audio)
                         st.session_state.bpm_essentia = bpm_essentia
                 else:  # same audiofile --> load from session_state
                     bpm_essentia = st.session_state.bpm_essentia
@@ -151,17 +151,23 @@ def beatinspect_main():
                          expanded=False):
 
             # Generate graphs/plots for RMS & Amplitude over time
-            st.audio(audiofile)  # display audio player UX
+            st.audio(audiofile)  # display web audio player UX/UI
 
-            # calculate the necessray data for further plotting
-            with st.spinner('calculating spectrogram insights'):
-                # calc spectrum data for plotting framework
-                y,sr = librosa.load(filename, sr=sampling_freq)
-                y_stft = librosa.stft(y)  # STFT of y
-                scale_db = librosa.amplitude_to_db(np.abs(y_stft), ref=np.max)
-                spectrogram_magn, phase = librosa.magphase(librosa.stft(y))
-                rms = librosa.feature.rms(S=spectrogram_magn)  # calculating rms
-                times = librosa.times_like(rms) #extracting rms timestamps
+            if new_audiofile: # new audiofile --> update session sates
+                # calculate the necessray data for further plotting
+                with st.spinner('calculating spectrogram insights'):
+                    # calc spectrum data for plotting framework
+                    y,sr = librosa.load(filename, sr=sampling_freq)
+                    y_stft = librosa.stft(y)  # STFT of y
+                    scale_db = librosa.amplitude_to_db(np.abs(y_stft), ref=np.max)
+                    spectrogram_magn, phase = librosa.magphase(librosa.stft(y))
+                    rms = librosa.feature.rms(S=spectrogram_magn)  # calculating rms
+                    times = librosa.times_like(rms) #extracting rms timestamps
+                    st.session_state.y, st.session_state.sr = y, sr
+                    st.session_state.times, st.session_state.rms = times, rms
+            else:  # same audiofile --> load from session_state
+                y, sr = st.session_state.y, st.session_state.sr
+                times, rms = st.session_state.times, st.session_state.rms
 
             # display the selected spectrum plot
             spectrum_coice = st.session_state.spectrum
@@ -243,6 +249,16 @@ if __name__ == '__main__':
         st.session_state.key_strength = None
     if "sampling_freq" not in st.session_state:
         st.session_state.sampling_freq = None
+
+    # initialize session states for plots attr
+    if "y" not in st.session_state:
+        st.session_state.y = None
+    if "sr" not in st.session_state:
+        st.session_state.sr = None
+    if "rms" not in st.session_state:
+        st.session_state.rms = None
+    if "times" not in st.session_state:
+        st.session_state.times = None
 
     # initialize session states for plots
     if "plot_spectrum_amp" not in st.session_state:
