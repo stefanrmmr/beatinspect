@@ -6,7 +6,7 @@
 
 import streamlit as st
 import streamlit.components.v1 as components
-from my_component import my_component
+# from my_component import my_component
 
 import os
 import sys
@@ -24,6 +24,13 @@ import src.plots as plots  # plotting framework
 import src.utils as utils  # utility functions
 import src.design as design  # design choices
 import src.detect_keyscale as detect_keyscale
+
+parent_dir = os.path.dirname(os.path.abspath(__file__))
+build_dir = os.path.join(parent_dir, "frontend/build")
+_component_func = components.declare_component("my_component", path=build_dir)
+
+def component_instance(name, key=None):
+    _component_func(name=name, key=key)
 
 def beatinspect_main():
 
@@ -59,7 +66,11 @@ def beatinspect_main():
                 audiofile = None
                 st.write('')  # ad spacing
                 st.write('SOON to be implemented!')
-                my_component('servus')
+
+
+
+                component_instance()
+
 
                 # https://www.youtube.com/watch?v=BuD3gILJW-Q&ab_channel=Streamlit
                 # USE streamlit custom component that implements a custom html/css/react element
