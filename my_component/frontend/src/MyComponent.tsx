@@ -46,7 +46,7 @@ class MyComponent extends StreamlitComponentBase<State> {
     // be available to the Python program.
     return (
       <span>
-        Hello, {name}! &nbsp;
+        Hello, {name}! This is a custom streamlit component! &nbsp;
         <button
           style={style}
           onClick={this.onClicked}
@@ -54,7 +54,7 @@ class MyComponent extends StreamlitComponentBase<State> {
           onFocus={this._onFocus}
           onBlur={this._onBlur}
         >
-          Click Me!
+          demo button
         </button>
       </span>
     )
