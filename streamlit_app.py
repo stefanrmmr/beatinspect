@@ -2,7 +2,7 @@
 
 # Version 1.1 add bpm detection, build page structure
 # Version 1.2 add music scale detection & design tweaks
-# Version 1.3 add amp & rms spectrum, session states
+# Version 1.3 add amp & rms spectrum, session states, bit_depth
 
 import streamlit as st
 import streamlit.components.v1 as components
@@ -107,7 +107,7 @@ def beatinspect_main():
                     channels = str(channels) + ' Channel'
 
                 st.metric(label="", value=f"{sampling_freq} Hz",
-                          delta=f'{bit_depth} WAV - {channels}', delta_color="off")
+                          delta=f'{bit_depth}bit WAV - {channels}', delta_color="off")
                 st.write('')  # add spacing
 
             with pref_col2:  # metrics : column for music scale evaluation
