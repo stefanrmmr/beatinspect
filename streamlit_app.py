@@ -93,6 +93,8 @@ def beatinspect_main():
             bit_depth = int(str(wav_specs.subtype)[4:])
             sampling_freq = wav_specs.samplerate
             channels = wav_specs.channels
+            frames = wav_specs.frames
+            seconds = frames/sampling_freq
 
             pref_col0, pref_col1, pref_col2, pref_col3 = st.columns([0.2, 1, 1, 1])
 
