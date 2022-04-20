@@ -109,7 +109,7 @@ def beatinspect_main():
                     channels = str(channels) + ' Channel'
 
                 st.metric(label="", value=f"{sampling_freq} Hz",
-                          delta=f'WAV - {channels}', delta_color="off")
+                          delta=f'{bit_depth} WAV - {channels}', delta_color="off")
                 st.write('')  # add spacing
 
             with pref_col2:  # metrics : column for music scale evaluation
