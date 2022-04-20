@@ -75,11 +75,13 @@ def beatinspect_main():
         audiofile_path = os.path.join(os.getcwd(), audiofile.name)
 
         # evaluate whether the input audiofile has changed
-        new_audiofile = False
+        new_audiofile = False # same audiofile --> load from session_state
         if audiofile.name != st.session_state.audiofile_name:
             # update session state and order new calc of attr
             st.session_state.audiofile_name = audiofile.name
-            new_audiofile = True
+            # update session state for selected amp/rms plot
+            st.session_state.spectrum = 'RMS Spectrum'
+            new_audiofile = True # new audiofile --> update session sates
 
         # Musical and Tech Specs Overview
         with st.expander("SECTION - Musical & Technical Specifications",
