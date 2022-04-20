@@ -72,13 +72,13 @@ def beatinspect_main():
         # Save audiofile to main directory to be called via path
         with open(audiofile.name,"wb") as f:
             f.write(audiofile.getbuffer())
-        filename = os.path.join(os.getcwd(), audiofile.name)
+        audiofile_path = os.path.join(os.getcwd(), audiofile.name)
 
         # evaluate whether the input audiofile has changed
         new_audiofile = False
-        if filename != st.session_state.filenname:
+        if audiofile.name != st.session_state.audiofile_name:
             # update session state and order new calc of attr
-            st.session_state.filename = filename
+            st.session_state.audiofile_name = audiofile.name
             new_audiofile = True
 
         # Musical and Tech Specs Overview
@@ -115,7 +115,7 @@ def beatinspect_main():
                         # utility funct that calculates key & scale via essentia
                         # https://essentia.upf.edu/reference/streaming_Key.html
                         key, scale, key_strength = detect_keyscale.detect_ks(
-                            filename, 'diatonic')
+                            audiofile.name, 'diatonic')
                         st.session_state.key = key
                         st.session_state.scale = scale
                         st.session_state.key_strength = key_strength
@@ -134,7 +134,7 @@ def beatinspect_main():
                     with st.spinner('Calculating BPM'):
                         time.sleep(0.3)  # buffer for loading the spinner
                         # BPM estimation using essentia library
-                        es_audio = es.MonoLoader(filename=filename)()
+                        es_audio = es.MonoLoader(filename=audiofile.name)()
                         rhythm_ex = es.RhythmExtractor2013(method="multifeature")
                         bpm_essentia, _, _, _, _ = rhythm_ex(es_audio)
                         st.session_state.bpm_essentia = bpm_essentia
@@ -157,7 +157,7 @@ def beatinspect_main():
                 # calculate the necessray data for further plotting
                 with st.spinner('calculating spectrogram insights'):
                     # calc spectrum data for plotting framework
-                    y,sr = librosa.load(filename, sr=sampling_freq)
+                    y,sr = librosa.load(audiofile_path, sr=sampling_freq)
                     y_stft = librosa.stft(y)  # STFT of y
                     scale_db = librosa.amplitude_to_db(np.abs(y_stft), ref=np.max)
                     spectrogram_magn, phase = librosa.magphase(librosa.stft(y))
@@ -233,8 +233,8 @@ if __name__ == '__main__':
         st.session_state.spectrum = 'RMS Spectrum'
 
     # initialize session state for audiofile.name
-    if "filename" not in st.session_state:
-        st.session_state.filename = None
+    if "audiofile_name" not in st.session_state:
+        st.session_state.audiofile_name = None
 
     # initialize session states for attributes
     if "key" not in st.session_state:
