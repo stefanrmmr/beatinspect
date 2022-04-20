@@ -29,8 +29,6 @@ parent_dir = os.path.dirname(os.path.abspath(__file__))
 build_dir = os.path.join(parent_dir, "my_component/frontend/build")
 _component_func = components.declare_component("my_component", path=build_dir)
 
-def component_instance(name, key=None):
-    _component_func(name=name, key=key)
 
 def beatinspect_main():
 
@@ -69,7 +67,7 @@ def beatinspect_main():
 
 
 
-                component_instance()
+                _component_func(name='servus', key=None, default=0)
 
 
                 # https://www.youtube.com/watch?v=BuD3gILJW-Q&ab_channel=Streamlit
