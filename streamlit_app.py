@@ -58,6 +58,12 @@ def beatinspect_main():
                 audiofile = None
                 st.write('')  # ad spacing
                 st.write('SOON to be implemented!')
+                import streamlit.components.v1 as components
+
+                # Declare the component & use it:
+                my_component = components.declare_component("my_component", path="frontend/build")
+                my_component(greeting="Hello", name="World")
+
                 # https://www.youtube.com/watch?v=BuD3gILJW-Q&ab_channel=Streamlit
                 # USE streamlit custom component that implements a custom html/css/react element
                 # input data can be passed to this component and it returns data
