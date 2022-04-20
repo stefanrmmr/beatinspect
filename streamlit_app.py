@@ -6,7 +6,6 @@
 
 import streamlit as st
 import streamlit.components.v1 as components
-from my_component import my_component
 
 import os
 import sys
