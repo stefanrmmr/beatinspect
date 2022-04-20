@@ -22,7 +22,6 @@ import essentia.standard as es
 import src.plots as plots  # plotting framework
 import src.utils as utils  # utility functions
 import src.design as design  # design choices
-import src.wav_specs as wav_specs
 import src.detect_keyscale as detect_keyscale
 
 def beatinspect_main():
@@ -88,21 +87,12 @@ def beatinspect_main():
         with st.expander("SECTION - Musical & Technical Specifications",
                          expanded=True):
 
-            if new_audiofile:  # new audiofile --> update session sates
-                # extract tech Specifications about wav file
-                wav_specs = sf.SoundFile(audiofile_path)
-                bit_depth = int(str(wav_specs.subtype)[4:])
-                sampling_freq = wav_specs.samplerate
-                channels = wav_specs.channels
-
-                # sampling_freq, channels = wav_specs.read_wav(audiofile.name)
-                st.session_state.sampling_freq = sampling_freq
-                st.session_state.channels = channels
-                st.session_state.bit_depth = bit_depth
-            else:  # same audiofile --> load from session_state
-                sampling_freq = st.session_state.sampling_freq
-                channels = st.session_state.channels
-                bit_depth = st.session_state.bit_depth
+            # extract technical specifications about wav file
+            # no needfor session_state saving bc instant calc
+            wav_specs = sf.SoundFile(audiofile_path)
+            bit_depth = int(str(wav_specs.subtype)[4:])
+            sampling_freq = wav_specs.samplerate
+            channels = wav_specs.channels
 
             pref_col0, pref_col1, pref_col2, pref_col3 = st.columns([0.2, 1, 1, 1])
 
@@ -251,16 +241,10 @@ if __name__ == '__main__':
         st.session_state.key = None
     if "scale" not in st.session_state:
         st.session_state.scale = None
-    if "channels" not in st.session_state:
-        st.session_state.channels = None
-    if "bit_depth" not in st.session_state:
-        st.session_state.bit_depth = None
     if "bpm_essentia" not in st.session_state:
         st.session_state.bpm_essentia = None
     if "key_strength" not in st.session_state:
         st.session_state.key_strength = None
-    if "sampling_freq" not in st.session_state:
-        st.session_state.sampling_freq = None
 
     # initialize session states for plots attr
     if "y" not in st.session_state:
