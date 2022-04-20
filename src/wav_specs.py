@@ -19,7 +19,7 @@
 
 import array
 import wave
-import soundfile as sf
+
 
 def read_wav(filename):
     # open file, get metadata for audio
@@ -28,6 +28,10 @@ def read_wav(filename):
     except IOError as e:
         print(e)
         return
+
+    # typ = choose_type( wf.getsampwidth() ) # TODO: implement choose_type
+    nsamps = wf.getnframes()
+    assert nsamps > 0
 
     sampling_freq = wf.getframerate()
     assert sampling_freq > 0
@@ -38,6 +42,12 @@ def read_wav(filename):
     # Returns sample width in bytes.
 
 
+    # Read entire file and make into an array
+    samps = list(array.array("i", wf.readframes(nsamps)))
 
+    try:
+        assert nsamps == len(samps)
+    except AssertionError:
+        print(nsamps, "not equal to", len(samps))
 
     return sampling_freq, channels
