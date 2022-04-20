@@ -94,7 +94,7 @@ def beatinspect_main():
                 subtype = ob.subtype
                 bit_depth = str(subtype)
 
-                sampling_freq, channels = wav_specs.read_wav(filename)
+                sampling_freq, channels = wav_specs.read_wav(audiofile.name)
                 st.session_state.sampling_freq = sampling_freq
                 st.session_state.channels = channels
                 st.session_state.bit_depth = bit_depth
