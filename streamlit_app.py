@@ -90,11 +90,12 @@ def beatinspect_main():
 
             if new_audiofile:  # new audiofile --> update session sates
                 # extract tech Specifications about wav file
-                ob = sf.SoundFile(audiofile_path)
-                subtype = ob.subtype
-                bit_depth = str(subtype)
+                wav_specs = sf.SoundFile(audiofile_path)
+                bit_depth = str(wav_specs.subtype)[4:]
+                sampling_freq = str(wav_specs.samplerate)
+                channels = str(wav_specs.channels)
 
-                sampling_freq, channels = wav_specs.read_wav(audiofile.name)
+                # sampling_freq, channels = wav_specs.read_wav(audiofile.name)
                 st.session_state.sampling_freq = sampling_freq
                 st.session_state.channels = channels
                 st.session_state.bit_depth = bit_depth
