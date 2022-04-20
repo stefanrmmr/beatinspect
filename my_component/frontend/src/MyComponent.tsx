@@ -5,6 +5,8 @@ import {
 } from "streamlit-component-lib"
 import React, { ReactNode } from "react"
 
+import AudioReactRecorder, { RecordState } from 'audio-react-recorder'
+
 interface State {
   numClicks: number
   isFocused: boolean
@@ -15,8 +17,35 @@ interface State {
  * This is a React-based component template. The `render()` function is called
  * automatically when your component should be re-rendered.
  */
+
+
 class MyComponent extends StreamlitComponentBase<State> {
   public state = { numClicks: 0, isFocused: false }
+
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      recordState: null
+    }
+  }
+
+  start = () => {
+    this.setState({
+      recordState: RecordState.START
+    })
+  }
+
+  stop = () => {
+    this.setState({
+      recordState: RecordState.STOP
+    })
+  }
+
+  //audioData contains blob and blobUrl
+  onStop = (audioData) => {
+    console.log('audioData', audioData)
+  }
 
   // RENDER FUNCTION
   public render = (): ReactNode => {
@@ -24,6 +53,8 @@ class MyComponent extends StreamlitComponentBase<State> {
     // Arguments that are passed to the plugin in Python are accessible
     // via `this.props.args`. Here, we access the "name" arg.
     const name = this.props.args["name"]
+
+    const { recordState } = this.state
 
     // Streamlit sends us a theme object via props that we can use to ensure
     // that our component has visuals that match the active theme in a
@@ -48,6 +79,13 @@ class MyComponent extends StreamlitComponentBase<State> {
     // variable, and send its new value back to Streamlit, where it'll
     // be available to the Python program.
     return (
+      <div>
+        <AudioReactRecorder state={recordState} onStop={this.onStop} />
+
+        <button onClick={this.start}>Start</button>
+        <button onClick={this.stop}>Stop</button>
+      </div>
+
       <span>
         Hello, {name}! This is a custom streamlit component! &nbsp;
         <button
