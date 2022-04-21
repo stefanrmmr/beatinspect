@@ -26,6 +26,10 @@ def design_setup():
     # Design Audio Uploader Status Loading Bar Color
     st.markdown('''<style>.st-dp {background-color: #e3fc03;}</style>''',
         unsafe_allow_html=True)
+    # Design Audio Uploader Status Loading Bar Color
+    st.markdown('''<style>.st-dn {background-color: #e3fc03;}</style>''',
+        unsafe_allow_html=True)
+
 
     # Design change spinner color to primary color
     st.markdown('''<style>.stSpinner > div > div {border-top-color: #e3fc03;}</style>''',
