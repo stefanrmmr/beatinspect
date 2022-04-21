@@ -1,28 +1,30 @@
 import { Streamlit, RenderData } from "streamlit-component-lib"
 
-// Add text and a button to the DOM. (You could also add these directly
-// to index.html.)
+// Add text and a button to the DOM.
+// (You could also add these directly to index.html.)
 const span = document.body.appendChild(document.createElement("span"))
 const textNode = span.appendChild(document.createTextNode(""))
-const button = span.appendChild(document.createElement("button"))
-button.textContent = "Click Me!"
+const button1 = span.appendChild(document.createElement("button"))
+const button2 = span.appendChild(document.createElement("button"))
+button1.textContent = "Click Me!"
+button2.textContent = "button 2"
 
 // Add a click handler to our button. It will send data back to Streamlit.
 let numClicks = 0
 let isFocused = false
 
-button.onclick = function(): void {
+button1.onclick = function(): void {
   // Increment numClicks, and pass the new value back to
   // Streamlit via `Streamlit.setComponentValue`.
   numClicks += 1
   Streamlit.setComponentValue(numClicks)
 }
 
-button.onfocus = function(): void {
+button1.onfocus = function(): void {
   isFocused = true
 }
 
-button.onblur = function(): void {
+button1.onblur = function(): void {
   isFocused = false
 }
 
@@ -43,12 +45,12 @@ function onRender(event: Event): void {
     const borderStyling = `1px solid var(${
       isFocused ? "--primary-color" : "gray"
     })`
-    button.style.border = borderStyling
-    button.style.outline = borderStyling
+    button1.style.border = borderStyling
+    button1.style.outline = borderStyling
   }
 
   // Disable our button if necessary.
-  button.disabled = data.disabled
+  button1.disabled = data.disabled
 
   // RenderData.args is the JSON dictionary of arguments sent from the
   // Python script.
