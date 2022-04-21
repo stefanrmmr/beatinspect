@@ -18,11 +18,9 @@ let isFocused = false
 let audiofile = 'audiofile_string_demo'
 
 button_rec.onclick = function(): void {
-  // Increment numClicks, and pass the new value back to
-  // Streamlit via `Streamlit.setComponentValue`.
   numClicks += 1
-  Streamlit.setComponentValue(numClicks)
-  Streamlit.setComponentValue(audiofile)
+  // component value is the return variable given to back to streamlit
+  Streamlit.setComponentValue(audiofile, numClicks)
 }
 
 button_rec.onfocus = function(): void {
