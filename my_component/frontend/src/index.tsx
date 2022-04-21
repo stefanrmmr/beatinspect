@@ -4,27 +4,30 @@ import { Streamlit, RenderData } from "streamlit-component-lib"
 // (You could also add these directly to index.html.)
 const span = document.body.appendChild(document.createElement("span"))
 const textNode = span.appendChild(document.createTextNode(""))
-const button1 = span.appendChild(document.createElement("button"))
-const button2 = span.appendChild(document.createElement("button"))
-button1.textContent = "Click Me!"
-button2.textContent = "button 2"
+
+const button_rec = span.appendChild(document.createElement("button"))
+const button_done = span.appendChild(document.createElement("button"))
+const button_rest = span.appendChild(document.createElement("button"))
+button_rec.textContent = "record"
+button_done.textContent = "done"
+button_reset.textContent = "reset"
 
 // Add a click handler to our button. It will send data back to Streamlit.
 let numClicks = 0
 let isFocused = false
 
-button1.onclick = function(): void {
+button_rec.onclick = function(): void {
   // Increment numClicks, and pass the new value back to
   // Streamlit via `Streamlit.setComponentValue`.
   numClicks += 1
   Streamlit.setComponentValue(numClicks)
 }
 
-button1.onfocus = function(): void {
+button_rec.onfocus = function(): void {
   isFocused = true
 }
 
-button1.onblur = function(): void {
+button_rec.onblur = function(): void {
   isFocused = false
 }
 
@@ -45,15 +48,14 @@ function onRender(event: Event): void {
     const borderStyling = `1px solid var(${
       isFocused ? "--primary-color" : "gray"
     })`
-    button1.style.border = borderStyling
-    button1.style.outline = borderStyling
+    button_rec.style.border = borderStyling
+    button_rec.style.outline = borderStyling
   }
 
   // Disable our button if necessary.
-  button1.disabled = data.disabled
+  button_rec.disabled = data.disabled
 
-  // RenderData.args is the JSON dictionary of arguments sent from the
-  // Python script.
+  // RenderData.args is the JSON dict of arguments sent from the Python script.
   let name = data.args["name"]
 
   // Show "Hello, name!" with a non-breaking space afterwards.
