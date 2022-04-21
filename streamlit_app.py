@@ -55,8 +55,9 @@ def beatinspect_main():
             st.write('')  # add spacing
             st.write('')  # add spacing
             st.write('')  # add spacing
-            choice = st.radio('',[' Audio File Upload',
-                                  ' Record via Microphone'])
+            # choice = st.radio('',[' Audio File Upload',
+            #                       ' Record via Microphone'])
+            choice = st.radio('',[' Audio File Upload'])
             st.write('')  # add spacing
         with audio_col2:
             if 'Upload' in choice:
