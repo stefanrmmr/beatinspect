@@ -3,10 +3,11 @@
 # Version 1.1 add bpm detection, build page structure
 # Version 1.2 add music scale detection & design tweaks
 # Version 1.3 add amp & rms spectrum, session states, bit_depth
+# Version 1.4 add live recording feature via custom component
 
 import streamlit as st
 import streamlit.components.v1 as components
-# from my_component import my_component
+from my_component import my_component
 
 import os
 import sys
@@ -67,7 +68,7 @@ def beatinspect_main():
 
 
 
-                component_returnvalue = _component_func(name='servus', key=None, default=0)
+                component_returnvalue = _component_func(key=None, default=0)
                 st.write(component_returnvalue)
 
 
