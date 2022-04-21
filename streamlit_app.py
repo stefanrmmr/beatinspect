@@ -67,8 +67,8 @@ def beatinspect_main():
                 st.write('')  # ad spacing
                 st.write('SOON to be implemented!')
 
-                rv1 = _component_func(name='servus')
-                st.write(rv1)
+                rv1, rv2 = _component_func(name='servus')
+                st.write(rv1, rv2)
 
                 # https://www.youtube.com/watch?v=BuD3gILJW-Q&ab_channel=Streamlit
                 # USE streamlit custom component that implements a custom html/css/react element
