@@ -68,7 +68,7 @@ def beatinspect_main():
 
 
 
-                component_returnvalue = _component_func(key=None, default=0)
+                component_returnvalue = _component_func()
                 st.write(component_returnvalue)
 
 
