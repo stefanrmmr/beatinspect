@@ -1,3 +1,9 @@
+import {
+  Streamlit,
+  StreamlitComponentBase,
+  withStreamlitConnection,
+} from "streamlit-component-lib"
+
 import React from 'react'
 
 import { Recorder } from 'react-voice-recorder'
@@ -57,4 +63,5 @@ class MyComponent extends React.Component<any, any> {
   }
 }
 
-export default MyComponent
+// You don't need to edit withStreamlitConnection (but you're welcome to!).
+export default withStreamlitConnection(MyComponent)
