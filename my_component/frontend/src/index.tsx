@@ -17,7 +17,7 @@ let isFocused = false
 let output: [number, string] = [1, 'audiofile_string_demo'];
 
 button_rec.onclick = function(): void {
-  output[0] += 1;     // Works!
+  output[0] += 1;
   // component value is the return variable given to back to streamlit
   Streamlit.setComponentValue(output)
 }
@@ -60,10 +60,8 @@ function onRender(event: Event): void {
   // Show "Hello, name!" with a non-breaking space afterwards.
   textNode.textContent = `Hello, ${name}! ` + String.fromCharCode(160)
 
-  // We tell Streamlit to update our frameHeight after each render event, in
-  // case it has changed. (This isn't strictly necessary for the example
-  // because our height stays fixed, but this is a low-cost function, so
-  // there's no harm in doing it redundantly.)
+  // We tell Streamlit to update our frameHeight after each render event
+  // in case something has changed (not necessary nut low cost function)
   Streamlit.setFrameHeight()
 }
 
