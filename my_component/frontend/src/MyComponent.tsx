@@ -5,7 +5,6 @@ import {
 } from "streamlit-component-lib"
 
 import React from 'react'
-
 import { Recorder } from 'react-voice-recorder'
 import 'react-voice-recorder/dist/index.css'
 
