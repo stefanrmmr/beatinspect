@@ -15,12 +15,14 @@ button_reset.textContent = "reset"
 // Add a click handler to our button. It will send data back to Streamlit.
 let numClicks = 0
 let isFocused = false
+let audiofile = 'audiofile_string_demo'
 
 button_rec.onclick = function(): void {
   // Increment numClicks, and pass the new value back to
   // Streamlit via `Streamlit.setComponentValue`.
   numClicks += 1
   Streamlit.setComponentValue(numClicks)
+  Streamlit.setComponentValue(audiofile)
 }
 
 button_rec.onfocus = function(): void {
