@@ -55,9 +55,9 @@ def beatinspect_main():
             st.write('')  # add spacing
             st.write('')  # add spacing
             st.write('')  # add spacing
-            # choice = st.radio('',[' Audio File Upload',
-            #                       ' Record via Microphone'])
-            choice = st.radio('',[' Audio File Upload'])
+            choice = st.radio('',[' Audio File Upload',
+                                  ' Record via Microphone'])
+            # choice = st.radio('',[' Audio File Upload'])
             st.write('')  # add spacing
         with audio_col2:
             if 'Upload' in choice:
@@ -67,13 +67,8 @@ def beatinspect_main():
                 st.write('')  # ad spacing
                 st.write('SOON to be implemented!')
 
-                # with st.spinner('servus'):
-                #     component_returnvalue = _component_func()
-                #     st.write(component_returnvalue)
-
-
-
-
+                returnvalue = _component_func(name='servus')
+                st.write(returnvalue)
 
                 # https://www.youtube.com/watch?v=BuD3gILJW-Q&ab_channel=Streamlit
                 # USE streamlit custom component that implements a custom html/css/react element
