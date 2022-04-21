@@ -10,7 +10,6 @@ import streamlit.components.v1 as components
 # from my_component import my_component
 
 
-import streamlit as st
 from bokeh.models.widgets import Button
 from bokeh.models import CustomJS
 from streamlit_bokeh_events import streamlit_bokeh_events
