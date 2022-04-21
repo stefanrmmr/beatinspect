@@ -7,7 +7,7 @@ const textNode = span.appendChild(document.createTextNode(""))
 
 const button_rec = span.appendChild(document.createElement("button"))
 const button_done = span.appendChild(document.createElement("button"))
-const button_rest = span.appendChild(document.createElement("button"))
+const button_reset = span.appendChild(document.createElement("button"))
 button_rec.textContent = "record"
 button_done.textContent = "done"
 button_reset.textContent = "reset"
