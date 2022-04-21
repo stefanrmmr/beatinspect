@@ -87,3 +87,11 @@ class MyComponent extends StreamlitComponentBase<State> {
 //
 // You don't need to edit withStreamlitConnection (but you're welcome to!).
 export default withStreamlitConnection(MyComponent)
+
+// Tell Streamlit we're ready to start receiving data. We won't get our
+// first RENDER_EVENT until we call this function.
+Streamlit.setComponentReady()
+
+// Finally, tell Streamlit to update our initial height. We omit the
+// `height` parameter here to have it default to our scrollHeight.
+Streamlit.setFrameHeight()
