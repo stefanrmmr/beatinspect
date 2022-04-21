@@ -57,5 +57,4 @@ class MyComponent extends React.Component<any, any> {
   }
 }
 
-export const COMPONENT_READY_WARNING_TIME_MS = 30000 
 export default MyComponent
