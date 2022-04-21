@@ -36,8 +36,9 @@ def beatinspect_main():
     # DESIGN implement changes to the standard streamlit UI/UX
     design.design_setup()  # switch to primaryColor for accents
 
-    component_returnvalue = _component_func()
-    st.write(component_returnvalue)
+    with st.spinner('servus'):
+        component_returnvalue = _component_func()
+        st.write(component_returnvalue)
 
     # TITLE and Information
     header_col1, header_col2, header_col3 = st.columns([10, 2.5, 2.5])
