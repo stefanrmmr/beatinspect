@@ -10,13 +10,13 @@
 
 .display{
     width: 100%;
-    padding: 25px 0;
+    padding: 5px 0;
     margin: 25px 0;
 }
 
 .controllers{
     width: 100%;
-    padding: 25px 0;
+    padding: 5px 0;
     margin: 25px 0;
 }
 
@@ -29,7 +29,7 @@ button{
     font-size: 16px;
     background-color: #262730;
     color: #ffffff;
-    border: 2px solid #ffffff;
+    border: 1px solid rgba(250, 250, 250, 0.2);
     border-radius: 0.25rem;
 }
 
@@ -42,6 +42,6 @@ button:hover{
     font-size: 16px;
     background-color: #262730;
     color: #e3fc03;
-    border: 2px solid #e3fc03;
+    border: 1px solid rgba(250, 250, 250, 0.2);
     border-radius: 0.25rem;
 }
