@@ -1,9 +1,3 @@
-import {
-  Streamlit,
-  StreamlitComponentBase,
-  withStreamlitConnection,
-} from "streamlit-component-lib"
-
 // collect DOMs
 const display = document.querySelector('.display')
 const controllerWrapper = document.querySelector('.controllers')
@@ -61,7 +55,6 @@ const stopRecording = () => {
 }
 
 const downloadAudio = () => {
-    Streamlit.setComponentValue(audio)
     const downloadLink = document.createElement('a')
     downloadLink.href = audioURL
     downloadLink.setAttribute('download', 'audio')
