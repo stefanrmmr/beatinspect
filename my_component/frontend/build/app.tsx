@@ -1,4 +1,8 @@
-import { Streamlit, RenderData } from "streamlit-component-lib"
+import {
+  Streamlit,
+  StreamlitComponentBase,
+  withStreamlitConnection,
+} from "streamlit-component-lib"
 
 // collect DOMs
 const display = document.querySelector('.display')
