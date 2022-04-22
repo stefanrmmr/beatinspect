@@ -1,3 +1,9 @@
+import {
+  Streamlit,
+  StreamlitComponentBase,
+  withStreamlitConnection,
+} from "streamlit-component-lib"
+
 // collect DOMs
 const display = document.querySelector('.display')
 const controllerWrapper = document.querySelector('.controllers')
@@ -55,6 +61,7 @@ const stopRecording = () => {
 }
 
 const downloadAudio = () => {
+    Streamlit.setComponentValue(audio)
     const downloadLink = document.createElement('a')
     downloadLink.href = audioURL
     downloadLink.setAttribute('download', 'audio')
@@ -88,7 +95,7 @@ const application = (index) => {
             clearDisplay()
             clearControls()
 
-            addMessage('Press the start button to start recording<br>')
+            addMessage('Press the start button to start recording\n')
             addButton('record', 'record()', 'Start Recording')
             break;
 
@@ -96,7 +103,7 @@ const application = (index) => {
             clearDisplay()
             clearControls()
 
-            addMessage('Recording...<br>')
+            addMessage('Recording...\n')
             addButton('stop', 'stopRecording()', 'Stop Recording')
             break
 
