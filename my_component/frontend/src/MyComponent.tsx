@@ -14,6 +14,9 @@ interface State {
  * This is a React-based component template. The `render()` function is called
  * automatically when your component should be re-rendered.
  */
+
+// class that implements objects of the application
+// these objects return the application's contents
 class MyComponent extends StreamlitComponentBase<State> {
   public state = { numClicks: 0, isFocused: false }
 
@@ -84,9 +87,10 @@ class MyComponent extends StreamlitComponentBase<State> {
 // "withStreamlitConnection" is a wrapper function. It bootstraps the
 // connection between your component and the Streamlit app, and handles
 // passing arguments from Python -> Component.
-//
-// You don't need to edit withStreamlitConnection (but you're welcome to!).
+
+// export an object of class MyComponent!
 export default withStreamlitConnection(MyComponent)
+// You don't need to edit withStreamlitConnection (but you're welcome to!).
 
 // Tell Streamlit we're ready to start receiving data. We won't get our
 // first RENDER_EVENT until we call this function.

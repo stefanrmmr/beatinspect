@@ -4,7 +4,9 @@ const controllerWrapper = document.querySelector('.controllers')
 
 const State = ['Initial', 'Record', 'Download']
 let stateIndex = 0
-let mediaRecorder, chunks = [], audioURL = ''
+let mediaRecorder = []
+let chunks = []
+let audioURL = ''
 
 // mediaRecorder setup for audio
 if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia){
