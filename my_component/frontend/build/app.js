@@ -105,7 +105,7 @@ const application = (index) => {
             clearDisplay()
 
             addAudio()
-            addButton('download', 'downloadAudio()', 'Dwnload Audio')
+            addButton('download', 'downloadAudio()', 'Download Audio')
             addButton('record', 'record()', 'Record Again')
             break
 
