@@ -88,7 +88,7 @@ const application = (index) => {
             clearDisplay()
             clearControls()
 
-            addMessage('Press the start button to start recording')
+            addMessage('Press the start button to start recording<br>')
             addButton('record', 'record()', 'Start Recording')
             break;
 
@@ -96,7 +96,7 @@ const application = (index) => {
             clearDisplay()
             clearControls()
 
-            addMessage('Recording...')
+            addMessage('Recording...<br>')
             addButton('stop', 'stopRecording()', 'Stop Recording')
             break
 
