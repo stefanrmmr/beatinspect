@@ -54,7 +54,8 @@ const stopRecording = () => {
     application(stateIndex)
 }
 
-const downloadAudio = () => {
+const analyzeAudio = () => {
+    // this element needs to create a return value for streamlit
     const downloadLink = document.createElement('a')
     downloadLink.href = audioURL
     downloadLink.setAttribute('download', 'audio')
@@ -105,7 +106,7 @@ const application = (index) => {
             clearDisplay()
 
             addAudio()
-            addButton('download', 'downloadAudio()', 'Download Audio')
+            addButton('continue', 'analyzeAudio()', 'Continue')
             addButton('record', 'record()', 'Record Again')
             break
 
