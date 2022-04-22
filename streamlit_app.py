@@ -64,8 +64,8 @@ def beatinspect_main():
                 audiofile = st.file_uploader("", type='wav')
             elif 'Record' in choice:
                 audiofile = None
-                st.write('')  # ad spacing
-                st.write('SOON to be implemented!')
+                # st.write('')  # ad spacing
+                # st.write('SOON to be implemented!')
 
                 rv1 = _component_func(name='servus')
                 st.write(rv1)

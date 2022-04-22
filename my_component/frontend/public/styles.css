@@ -11,7 +11,7 @@
 .display{
     width: 100%;
     padding: 5px 0;
-    margin: 25px 0;
+    margin: 15px 0;
 }
 
 .controllers{
@@ -32,6 +32,7 @@ button{
     color: #ffffff;
     border: 1px solid rgba(250, 250, 250, 0.2);
     border-radius: 0.25rem;
+    margin-bottom: 0.75rem;
 }
 
 button:hover{
@@ -45,4 +46,5 @@ button:hover{
     color: #e3fc03;
     border: 1px solid #e3fc03;
     border-radius: 0.25rem;
+    margin-bottom: 0.75rem;
 }
