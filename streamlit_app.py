@@ -86,7 +86,7 @@ def beatinspect_main():
         with audio_col2:
             if 'Upload' in choice:
                 audiofile = st.file_uploader("", type='wav')
-                if audiofile is not None
+                if audiofile is not None:
                     audiofile_name = audiofile.name
             elif 'Record' in choice:
                 audiofile = None
