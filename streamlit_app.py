@@ -85,10 +85,15 @@ def beatinspect_main():
             st.write('')  # add spacing
         with audio_col2:
             audiofile_name = None
+
             if 'Upload' in choice:
                 audiofile = st.file_uploader("", type='wav')
                 if audiofile is not None:
                     audiofile_name = audiofile.name
+                    # Save audiofile to main directory to be called via path
+                    with open(audiofile_name,"wb") as f:
+                        f.write(audiofile.getbuffer())
+
             elif 'Record' in choice:
                 audiofile = None
                 # st.write('')  # ad spacing
@@ -179,9 +184,6 @@ def beatinspect_main():
     # ANALYTICS for Audio File
     if audiofile_name is not None:
 
-        # Save audiofile to main directory to be called via path
-        with open(audiofile_name,"wb") as f:
-            f.write(audiofile.getbuffer())
         audiofile_path = os.path.join(os.getcwd(), audiofile_name)
 
         # evaluate whether the input audiofile has changed
