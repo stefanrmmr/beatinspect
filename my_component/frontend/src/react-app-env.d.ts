@@ -1,2 +1,2 @@
 /// <reference types="react-scripts" />
-declare module 'use-media-recorder';
+declare module 'react-media-recorder';

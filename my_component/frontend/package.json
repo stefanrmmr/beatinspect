@@ -10,6 +10,7 @@
     "normalize.css": "^8.0.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-media-recorder": "^1.6.4",
     "react-scripts": "3.4.1",
     "streamlit-component-lib": "^1.4.0",
     "typescript": "~3.8.0",
