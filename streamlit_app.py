@@ -86,8 +86,7 @@ def beatinspect_main():
         with audio_col2:
             if 'Upload' in choice:
                 audiofile = st.file_uploader("", type='wav')
-                if audiofile is not None:
-                    audiofile_name = audiofile.name
+                audiofile_name = audiofile.name
             elif 'Record' in choice:
                 audiofile = None
                 # st.write('')  # ad spacing
@@ -164,7 +163,6 @@ def beatinspect_main():
                             st.write("Read sound by saving in server and reloading file")
                             st.audio(uploaded_file)
 
-                            audiofile = st.file_uploader(uploaded_file, type='wav')
                             audiofile_name = uploaded_file
                 # ++++++++++++++++
 
@@ -177,7 +175,7 @@ def beatinspect_main():
                 # clean existing audio files bevore saving the new audio file! (tmp dictonary)
 
     # ANALYTICS for Audio File
-    if audiofile is not None:
+    if audiofile_name is not None:
 
         # Save audiofile to main directory to be called via path
         with open(audiofile_name,"wb") as f:
