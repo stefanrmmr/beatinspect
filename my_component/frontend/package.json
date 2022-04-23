@@ -12,7 +12,8 @@
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1",
     "streamlit-component-lib": "^1.4.0",
-    "typescript": "~3.8.0"
+    "typescript": "~3.8.0",
+    "use-media-recorder": "^2.0.4"
   },
   "scripts": {
     "start": "react-scripts start",
