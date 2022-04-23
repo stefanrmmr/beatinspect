@@ -268,7 +268,7 @@ def beatinspect_main():
         with st.expander("SECTION - Waveform and Spectrogram Insights",
                          expanded=False):
             if not advanced_analytics:
-                analytics_msg = '<p style="color: #e3fc03; font-size: 18px;">Please provide your audio sample via file upload for spectrograms and advanced analytics to be generated.</p>'
+                analytics_msg = '<p style="color: #e3fc03; font-size: 1rem;">Please provide your audio sample via file upload for spectrograms and advanced analytics to be generated.</p>'
                 st.markdown(analytics_msg, unsafe_allow_html=True)
             if advanced_analytics:  # only if audio file uploaded
                 # Generate graphs/plots for RMS & Amplitude over time
