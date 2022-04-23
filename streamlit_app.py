@@ -105,7 +105,7 @@ def beatinspect_main():
                 stt_button  = Button(label="Speak", width=100)
 
                 stt_button.js_on_event("button_click", CustomJS(code="""
-                const timeMilliSec = 5000 //Fixed 5sec recording ... change here the value
+                const timeMilliSec = 10000 //Fixed 10sec recording
                 navigator.mediaDevices.getUserMedia({ audio: true })
                   .then(stream => {
                     const mediaRecorder = new MediaRecorder(stream);
