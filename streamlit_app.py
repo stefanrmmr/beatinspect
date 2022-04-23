@@ -42,6 +42,10 @@ def beatinspect_main():
     # DESIGN implement changes to the standard streamlit UI/UX
     design.design_setup()  # switch to primaryColor for accents
 
+    # initialize global vars
+    advanced_analytics = False
+    audiofile_name = None
+
     # TITLE and Information
     header_col1, header_col2, header_col3 = st.columns([10, 2.5, 2.5])
     with header_col1:
@@ -84,13 +88,13 @@ def beatinspect_main():
             # choice = st.radio('',[' Audio File Upload'])
             st.write('')  # add spacing
         with audio_col2:
-            audiofile_name = None
-
             if 'Upload' in choice:
                 audiofile = st.file_uploader("", type='wav')
                 if audiofile is not None:
+                    advanced_analytics = True
+                    # enable advanced analytics bc uploaded
                     audiofile_name = audiofile.name
-                    # Save audiofile to main directory to be called via path
+                    # Save to main dir to be called via path
                     with open(audiofile_name,"wb") as f:
                         f.write(audiofile.getbuffer())
 
@@ -263,63 +267,66 @@ def beatinspect_main():
         # Inspect Audio File Specifications
         with st.expander("SECTION - Waveform and Spectrogram Insights",
                          expanded=False):
+            if not advanced_analytics:
+                st.write('Advanced audio analytics such as spectrogram graphs'
+                    'can only be generated for audio files that were provided via file upload.')
+            if advanced_analytics:  # only if audio file uploaded
+                # Generate graphs/plots for RMS & Amplitude over time
+                st.audio(audiofile)  # display web audio player UX/UI
 
-            # Generate graphs/plots for RMS & Amplitude over time
-            st.audio(audiofile)  # display web audio player UX/UI
+                if new_audiofile: # new audiofile --> update session sates
+                    # calculate the necessray data for further plotting
+                    with st.spinner('calculating spectrogram insights'):
+                        # calc spectrum data for plotting framework
+                        y,sr = librosa.load(audiofile_path, sr=sampling_freq)
+                        y_stft = librosa.stft(y)  # STFT of y
+                        scale_db = librosa.amplitude_to_db(np.abs(y_stft), ref=np.max)
+                        spectrogram_magn, phase = librosa.magphase(librosa.stft(y))
+                        rms = librosa.feature.rms(S=spectrogram_magn)  # calculating rms
+                        times = librosa.times_like(rms) #extracting rms timestamps
+                        st.session_state.y, st.session_state.sr = y, sr
+                        st.session_state.times, st.session_state.rms = times, rms
+                else:  # same audiofile --> load from session_state
+                    y, sr = st.session_state.y, st.session_state.sr
+                    times, rms = st.session_state.times, st.session_state.rms
 
-            if new_audiofile: # new audiofile --> update session sates
-                # calculate the necessray data for further plotting
-                with st.spinner('calculating spectrogram insights'):
-                    # calc spectrum data for plotting framework
-                    y,sr = librosa.load(audiofile_path, sr=sampling_freq)
-                    y_stft = librosa.stft(y)  # STFT of y
-                    scale_db = librosa.amplitude_to_db(np.abs(y_stft), ref=np.max)
-                    spectrogram_magn, phase = librosa.magphase(librosa.stft(y))
-                    rms = librosa.feature.rms(S=spectrogram_magn)  # calculating rms
-                    times = librosa.times_like(rms) #extracting rms timestamps
-                    st.session_state.y, st.session_state.sr = y, sr
-                    st.session_state.times, st.session_state.rms = times, rms
-            else:  # same audiofile --> load from session_state
-                y, sr = st.session_state.y, st.session_state.sr
-                times, rms = st.session_state.times, st.session_state.rms
+                # display the selected spectrum plot
+                spectrum_coice = st.session_state.spectrum
+                # due to the session state only updating after Selection
+                # these plot calls need to be inversed/swapped like below
+                if 'AMP' in spectrum_coice:  # generate rms spectrum plots
+                    with st.spinner('generating RMS spectrum plot'):
+                        plots.rms_spectrum(times, rms)
+                else:  # generate amp spectrum plots
+                    with st.spinner('generating AMP spectrum plot'):
+                        plots.amp_spectrum(y,sr)
 
-            # display the selected spectrum plot
-            spectrum_coice = st.session_state.spectrum
-            # due to the session state only updating after Selection
-            # these plot calls need to be inversed/swapped like below
-            if 'AMP' in spectrum_coice:  # generate rms spectrum plots
-                with st.spinner('generating RMS spectrum plot'):
-                    plots.rms_spectrum(times, rms)
-            else:  # generate amp spectrum plots
-                with st.spinner('generating AMP spectrum plot'):
-                    plots.amp_spectrum(y,sr)
+                # radio button selection for spectrum plot over time
+                design.radiobutton_horizontal()  # switch alignment
+                sradio_col1, sradio_col2 = st.columns([0.03, 1.5])
+                with sradio_col2:
+                    st.session_state.spectrum = st.radio('Please select your spectrum of choice',
+                                                         ['AMP Spectrum  ', 'RMS Spectrum  '])
+                st.write('')  # add spacing
 
-            # radio button selection for spectrum plot over time
-            design.radiobutton_horizontal()  # switch alignment
-            sradio_col1, sradio_col2 = st.columns([0.03, 1.5])
-            with sradio_col2:
-                st.session_state.spectrum = st.radio('Please select your spectrum of choice',
-                                                     ['AMP Spectrum  ', 'RMS Spectrum  '])
-            st.write('')  # add spacing
+                # img2 = librosa.display.specshow(scale_db, ax=ax2, sr=sr, x_axis='time', y_axis='log')
+                # fig.colorbar(img2, ax=ax2, format="%+2.f dB")
 
-            # img2 = librosa.display.specshow(scale_db, ax=ax2, sr=sr, x_axis='time', y_axis='log')
-            # fig.colorbar(img2, ax=ax2, format="%+2.f dB")
+                # STREAMLIT double sided slider mit info dass max 20sec
+                # nur wenn kleiner gleich 20 sec wird das zweite bild generiert
+                # das mel spektrum gibt es nur für bestimmte abschnitte nicht ganzer track!
 
-            # STREAMLIT double sided slider mit info dass max 20sec
-            # nur wenn kleiner gleich 20 sec wird das zweite bild generiert
-            # das mel spektrum gibt es nur für bestimmte abschnitte nicht ganzer track!
-
-            # darunter custom select max 20 sec spectrum viewer !
-            # INTERACTVE 3D spectrogram (turn and zoom in) for the selected timeframe
-            # https://librosa.org/doc/0.9.1/generated/librosa.feature.rms.html
+                # darunter custom select max 20 sec spectrum viewer !
+                # INTERACTVE 3D spectrogram (turn and zoom in) for the selected timeframe
+                # https://librosa.org/doc/0.9.1/generated/librosa.feature.rms.html
 
 
-            # TODO select a section of the track (or the whole track) and analyze for sections that are above ZERO level
-            # TODO for these sections that are "übersteuern" --> find out in which frequency bands they need to be decreased in amplitude
-            # PLOT amplitude over frequency --> classical EQ view --> Spectrogram
-            # Step 1 Select slider timeframe from overall plotted audio file (AMP oder time)
-            # Step 2 Use the timeframe to calculate the Spectrogram (AMP(frequency))
-            # Step 3 Plot Spectrogram plot with yellow vertical bars at frequencies where AMP too high!
+                # TODO select a section of the track (or the whole track) and analyze for sections that are above ZERO level
+                # TODO for these sections that are "übersteuern" --> find out in which frequency bands they need to be decreased in amplitude
+                # PLOT amplitude over frequency --> classical EQ view --> Spectrogram
+                # Step 1 Select slider timeframe from overall plotted audio file (AMP oder time)
+                # Step 2 Use the timeframe to calculate the Spectrogram (AMP(frequency))
+                # Step 3 Plot Spectrogram plot with yellow vertical bars at frequencies where AMP too high!
 
 
     # FOOTER Content and Coop logos etc
