@@ -86,6 +86,7 @@ def beatinspect_main():
         with audio_col2:
             if 'Upload' in choice:
                 audiofile = st.file_uploader("", type='wav')
+                audiofile_name = audiofile.name
             elif 'Record' in choice:
                 audiofile = None
                 # st.write('')  # ad spacing
@@ -161,7 +162,9 @@ def beatinspect_main():
 
                             st.write("Read sound by saving in server and reloading file")
                             st.audio(uploaded_file)
-                            audiofile = uploaded_file
+
+                            audiofile = st.file_uploader(uploaded_file, type='wav')
+                            audiofile_name = uploaded_file
                 # ++++++++++++++++
 
                 # https://www.youtube.com/watch?v=BuD3gILJW-Q&ab_channel=Streamlit
@@ -176,15 +179,15 @@ def beatinspect_main():
     if audiofile is not None:
 
         # Save audiofile to main directory to be called via path
-        with open(audiofile.name,"wb") as f:
+        with open(audiofile_name,"wb") as f:
             f.write(audiofile.getbuffer())
-        audiofile_path = os.path.join(os.getcwd(), audiofile.name)
+        audiofile_path = os.path.join(os.getcwd(), audiofile_name)
 
         # evaluate whether the input audiofile has changed
         new_audiofile = False # same audiofile --> load from session_state
-        if audiofile.name != st.session_state.audiofile_name:
+        if audiofile_name != st.session_state.audiofile_name:
             # update session state and order new calc of attr
-            st.session_state.audiofile_name = audiofile.name
+            st.session_state.audiofile_name = audiofile_name
             # update session state for selected amp/rms plot
             st.session_state.spectrum = 'RMS Spectrum'
             new_audiofile = True # new audiofile --> update session sates
@@ -223,7 +226,7 @@ def beatinspect_main():
                         # utility funct that calculates key & scale via essentia
                         # https://essentia.upf.edu/reference/streaming_Key.html
                         key, scale, key_strength = detect_keyscale.detect_ks(
-                            audiofile.name, 'diatonic')
+                            audiofile_name, 'diatonic')
                         st.session_state.key = key
                         st.session_state.scale = scale
                         st.session_state.key_strength = key_strength
@@ -242,7 +245,7 @@ def beatinspect_main():
                     with st.spinner('Calculating BPM'):
                         time.sleep(0.3)  # buffer for loading the spinner
                         # BPM estimation using essentia library
-                        es_audio = es.MonoLoader(filename=audiofile.name)()
+                        es_audio = es.MonoLoader(filename=audiofile_name)()
                         rhythm_ex = es.RhythmExtractor2013(method="multifeature")
                         bpm_essentia, _, _, _, _ = rhythm_ex(es_audio)
                         st.session_state.bpm_essentia = bpm_essentia
