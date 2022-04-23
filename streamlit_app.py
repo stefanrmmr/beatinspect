@@ -84,6 +84,7 @@ def beatinspect_main():
             # choice = st.radio('',[' Audio File Upload'])
             st.write('')  # add spacing
         with audio_col2:
+            audiofile_name = None
             if 'Upload' in choice:
                 audiofile = st.file_uploader("", type='wav')
                 if audiofile is not None:
@@ -188,7 +189,7 @@ def beatinspect_main():
         if audiofile_name != st.session_state.audiofile_name:
             # update session state and order new calc of attr
             st.session_state.audiofile_name = audiofile_name
-            # update session state for selected amp/rms plot
+            # reset session state for selected amp/rms plot
             st.session_state.spectrum = 'RMS Spectrum'
             new_audiofile = True # new audiofile --> update session sates
 
