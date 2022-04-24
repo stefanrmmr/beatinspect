@@ -1,3 +1,9 @@
+import {
+  Streamlit,
+  StreamlitComponentBase,
+  withStreamlitConnection,
+} from "streamlit-component-lib"
+
 // collect DOMs
 const display = document.querySelector('.display')
 const controllerWrapper = document.querySelector('.controllers')
@@ -62,6 +68,7 @@ const analyzeAudio = () => {
     downloadLink.href = audioURL
     downloadLink.setAttribute('download', 'audio')
     downloadLink.click()
+    Streamlit.setComponentValue(audioURL)
 }
 
 const addButton = (id, funString, text) => {
