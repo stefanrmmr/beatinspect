@@ -112,7 +112,7 @@ def beatinspect_main():
                 rv1 = _component_func(name='servus')
                 st.write(rv1)
 
-                stt_button  = Button(label="Speak", width=100, height=20)
+                stt_button  = Button(label="Speak", width=100, height=40, background='#262730')
 
                 stt_button.js_on_event("button_click", CustomJS(code="""
                 const timeMilliSec = 10000 //Fixed 10sec recording
