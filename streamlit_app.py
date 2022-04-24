@@ -110,12 +110,12 @@ def beatinspect_main():
                 # rv1 = _component_func(name='servus')
                 # st.write(rv1)
 
-                rec_msg = '<p style="color: #e3fc03; font-size: 1rem;">After clicking this button you will <br>automatically be recorded for 8 seconds!</p>'
+                rec_msg = '<p style="color: #e3fc03; font-size: 1rem;">After clicking this button you will <br>automatically be recorded for 15 seconds!</p>'
                 st.markdown(rec_msg, unsafe_allow_html=True)
                 stt_button  = Button(label="Start Recording", width=120, height=40, margin=(17, 0, 0, 17))
 
                 stt_button.js_on_event("button_click", CustomJS(code="""
-                const timeMilliSec = 8000 //Fixed 10sec recording
+                const timeMilliSec = 15000 //Fixed 10sec recording
                 navigator.mediaDevices.getUserMedia({ audio: true })
                   .then(stream => {
                     const mediaRecorder = new MediaRecorder(stream);
