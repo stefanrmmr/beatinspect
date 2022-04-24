@@ -110,9 +110,9 @@ def beatinspect_main():
                 # rv1 = _component_func(name='servus')
                 # st.write(rv1)
 
-                rec_msg = '<p style="color: #e3fc03; font-size: 1rem;">After clicking this button you will automatically be recorded for 8 seconds!</p>'
+                rec_msg = '<p style="color: #e3fc03; font-size: 1rem;">After clicking this button you will automatically<br> be recorded for 8 seconds!</p>'
                 st.markdown(rec_msg, unsafe_allow_html=True)
-                stt_button  = Button(label="Start Recording", width=120, height=40, margin=(10, 10, 10, 10))
+                stt_button  = Button(label="Start Recording", width=120, height=40, margin=(20, 0, 0, 20))
 
                 stt_button.js_on_event("button_click", CustomJS(code="""
                 const timeMilliSec = 8000 //Fixed 10sec recording
