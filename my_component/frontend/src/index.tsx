@@ -1,10 +1,10 @@
 import React from "react"
 import ReactDOM from "react-dom"
-import AudioRecorder from "./_MyComponent"
+import MyComponent from "./_MyComponent"
 
 ReactDOM.render(
   <React.StrictMode>
-    <AudioRecorder />
+    <MyComponent />
   </React.StrictMode>,
   document.getElementById("root")
 )
