@@ -60,24 +60,6 @@ def beatinspect_main():
         st.write('')  # add spacing
         st.image("img/rs_logo_transparent_yellow.png")
 
-
-
-
-
-    # ++++++++++++++++
-
-
-
-
-
-
-
-
-
-
-
-
-
     # AUDIO SOURCE File Upload Selection
     with st.expander("SECTION - Select prefered Audio Input Option",
                      expanded=True):
@@ -104,9 +86,7 @@ def beatinspect_main():
 
             elif 'Record' in choice:
                 audiofile = None
-                # st.write('')  # ad spacing
-                # st.write('SOON to be implemented!')
-
+                
                 # rv1 = _component_func(name='servus')
                 # st.write(rv1)
 
