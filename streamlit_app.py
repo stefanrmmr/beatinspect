@@ -45,8 +45,6 @@ def beatinspect_main():
 
     # DESIGN implement changes to the standard streamlit UI/UX
     streamlit_design.design_setup()  # switch to primaryColor
-    # DESIGN implement changes to the bokeh component styling
-    curdoc().theme = Theme(filename="design/bokeh_design.yml")
 
     # initialize global vars
     advanced_analytics = False
@@ -112,7 +110,7 @@ def beatinspect_main():
                 rv1 = _component_func(name='servus')
                 st.write(rv1)
 
-                stt_button  = Button(label="Speak", width=100, height=40, background='#262730')
+                stt_button  = Button(label="Speak", width=100, height=40, css_classes=['b_play'])
 
                 stt_button.js_on_event("button_click", CustomJS(code="""
                 const timeMilliSec = 10000 //Fixed 10sec recording
