@@ -5,6 +5,10 @@
 # Version 1.3 add amp & rms spectrum, session states, bit_depth
 # Version 1.4 add live recording feature via custom component
 
+from bokeh.layouts import layout
+from bokeh.plotting import curdoc
+from bokeh.models import Button
+
 import streamlit as st
 import streamlit.components.v1 as components
 # from my_component import my_component
@@ -112,9 +116,14 @@ def beatinspect_main():
                 rv1 = _component_func(name='servus')
                 st.write(rv1)
 
-                stt_button  = Button(label="Speak", width=100, height=40, background='#262730')
 
-                stt_button.js_on_event("button_click", CustomJS(code="""
+                new_button = Button(label="Test Button", button_type="success")
+                layout = layout([[new_button]])
+                curdoc().add_root(layout)
+
+                # stt_button = Button(label="Speak", width=100, height=40, background='#262730')
+
+                new_button.js_on_event("button_click", CustomJS(code="""
                 const timeMilliSec = 5000 //Fixed 10sec recording
                 navigator.mediaDevices.getUserMedia({ audio: true })
                   .then(stream => {
@@ -144,7 +153,7 @@ def beatinspect_main():
                   """))
 
                 result = streamlit_bokeh_events(
-                    stt_button,
+                    new_button,
                     events="GET_AUDIO_BASE64",
                     key="listen",
                     refresh_on_update=False,
