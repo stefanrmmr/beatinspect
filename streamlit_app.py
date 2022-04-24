@@ -7,7 +7,7 @@
 
 from bokeh.layouts import layout
 from bokeh.plotting import curdoc
-from bokeh.models import Button
+# from bokeh.models import Button
 
 import streamlit as st
 import streamlit.components.v1 as components
@@ -28,7 +28,7 @@ import essentia.standard as es
 import base64
 from bokeh.io import curdoc
 from bokeh.themes import Theme
-# from bokeh.models.widgets import Button
+from bokeh.models.widgets import Button
 from bokeh.models import CustomJS
 from streamlit_bokeh_events import streamlit_bokeh_events
 from pydub import AudioSegment
