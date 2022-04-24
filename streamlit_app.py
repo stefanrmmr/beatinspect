@@ -22,6 +22,8 @@ import soundfile as sf
 import essentia.standard as es
 
 import base64
+from bokeh.io import curdoc
+from bokeh.themes import Theme
 from bokeh.models.widgets import Button
 from bokeh.models import CustomJS
 from streamlit_bokeh_events import streamlit_bokeh_events
@@ -29,8 +31,10 @@ from pydub import AudioSegment
 
 import src.plots as plots  # plotting framework
 import src.utils as utils  # utility functions
-import src.design as design  # design choices
 import src.detect_keyscale as detect_keyscale
+
+# import design augmentation for streamlit UX/UI
+import design.streamlit_design as streamlit_design
 
 parent_dir = os.path.dirname(os.path.abspath(__file__))
 build_dir = os.path.join(parent_dir, "my_component/frontend/build")
@@ -40,7 +44,9 @@ _component_func = components.declare_component("my_component", path=build_dir)
 def beatinspect_main():
 
     # DESIGN implement changes to the standard streamlit UI/UX
-    design.design_setup()  # switch to primaryColor for accents
+    streamlit_design.design_setup()  # switch to primaryColor
+    # DESIGN implement changes to the bokeh component styling
+    curdoc().theme = Theme(filename="design/bokeh_design.yml")
 
     # initialize global vars
     advanced_analytics = False
