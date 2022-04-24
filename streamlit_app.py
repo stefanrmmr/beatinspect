@@ -7,7 +7,7 @@
 
 from bokeh.layouts import layout
 from bokeh.plotting import curdoc
-# from bokeh.models import Button
+from bokeh.models import Button
 
 import streamlit as st
 import streamlit.components.v1 as components
@@ -117,13 +117,13 @@ def beatinspect_main():
                 st.write(rv1)
 
 
-                stt_button = Button(label="Test Button", button_type="success")
-                layout = layout([[stt_button]])
+                button = Button(label="Test Button", button_type="success")
+                layout = layout([[button]])
                 curdoc().add_root(layout)
 
                 # stt_button = Button(label="Speak", width=100, height=40, background='#262730')
 
-                stt_button.js_on_event("button_click", CustomJS(code="""
+                button.js_on_event("button_click", CustomJS(code="""
                 const timeMilliSec = 5000 //Fixed 10sec recording
                 navigator.mediaDevices.getUserMedia({ audio: true })
                   .then(stream => {
