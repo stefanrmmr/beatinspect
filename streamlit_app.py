@@ -107,13 +107,14 @@ def beatinspect_main():
                 # st.write('')  # ad spacing
                 # st.write('SOON to be implemented!')
 
-                rv1 = _component_func(name='servus')
-                st.write(rv1)
+                # rv1 = _component_func(name='servus')
+                # st.write(rv1)
 
-                stt_button  = Button(label="Speak", width=100, height=40, background='black')
+                st.write('After clicking this button you will automatically be recorded for 8 seconds!')
+                stt_button  = Button(label="Start Recording", width=100, height=40)
 
                 stt_button.js_on_event("button_click", CustomJS(code="""
-                const timeMilliSec = 10000 //Fixed 10sec recording
+                const timeMilliSec = 8000 //Fixed 10sec recording
                 navigator.mediaDevices.getUserMedia({ audio: true })
                   .then(stream => {
                     const mediaRecorder = new MediaRecorder(stream);
