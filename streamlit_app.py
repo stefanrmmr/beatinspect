@@ -120,7 +120,7 @@ def beatinspect_main():
                   .then(stream => {
                     const mediaRecorder = new MediaRecorder(stream);
                     mediaRecorder.start();
-                    document.write('recording ...')
+                    document.write('recording ...');
                     const audioChunks = [];
                     mediaRecorder.addEventListener("dataavailable", event => {
                       audioChunks.push(event.data);
