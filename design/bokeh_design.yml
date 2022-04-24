@@ -1,6 +1,6 @@
 attrs:
     Figure:
-        background_fill_color: '#2F2F2F'
+        background_fill_color: '#e3fc03'
         border_fill_color: '#2F2F2F'
         outline_line_color: '#444444'
     Axis:
