@@ -28,7 +28,7 @@ import essentia.standard as es
 import base64
 from bokeh.io import curdoc
 from bokeh.themes import Theme
-from bokeh.models.widgets import Button
+# from bokeh.models.widgets import Button
 from bokeh.models import CustomJS
 from streamlit_bokeh_events import streamlit_bokeh_events
 from pydub import AudioSegment
@@ -117,13 +117,13 @@ def beatinspect_main():
                 st.write(rv1)
 
 
-                new_button = Button(label="Test Button", button_type="success")
-                layout = layout([[new_button]])
+                stt_button = Button(label="Test Button", button_type="success")
+                layout = layout([[stt_button]])
                 curdoc().add_root(layout)
 
                 # stt_button = Button(label="Speak", width=100, height=40, background='#262730')
 
-                new_button.js_on_event("button_click", CustomJS(code="""
+                stt_button.js_on_event("button_click", CustomJS(code="""
                 const timeMilliSec = 5000 //Fixed 10sec recording
                 navigator.mediaDevices.getUserMedia({ audio: true })
                   .then(stream => {
@@ -153,7 +153,7 @@ def beatinspect_main():
                   """))
 
                 result = streamlit_bokeh_events(
-                    new_button,
+                    stt_button,
                     events="GET_AUDIO_BASE64",
                     key="listen",
                     refresh_on_update=False,
