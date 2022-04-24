@@ -4,7 +4,7 @@ import streamlit as st
 def design_setup():
 
     # bokeh button design
-    st.markdown('''style>.b_play button { background-color: #98FB98 !important;  }</style>''', unsafe_allow_html=True)
+    st.markdown('''style>.b_play { background-color: #98FB98 !important;  }</style>''', unsafe_allow_html=True)
 
 
     # Design page layout and browser window details
