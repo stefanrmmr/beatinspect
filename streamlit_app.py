@@ -165,7 +165,8 @@ def beatinspect_main():
 
                             decoded = base64.b64decode(b64_str)
 
-                            st.write("Read sound from Frontend")
+                            # st.write("Read sound from Frontend")
+                            st.write('Captured audio recording from web browser:')
                             st.audio(decoded)
 
                             #save it server side if needed
@@ -177,8 +178,8 @@ def beatinspect_main():
                             wav = AudioSegment.from_file(uploaded_file)
                             getaudio = wav.export(uploaded_file, format="wav")
 
-                            st.write("Read sound by saving in server and reloading file")
-                            st.audio(uploaded_file)
+                            # st.write("Read sound by saving in server and reloading file")
+                            # st.audio(uploaded_file)
 
                             audiofile_name = uploaded_file
                 # ++++++++++++++++
