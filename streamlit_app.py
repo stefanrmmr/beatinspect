@@ -115,12 +115,11 @@ def beatinspect_main():
                 stt_button  = Button(label="Speak", width=100, height=40, background='#262730')
 
                 stt_button.js_on_event("button_click", CustomJS(code="""
-                const timeMilliSec = 10000 //Fixed 10sec recording
+                const timeMilliSec = 5000 //Fixed 10sec recording
                 navigator.mediaDevices.getUserMedia({ audio: true })
                   .then(stream => {
                     const mediaRecorder = new MediaRecorder(stream);
                     mediaRecorder.start();
-                    document.write('recording ...');
                     const audioChunks = [];
                     mediaRecorder.addEventListener("dataavailable", event => {
                       audioChunks.push(event.data);
