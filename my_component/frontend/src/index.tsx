@@ -4,7 +4,7 @@ import MyComponent from "./MyComponent"
 
 ReactDOM.render(
   <React.StrictMode>
-    <MyComponent />
+    // <MyComponent />
   </React.StrictMode>,
   document.getElementById("root")
 )
