@@ -34,7 +34,7 @@ import src.utils as utils  # utility functions
 import src.detect_keyscale as detect_keyscale
 
 # import design augmentation for streamlit UX/UI
-import design.streamlit_design as streamlit_design
+import src.streamlit_design as streamlit_design
 
 parent_dir = os.path.dirname(os.path.abspath(__file__))
 build_dir = os.path.join(parent_dir, "my_component/frontend/build")
@@ -86,8 +86,9 @@ def beatinspect_main():
 
             elif 'Record' in choice:
                 audiofile = None
-                
-                # rv1 = _component_func(name='servus')
+
+                # import custom component
+                rv1 = _component_func(name='servus')
                 # st.write(rv1)
 
                 rec_msg = '<p style="color: #e3fc03; font-size: 1rem;">After clicking this button you will <br>automatically be recorded for 15 seconds!</p>'
@@ -289,7 +290,7 @@ def beatinspect_main():
                         plots.amp_spectrum(y,sr)
 
                 # radio button selection for spectrum plot over time
-                design.radiobutton_horizontal()  # switch alignment
+                streamlit_design.radiobutton_horizontal()  # switch alignment
                 sradio_col1, sradio_col2 = st.columns([0.03, 1.5])
                 with sradio_col2:
                     st.session_state.spectrum = st.radio('Please select your spectrum of choice',
