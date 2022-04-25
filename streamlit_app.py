@@ -21,7 +21,6 @@ import numpy as np
 import soundfile as sf
 import essentia.standard as es
 
-import base64
 from bokeh.io import curdoc
 from bokeh.themes import Theme
 from bokeh.models.widgets import Button
@@ -32,10 +31,12 @@ from pydub import AudioSegment
 import src.plots as plots  # plotting framework
 import src.utils as utils  # utility functions
 import src.detect_keyscale as detect_keyscale
+import src.rec_audio_bokeh as rec_audio_bokeh
 
 # import design augmentation for streamlit UX/UI
 import src.streamlit_design as streamlit_design
 
+# initialize custom component for recording client audio in browser
 parent_dir = os.path.dirname(os.path.abspath(__file__))
 build_dir = os.path.join(parent_dir, "my_component/frontend/build")
 _component_func = components.declare_component("my_component", path=build_dir)
@@ -91,87 +92,10 @@ def beatinspect_main():
                 rv1 = _component_func(name='servus')
                 # st.write(rv1)
 
-                rec_msg = '<p style="color: #e3fc03; font-size: 1rem;">After clicking this button you will <br>automatically be recorded for 15 seconds!</p>'
-                st.markdown(rec_msg, unsafe_allow_html=True)
-                stt_button  = Button(label="Start Recording", width=120, height=40, margin=(17, 0, 0, 17))
+                # use bokeh workaround to record some audio
+                # will be replaced by streamlit custom component
+                audiofile_name = rec_audio_bokeh.rec_bokeh()
 
-                stt_button.js_on_event("button_click", CustomJS(code="""
-                const timeMilliSec = 15000 //Fixed 10sec recording
-                navigator.mediaDevices.getUserMedia({ audio: true })
-                  .then(stream => {
-                    const mediaRecorder = new MediaRecorder(stream);
-                    mediaRecorder.start();
-                    const audioChunks = [];
-                    mediaRecorder.addEventListener("dataavailable", event => {
-                      audioChunks.push(event.data);
-                    });
-                    mediaRecorder.addEventListener("stop", () => {
-                      //convert audioBuffer to wav
-                      const audioBlob = new Blob(audioChunks, {type:'audio/wav'});
-                      //create base64 reader
-                      var reader = new FileReader();
-                      reader.readAsDataURL(audioBlob);
-                      reader.onloadend = function() {
-                        //read base64
-                        var base64data = reader.result;
-                        //send data to streamlit
-                        document.dispatchEvent(new CustomEvent("GET_AUDIO_BASE64", {detail: base64data}));
-                      }
-                    });
-                    setTimeout(() => {
-                      mediaRecorder.stop();
-                    }, timeMilliSec);
-                  });
-                  """))
-
-                result = streamlit_bokeh_events(
-                    stt_button,
-                    events="GET_AUDIO_BASE64",
-                    key="listen",
-                    refresh_on_update=False,
-                    override_height=75,
-                    debounce_time=0)
-
-                if result:
-                    if "GET_AUDIO_BASE64" in result:
-                        b64_str_metadata = result.get("GET_AUDIO_BASE64")
-                        metadata_string = "data:audio/wav;base64,"
-                        if len(b64_str_metadata)>len(metadata_string):
-                            #get rid of metadata (data:audio/wav;base64,)
-
-                            if b64_str_metadata.startswith(metadata_string):
-                                b64_str = b64_str_metadata[len(metadata_string):]
-                            else:
-                                b64_str = b64_str_metadata
-
-                            decoded = base64.b64decode(b64_str)
-
-                            # st.write("Read sound from Frontend")
-                            st.write('Captured audio recording from web browser:')
-                            st.audio(decoded)
-
-                            #save it server side if needed
-                            uploaded_file = 'test.wav'
-                            with open(uploaded_file,'wb') as f:
-                                f.write(decoded)
-
-                            #convert File to wav and save it again
-                            wav = AudioSegment.from_file(uploaded_file)
-                            getaudio = wav.export(uploaded_file, format="wav")
-
-                            # st.write("Read sound by saving in server and reloading file")
-                            # st.audio(uploaded_file)
-
-                            audiofile_name = uploaded_file
-                # ++++++++++++++++
-
-                # https://www.youtube.com/watch?v=BuD3gILJW-Q&ab_channel=Streamlit
-                # USE streamlit custom component that implements a custom html/css/react element
-                # input data can be passed to this component and it returns data
-                # TODO build a component that uses the html/script code of above (for demo webapp rec tool)
-                # the component should show up in case the radio button record mic is selected
-                # the component should return a path to a audiofile
-                # clean existing audio files bevore saving the new audio file! (tmp dictonary)
 
     # ANALYTICS for Audio File
     if audiofile_name is not None:
