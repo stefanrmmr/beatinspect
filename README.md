@@ -16,7 +16,7 @@ To insure that the implemented functionality provides real value to aspiring art
 - Waveform and RMS Spectrogram Insights (view Amplitude/RMS spectrum over time)<br/>
 - SOON: Audio File Format Processing
   - Recording Audio to be analyzed from your Browser<br/>(currently work in progress, not functional yet)
-  - Conversion to .wav file with predefined settings<br/>(provided by using convertio.co's API features)<br/><br/>
+  - Conversion to .wav file with predefined settings<br/>(provided by using convertio.co's API features)<br/>
   - Meta data information encoded in the output file
   - Bringing beatinspect to mobile browsers/devices
 
