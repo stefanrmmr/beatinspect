@@ -15,7 +15,9 @@ To insure that the implemented functionality provides real value to aspiring art
 - Technical Overview (Audio file format, quality, resolution, audio channels dimension)
 - Waveform and RMS Spectrogram Insights (view Amplitude/RMS spectrum over time)<br/><br/>
 - SOON: Audio File Format Processing
-  - Meta information encoded in the output file
+  - Recording Audio to be analyzed from your Browser
   - Conversion to .wav file with predefined settings<br/>(provided by using convertio.co's API features)<br/><br/>
+  - Meta data information encoded in the output file
+  - Bringing beatinspect to mobile browsers/devices
 
 <img width="658" alt="ux_screenshot" src="https://user-images.githubusercontent.com/82606558/163827628-f27058de-5d44-4002-a12d-a3c041720231.png">
