@@ -48,8 +48,8 @@ class MyComponent extends StreamlitComponentBase<State> {
             onStop={this.onStop_audio}
             backgroundColor='rgb(15, 17, 22)'
             foregroundColor='rgb(227, 252, 3)'
-            // canvasWidth=500
-            // canvasHeight=200
+            canvasWidth={500}
+            canvasHeight={200}
           />
 
           <audio
