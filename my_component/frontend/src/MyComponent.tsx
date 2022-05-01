@@ -84,7 +84,7 @@ class MyComponent extends StreamlitComponentBase<State> {
 
   private onClick_reset = () => {
     this.setState({
-      recordState: RecordState.STOP,
+      recordState: RecordState.RESET,
       audioDataUrl: ''
     })
     Streamlit.setComponentValue('')
