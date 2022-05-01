@@ -58,11 +58,11 @@ class MyComponent extends StreamlitComponentBase<State> {
           <button id='record' onClick={this.onClick_start}>
             Start
           </button>
-          <button id='pause' onClick={this.onClick_pause}>
-            Pause
-          </button>
           <button id='stop' onClick={this.onClick_stop}>
             Stop
+          </button>
+          <button id='reset' onClick={this.onClick_reset}>
+            Reset
           </button>
 
         </div>
@@ -70,16 +70,9 @@ class MyComponent extends StreamlitComponentBase<State> {
     )
   }
 
-  /** fucntions from react audio recorder app */
   private onClick_start = () => {
     this.setState({
       recordState: RecordState.START
-    })
-  }
-
-  private onClick_pause = () => {
-    this.setState({
-      recordState: RecordState.PAUSE
     })
   }
 
@@ -87,6 +80,14 @@ class MyComponent extends StreamlitComponentBase<State> {
     this.setState({
       recordState: RecordState.STOP
     })
+  }
+
+  private onClick_reset = () => {
+    this.setState({
+      recordState: RecordState.STOP,
+      audioDataUrl: ''
+    })
+    Streamlit.setComponentValue('')
   }
 
   private onStop_audio = (data) => {
