@@ -5,9 +5,14 @@ import {
 } from "streamlit-component-lib"
 import React, { ReactNode } from "react"
 
+import AudioReactRecorder, { RecordState } from 'audio-react-recorder'
+import 'audio-react-recorder/dist/index.css'
+
 interface State {
   numClicks: number
   isFocused: boolean
+  recordState: null
+  audioData: string
 }
 
 /**
@@ -15,7 +20,7 @@ interface State {
  * automatically when your component should be re-rendered.
  */
 class MyComponent extends StreamlitComponentBase<State> {
-  public state = { numClicks: 0, isFocused: false }
+  public state = { numClicks: 0, isFocused: false, recordState: null, audioData: ''}
 
   public render = (): ReactNode => {
     // Arguments that are passed to the plugin in Python are accessible
@@ -27,6 +32,8 @@ class MyComponent extends StreamlitComponentBase<State> {
     // streamlit app.
     const { theme } = this.props
     const style: React.CSSProperties = {}
+
+    const { recordState } = this.state
 
     // Maintain compatibility with older versions of Streamlit that don't send
     // a theme object.
@@ -46,6 +53,30 @@ class MyComponent extends StreamlitComponentBase<State> {
     // be available to the Python program.
     return (
       <span>
+        <div>
+          <AudioReactRecorder
+            state={recordState}
+            onStop={this.onStop}
+            backgroundColor='rgb(255,255,255)'
+          />
+          <audio
+            id='audio'
+            controls
+            src={this.state.audioData}
+          ></audio>
+          <button id='record' onClick={this.start}>
+            Start
+          </button>
+          <button id='pause' onClick={this.pause}>
+            Pause
+          </button>
+          <button id='stop' onClick={this.stop}>
+            Stop
+          </button>
+        </div>
+
+
+
         Hello, {name}! &nbsp;
         <button id='button_a' style={style} onClick={this.onClickedA}>
           Button A
@@ -100,6 +131,32 @@ class MyComponent extends StreamlitComponentBase<State> {
   private _onBlur = (): void => {
     this.setState({ isFocused: false })
   }
+
+  /** fucntions from react audio recorder app */
+  private start = () => {
+    this.setState({
+      recordState: RecordState.START
+    })
+  }
+
+  private pause = () => {
+    this.setState({
+      recordState: RecordState.PAUSE
+    })
+  }
+
+  private stop = () => {
+    this.setState({
+      recordState: RecordState.STOP
+    })
+  }
+
+  private onStop = (data) => {
+    this.setState({
+      audioData: data
+    })
+  }
+
 }
 
 // "withStreamlitConnection" is a wrapper function. It bootstraps the
