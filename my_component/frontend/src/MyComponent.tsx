@@ -48,15 +48,15 @@ class MyComponent extends StreamlitComponentBase<State> {
             onStop={this.onStop_audio}
             backgroundColor='rgb(15, 17, 22)'
             foregroundColor='rgb(227, 252, 3)'
-            canvasWidth={400}
-            canvasHeight={100}
+            canvasWidth={450}
+            canvasHeight={150}
           />
 
           <audio
             id='audio'
             controls
             src={this.state.audioDataUrl}
-          ></audio>
+          />
 
           <button id='record' onClick={this.onClick_start}>
             Record
