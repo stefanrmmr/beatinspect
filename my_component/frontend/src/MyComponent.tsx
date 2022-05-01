@@ -56,13 +56,16 @@ class MyComponent extends StreamlitComponentBase<State> {
           ></audio>
 
           <button id='record' onClick={this.onClick_start}>
-            Start
+            Start Recording
           </button>
           <button id='stop' onClick={this.onClick_stop}>
-            Stop
+            Stop Recording
           </button>
           <button id='reset' onClick={this.onClick_reset}>
-            Reset
+            Reset Recording
+          </button>
+          <button id='continue' onClick={this.onClick_continue}>
+            Continue to Analyis
           </button>
 
         </div>
@@ -95,18 +98,25 @@ class MyComponent extends StreamlitComponentBase<State> {
     Streamlit.setComponentValue(this.state.audioDataUrl)
   }
 
+  private onClick_continue = () => {
+    if (this.state.audioDataUrl != '')
+    {
+      Streamlit.setComponentValue(this.state.audioDataUrl)
+    }
+  }
+
   private onStop_audio = (data) => {
     if (this.state.reset)
     {
       this.setState({
         audioDataUrl: ''
       })
-      Streamlit.setComponentValue(this.state.audioDataUrl)
+      //Streamlit.setComponentValue(this.state.audioDataUrl)
     }else{
       this.setState({
         audioDataUrl: data.url
       })
-      Streamlit.setComponentValue(this.state.audioDataUrl)
+      //Streamlit.setComponentValue(this.state.audioDataUrl)
     }
 
   }
