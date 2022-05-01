@@ -12,7 +12,7 @@ interface State {
   numClicks: number
   isFocused: boolean
   recordState: null
-  audioData: string
+  audioDataUrl: string
 }
 
 /**
@@ -20,7 +20,7 @@ interface State {
  * automatically when your component should be re-rendered.
  */
 class MyComponent extends StreamlitComponentBase<State> {
-  public state = { numClicks: 0, isFocused: false, recordState: null, audioData: ''}
+  public state = { numClicks: 0, isFocused: false, recordState: null, audioDataUrl: ''}
 
   public render = (): ReactNode => {
     // Arguments that are passed to the plugin in Python are accessible
@@ -62,7 +62,7 @@ class MyComponent extends StreamlitComponentBase<State> {
           <audio
             id='audio'
             controls
-            src={this.state.audioData}
+            src={this.state.audioDataUrl}
           ></audio>
           <button id='record' onClick={this.start}>
             Start
@@ -153,9 +153,9 @@ class MyComponent extends StreamlitComponentBase<State> {
 
   private onStop = (data) => {
     this.setState({
-      audioData: data
+      audioDataUrl: data.url
     })
-    Streamlit.setComponentValue(data)
+    Streamlit.setComponentValue(data.url)
   }
 
 }
