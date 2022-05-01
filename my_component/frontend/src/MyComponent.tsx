@@ -47,13 +47,13 @@ class MyComponent extends StreamlitComponentBase<State> {
     return (
       <span>
         Hello, {name}! &nbsp;
-        <button id='button_a' style={style} onClick={this.onClickedA} onFocus={this._onFocus} onBlur={this._onBlur}>
+        <button id='button_a' style={style} onClick={this.onClickedA}>
           Button A
         </button>
-        <button id='button_b' style={style} onClick={this.onClickedB} onFocus={this._onFocus} onBlur={this._onBlur}>
+        <button id='button_b' style={style} onClick={this.onClickedB}>
           Button B
         </button>
-        <button id='button_c' style={style} onClick={this.onClickedC} onFocus={this._onFocus} onBlur={this._onBlur}>
+        <button id='button_c' style={style} onClick={this.onClickedC}>
           Button C
         </button>
       </span>
