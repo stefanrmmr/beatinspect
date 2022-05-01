@@ -71,23 +71,23 @@ class MyComponent extends StreamlitComponentBase<State> {
   }
 
   private onClick_start = () => {
-    this.state.reset = false
     this.setState({
+      reset: false,
       recordState: RecordState.START
     })
   }
 
   private onClick_stop = () => {
-    this.state.reset = false
     this.setState({
+      reset: false,
       recordState: RecordState.STOP
     })
   }
 
   private onClick_reset = () => {
-    this.state.reset = true
     this.setState({
-      recordState: RecordState.STOP,
+      reset: true,
+      recordState: RecordState.STOP
     }) // stop recording
     this.setState({
       audioDataUrl: ''
