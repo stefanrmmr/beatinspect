@@ -12,15 +12,15 @@ interface State {
   isFocused: boolean
   recordState: null
   audioDataUrl: string
+  reset: boolean
 }
 
 class MyComponent extends StreamlitComponentBase<State> {
-  public state = { isFocused: false, recordState: null, audioDataUrl: ''}
+  public state = { isFocused: false, recordState: null, audioDataUrl: '', reset: false}
 
   public render = (): ReactNode => {
     // Arguments that are passed to the plugin in Python are accessible
     // via `this.props.args`. Here, we access the "name" arg.
-    // const name = this.props.args["name"]
 
     // Streamlit sends us a theme object via props that we can use to ensure
     // that our component has visuals that match the active theme in a
@@ -71,32 +71,40 @@ class MyComponent extends StreamlitComponentBase<State> {
   }
 
   private onClick_start = () => {
+    this.state.reset = false
     this.setState({
       recordState: RecordState.START
     })
   }
 
   private onClick_stop = () => {
+    this.state.reset = false
     this.setState({
       recordState: RecordState.STOP
     })
   }
 
   private onClick_reset = () => {
+    this.state.reset = true
     this.setState({
       recordState: RecordState.STOP,
     }) // stop recording
-    this.setState({
-      audioDataUrl: ''
-    }) // remove recorded url
-    Streamlit.setComponentValue('')
   }
 
   private onStop_audio = (data) => {
-    this.setState({
-      audioDataUrl: data.url
-    })
-    Streamlit.setComponentValue(data.url)
+    if (this.state.reset)
+    {
+      this.setState({
+        audioDataUrl: ''
+      })
+      Streamlit.setComponentValue('')
+    }else{
+      this.setState({
+        audioDataUrl: data.url
+      })
+      Streamlit.setComponentValue(data.url)
+    }
+
   }
 
 }
