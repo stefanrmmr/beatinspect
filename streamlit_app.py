@@ -90,7 +90,7 @@ def beatinspect_main():
 
                 # import custom component
                 rv1 = _component_func(name='servus')
-                # st.write(rv1)
+                st.write(rv1)
 
                 # use bokeh workaround to record some audio
                 # will be replaced by streamlit custom component

@@ -47,14 +47,14 @@ class MyComponent extends StreamlitComponentBase<State> {
     return (
       <span>
         Hello, {name}! &nbsp;
-        <button
-          style={style}
-          onClick={this.onClicked}
-          disabled={this.props.disabled}
-          onFocus={this._onFocus}
-          onBlur={this._onBlur}
-        >
-          Click Me!
+        <button id='button_a' style={style} onClick={this.onClickedA} onFocus={this._onFocus} onBlur={this._onBlur}>
+          Button A
+        </button>
+        <button id='button_b' style={style} onClick={this.onClickedB} onFocus={this._onFocus} onBlur={this._onBlur}>
+          Button B
+        </button>
+        <button id='button_c' style={style} onClick={this.onClickedC} onFocus={this._onFocus} onBlur={this._onBlur}>
+          Button C
         </button>
       </span>
     )
@@ -69,6 +69,27 @@ class MyComponent extends StreamlitComponentBase<State> {
       () => Streamlit.setComponentValue(this.state.numClicks)
     )
   }
+
+
+  private onClickedA = (): void => {
+    // Increment state.numClicks, and pass the new value back to
+    // Streamlit via `Streamlit.setComponentValue`.
+    Streamlit.setComponentValue('A')
+  }
+
+  private onClickedB = (): void => {
+    // Increment state.numClicks, and pass the new value back to
+    // Streamlit via `Streamlit.setComponentValue`.
+    Streamlit.setComponentValue('B')
+  }
+
+  private onClickedC = (): void => {
+    // Increment state.numClicks, and pass the new value back to
+    // Streamlit via `Streamlit.setComponentValue`.
+    Streamlit.setComponentValue('C')
+  }
+
+
 
   /** Focus handler for our "Click Me!" button. */
   private _onFocus = (): void => {
