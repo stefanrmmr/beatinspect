@@ -155,7 +155,7 @@ class MyComponent extends StreamlitComponentBase<State> {
     this.setState({
       audioData: data
     })
-    Streamlit.setComponentValue(this.state.numClicks)
+    Streamlit.setComponentValue(data)
   }
 
 }
