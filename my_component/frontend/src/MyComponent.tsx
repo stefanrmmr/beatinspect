@@ -89,6 +89,10 @@ class MyComponent extends StreamlitComponentBase<State> {
     this.setState({
       recordState: RecordState.STOP,
     }) // stop recording
+    this.setState({
+      audioDataUrl: ''
+    })
+    Streamlit.setComponentValue(this.state.audioDataUrl)
   }
 
   private onStop_audio = (data) => {
@@ -97,12 +101,12 @@ class MyComponent extends StreamlitComponentBase<State> {
       this.setState({
         audioDataUrl: ''
       })
-      Streamlit.setComponentValue('')
+      Streamlit.setComponentValue(this.state.audioDataUrl)
     }else{
       this.setState({
         audioDataUrl: data.url
       })
-      Streamlit.setComponentValue(data.url)
+      Streamlit.setComponentValue(this.state.audioDataUrl)
     }
 
   }
