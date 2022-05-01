@@ -46,7 +46,10 @@ class MyComponent extends StreamlitComponentBase<State> {
           <AudioReactRecorder
             state={recordState}
             onStop={this.onStop_audio}
-            backgroundColor='rgb(255,255,255)'
+            backgroundColor='rgb(15, 17, 22)'
+            foregroundColor='rgb(227, 252, 3)'
+            // canvasWidth=500
+            // canvasHeight=200
           />
 
           <audio
@@ -56,16 +59,16 @@ class MyComponent extends StreamlitComponentBase<State> {
           ></audio>
 
           <button id='record' onClick={this.onClick_start}>
-            Start Recording
+            Record
           </button>
           <button id='stop' onClick={this.onClick_stop}>
-            Stop Recording
+            Stop
           </button>
           <button id='reset' onClick={this.onClick_reset}>
-            Reset Recording
+            Reset
           </button>
           <button id='continue' onClick={this.onClick_continue}>
-            Continue to Analyis
+            Continue
           </button>
 
         </div>
@@ -99,14 +102,14 @@ class MyComponent extends StreamlitComponentBase<State> {
   }
 
   private onClick_continue = () => {
-    if (this.state.audioDataUrl != '')
+    if (this.state.audioDataUrl !== '')
     {
       Streamlit.setComponentValue(this.state.audioDataUrl)
     }
   }
 
   private onStop_audio = (data) => {
-    if (this.state.reset == true)
+    if (this.state.reset === true)
     {
       this.setState({
         audioDataUrl: ''
