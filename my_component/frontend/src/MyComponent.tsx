@@ -59,7 +59,7 @@ class MyComponent extends StreamlitComponentBase<State> {
           />
 
           <button id='record' onClick={this.onClick_start}>
-            Record
+            Start Recording
           </button>
           <button id='stop' onClick={this.onClick_stop}>
             Stop
@@ -68,7 +68,7 @@ class MyComponent extends StreamlitComponentBase<State> {
             Reset
           </button>
           <button id='continue' onClick={this.onClick_continue}>
-            Continue
+            Continue to Analysis
           </button>
 
         </div>
