@@ -12,7 +12,6 @@ import os
 import sys
 import toml
 import time
-import pydub
 import base64
 import ffmpeg
 import librosa
@@ -20,24 +19,17 @@ import numpy as np
 import soundfile as sf
 import essentia.standard as es
 
-from bokeh.io import curdoc
-from bokeh.themes import Theme
-from bokeh.models.widgets import Button
-from bokeh.models import CustomJS
-from streamlit_bokeh_events import streamlit_bokeh_events
-from pydub import AudioSegment
-
 import src.plots as plots  # plotting framework
 import src.utils as utils  # utility functions
 import src.detect_keyscale as detect_keyscale
-import src.rec_audio_bokeh as rec_audio_bokeh
 
 # import design augmentation for streamlit UX/UI
 import src.streamlit_design as streamlit_design
 
-# initialize custom component for recording client audio in browser
+# custom component for recording client audio in browser
 parent_dir = os.path.dirname(os.path.abspath(__file__))
 build_dir = os.path.join(parent_dir, "st_audiorec/frontend/build")
+# specify directory and initialize st_audiorec object functionality
 st_audiorec = components.declare_component("st_audiorec", path=build_dir)
 
 
@@ -91,8 +83,8 @@ def beatinspect_main():
                 st.markdown(rec_msg, unsafe_allow_html=True)
 
                 # import custom component
-                rv1 = st_audiorec()
-                st.write(rv1)
+                returned_audio = st_audiorec()
+                st.write(returned_audio)
 
                 # TODOOOOO
                 # download the file to a dir and with a respective UNIQUE name!
@@ -100,12 +92,6 @@ def beatinspect_main():
                 # add the name of the saved file itself to audiofile_name
 
                 # audiofile_name = rv1
-
-                # use bokeh workaround to record some audio
-                # will be replaced by streamlit custom component
-                # audiofile_name = rec_audio_bokeh.rec_bokeh()
-
-
 
 
     # ANALYTICS for Audio File
