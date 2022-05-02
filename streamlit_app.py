@@ -84,10 +84,11 @@ def beatinspect_main():
                 st.markdown(rec_msg, unsafe_allow_html=True)
 
                 # use st_audiorec component
-                returned_audio = st_audiorec()
+                returned_audio_str = st_audiorec()
+                returned_audio_url = returned_audio_str[5:]
 
                 # returns audio after finished recording
-                st.write(str(returned_audio))
+                st.write(str(returned_audio_url))
 
                 # TODOOOOO
                 # download the file to a dir and with a respective UNIQUE name!
