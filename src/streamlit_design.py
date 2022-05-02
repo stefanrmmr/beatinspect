@@ -31,6 +31,11 @@ def design_setup():
         unsafe_allow_html=True)
 
 
+    # Design error message black colored texts
+    st.markdown('''<style>.st-dm {color: black;}</style>''',
+        unsafe_allow_html=True)
+
+
     # Design change spinner color to primary color
     st.markdown('''<style>.stSpinner > div > div {border-top-color: #e3fc03;}</style>''',
         unsafe_allow_html=True)
@@ -62,7 +67,6 @@ def design_setup():
     # Design change radio button title div size to zero height
     st.markdown('''<style>.css-16huue1 {min-height: 0rem;}</style>''',
         unsafe_allow_html=True)
-
     st.markdown('<style>div.row-widget.stRadio {margin-top: -2.5rem;} </style>',
              unsafe_allow_html=True)
 
