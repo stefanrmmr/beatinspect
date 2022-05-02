@@ -92,10 +92,10 @@ def beatinspect_main():
 
 
                 # 2. download the data behind the URL
-                # audio_response = requests.get(returned_audio_url)
+                audio_response = requests.get(returned_audio_url)
 
                 # returns audio after finished recording
-                # st.write(audio_response)
+                st.write(audio_response)
 
                 # TODOOOOO
                 # download the file to a dir and with a respective UNIQUE name!
