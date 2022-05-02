@@ -87,8 +87,8 @@ def beatinspect_main():
                 returned_audio_str = str(st_audiorec())
                 returned_audio_url = returned_audio_str[5:]
 
-                print(returned_audio_str)
-                print(returned_audio_url)
+                st.write(returned_audio_str)
+                st.write(returned_audio_url)
 
 
                 # 2. download the data behind the URL
