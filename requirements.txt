@@ -10,5 +10,3 @@ sounddevice
 wavio
 pydub
 ffmpeg
-bokeh
-streamlit_bokeh_events
