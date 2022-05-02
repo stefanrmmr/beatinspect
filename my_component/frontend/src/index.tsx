@@ -1,10 +1,10 @@
 import React from "react"
 import ReactDOM from "react-dom"
-import MyComponent from "./MyComponent"
+import StAudioRec from "./StreamlitAudioRecorder"
 
 ReactDOM.render(
   <React.StrictMode>
-    <MyComponent />
+    <StAudioRec />
   </React.StrictMode>,
   document.getElementById("root")
 )
