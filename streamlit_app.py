@@ -84,6 +84,12 @@ def beatinspect_main():
 
                 # use st_audiorec component
                 returned_audio = st_audiorec()
+
+                audiofile_name = 'testaudio.wav'
+
+                with open('testaudio.wav',"wb") as g:
+                    g.write(returned_audio.getbuffer())
+
                 # returns audio after finished recording
                 st.write(returned_audio)
 
@@ -92,7 +98,7 @@ def beatinspect_main():
                 # save the file from the url to os.path.join(os.getcwd(), audiofile_name)
                 # add the name of the saved file itself to audiofile_name
 
-                # audiofile_name = rv1
+
 
 
     # ANALYTICS for Audio File
