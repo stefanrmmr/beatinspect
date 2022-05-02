@@ -27,6 +27,7 @@ button{
     padding-right: 0.75rem;
     padding-left: 0.75rem;
     margin-right: 0.5rem;
+    margin-left: 0.1rem;
     font-size: 16px;
     background-color: #262730;
     color: #ffffff;
@@ -42,6 +43,7 @@ button:hover{
     padding-right: 0.75rem;
     padding-left: 0.75rem;
     margin-right: 0.5rem;
+    margin-left: 0.1rem;
     font-size: 16px;
     background-color: #262730;
     color: #e3fc03;
