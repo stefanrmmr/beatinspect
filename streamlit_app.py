@@ -91,10 +91,15 @@ def beatinspect_main():
                 # import custom component
                 rv1 = _component_func()
                 st.write(rv1)
+                # download the file to a dir and with a respective UNIQUE name!
+
+                audiofile_name = rv1
 
                 # use bokeh workaround to record some audio
                 # will be replaced by streamlit custom component
-                audiofile_name = rec_audio_bokeh.rec_bokeh()
+                # audiofile_name = rec_audio_bokeh.rec_bokeh()
+
+
 
 
     # ANALYTICS for Audio File
