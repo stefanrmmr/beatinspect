@@ -89,7 +89,7 @@ def beatinspect_main():
                 audiofile = None
 
                 # import custom component
-                rv1 = _component_func(name='servus')
+                rv1 = _component_func()
                 st.write(rv1)
 
                 # use bokeh workaround to record some audio

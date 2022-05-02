@@ -46,8 +46,8 @@ def design_setup():
     st.markdown('''<style>.css-1gf0e5q {min-height: 0.5rem;}</style>''',
         unsafe_allow_html=True)
 
-    # Design change st.Audio to fixed height of 40 pixels
-    st.markdown('''<style>.stAudio {height: 40px;}</style>''',
+    # Design change st.Audio to fixed height of 45 pixels
+    st.markdown('''<style>.stAudio {height: 45px;}</style>''',
         unsafe_allow_html=True)
 
     # Design change radio button inner point to be dark grey via custom css

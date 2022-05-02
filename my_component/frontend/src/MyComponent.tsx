@@ -20,7 +20,6 @@ class MyComponent extends StreamlitComponentBase<State> {
 
   public render = (): ReactNode => {
     // Arguments that are passed to the plugin in Python are accessible
-    // via `this.props.args`. Here, we access the "name" arg.
 
     // Streamlit sends us a theme object via props that we can use to ensure
     // that our component has visuals that match the active theme in a
