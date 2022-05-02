@@ -7,7 +7,6 @@
 
 import streamlit as st
 import streamlit.components.v1 as components
-# from my_component import my_component
 
 import os
 import sys
@@ -38,8 +37,8 @@ import src.streamlit_design as streamlit_design
 
 # initialize custom component for recording client audio in browser
 parent_dir = os.path.dirname(os.path.abspath(__file__))
-build_dir = os.path.join(parent_dir, "my_component/frontend/build")
-_component_func = components.declare_component("my_component", path=build_dir)
+build_dir = os.path.join(parent_dir, "st_audiorec/frontend/build")
+st_audiorec = components.declare_component("st_audiorec", path=build_dir)
 
 
 def beatinspect_main():
@@ -92,7 +91,7 @@ def beatinspect_main():
                 st.markdown(rec_msg, unsafe_allow_html=True)
 
                 # import custom component
-                rv1 = _component_func()
+                rv1 = st_audiorec()
                 st.write(rv1)
 
                 # TODOOOOO
