@@ -91,9 +91,13 @@ def beatinspect_main():
                 # import custom component
                 rv1 = _component_func()
                 st.write(rv1)
-                # download the file to a dir and with a respective UNIQUE name!
 
-                audiofile_name = rv1
+                # TODOOOOO
+                # download the file to a dir and with a respective UNIQUE name!
+                # save the file from the url to os.path.join(os.getcwd(), audiofile_name)
+                # add the name of the saved file itself to audiofile_name
+
+                # audiofile_name = rv1
 
                 # use bokeh workaround to record some audio
                 # will be replaced by streamlit custom component
@@ -183,7 +187,7 @@ def beatinspect_main():
 
         # Inspect Audio File Specifications
         with st.expander("SECTION - Waveform and Spectrogram Insights",
-                         expanded=False):
+                         expanded=True):
             if not advanced_analytics:
                 analytics_msg = '<p style="color: #e3fc03; font-size: 1rem;">Only available for audio files provided via "Audio File Upload"</p>'
                 st.markdown(analytics_msg, unsafe_allow_html=True)
