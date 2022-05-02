@@ -15,6 +15,7 @@ import time
 import base64
 import ffmpeg
 import librosa
+import requests
 import numpy as np
 import soundfile as sf
 import essentia.standard as es
@@ -85,13 +86,8 @@ def beatinspect_main():
                 # use st_audiorec component
                 returned_audio = st_audiorec()
 
-                audiofile_name = 'testaudio.wav'
-
-                with open('testaudio.wav',"wb") as g:
-                    g.write(returned_audio.getbuffer())
-
                 # returns audio after finished recording
-                st.write(returned_audio)
+                st.write(str(returned_audio))
 
                 # TODOOOOO
                 # download the file to a dir and with a respective UNIQUE name!
