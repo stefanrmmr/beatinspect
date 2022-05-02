@@ -58,7 +58,7 @@ class MyComponent extends StreamlitComponentBase<State> {
             backgroundColor='rgb(15, 17, 22)'
             foregroundColor='rgb(227, 252, 3)'
             canvasWidth={450}
-            canvasHeight={150}
+            canvasHeight={100}
           />
 
           <audio

@@ -88,6 +88,9 @@ def beatinspect_main():
             elif 'Record' in choice:
                 audiofile = None
 
+                rec_msg = '<p style="color: #e3fc03; font-size: 1rem;">Record at least 15sec of audio for optimal functionality!</p>'
+                st.markdown(rec_msg, unsafe_allow_html=True)
+
                 # import custom component
                 rv1 = _component_func()
                 st.write(rv1)
