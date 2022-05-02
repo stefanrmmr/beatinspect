@@ -48,3 +48,7 @@ button:hover{
     border-radius: 0.25rem;
     margin-bottom: 0.75rem;
 }
+
+audio {
+  width: 100%
+}
