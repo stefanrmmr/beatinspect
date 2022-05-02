@@ -50,5 +50,6 @@ button:hover{
 }
 
 audio {
-  width: 100%
+  width: 450px;
+  height: 40px;
 }
