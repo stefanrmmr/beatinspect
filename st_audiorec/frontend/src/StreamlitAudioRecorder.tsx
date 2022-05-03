@@ -11,12 +11,12 @@ import 'audio-react-recorder/dist/index.css'
 interface State {
   isFocused: boolean
   recordState: null
-  audioDataUrl: string
+  audioDataURI: string
   reset: boolean
 }
 
 class StAudioRec extends StreamlitComponentBase<State> {
-  public state = { isFocused: false, recordState: null, audioDataUrl: '', reset: false}
+  public state = { isFocused: false, recordState: null, audioDataURI: '', reset: false}
 
   public render = (): ReactNode => {
     // Arguments that are passed to the plugin in Python are accessible
@@ -65,7 +65,7 @@ class StAudioRec extends StreamlitComponentBase<State> {
           <audio
             id='audio'
             controls
-            src={this.state.audioDataUrl}
+            src={this.state.audioDataURI}
           />
 
           <button id='continue' onClick={this.onClick_continue}>
@@ -80,7 +80,7 @@ class StAudioRec extends StreamlitComponentBase<State> {
   private onClick_start = () => {
     this.setState({
       reset: false,
-      audioDataUrl: '',
+      audioDataURI: '',
       recordState: RecordState.START
     })
     Streamlit.setComponentValue('')
@@ -96,16 +96,16 @@ class StAudioRec extends StreamlitComponentBase<State> {
   private onClick_reset = () => {
     this.setState({
       reset: true,
-      audioDataUrl: '',
+      audioDataURI: '',
       recordState: RecordState.STOP
     })
     Streamlit.setComponentValue('')
   }
 
   private onClick_continue = () => {
-    if (this.state.audioDataUrl !== '')
+    if (this.state.audioDataURI !== '')
     {
-      Streamlit.setComponentValue(this.state.audioDataUrl)
+      Streamlit.setComponentValue(this.state.audioDataURI)
     }
   }
 
@@ -113,13 +113,16 @@ class StAudioRec extends StreamlitComponentBase<State> {
     if (this.state.reset === true)
     {
       this.setState({
-        audioDataUrl: ''
+        audioDataURI: ''
       })
       Streamlit.setComponentValue('')
     }else{
-      var blobUrl = URL.createObjectURL(data)
       this.setState({
-        audioDataUrl: blobUrl
+        // the URI is a link to the audio data stored in the browser cache
+        // the URI is sandboxed to the client browser that created the blob
+        // the URI is can not be converted to a normal URL/download link
+        // use an AJAX request to pull blob content from the browser memory
+        audioDataURI: data.url
       })
     }
 
