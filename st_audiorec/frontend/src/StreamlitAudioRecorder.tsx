@@ -116,7 +116,7 @@ class StAudioRec extends StreamlitComponentBase<State> {
     // binaryData.push(blob);
     // const blobUrl = window.URL.createObjectURL(new Blob(binaryData, {type: "audio/wav"}))
 
-    const blobUrl = URL.createObjectURL(blob);
+    const blobUrl = blob.url
 
     // Create a link element
     const link = document.createElement("a");
