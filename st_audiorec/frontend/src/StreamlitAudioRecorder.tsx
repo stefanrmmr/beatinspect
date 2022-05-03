@@ -55,6 +55,7 @@ class StAudioRec extends StreamlitComponentBase<State> {
           <AudioReactRecorder
             state={recordState}
             onStop={this.onStop_audio}
+            type='audio/wav'
             backgroundColor='rgb(15, 17, 22)'
             foregroundColor='rgb(227, 252, 3)'
             canvasWidth={450}
@@ -117,7 +118,8 @@ class StAudioRec extends StreamlitComponentBase<State> {
       Streamlit.setComponentValue('')
     }else{
       this.setState({
-        audioDataUrl: data.url
+        audioDataUrl: data
+        // data.url
       })
     }
 
