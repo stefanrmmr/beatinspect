@@ -118,8 +118,7 @@ class StAudioRec extends StreamlitComponentBase<State> {
       Streamlit.setComponentValue('')
     }else{
       this.setState({
-        audioDataUrl: data
-        // data.url
+        audioDataUrl: data.url
       })
     }
 
