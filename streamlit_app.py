@@ -86,7 +86,7 @@ def beatinspect_main():
                 # use st_audiorec component
                 returned_audio_str = str(st_audiorec())
                 # returned_audio_url = returned_audio_str[5:]
-                st.write(returned_audio_str)
+                # st.write(returned_audio_str)
                 # 2. download the data behind the URL
                 # audio_response = requests.get(returned_audio_url)
 

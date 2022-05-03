@@ -111,7 +111,12 @@ class StAudioRec extends StreamlitComponentBase<State> {
 
   private downloadBlob(blob, name = 'file.txt') {
     // Convert your blob into a Blob URL (a special url that points to an object in the browser's memory)
-    const blobUrl = URL.createObjectURL(blob);
+
+    // var binaryData = [];
+    // binaryData.push(blob);
+    // const blobUrl = window.URL.createObjectURL(new Blob(binaryData, {type: "audio/wav"}))
+
+    const blobUrl = window.URL.createObjectURL(blob);
 
     // Create a link element
     const link = document.createElement("a");
