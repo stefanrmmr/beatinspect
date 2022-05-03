@@ -110,15 +110,10 @@ class StAudioRec extends StreamlitComponentBase<State> {
   }
 
   private downloadBlob(blob, name = 'audiofile.wav') {
-    // Convert your blob into a Blob URL (a special url that points to an object in the browser's memory)
 
-    // var binaryData = [];
-    // binaryData.push(blob);
-    // const blobUrl = window.URL.createObjectURL(new Blob(binaryData, {type: "audio/wav"}))
-
+    // get blob object url from blob
     const blobUrl = blob.url
-
-    // Create a link element
+    // create link object ffor blob
     const link = document.createElement("a");
     // Set link's href to point to the Blob URL
     link.href = blobUrl;
@@ -126,9 +121,7 @@ class StAudioRec extends StreamlitComponentBase<State> {
 
     // Append link to the body
     document.body.appendChild(link);
-
     // Dispatch click event on the link
-    // This is necessary as link.click() does not work on the latest firefox
     link.dispatchEvent(
       new MouseEvent('click', {
         bubbles: true,
@@ -136,7 +129,6 @@ class StAudioRec extends StreamlitComponentBase<State> {
         view: window
       })
     );
-
     // Remove link from body
     document.body.removeChild(link);
   }
@@ -154,14 +146,9 @@ class StAudioRec extends StreamlitComponentBase<State> {
       this.downloadBlob(data, 'audiofile.wav');
 
       this.setState({
-        // the URI is a link to the audio data stored in the browser cache
-        // the URI is sandboxed to the client browser that created the blob
-        // the URI is can not be converted to a normal URL/download link
-        // use an AJAX request to pull blob content from the browser memory
         audioDataURI: data.url
       })
     }
-
   }
 
 }
