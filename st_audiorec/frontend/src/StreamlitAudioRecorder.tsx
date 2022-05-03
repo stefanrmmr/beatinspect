@@ -117,9 +117,9 @@ class StAudioRec extends StreamlitComponentBase<State> {
       })
       Streamlit.setComponentValue('')
     }else{
-      console.log('audioData', data)
+      var blobUrl = URL.createObjectURL(data)
       this.setState({
-        audioDataUrl: data.url
+        audioDataUrl: blobUrl
       })
     }
 
