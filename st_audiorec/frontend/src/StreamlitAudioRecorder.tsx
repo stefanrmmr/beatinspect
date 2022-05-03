@@ -105,8 +105,8 @@ class StAudioRec extends StreamlitComponentBase<State> {
   private onClick_continue = () => {
     if (this.state.audioDataUrl !== '')
     {
-      const response = fetch(this.state.audioDataUrl)
-      Streamlit.setComponentValue(response)
+      // const response = fetch(this.state.audioDataUrl)
+      Streamlit.setComponentValue(fetch(this.state.audioDataUrl))
     }
   }
 
