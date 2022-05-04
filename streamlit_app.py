@@ -83,22 +83,29 @@ def beatinspect_main():
                 rec_msg = '<p style="color: #e3fc03; font-size: 1rem;">Record at least 15sec of audio for optimal functionality!</p>'
                 st.markdown(rec_msg, unsafe_allow_html=True)
 
-                # use st_audiorec component
+
+
+                # the audiorec custom component
                 returned_audio_url = st_audiorec()
-                # st.write(returned_audio_url)
+                # returns an url to the recorded audio sample
 
                 if (returned_audio_url != None) and (returned_audio_url != ''):
                     r = requests.get(returned_audio_url, allow_redirects=True)
                     open('recorded_audio.wav', 'wb').write(r.content)
+
+
+
                     audiofile_path = os.path.join(os.getcwd(), 'recorded_audio.wav')
                     st.write(audiofile_path)
 
-                    # with open("recorded_audio.wav", "rb") as file:
-                    #     st.download_button(
-                    #         label="Download audio",
-                    #         data=file,
-                    #         file_name="recorded_audio.wav",
-                    #         mime="audio/wav")
+                    with open("recorded_audio.wav", "rb") as file:
+                        st.audio(file, format="audio/wav", start_time=0)
+                        
+                        st.download_button(
+                            label="Download audio",
+                            data=file,
+                            file_name="recorded_audio.wav",
+                            mime="audio/wav")
 
 
     # ANALYTICS for Audio File
@@ -118,7 +125,6 @@ def beatinspect_main():
         with st.expander("SECTION - Musical & Technical Specifications",
                          expanded=True):
 
-            st.write(str(audiofile_path))
             # extract technical specifications about wav file
             # no needfor session_state saving bc instant calc
             wav_specs = sf.SoundFile(audiofile_path)
