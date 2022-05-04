@@ -85,10 +85,10 @@ def beatinspect_main():
 
                 # use st_audiorec component
                 returned_audio_str = str(st_audiorec())
-                returned_audio_url = returned_audio_str[5:]
+                # returned_audio_url = returned_audio_str[5:]
                 if returned_audio_str != '':
                     audiofile_name = "audiofile.wav"
-                    response = requests.get(returned_audio_url)
+                    response = requests.get(returned_audio_str)
                     # open("audiofile.wav", "wb").write(response.content)
                     with open(audiofile_name,"wb") as f:
                         f.write(response.content)
