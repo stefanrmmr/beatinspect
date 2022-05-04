@@ -94,19 +94,10 @@ def beatinspect_main():
                     st.write(r)
                     open('recorded_audio.wav', 'wb').write(r.content)
 
-
-
-                    audiofile_path = os.path.join(os.getcwd(), 'recorded_audio.wav')
-                    st.write(audiofile_path)
-
-                    st.audio(audiofile_path, format="audio/wav", start_time=0)
-
-                    with open("recorded_audio.wav", "rb") as file:
-                        st.download_button(
-                            label="Download audio",
-                            data=file,
-                            file_name="recorded_audio.wav",
-                            mime="audio/wav")
+                    # TODO not working: the call of the url yields 404 :(
+                    # can I even call the blob content from within the python part?
+                    # there needs to a be a conversion from blob to wav within the app
+                    # return final wav file to python (or downloadlink if possible)
 
 
     # ANALYTICS for Audio File

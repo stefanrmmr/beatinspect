@@ -105,6 +105,8 @@ class StAudioRec extends StreamlitComponentBase<State> {
   private onClick_continue = () => {
     if (this.state.audioDataURL !== '')
     {
+      // NOT WORKING THO: --> see python code notes 
+      // return a string to the blob content
       var blob_url = String(this.state.audioDataURL)
       Streamlit.setComponentValue(blob_url.substring(5))
     }
