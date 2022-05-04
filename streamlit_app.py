@@ -88,8 +88,9 @@ def beatinspect_main():
                 returned_audio_url = returned_audio_str[5:]
                 st.write(returned_audio_url)
 
-                r = requests.get(returned_audio_url, allow_redirects=True)
-                open('audio.wav', 'wb').write(r.content)
+                if returned_audio_url != '':
+                    r = requests.get(returned_audio_url, allow_redirects=True)
+                    open('audio.wav', 'wb').write(r.content)
 
                 # TODOOOOO
                 # download the file to a dir and with a respective UNIQUE name!
