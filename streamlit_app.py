@@ -90,7 +90,8 @@ def beatinspect_main():
                 if (returned_audio_url != None) and (returned_audio_url != ''):
                     r = requests.get(returned_audio_url, allow_redirects=True)
                     open('recorded_audio.wav', 'wb').write(r.content)
-                    audiofile_name = 'recorded_audio.wav'
+                    audiofile_path = os.path.join(os.getcwd(), 'recorded_audio.wav')
+                    st.write(audiofile_path)
 
                     # with open("recorded_audio.wav", "rb") as file:
                     #     st.download_button(
