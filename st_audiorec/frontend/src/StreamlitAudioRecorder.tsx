@@ -11,13 +11,12 @@ import 'audio-react-recorder/dist/index.css'
 interface State {
   isFocused: boolean
   recordState: null
-  audioDataURI: string
   audioDataURL: string
   reset: boolean
 }
 
 class StAudioRec extends StreamlitComponentBase<State> {
-  public state = { isFocused: false, recordState: null, audioDataURI: '', audioDataURL: '', reset: false}
+  public state = { isFocused: false, recordState: null, audioDataURL: '', reset: false}
 
   public render = (): ReactNode => {
     // Arguments that are passed to the plugin in Python are accessible
@@ -66,7 +65,7 @@ class StAudioRec extends StreamlitComponentBase<State> {
           <audio
             id='audio'
             controls
-            src={this.state.audioDataURI}
+            src={this.state.audioDataURL}
           />
 
           <button id='continue' onClick={this.onClick_continue}>
@@ -81,7 +80,7 @@ class StAudioRec extends StreamlitComponentBase<State> {
   private onClick_start = () => {
     this.setState({
       reset: false,
-      audioDataURI: '',
+      audioDataURL: '',
       recordState: RecordState.START
     })
     Streamlit.setComponentValue('')
@@ -97,59 +96,30 @@ class StAudioRec extends StreamlitComponentBase<State> {
   private onClick_reset = () => {
     this.setState({
       reset: true,
-      audioDataURI: '',
+      audioDataURL: '',
       recordState: RecordState.STOP
     })
     Streamlit.setComponentValue('')
   }
 
   private onClick_continue = () => {
-    if (this.state.audioDataURI !== '')
+    if (this.state.audioDataURL !== '')
     {
-      Streamlit.setComponentValue(this.state.audioDataURI)
+      var blob_url = this.state.audioDataURL
+      Streamlit.setComponentValue(blob_url.substring(5))
     }
-  }
-
-  private downloadBlob(blob, name = 'audiofile.wav') {
-
-    // get blob object url from blob
-    const blobUrl = blob.url
-    // create link object ffor blob
-    const link = document.createElement("a");
-    // Set link's href to point to the Blob URL
-    link.href = blobUrl;
-    link.download = name;
-
-    this.setState({
-      audioDataURL: blobUrl
-    })
-
-    // Append link to the body
-    document.body.appendChild(link);
-    // Dispatch click event on the link
-    link.dispatchEvent(
-      new MouseEvent('click', {
-        bubbles: true,
-        cancelable: true,
-        view: window
-      })
-    );
-    // Remove link from body
-    document.body.removeChild(link);
   }
 
   private onStop_audio = (data) => {
     if (this.state.reset === true)
     {
       this.setState({
-        audioDataURI: ''
+        audioDataURL: ''
       })
       Streamlit.setComponentValue('')
     }else{
-      // this.downloadBlob(data, 'audiofile.wav');
-
       this.setState({
-        audioDataURI: data.url
+        audioDataURL: data.url
       })
     }
   }
