@@ -92,6 +92,15 @@ def beatinspect_main():
                     r = requests.get(returned_audio_url, allow_redirects=True)
                     open('audio.wav', 'wb').write(r.content)
 
+                    with open("audio.wav", "rb") as file:
+                        st.download_button(
+                            label="Download audio",
+                            data=file,
+                            file_name="audio.wav",
+                            mime="audio/wav")
+
+
+
                 # TODOOOOO
                 # download the file to a dir and with a respective UNIQUE name!
                 # save the file from the url to os.path.join(os.getcwd(), audiofile_name)
