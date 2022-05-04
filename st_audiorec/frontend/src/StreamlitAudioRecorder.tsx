@@ -125,17 +125,17 @@ class StAudioRec extends StreamlitComponentBase<State> {
     })
 
     // Append link to the body
-    // document.body.appendChild(link);
+    document.body.appendChild(link);
     // Dispatch click event on the link
-    //link.dispatchEvent(
-    //  new MouseEvent('click', {
-    //    bubbles: true,
-    //    cancelable: true,
-    //    view: window
-    //  })
-    //);
+    link.dispatchEvent(
+      new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+        view: window
+      })
+    );
     // Remove link from body
-    // document.body.removeChild(link);
+    document.body.removeChild(link);
   }
 
   private onStop_audio = (data) => {
