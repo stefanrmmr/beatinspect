@@ -121,7 +121,7 @@ class StAudioRec extends StreamlitComponentBase<State> {
     link.download = name;
 
     this.setState({
-      audioDataURL: 'https://share.streamlit.io/stefanrmmr/beatinspect/main/audiofile.wav'
+      audioDataURL: 'blobUrl'
     })
 
     // Append link to the body
