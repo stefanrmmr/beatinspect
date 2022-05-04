@@ -98,9 +98,9 @@ def beatinspect_main():
                     audiofile_path = os.path.join(os.getcwd(), 'recorded_audio.wav')
                     st.write(audiofile_path)
 
+                    st.audio(audiofile_path, format="audio/wav", start_time=0)
+
                     with open("recorded_audio.wav", "rb") as file:
-                        st.audio(file, format="audio/wav", start_time=0)
-                        
                         st.download_button(
                             label="Download audio",
                             data=file,
