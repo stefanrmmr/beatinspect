@@ -91,6 +91,7 @@ def beatinspect_main():
 
                 if (returned_audio_url != None) and (returned_audio_url != ''):
                     r = requests.get(returned_audio_url, allow_redirects=True)
+                    st.write(r)
                     open('recorded_audio.wav', 'wb').write(r.content)
 
 
