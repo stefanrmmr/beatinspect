@@ -42,7 +42,6 @@ def beatinspect_main():
     # initialize global vars
     advanced_analytics = False
     audiofile_name = None
-    returned_audio_str = ''
 
     # TITLE and Information
     header_col1, header_col2, header_col3 = st.columns([10, 2.5, 2.5])
