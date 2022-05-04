@@ -106,7 +106,7 @@ class StAudioRec extends StreamlitComponentBase<State> {
   private onClick_continue = () => {
     if (this.state.audioDataURI !== '')
     {
-      Streamlit.setComponentValue(this.state.audioDataURL)
+      Streamlit.setComponentValue(this.state.audioDataURI)
     }
   }
 
@@ -148,7 +148,7 @@ class StAudioRec extends StreamlitComponentBase<State> {
     }else{
 
       // Usage
-      this.downloadBlob(data, 'audiofile.wav');
+      //this.downloadBlob(data, 'audiofile.wav');
 
       this.setState({
         audioDataURI: data.url

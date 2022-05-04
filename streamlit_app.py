@@ -84,13 +84,14 @@ def beatinspect_main():
                 st.markdown(rec_msg, unsafe_allow_html=True)
 
                 # use st_audiorec component
-                returned_audio_str = st_audiorec()
-                returned_audio_url = returned_audio_str[5:]
+                returned_audio_str = str(st_audiorec())
                 if returned_audio_str != '':
-                    audiofile_name = "audiofile.wav"
+                    returned_audio_url = returned_audio_str[5:]
                     response = requests.get(returned_audio_url)
                     st.write(response.content)
                     st.write(response)
+
+                    audiofile_name = "audiofile.wav"
                     # open("audiofile.wav", "wb").write(response.content)
                     with open(audiofile_name,"wb") as f:
                         f.write(response.content)
