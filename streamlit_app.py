@@ -105,7 +105,6 @@ def beatinspect_main():
     if audiofile_name is not None:
 
         audiofile_path = os.path.join(os.getcwd(), audiofile_name)
-
         # evaluate whether the input audiofile has changed
         new_audiofile = False # same audiofile --> load from session_state
         if audiofile_name != st.session_state.audiofile_name:
@@ -119,6 +118,7 @@ def beatinspect_main():
         with st.expander("SECTION - Musical & Technical Specifications",
                          expanded=True):
 
+            st.write(str(audiofile_path))
             # extract technical specifications about wav file
             # no needfor session_state saving bc instant calc
             wav_specs = sf.SoundFile(audiofile_path)
