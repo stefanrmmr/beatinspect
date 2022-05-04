@@ -42,7 +42,6 @@ def beatinspect_main():
     # initialize global vars
     advanced_analytics = False
     audiofile_name = None
-    returned_audio_url = ''
 
     # TITLE and Information
     header_col1, header_col2, header_col3 = st.columns([10, 2.5, 2.5])
@@ -86,9 +85,9 @@ def beatinspect_main():
 
                 # use st_audiorec component
                 returned_audio_url = st_audiorec()
-                st.write(returned_audio_url)
+                # st.write(returned_audio_url)
 
-                if returned_audio_url != '':
+                if returned_audio_url != None:
                     r = requests.get(returned_audio_url, allow_redirects=True)
                     open('audio.wav', 'wb').write(r.content)
 
