@@ -12,11 +12,12 @@ interface State {
   isFocused: boolean
   recordState: null
   audioDataURI: string
+  audioDataURL: string
   reset: boolean
 }
 
 class StAudioRec extends StreamlitComponentBase<State> {
-  public state = { isFocused: false, recordState: null, audioDataURI: '', reset: false}
+  public state = { isFocused: false, recordState: null, audioDataURI: '', audioDataURL: '', reset: false}
 
   public render = (): ReactNode => {
     // Arguments that are passed to the plugin in Python are accessible
@@ -105,7 +106,7 @@ class StAudioRec extends StreamlitComponentBase<State> {
   private onClick_continue = () => {
     if (this.state.audioDataURI !== '')
     {
-      Streamlit.setComponentValue(this.state.audioDataURI)
+      Streamlit.setComponentValue(this.state.audioDataURL)
     }
   }
 
@@ -119,18 +120,22 @@ class StAudioRec extends StreamlitComponentBase<State> {
     link.href = blobUrl;
     link.download = name;
 
+    this.setState({
+      audioDataURL: 'https://share.streamlit.io/stefanrmmr/beatinspect/main/audiofile.wav'
+    })
+
     // Append link to the body
-    document.body.appendChild(link);
+    // document.body.appendChild(link);
     // Dispatch click event on the link
-    link.dispatchEvent(
-      new MouseEvent('click', {
-        bubbles: true,
-        cancelable: true,
-        view: window
-      })
-    );
+    //link.dispatchEvent(
+    //  new MouseEvent('click', {
+    //    bubbles: true,
+    //    cancelable: true,
+    //    view: window
+    //  })
+    //);
     // Remove link from body
-    document.body.removeChild(link);
+    // document.body.removeChild(link);
   }
 
   private onStop_audio = (data) => {
