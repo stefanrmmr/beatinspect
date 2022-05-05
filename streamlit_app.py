@@ -49,7 +49,7 @@ def beatinspect_main():
         st.title('beat inspect ™')
         st.markdown('Version 1.3.2 - April 2022 - '
             '[GitHub](https://github.com/stefanrmmr/beatinspect) - '
-            '[Instagram](https://www.instagram.com/beatinspect/)'))
+            '[Instagram](https://www.instagram.com/beatinspect/)')
     with header_col3:
         st.write('')  # add spacing
         st.image("img/rs_logo_transparent_yellow.png")
