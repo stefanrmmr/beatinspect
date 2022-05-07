@@ -137,25 +137,6 @@ class StAudioRec extends StreamlitComponentBase<State> {
       Streamlit.setComponentValue('')
     }else{
 
-      // ADD CODE here
-      const audioContext = new AudioContext()
-      const fileReader = new FileReader()
-
-      // Set up file reader on loaded end event
-      fileReader.onloadend = () => {
-          const arrayBuffer = fileReader.result as ArrayBuffer
-          // Convert array buffer into audio buffer
-          audioContext.decodeAudioData(arrayBuffer, (audioBuffer) => {
-            // Do something with audioBuffer
-            console.log(audioBuffer)
-          })
-      }
-
-      //Load blob
-      fileReader.readAsArrayBuffer(data.url)
-
-      //************
-
       this.setState({
         audioDataURL: data.url
       })
