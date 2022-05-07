@@ -83,6 +83,8 @@ class StAudioRec extends StreamlitComponentBase<State> {
     )
   }
 
+
+
   private sendAudioFile = file => {
     const formData = new FormData();
     formData.append('audio-file', file);
@@ -123,8 +125,7 @@ class StAudioRec extends StreamlitComponentBase<State> {
       // NOT WORKING THO: --> see python code notes
       // return a string to the blob content
       var blob_url = String(this.state.audioDataURL)
-      //Streamlit.setComponentValue(blob_url.substring(5))
-      Streamlit.setComponentValue(this.state.audioDataURL)
+      Streamlit.setComponentValue(blob_url.substring(5))
 
       //let filesManager = new FilesManager();
       //const temp_path = filesManager.createTempDirectory('temp-dir-name');
@@ -142,10 +143,10 @@ class StAudioRec extends StreamlitComponentBase<State> {
       Streamlit.setComponentValue('')
     }else{
 
-      this.sendAudioFile(data)
+      Streamlit.setComponentValue(data)
 
       this.setState({
-        audioDataURL: data
+        audioDataURL: data.url
       })
     }
   }
