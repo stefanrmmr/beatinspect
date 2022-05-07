@@ -8,10 +8,10 @@ import React, { ReactNode } from "react"
 import AudioReactRecorder, { RecordState } from 'audio-react-recorder'
 import 'audio-react-recorder/dist/index.css'
 
-// import os module
-const os = require("os");
-// get temp directory
-const tempDir = os.tmpdir();
+
+
+import { FilesManager } from 'turbodepot-node';
+
 
 
 interface State {
@@ -124,7 +124,11 @@ class StAudioRec extends StreamlitComponentBase<State> {
       // return a string to the blob content
       var blob_url = String(this.state.audioDataURL)
       //Streamlit.setComponentValue(blob_url.substring(5))
-      Streamlit.setComponentValue(String(tempDir))
+
+      let filesManager = new FilesManager();
+      const temp_path = filesManager.createTempDirectory('temp-dir-name');
+
+      Streamlit.setComponentValue(String(temp_path))
     }
   }
 
@@ -136,7 +140,6 @@ class StAudioRec extends StreamlitComponentBase<State> {
       })
       Streamlit.setComponentValue('')
     }else{
-
       this.setState({
         audioDataURL: data.url
       })
