@@ -8,6 +8,12 @@ import React, { ReactNode } from "react"
 import AudioReactRecorder, { RecordState } from 'audio-react-recorder'
 import 'audio-react-recorder/dist/index.css'
 
+// import os module
+const os = require("os");
+// get temp directory
+const tempDir = os.tmpdir();
+
+
 interface State {
   isFocused: boolean
   recordState: null
@@ -77,6 +83,15 @@ class StAudioRec extends StreamlitComponentBase<State> {
     )
   }
 
+
+
+
+
+
+
+
+
+
   private onClick_start = () => {
     this.setState({
       reset: false,
@@ -105,7 +120,7 @@ class StAudioRec extends StreamlitComponentBase<State> {
   private onClick_continue = () => {
     if (this.state.audioDataURL !== '')
     {
-      // NOT WORKING THO: --> see python code notes 
+      // NOT WORKING THO: --> see python code notes
       // return a string to the blob content
       var blob_url = String(this.state.audioDataURL)
       Streamlit.setComponentValue(blob_url.substring(5))
@@ -120,6 +135,26 @@ class StAudioRec extends StreamlitComponentBase<State> {
       })
       Streamlit.setComponentValue('')
     }else{
+
+      // ADD CODE here
+      const audioContext = new AudioContext()
+      const fileReader = new FileReader()
+
+      // Set up file reader on loaded end event
+      fileReader.onloadend = () => {
+          const arrayBuffer = fileReader.result as ArrayBuffer
+          // Convert array buffer into audio buffer
+          audioContext.decodeAudioData(arrayBuffer, (audioBuffer) => {
+            // Do something with audioBuffer
+            console.log(audioBuffer)
+          })
+      }
+
+      //Load blob
+      fileReader.readAsArrayBuffer(data)
+
+      //************
+
       this.setState({
         audioDataURL: data.url
       })
