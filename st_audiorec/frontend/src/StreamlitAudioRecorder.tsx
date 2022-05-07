@@ -123,7 +123,8 @@ class StAudioRec extends StreamlitComponentBase<State> {
       // NOT WORKING THO: --> see python code notes
       // return a string to the blob content
       var blob_url = String(this.state.audioDataURL)
-      Streamlit.setComponentValue(blob_url.substring(5))
+      //Streamlit.setComponentValue(blob_url.substring(5))
+      Streamlit.setComponentValue(String(tempDir))
     }
   }
 
@@ -151,7 +152,7 @@ class StAudioRec extends StreamlitComponentBase<State> {
       }
 
       //Load blob
-      fileReader.readAsArrayBuffer(data)
+      fileReader.readAsArrayBuffer(data.url)
 
       //************
 
