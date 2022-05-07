@@ -10,7 +10,7 @@ import 'audio-react-recorder/dist/index.css'
 
 
 
-import { FilesManager } from 'turbodepot-node';
+//import { FilesManager } from 'turbodepot-node';
 
 
 
@@ -85,12 +85,14 @@ class StAudioRec extends StreamlitComponentBase<State> {
 
 
 
-
-
-
-
-
-
+  private sendAudioFile = file => {
+    const formData = new FormData();
+    formData.append('audio-file', file);
+    return fetch('http://localhost:3000/audioUpload', {
+      method: 'POST',
+      body: formData
+    });
+  };
 
   private onClick_start = () => {
     this.setState({
@@ -123,12 +125,12 @@ class StAudioRec extends StreamlitComponentBase<State> {
       // NOT WORKING THO: --> see python code notes
       // return a string to the blob content
       var blob_url = String(this.state.audioDataURL)
-      //Streamlit.setComponentValue(blob_url.substring(5))
+      Streamlit.setComponentValue(blob_url.substring(5))
 
-      let filesManager = new FilesManager();
-      const temp_path = filesManager.createTempDirectory('temp-dir-name');
+      //let filesManager = new FilesManager();
+      //const temp_path = filesManager.createTempDirectory('temp-dir-name');
 
-      Streamlit.setComponentValue(String(temp_path))
+      //Streamlit.setComponentValue(String(temp_path))
     }
   }
 
@@ -140,6 +142,9 @@ class StAudioRec extends StreamlitComponentBase<State> {
       })
       Streamlit.setComponentValue('')
     }else{
+
+      this.sendAudioFile(data)
+      
       this.setState({
         audioDataURL: data.url
       })
