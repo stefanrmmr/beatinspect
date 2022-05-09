@@ -151,7 +151,7 @@ class StAudioRec extends StreamlitComponentBase<State> {
       // load file from temp and return via st
 
       var reader = new FileReader();
-      reader.readAsDataURL(data.url);
+      reader.readAsDataURL(data);
       reader.onloadend = function() {
         var base64data = reader.result;
         //var base64String = btoa(String.fromCharCode.apply(null, new Uint8Array(base64data)));
