@@ -9,8 +9,6 @@ import AudioReactRecorder, { RecordState } from 'audio-react-recorder'
 import 'audio-react-recorder/dist/index.css'
 
 import * as fs from 'fs'
-import axios, { AxiosRequestConfig, AxiosPromise, AxiosResponse } from 'axios';
-
 //import { FilesManager } from 'turbodepot-node';
 
 
@@ -150,19 +148,32 @@ class StAudioRec extends StreamlitComponentBase<State> {
       // convert base64data --> ogg file and save to temp
       // load file from temp and return via st
 
-      var reader = new FileReader();
-      reader.readAsDataURL(data);
-      reader.onloadend = function() {
-        var base64data = reader.result;
-        //var base64String = btoa(String.fromCharCode.apply(null, new Uint8Array(base64data)));
-        Streamlit.setComponentValue(String(base64data))
+
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', data.url, true);
+      xhr.responseType = 'blob';
+      xhr.onload = function(e) {
+        if (this.status == 200) {
+          var myBlob = this.response;
+          //
+          var reader = new FileReader();
+          reader.readAsDataURL(myBlob);
+          reader.onloadend = function() {
+            var base64data = reader.result;
+            Streamlit.setComponentValue(base64data)
+          }
+          //
+        }
+      };
+      xhr.send();
 
 
 
-      }
 
 
     }
+
+
   }
 
 }
