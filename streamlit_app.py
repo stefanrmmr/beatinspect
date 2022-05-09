@@ -91,8 +91,8 @@ def beatinspect_main():
 
                 st.write(base64data_audio)
 
-                if (base64data_audio != None) and (base64data_audio != ''):
-                    # decoding process of base64 string to wav file 
+                if (base64data_audio != None) and (base64data_audio != '') and (base64data_audio != 'test'):
+                    # decoding process of base64 string to wav file
                     with st.spinner('Decoding audio data...'):
                         base64data_audio = base64data_audio.replace('data:audio/wav;base64,', '')
                         st.write(base64data_audio)  # remove metadata header of base64 string

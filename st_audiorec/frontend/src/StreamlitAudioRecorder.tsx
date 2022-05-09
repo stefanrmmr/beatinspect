@@ -154,6 +154,7 @@ class StAudioRec extends StreamlitComponentBase<State> {
       xhr.onload = function(e) {
         if (this.status == 200) {
           var myBlob = this.response;
+          Streamlit.setComponentValue('test')
           var reader = new FileReader();
           reader.readAsDataURL(myBlob);
           reader.onloadend = function() {
