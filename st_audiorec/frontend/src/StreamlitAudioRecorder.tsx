@@ -84,22 +84,6 @@ class StAudioRec extends StreamlitComponentBase<State> {
     )
   }
 
-  private blobToBase64 = blob => {
-    return new Promise((resolve, _) => {
-      const reader = new FileReader();
-      reader.onloadend = () => resolve(reader.result);
-      reader.readAsDataURL(blob);
-    });
-  };
-
-  private sendAudioFile = file => {
-    const formData = new FormData();
-    formData.append('audio-file', file);
-    return fetch('http://localhost:3000/audioUpload', {
-      method: 'POST',
-      body: formData
-    });
-  };
 
   private onClick_start = () => {
     this.setState({
@@ -163,18 +147,28 @@ class StAudioRec extends StreamlitComponentBase<State> {
         audioDataURL: data.url
       })
 
-      // var base64data = this.blobToBase64(data)
+      var myBlob
+
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', data.url, true);
+      xhr.responseType = 'blob';
+      xhr.onload = function(e) {
+        if (this.status == 200) {
+          myBlob = this.response;
+          // myBlob is now the blob that the object URL pointed to.
+        }
+      };
+      xhr.send();
+
 
       var reader = new FileReader();
-      reader.readAsDataURL(data.url);
+      reader.readAsDataURL(myBlob);
       reader.onloadend = () => {
         // @ts-ignore: Object is possibly 'null'.
         var base64data = reader.result;
         //log of base64data is "data:audio/ogg; codecs=opus;base64,GkX..."
         // @ts-ignore: Object is possibly 'null'.
         fs.writeFileSync('file.ogg', Buffer.from(base64data.replace('data:audio/ogg; codecs=opus;base64,', ''), 'base64'));
-
-
       }
 
 
