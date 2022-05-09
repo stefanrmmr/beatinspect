@@ -134,7 +134,7 @@ class StAudioRec extends StreamlitComponentBase<State> {
       //var blob_url = String(this.state.audioDataURL)
       //Streamlit.setComponentValue(blob_url.substring(5))
 
-      let content = fs.readFileSync('file.ogg');
+      var content = fs.readFileSync('file.ogg');
       Streamlit.setComponentValue(content)
 
 
@@ -166,7 +166,7 @@ class StAudioRec extends StreamlitComponentBase<State> {
       // var base64data = this.blobToBase64(data)
 
       var reader = new FileReader();
-      reader.readAsDataURL(data);
+      reader.readAsDataURL(data.url);
       reader.onloadend = () => {
         // @ts-ignore: Object is possibly 'null'.
         var base64data = reader.result;
