@@ -92,9 +92,6 @@ def beatinspect_main():
 
                 if (returned_audio_url != None) and (returned_audio_url != ''):
                     st.write(returned_audio_url)
-                    # r = requests.get(returned_audio_url, allow_redirects=True)
-                    # st.write(r)
-                    # open('recorded_audio.wav', 'wb').write(r.content)
 
                     # TODO not working: the call of the url yields 404 :(
                     # can I even call the blob content from within the python part?
