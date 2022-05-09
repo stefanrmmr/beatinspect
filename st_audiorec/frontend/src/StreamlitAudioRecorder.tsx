@@ -60,7 +60,7 @@ class StAudioRec extends StreamlitComponentBase<State> {
           <AudioReactRecorder
             state={recordState}
             onStop={this.onStop_audio}
-            type='audio/wav'
+            type='audio/mp3'
             backgroundColor='rgb(15, 17, 22)'
             foregroundColor='rgb(227, 252, 3)'
             canvasWidth={450}
@@ -110,25 +110,9 @@ class StAudioRec extends StreamlitComponentBase<State> {
   private onClick_continue = () => {
     if (this.state.audioDataURL !== '')
     {
-      // NOT WORKING THO: --> see python code notes
-      // return a string to the blob content
-      //var blob_url = String(this.state.audioDataURL)
-      //Streamlit.setComponentValue(blob_url.substring(5))
-
       //var content = fs.readFileSync('file.ogg');
       //Streamlit.setComponentValue(content)
 
-
-      // 1. fetch content from blob url directly
-      // 2. store content in tmp folder as files
-      // 3. convert audioblob --> arraybuffer --> audiobuffer --> wav files
-      // 4. get url of file stored in tmp folder and hand it to python
-      // 5. maybe also hand the file directly to python?
-
-      //let filesManager = new FilesManager();
-      //const temp_path = filesManager.createTempDirectory('temp-dir-name');
-
-      //Streamlit.setComponentValue(String(temp_path))
     }
   }
 
@@ -144,9 +128,11 @@ class StAudioRec extends StreamlitComponentBase<State> {
         audioDataURL: data.url
       })
 
-      // convert blob url --> base64data
+      // **CONCEPT for Data-Handling**
+      // fetch blob-object from blob-url
+      // convert blob object --> blob base64data
       // convert base64data --> ogg file and save to temp
-      // load file from temp and return via st
+      // load file from temp and return via st component value
 
       var xhr = new XMLHttpRequest();
       xhr.open('GET', data.url, true);
@@ -154,6 +140,17 @@ class StAudioRec extends StreamlitComponentBase<State> {
       xhr.onload = function(e) {
         if (this.status == 200) {
           var myBlob = this.response;
+          // tested: loading the blob from Url happens fast
+          // tested: converting blob to base64 insane time consumption
+
+          // reading in the whole blob file into memory before processing
+          // causes memory overload and lag --> freezes the browser
+          // read in the blob in sub-sets/blob chunks to avoid inefficiencies
+
+          // A File objects is also an instance of a Blob,
+          // which offers the .slice method to create a smaller view of the file.
+
+
           Streamlit.setComponentValue('test')
           var reader = new FileReader();
           reader.readAsDataURL(myBlob);
