@@ -115,8 +115,8 @@ class StAudioRec extends StreamlitComponentBase<State> {
       //var blob_url = String(this.state.audioDataURL)
       //Streamlit.setComponentValue(blob_url.substring(5))
 
-      //var content = fs.readFileSync('file.ogg');
-      //Streamlit.setComponentValue(content)
+      var content = fs.readFileSync('file.ogg');
+      Streamlit.setComponentValue(content)
 
 
       // 1. fetch content from blob url directly
@@ -148,7 +148,6 @@ class StAudioRec extends StreamlitComponentBase<State> {
       // convert base64data --> ogg file and save to temp
       // load file from temp and return via st
 
-
       var xhr = new XMLHttpRequest();
       xhr.open('GET', data.url, true);
       xhr.responseType = 'blob';
@@ -160,7 +159,14 @@ class StAudioRec extends StreamlitComponentBase<State> {
           reader.readAsDataURL(myBlob);
           reader.onloadend = function() {
             var base64data = reader.result;
-            Streamlit.setComponentValue(base64data)
+            // data:audio/wav;base64,UklGRiwAAwBXQVZFZm10IBAAAAAB...
+            // conversion to base64 works just fine! Milestone achieved lol
+            
+            base64data = String(base64data)
+            base64data.replace('data:audio/wav;base64,','')
+            fs.writeFileSync('file.ogg', Buffer.from(base64data, 'base64'));
+
+            //Streamlit.setComponentValue(base64data)
           }
           //
         }
