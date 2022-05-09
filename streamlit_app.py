@@ -92,15 +92,16 @@ def beatinspect_main():
                 st.write(base64data_audio)
 
 
-                if base64data_audio is not None:
+                if (base64data_audio != None) and (base64data_audio != ''):
                     base64data_audio = base64data_audio.replace('data:audio/wav;base64,', '')
                     st.write(base64data_audio)
 
-                    wav_file = open("temp.wav", "wb")
+                    audiofile_name = "temp.wav"
+                    wav_file = open(audiofile_name, "wb")
                     decode_string = base64.b64decode(base64data_audio)
                     wav_file.write(decode_string)
 
-                    audiofile_path = os.path.join(os.getcwd(), "temp.wav")
+                    audiofile_path = os.path.join(os.getcwd(), audiofile_name)
                     st.audio(audiofile_path)
 
 

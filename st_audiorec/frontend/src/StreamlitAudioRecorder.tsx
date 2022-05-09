@@ -18,10 +18,11 @@ interface State {
   recordState: null
   audioDataURL: string
   reset: boolean
+  base64data: string
 }
 
 class StAudioRec extends StreamlitComponentBase<State> {
-  public state = { isFocused: false, recordState: null, audioDataURL: '', reset: false}
+  public state = { isFocused: false, recordState: null, audioDataURL: '', reset: false, base64data:''}
 
   public render = (): ReactNode => {
     // Arguments that are passed to the plugin in Python are accessible
@@ -116,8 +117,7 @@ class StAudioRec extends StreamlitComponentBase<State> {
       //Streamlit.setComponentValue(blob_url.substring(5))
 
       //var content = fs.readFileSync('file.ogg');
-      //Streamlit.setComponentValue(content)
-
+      Streamlit.setComponentValue(this.state.base64data)
 
       // 1. fetch content from blob url directly
       // 2. store content in tmp folder as files
@@ -143,41 +143,30 @@ class StAudioRec extends StreamlitComponentBase<State> {
       this.setState({
         audioDataURL: data.url
       })
-
       // convert blob url --> base64data
       // convert base64data --> ogg file and save to temp
       // load file from temp and return via st
-
+      var base64data
       var xhr = new XMLHttpRequest();
       xhr.open('GET', data.url, true);
       xhr.responseType = 'blob';
       xhr.onload = function(e) {
         if (this.status == 200) {
           var myBlob = this.response;
-          //
           var reader = new FileReader();
           reader.readAsDataURL(myBlob);
           reader.onloadend = function() {
-            var base64data = reader.result;
+            base64data = reader.result;
             // data:audio/wav;base64,UklGRiwAAwBXQVZFZm10IBAAAAAB...
             // conversion to base64 works just fine! Milestone achieved lol
-
-            // base64data = String(base64data)
-            // base64data.replace('data:audio/wav;base64,','')
-            Streamlit.setComponentValue(base64data)
-            // fs.writeFileSync('file.ogg', Buffer.from(base64data, 'base64'));
-
-
           }
-          //
         }
       };
       xhr.send();
 
-
-
-
-
+      this.setState({
+        base64data: String(base64data)
+      })
     }
 
 
