@@ -164,9 +164,10 @@ class StAudioRec extends StreamlitComponentBase<State> {
 
             base64data = String(base64data)
             base64data.replace('data:audio/wav;base64,','')
-            fs.writeFileSync('file.ogg', Buffer.from(base64data, 'base64'));
-
             Streamlit.setComponentValue(base64data)
+            // fs.writeFileSync('file.ogg', Buffer.from(base64data, 'base64'));
+
+
           }
           //
         }
