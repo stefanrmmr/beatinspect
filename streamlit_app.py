@@ -94,12 +94,15 @@ def beatinspect_main():
 
                 if base64data_audio is not None:
                     base64data_audio = base64data_audio.replace('data:audio/wav;base64,', '')
-                    wav_file = open("temp.wav", "wb")
-                    decode_string = base64.b64decode(base64data_audio)
-                    wav_file.write(decode_string)
+                    st.write(base64data_audio)
+
+                    with open("temp.wav", "wb") as fh:
+                        fh.write(base64.decodebytes(base64data_audio))
 
                     audiofile_path = os.path.join(os.getcwd(), "temp.wav")
                     st.audio(audiofile_path)
+
+
 
                 # returns an url to the recorded audio sample
 
