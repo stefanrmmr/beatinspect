@@ -91,7 +91,9 @@ def beatinspect_main():
 
                 st.write(base64data_audio)
 
+
                 if base64data_audio is not None:
+                    base64data_audio = base64data_audio.replace('data:audio/wav;base64,', '')
                     wav_file = open("temp.wav", "wb")
                     decode_string = base64.b64decode(base64data_audio)
                     wav_file.write(decode_string)
