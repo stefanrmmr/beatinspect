@@ -160,21 +160,12 @@ class StAudioRec extends StreamlitComponentBase<State> {
             var base64data = reader.result;
             // data:audio/wav;base64,UklGRiwAAwBXQVZFZm10IBAAAAAB...
             // conversion to base64 works just fine! Milestone achieved lol
-
-            // base64data = String(base64data)
-            // base64data.replace('data:audio/wav;base64,','')
             Streamlit.setComponentValue(String(base64data))
             // fs.writeFileSync('file.ogg', Buffer.from(base64data, 'base64'));
-
           }
-          //
         }
       };
       const audiostring = xhr.send();
-
-
-
-
 
     }
 
