@@ -87,8 +87,9 @@ def beatinspect_main():
 
 
                 # the audiorec custom component
-                returned_audio_url = st_audiorec()
-                st.write(returned_audio_url)
+                returned_audio = st_audiorec()
+                st.audio(returned_audio)
+                # st.write(returned_audio_url)
                 # returns an url to the recorded audio sample
 
                 # if (returned_audio_url != None) and (returned_audio_url != ''):
