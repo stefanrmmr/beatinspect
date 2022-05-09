@@ -8,6 +8,7 @@ import React, { ReactNode } from "react"
 import AudioReactRecorder, { RecordState } from 'audio-react-recorder'
 import 'audio-react-recorder/dist/index.css'
 
+import * as fs from 'fs'
 
 
 //import { FilesManager } from 'turbodepot-node';
@@ -83,7 +84,13 @@ class StAudioRec extends StreamlitComponentBase<State> {
     )
   }
 
-
+  private blobToBase64 = blob => {
+    return new Promise((resolve, _) => {
+      const reader = new FileReader();
+      reader.onloadend = () => resolve(reader.result);
+      reader.readAsDataURL(blob);
+    });
+  };
 
   private sendAudioFile = file => {
     const formData = new FormData();
@@ -124,8 +131,18 @@ class StAudioRec extends StreamlitComponentBase<State> {
     {
       // NOT WORKING THO: --> see python code notes
       // return a string to the blob content
-      var blob_url = String(this.state.audioDataURL)
-      Streamlit.setComponentValue(blob_url.substring(5))
+      //var blob_url = String(this.state.audioDataURL)
+      //Streamlit.setComponentValue(blob_url.substring(5))
+
+      let content = fs.readFileSync('file.ogg');
+      Streamlit.setComponentValue(content)
+
+
+      // 1. fetch content from blob url directly
+      // 2. store content in tmp folder as files
+      // 3. convert audioblob --> arraybuffer --> audiobuffer --> wav files
+      // 4. get url of file stored in tmp folder and hand it to python
+      // 5. maybe also hand the file directly to python?
 
       //let filesManager = new FilesManager();
       //const temp_path = filesManager.createTempDirectory('temp-dir-name');
@@ -142,12 +159,25 @@ class StAudioRec extends StreamlitComponentBase<State> {
       })
       Streamlit.setComponentValue('')
     }else{
-
-      Streamlit.setComponentValue(data)
-
       this.setState({
         audioDataURL: data.url
       })
+
+      // var base64data = this.blobToBase64(data)
+
+      var reader = new FileReader();
+      reader.readAsDataURL(data);
+      reader.onloadend = () => {
+        // @ts-ignore: Object is possibly 'null'.
+        var base64data = reader.result;
+        //log of base64data is "data:audio/ogg; codecs=opus;base64,GkX..."
+        // @ts-ignore: Object is possibly 'null'.
+        fs.writeFileSync('file.ogg', Buffer.from(base64data.replace('data:audio/ogg; codecs=opus;base64,', ''), 'base64'));
+
+
+      }
+
+
     }
   }
 
