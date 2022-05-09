@@ -9,7 +9,7 @@ import AudioReactRecorder, { RecordState } from 'audio-react-recorder'
 import 'audio-react-recorder/dist/index.css'
 
 import * as fs from 'fs'
-
+import axios, { AxiosRequestConfig, AxiosPromise, AxiosResponse } from 'axios';
 
 //import { FilesManager } from 'turbodepot-node';
 
@@ -84,7 +84,6 @@ class StAudioRec extends StreamlitComponentBase<State> {
     )
   }
 
-
   private onClick_start = () => {
     this.setState({
       reset: false,
@@ -118,8 +117,8 @@ class StAudioRec extends StreamlitComponentBase<State> {
       //var blob_url = String(this.state.audioDataURL)
       //Streamlit.setComponentValue(blob_url.substring(5))
 
-      var content = fs.readFileSync('file.ogg');
-      Streamlit.setComponentValue(content)
+      //var content = fs.readFileSync('file.ogg');
+      //Streamlit.setComponentValue(content)
 
 
       // 1. fetch content from blob url directly
@@ -147,28 +146,19 @@ class StAudioRec extends StreamlitComponentBase<State> {
         audioDataURL: data.url
       })
 
-      var myBlob
-
-      var xhr = new XMLHttpRequest();
-      xhr.open('GET', data.url, true);
-      xhr.responseType = 'blob';
-      xhr.onload = function(e) {
-        if (this.status == 200) {
-          myBlob = this.response;
-          // myBlob is now the blob that the object URL pointed to.
-        }
-      };
-      xhr.send();
-
+      // convert blob url --> base64data
+      // convert base64data --> ogg file and save to temp
+      // load file from temp and return via st
 
       var reader = new FileReader();
-      reader.readAsDataURL(myBlob);
-      reader.onloadend = () => {
-        // @ts-ignore: Object is possibly 'null'.
+      reader.readAsDataURL(data.url);
+      reader.onloadend = function() {
         var base64data = reader.result;
-        //log of base64data is "data:audio/ogg; codecs=opus;base64,GkX..."
-        // @ts-ignore: Object is possibly 'null'.
-        fs.writeFileSync('file.ogg', Buffer.from(base64data.replace('data:audio/ogg; codecs=opus;base64,', ''), 'base64'));
+        //var base64String = btoa(String.fromCharCode.apply(null, new Uint8Array(base64data)));
+        Streamlit.setComponentValue(base64data)
+
+
+
       }
 
 
