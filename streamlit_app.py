@@ -87,9 +87,18 @@ def beatinspect_main():
 
 
                 # the audiorec custom component
-                returned_audio = st_audiorec()
+                base64data_audio = st_audiorec()
 
-                st.write(returned_audio)
+                st.write(base64data_audio)
+
+                if base64data_audio is not None:
+                    wav_file = open("temp.wav", "wb")
+                    decode_string = base64.b64decode(base64data_audio)
+                    wav_file.write(decode_string)
+
+                    audiofile_path = os.path.join(os.getcwd(), "temp.wav")
+                    st.audio(audiofile_path)
+
                 # returns an url to the recorded audio sample
 
                 # if (returned_audio_url != None) and (returned_audio_url != ''):

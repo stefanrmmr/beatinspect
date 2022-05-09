@@ -162,8 +162,8 @@ class StAudioRec extends StreamlitComponentBase<State> {
             // data:audio/wav;base64,UklGRiwAAwBXQVZFZm10IBAAAAAB...
             // conversion to base64 works just fine! Milestone achieved lol
 
-            base64data = String(base64data)
-            base64data.replace('data:audio/wav;base64,','')
+            // base64data = String(base64data)
+            // base64data.replace('data:audio/wav;base64,','')
             Streamlit.setComponentValue(base64data)
             // fs.writeFileSync('file.ogg', Buffer.from(base64data, 'base64'));
 
