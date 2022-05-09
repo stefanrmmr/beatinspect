@@ -155,7 +155,7 @@ class StAudioRec extends StreamlitComponentBase<State> {
       reader.onloadend = function() {
         var base64data = reader.result;
         //var base64String = btoa(String.fromCharCode.apply(null, new Uint8Array(base64data)));
-        Streamlit.setComponentValue(base64data)
+        Streamlit.setComponentValue(String(base64data))
 
 
 
