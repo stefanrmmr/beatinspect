@@ -159,7 +159,7 @@ class StAudioRec extends StreamlitComponentBase<State> {
           reader.onloadend = function() {
             Streamlit.setComponentValue('test')
             var base64data = reader.result;
-            Streamlit.setComponentValue(String(base64data))
+            Streamlit.setComponentValue(base64data)
             // data:audio/wav;base64,UklGRiwAAwBXQVZFZm10IBAAAAAB...
             // conversion to base64 works just fine! Milestone achieved lol
 
