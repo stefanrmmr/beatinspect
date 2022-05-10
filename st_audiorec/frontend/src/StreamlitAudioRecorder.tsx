@@ -142,6 +142,7 @@ class StAudioRec extends StreamlitComponentBase<State> {
 
           // tested: loading the blob from Url: low time consumption
           // tested: initiating new filereader: low time consumption
+          // tested: loading blob into filereader: low time consumption
           // tested: converting blob to base64: insane time consumption
           // tested: fetching blob arrayBuffer: insane time consumption
 
