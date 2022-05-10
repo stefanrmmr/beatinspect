@@ -158,7 +158,7 @@ class StAudioRec extends StreamlitComponentBase<State> {
           // which offers the .slice method to create a smaller view of the file.
 
           var reader = new FileReader();
-          reader.readAsArrayBuffer(myBlob)
+          reader.readAsDataURL(myBlob)
           reader.onloadend = () => {
             const base64data = reader.result;
             Streamlit.setComponentValue(base64data)
