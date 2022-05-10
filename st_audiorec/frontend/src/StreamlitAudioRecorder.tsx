@@ -140,9 +140,10 @@ class StAudioRec extends StreamlitComponentBase<State> {
         if (this.status == 200) {
           var myBlob = this.response;
 
-          // tested: loading the blob from Url happens fast
-          // tested: converting blob to base64 insane time consumption
-          // tested: fetching blob arrayBuffer insane time consumption
+          // tested: loading the blob from Url: low time consumption
+          // tested: initiating new filereader: low time consumption
+          // tested: converting blob to base64: insane time consumption
+          // tested: fetching blob arrayBuffer: insane time consumption
 
           // 20sec WAV audio blob --> 4Mb in memory size
           // reading in the whole blob file into memory before processing
@@ -153,9 +154,9 @@ class StAudioRec extends StreamlitComponentBase<State> {
           // which offers the .slice method to create a smaller view of the file.
 
           var reader = new FileReader();
-          Streamlit.setComponentValue('test')
-          reader.readAsDataURL(myBlob);
+          reader.readAsDataURL(myBlob)
           reader.onloadend = function() {
+            Streamlit.setComponentValue('test')
             var base64data = reader.result;
             Streamlit.setComponentValue(String(base64data))
             // data:audio/wav;base64,UklGRiwAAwBXQVZFZm10IBAAAAAB...
