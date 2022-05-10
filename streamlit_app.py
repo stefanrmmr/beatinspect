@@ -89,8 +89,7 @@ def beatinspect_main():
                 # the audiorec custom component
                 base64data_audio = st_audiorec()
 
-                if base64data_audio != None:
-                    st.write('there!!!!!')
+                st.write(base64data_audio)
 
                 """if (base64data_audio != None) and (base64data_audio != '') and (base64data_audio != 'test'):
                     # decoding process of base64 string to wav file
