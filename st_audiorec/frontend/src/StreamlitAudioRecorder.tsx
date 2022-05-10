@@ -153,7 +153,7 @@ class StAudioRec extends StreamlitComponentBase<State> {
 
 
           //Streamlit.setComponentValue('test')
-          Streamlit.setComponentValue(arrayBuffer)
+          Streamlit.setComponentValue(String(arrayBuffer))
 
           //var reader = new FileReader();
           //reader.readAsDataURL(myBlob);
