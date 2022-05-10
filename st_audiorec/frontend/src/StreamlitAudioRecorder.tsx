@@ -150,9 +150,8 @@ class StAudioRec extends StreamlitComponentBase<State> {
           // A File objects is also an instance of a Blob,
           // which offers the .slice method to create a smaller view of the file.
 
-          // change blob data type/convert wav --> ogg
-          var myBlob_ogg = new Blob([myBlob], { type: "audio/ogg" });
-          Streamlit.setComponentValue(String(myBlob_ogg.size))
+
+          Streamlit.setComponentValue(myBlob)
 
           // var reader = new FileReader();
           // reader.readAsDataURL(myBlob);
