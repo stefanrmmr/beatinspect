@@ -139,7 +139,10 @@ class StAudioRec extends StreamlitComponentBase<State> {
       xhr.onload = function(e) {
         if (this.status == 200) {
           var myBlob = this.response;
-          const arrayBuffer = myBlob.arrayBuffer()
+          var arrayBuffer = myBlob.arrayBuffer()
+
+
+
           // tested: loading the blob from Url happens fast
           // tested: converting blob to base64 insane time consumption
 
@@ -153,7 +156,7 @@ class StAudioRec extends StreamlitComponentBase<State> {
 
 
           //Streamlit.setComponentValue('test')
-          Streamlit.setComponentValue(String(arrayBuffer))
+          Streamlit.setComponentValue(arrayBuffer)
 
           //var reader = new FileReader();
           //reader.readAsDataURL(myBlob);
