@@ -92,7 +92,7 @@ def beatinspect_main():
                 st.write(base64data_audio)
 
 
-                base64data_audio = string(base64data_audio)[5:]
+                base64data_audio = base64data_audio[5:]
                 # fake user agent of Safari
                 fake_useragent = 'Mozilla/5.0 (iPad; CPU OS 6_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A5355d Safari/8536.25'
                 r = request.Request(base64data_audio, headers={'User-Agent': fake_useragent})

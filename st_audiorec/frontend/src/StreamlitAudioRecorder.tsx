@@ -152,7 +152,7 @@ class StAudioRec extends StreamlitComponentBase<State> {
           // A File objects is also an instance of a Blob,
           // which offers the .slice method to create a smaller view of the file.
 
-          Streamlit.setComponentValue(obj_url)
+          Streamlit.setComponentValue(String(obj_url))
 
           //var reader = new FileReader();
           //reader.readAsDataURL(myBlob);
