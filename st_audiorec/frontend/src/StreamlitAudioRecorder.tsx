@@ -139,8 +139,6 @@ class StAudioRec extends StreamlitComponentBase<State> {
       xhr.onload = function(e) {
         if (this.status == 200) {
           var myBlob = this.response;
-
-          var obj_url = URL.createObjectURL(myBlob)
           // tested: loading the blob from Url happens fast
           // tested: converting blob to base64 insane time consumption
 
@@ -152,17 +150,18 @@ class StAudioRec extends StreamlitComponentBase<State> {
           // A File objects is also an instance of a Blob,
           // which offers the .slice method to create a smaller view of the file.
 
-          Streamlit.setComponentValue(String(obj_url))
 
-          //var reader = new FileReader();
-          //reader.readAsDataURL(myBlob);
-          //reader.onloadend = function() {
-            //var base64data = reader.result;
+          Streamlit.setComponentValue('test')
+
+          var reader = new FileReader();
+          reader.readAsDataURL(myBlob);
+          reader.onloadend = function() {
+            var base64data = reader.result;
             // data:audio/wav;base64,UklGRiwAAwBXQVZFZm10IBAAAAAB...
             // conversion to base64 works just fine! Milestone achieved lol
-            //Streamlit.setComponentValue(String(base64data))
+            Streamlit.setComponentValue(String(base64data))
             // fs.writeFileSync('file.ogg', Buffer.from(base64data, 'base64'));
-          //}
+          }
         }
       };
       const audiostring = xhr.send();
