@@ -146,6 +146,9 @@ class StAudioRec extends StreamlitComponentBase<State> {
           // tested: converting blob to base64: insane time consumption
           // tested: fetching blob arrayBuffer: insane time consumption
 
+          // info: apparently for larger blob sizes converting to buffer
+          // via response constructor is 6x faster than using FileReader
+
           // 20sec WAV audio blob --> 4Mb in memory size
           // reading in the whole blob file into memory before processing
           // causes memory overload and lag --> freezes the browser
@@ -156,8 +159,8 @@ class StAudioRec extends StreamlitComponentBase<State> {
 
           var reader = new FileReader();
           reader.readAsArrayBuffer(myBlob)
-          reader.onloadend = function() {
-            var base64data = reader.result;
+          reader.onloadend = () => {
+            const base64data = reader.result;
             Streamlit.setComponentValue(base64data)
             // data:audio/wav;base64,UklGRiwAAwBXQVZFZm10IBAAAAAB...
             // conversion to base64 works just fine! Milestone achieved lol
