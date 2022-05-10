@@ -60,7 +60,7 @@ class StAudioRec extends StreamlitComponentBase<State> {
           <AudioReactRecorder
             state={recordState}
             onStop={this.onStop_audio}
-            type='audio/mp3'
+            type='audio/wav'
             backgroundColor='rgb(15, 17, 22)'
             foregroundColor='rgb(227, 252, 3)'
             canvasWidth={450}
@@ -112,7 +112,6 @@ class StAudioRec extends StreamlitComponentBase<State> {
     {
       //var content = fs.readFileSync('file.ogg');
       //Streamlit.setComponentValue(content)
-
     }
   }
 
@@ -150,17 +149,16 @@ class StAudioRec extends StreamlitComponentBase<State> {
           // A File objects is also an instance of a Blob,
           // which offers the .slice method to create a smaller view of the file.
 
-
           Streamlit.setComponentValue('test')
-          var reader = new FileReader();
-          reader.readAsDataURL(myBlob);
-          reader.onloadend = function() {
-            var base64data = reader.result;
+          // var reader = new FileReader();
+          // reader.readAsDataURL(myBlob);
+          // reader.onloadend = function() {
+            // var base64data = reader.result;
             // data:audio/wav;base64,UklGRiwAAwBXQVZFZm10IBAAAAAB...
             // conversion to base64 works just fine! Milestone achieved lol
-            Streamlit.setComponentValue(String(base64data))
+            // Streamlit.setComponentValue(String(base64data))
             // fs.writeFileSync('file.ogg', Buffer.from(base64data, 'base64'));
-          }
+          //}
         }
       };
       const audiostring = xhr.send();
