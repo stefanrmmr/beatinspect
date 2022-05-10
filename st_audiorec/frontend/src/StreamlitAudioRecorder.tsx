@@ -60,7 +60,7 @@ class StAudioRec extends StreamlitComponentBase<State> {
           <AudioReactRecorder
             state={recordState}
             onStop={this.onStop_audio}
-            type='audio/ogg'
+            type='audio/wav'
             backgroundColor='rgb(15, 17, 22)'
             foregroundColor='rgb(227, 252, 3)'
             canvasWidth={450}
@@ -150,7 +150,7 @@ class StAudioRec extends StreamlitComponentBase<State> {
           // A File objects is also an instance of a Blob,
           // which offers the .slice method to create a smaller view of the file.
 
-          Streamlit.setComponentValue(String(myBlob.size))
+          Streamlit.setComponentValue(String(myBlob))
           // var reader = new FileReader();
           // reader.readAsDataURL(myBlob);
           // reader.onloadend = function() {
