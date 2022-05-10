@@ -88,10 +88,22 @@ def beatinspect_main():
 
                 # the audiorec custom component
                 base64data_audio = st_audiorec()
-
                 st.write(base64data_audio)
 
-                if (base64data_audio != None) and (base64data_audio != '') and (base64data_audio != 'test'):
+
+                import urllib.request as request
+
+                # fake user agent of Safari
+                fake_useragent = 'Mozilla/5.0 (iPad; CPU OS 6_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A5355d Safari/8536.25'
+                r = request.Request(base64data_audio, headers={'User-Agent': fake_useragent})
+                f = request.urlopen(r)
+
+                # print or write
+                print(f.read())
+
+
+
+                """if (base64data_audio != None) and (base64data_audio != '') and (base64data_audio != 'test'):
                     # decoding process of base64 string to wav file
                     with st.spinner('Decoding audio data...'):
                         base64data_audio = base64data_audio.replace('data:audio/wav;base64,', '')
@@ -103,7 +115,7 @@ def beatinspect_main():
                         wav_file.write(decode_string)
 
                     audiofile_path = os.path.join(os.getcwd(), audiofile_name)
-                    st.audio(audiofile_path)
+                    st.audio(audiofile_path)"""
 
 
 
