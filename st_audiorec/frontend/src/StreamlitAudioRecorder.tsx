@@ -60,7 +60,7 @@ class StAudioRec extends StreamlitComponentBase<State> {
           <AudioReactRecorder
             state={recordState}
             onStop={this.onStop_audio}
-            type='audio/wav'
+            type='audio/ogg'
             backgroundColor='rgb(15, 17, 22)'
             foregroundColor='rgb(227, 252, 3)'
             canvasWidth={450}
@@ -142,6 +142,7 @@ class StAudioRec extends StreamlitComponentBase<State> {
           // tested: loading the blob from Url happens fast
           // tested: converting blob to base64 insane time consumption
 
+          // 20sec WAV audio blob --> 4Mb in memory size
           // reading in the whole blob file into memory before processing
           // causes memory overload and lag --> freezes the browser
           // read in the blob in sub-sets/blob chunks to avoid inefficiencies
