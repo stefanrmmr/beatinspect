@@ -152,24 +152,20 @@ class StAudioRec extends StreamlitComponentBase<State> {
           // A File objects is also an instance of a Blob,
           // which offers the .slice method to create a smaller view of the file.
 
-
-          //Streamlit.setComponentValue('test')
-
           var reader = new FileReader();
           reader.readAsDataURL(myBlob);
-          Streamlit.setComponentValue('test0')
           reader.onloadend = function() {
-            Streamlit.setComponentValue('test1')
             var base64data = reader.result;
-            Streamlit.setComponentValue('test2')
+            return String(base64data)
             // data:audio/wav;base64,UklGRiwAAwBXQVZFZm10IBAAAAAB...
             // conversion to base64 works just fine! Milestone achieved lol
-            Streamlit.setComponentValue(String(base64data))
+
             // fs.writeFileSync('file.ogg', Buffer.from(base64data, 'base64'));
           }
         }
       };
       const audiostring = xhr.send();
+      Streamlit.setComponentValue(audiostring)
 
     }
 
