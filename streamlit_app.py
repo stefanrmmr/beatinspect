@@ -89,6 +89,7 @@ def beatinspect_main():
 
                 # the audiorec custom component
                 base64data_audio = st_audiorec()
+                st.write(base64data_audio)
 
                 # st.write(base64data_audio)
 
