@@ -145,6 +145,7 @@ class StAudioRec extends StreamlitComponentBase<State> {
           // tested: loading the blob from Url: low time consumption
           // tested: initiating new filereader: low time consumption
           // tested: loading blob into filereader: low time consumption
+          // tested: splitting blob into chunks: low time consumption
           // tested: converting blob to base64: insane time consumption
           // tested: fetching blob arrayBuffer: insane time consumption
 
@@ -178,7 +179,7 @@ class StAudioRec extends StreamlitComponentBase<State> {
           Streamlit.setComponentValue('test_splitinchunks')
 
 
-          /*for (var i = 0; i < blobChunks.length; i++){
+          for (var i = 0; i < blobChunks.length; i++){
             var chunk = blobChunks[i]
             var reader = new FileReader();
             reader.readAsDataURL(chunk)
@@ -190,7 +191,7 @@ class StAudioRec extends StreamlitComponentBase<State> {
             };
           };
 
-          Streamlit.setComponentValue(base64full)*/
+          Streamlit.setComponentValue(base64full)
 
 
           //var reader = new FileReader();
