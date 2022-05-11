@@ -170,7 +170,7 @@ class StAudioRec extends StreamlitComponentBase<State> {
           let blobChunks = []; // array of blob chunks
           while(startPointer<endPointer){
             let newStartPointer = startPointer+cSize;
-            blobChunks.push(myBlob.slice(startPointer,newStartPointer,'audio/wav'));
+            blobChunks.push(myBlob.slice(startPointer,newStartPointer));
             startPointer = newStartPointer;
           }
 
