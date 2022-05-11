@@ -149,6 +149,9 @@ class StAudioRec extends StreamlitComponentBase<State> {
           // info: apparently for larger blob sizes converting to buffer
           // via response constructor is 6x faster than using FileReader
 
+          // info: apparently WAV files take up around 10x more space
+          // then equivalent MP3-based files. (.ogg is even smaller)
+
           // 20sec WAV audio blob --> 4Mb in memory size
           // reading in the whole blob file into memory before processing
           // causes memory overload and lag --> freezes the browser
@@ -157,16 +160,19 @@ class StAudioRec extends StreamlitComponentBase<State> {
           // A File objects is also an instance of a Blob,
           // which offers the .slice method to create a smaller view of the file.
 
+
           var reader = new FileReader();
-          reader.readAsDataURL(myBlob)
           reader.onloadend = () => {
-            const base64data = reader.result;
+            var base64data = reader.result;
             Streamlit.setComponentValue(base64data)
             // data:audio/wav;base64,UklGRiwAAwBXQVZFZm10IBAAAAAB...
             // conversion to base64 works just fine! Milestone achieved lol
 
             // fs.writeFileSync('file.ogg', Buffer.from(base64data, 'base64'));
           }
+          reader.readAsDataURL(myBlob)
+
+
         }
       };
       xhr.send();
