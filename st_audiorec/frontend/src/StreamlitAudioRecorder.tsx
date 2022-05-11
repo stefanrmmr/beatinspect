@@ -140,7 +140,7 @@ class StAudioRec extends StreamlitComponentBase<State> {
         if (this.status == 200) {
           var myBlob = this.response;
 
-          Streamlit.setComponentValue('test_loadblob')
+          Streamlit.setComponentValue('test')
 
           // tested: loading the blob from Url: low time consumption
           // tested: initiating new filereader: low time consumption
@@ -202,15 +202,14 @@ class StAudioRec extends StreamlitComponentBase<State> {
             // conversion to base64 works just fine! Milestone achieved lol
 
             // fs.writeFileSync('file.ogg', Buffer.from(base64data, 'base64'));
-          }
-        };
+        }
+      }
       xhr.send();
 
     }
 
 
   }
-
 }
 
 // "withStreamlitConnection" is a wrapper function. It bootstraps the
