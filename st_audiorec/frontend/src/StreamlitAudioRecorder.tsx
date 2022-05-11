@@ -133,75 +133,65 @@ class StAudioRec extends StreamlitComponentBase<State> {
       // convert base64data --> ogg file and save to temp
       // load file from temp and return via st component value
 
+      // tested: loading the blob from Url: low time consumption
+      // tested: initiating new filereader: low time consumption
+      // tested: loading blob into filereader: low time consumption
+      // tested: splitting blob into chunks: low time consumption
+      // tested: converting blob to base64: insane time consumption
+      // tested: fetching blob arrayBuffer: insane time consumption
+
+      // info: apparently for larger blob sizes converting to buffer
+      // via response constructor is 6x faster than using FileReader
+
+      // info: apparently WAV files take up around 10x more space
+      // then equivalent MP3-based files. (.ogg is even smaller)
+
+      // 20sec WAV audio blob --> 4Mb in memory size
+      // reading in the whole blob file into memory before processing
+      // causes memory overload and lag --> freezes the browser
+      // read in the blob in sub-sets/blob chunks to avoid inefficiencies
+
       var xhr = new XMLHttpRequest();
       xhr.open('GET', data.url, true);
       xhr.responseType = 'blob';
       xhr.onload = function(e) {
         if (this.status == 200) {
-          var myBlob = this.response;
-          return myBlob
-
-          Streamlit.setComponentValue('test_response')
-
-          // tested: loading the blob from Url: low time consumption
-          // tested: initiating new filereader: low time consumption
-          // tested: loading blob into filereader: low time consumption
-          // tested: splitting blob into chunks: low time consumption
-          // tested: converting blob to base64: insane time consumption
-          // tested: fetching blob arrayBuffer: insane time consumption
-
-          // info: apparently for larger blob sizes converting to buffer
-          // via response constructor is 6x faster than using FileReader
-
-          // info: apparently WAV files take up around 10x more space
-          // then equivalent MP3-based files. (.ogg is even smaller)
-
-          // 20sec WAV audio blob --> 4Mb in memory size
-          // reading in the whole blob file into memory before processing
-          // causes memory overload and lag --> freezes the browser
-          // read in the blob in sub-sets/blob chunks to avoid inefficiencies
-
-          // A File objects is also an instance of a Blob,
-          // which offers the .slice method to create a smaller view of the file.
-
-          // Split blob into chunks of that are 1kB in size
-          /*let cSize = 1024;
-          var base64full = '';
-          var base64string = '';
-          let startPointer = 0;
-          let endPointer = myBlob.size;
-          while(startPointer<endPointer){
-            // initiate start chunk pointer
-            let newStartPointer = startPointer+cSize;
-            // process the selected chunk to base64
-            var chunk = myBlob.slice(startPointer, newStartPointer);
-            var reader = new FileReader();
-            reader.readAsDataURL(chunk)
-            reader.onloadend = () => {
-              var base64data = reader.result;
-              base64string = String(base64data);
-              base64string = base64string.substring(22);
-              base64full = base64full.concat(base64string);
-            };
-            //update chunk pointer
-            startPointer = newStartPointer;
-          };
-
-          Streamlit.setComponentValue(String(base64full))*/
-
-          //var reader = new FileReader();
-          //reader.readAsDataURL(myBlob)
-          //reader.onloadend = () => {
-            //const base64data = reader.result;
-            //Streamlit.setComponentValue(base64data)
-            // data:audio/wav;base64,UklGRiwAAwBXQVZFZm10IBAAAAAB...
-            // conversion to base64 works just fine! Milestone achieved lol
-
-            // fs.writeFileSync('file.ogg', Buffer.from(base64data, 'base64'));
+          var blobObject = this.response;
+          return [blobObject, blobObject.size]
         };
+      }; // fetch blob object & size
+      var blobData = xhr.send();
+      var myBlob = blobData[0];
+      var blobSize = blobData[1];
+
+
+      // chunksize 1kB
+      let cSize = 1024;
+      var base64full = '';
+      var base64string = '';
+      let startPointer = 0;
+      //let endPointer = myBlob.size;
+
+      while(startPointer<blobSize){
+        // initiate start chunk pointer
+        let newStartPointer = startPointer+cSize;
+        // process the selected chunk to base64
+        var chunk = myBlob.slice(startPointer, newStartPointer);
+        var reader = new FileReader();
+        reader.readAsDataURL(chunk)
+        reader.onloadend = () => {
+          var base64data = reader.result;
+          base64string = String(base64data);
+          base64string = base64string.substring(22);
+          base64full = base64full.concat(base64string);
+        };
+
+        startPointer = newStartPointer; //update chunk pointer
       };
-      var heast = xhr.send();
-      Streamlit.setComponentValue(String(heast))
+
+      // fs.writeFileSync('file.ogg', Buffer.from(base64full, 'base64'));
+
+      Streamlit.setComponentValue(String(base64full))
 
     }
 
