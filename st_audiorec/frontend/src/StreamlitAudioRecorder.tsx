@@ -163,18 +163,18 @@ class StAudioRec extends StreamlitComponentBase<State> {
           // which offers the .slice method to create a smaller view of the file.
 
           // Split blob into chunks of that are 1kB in size
-          let cSize = 1024 /* cSize should be byte 1024*1 = 1KB */
+          let cSize = 1024; /* cSize should be byte 1024*1 = 1KB */
 
           let startPointer = 0;
           let endPointer = myBlob.size;
-          let blobChunks = []; // array of chunks
+          let blobChunks = []; // array of blob chunks
           while(startPointer<endPointer){
             let newStartPointer = startPointer+cSize;
-            blobChunks.push(myBlob.slice(startPointer,newStartPointer));
+            blobChunks.push(myBlob.slice(startPointer,newStartPointer,'audio/wav'));
             startPointer = newStartPointer;
           }
 
-          var base64full = ''
+          let base64full = '';
           Streamlit.setComponentValue('test_splitinchunks')
 
 
@@ -186,9 +186,9 @@ class StAudioRec extends StreamlitComponentBase<State> {
               const base64data = reader.result;
               var base64string = String(base64data);
               base64string = base64string.substring(22);
-              base64full = base64full + base64string
-            }
-          }
+              base64full = base64full.concat(base64string);
+            };
+          };
 
           Streamlit.setComponentValue(base64full)
           //var reader = new FileReader();
