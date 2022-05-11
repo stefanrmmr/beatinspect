@@ -175,6 +175,7 @@ class StAudioRec extends StreamlitComponentBase<State> {
           }
 
           let base64full = ''
+          Streamlit.setComponentValue(createChunks)
 
           // for alle chunks in createChunks convert und an string adden
           // vor dem add to string "data:audio/wav;base64," vorne entfernen
