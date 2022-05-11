@@ -201,6 +201,7 @@ class StAudioRec extends StreamlitComponentBase<State> {
                 base64string = base64string.substring(22);
                 base64full = base64full + base64string
               }
+          }
 
           Streamlit.setComponentValue(base64full)
           //var reader = new FileReader();
@@ -213,8 +214,7 @@ class StAudioRec extends StreamlitComponentBase<State> {
 
             // fs.writeFileSync('file.ogg', Buffer.from(base64data, 'base64'));
           }
-        }
-      };
+        };
       xhr.send();
 
     }
