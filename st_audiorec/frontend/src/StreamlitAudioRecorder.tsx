@@ -163,7 +163,7 @@ class StAudioRec extends StreamlitComponentBase<State> {
           // which offers the .slice method to create a smaller view of the file.
 
           // Split blob into chunks of that are 1kB in size
-          /*let cSize = 1024;
+          let cSize = 1024;
 
           let startPointer = 0;
           let endPointer = myBlob.size;
@@ -178,7 +178,7 @@ class StAudioRec extends StreamlitComponentBase<State> {
           Streamlit.setComponentValue('test_splitinchunks')
 
 
-          for (var i = 0; i < blobChunks.length; i++){
+          /*for (var i = 0; i < blobChunks.length; i++){
             var chunk = blobChunks[i]
             var reader = new FileReader();
             reader.readAsDataURL(chunk)
