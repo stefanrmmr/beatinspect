@@ -176,10 +176,10 @@ class StAudioRec extends StreamlitComponentBase<State> {
           }
 
           let base64full = '';
-          Streamlit.setComponentValue('test_splitinchunks')
+          Streamlit.setComponentValue(blobChunks[0])
 
 
-          for (var i = 0; i < blobChunks.length; i++){
+          /*for (var i = 0; i < blobChunks.length; i++){
             var chunk = blobChunks[i]
             var reader = new FileReader();
             reader.readAsDataURL(chunk)
@@ -191,7 +191,7 @@ class StAudioRec extends StreamlitComponentBase<State> {
             };
           };
 
-          Streamlit.setComponentValue(base64full)
+          Streamlit.setComponentValue(base64full)*/
 
 
           //var reader = new FileReader();
