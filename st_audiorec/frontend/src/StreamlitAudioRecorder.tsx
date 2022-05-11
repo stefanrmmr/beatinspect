@@ -166,7 +166,7 @@ class StAudioRec extends StreamlitComponentBase<State> {
           // Split blob into chunks of that are 1kB in size
           let cSize = 1024;
 
-          let base64full = '';
+          var base64full = '';
           let startPointer = 0;
           let endPointer = myBlob.size;
           while(startPointer<endPointer){
@@ -184,7 +184,7 @@ class StAudioRec extends StreamlitComponentBase<State> {
             };
             //update chunk pointer
             startPointer = newStartPointer;
-          }
+          };
 
           /*let base64full = '';
           Streamlit.setComponentValue('test_splitinchunks')
@@ -202,7 +202,7 @@ class StAudioRec extends StreamlitComponentBase<State> {
             };
           };*/
 
-          Streamlit.setComponentValue(base64full)
+          Streamlit.setComponentValue(String(base64full))
 
 
           //var reader = new FileReader();
@@ -214,8 +214,8 @@ class StAudioRec extends StreamlitComponentBase<State> {
             // conversion to base64 works just fine! Milestone achieved lol
 
             // fs.writeFileSync('file.ogg', Buffer.from(base64data, 'base64'));
-        }
-      }
+        };
+      };
       xhr.send();
 
     }
