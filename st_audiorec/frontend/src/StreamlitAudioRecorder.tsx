@@ -162,7 +162,16 @@ class StAudioRec extends StreamlitComponentBase<State> {
 
           // Split blob into chunks of that are 1kB in size
           var cSize = 1024 /* cSize should be byte 1024*1 = 1KB */
-          var createChunks = (myBlob,cSize) => {
+          let startPointer = 0;
+          let endPointer = myBlob.size;
+          let blobChunks = []; // array of chunks
+          while(startPointer<endPointer){
+            let newStartPointer = startPointer+cSize;
+            blobChunks.push(myBlob.slice(startPointer,newStartPointer));
+            startPointer = newStartPointer;
+          }
+
+          /*var createChunks = (myBlob,cSize) => {
             let startPointer = 0;
             let endPointer = myBlob.size;
             let chunks = []; // array of chunks
@@ -172,16 +181,16 @@ class StAudioRec extends StreamlitComponentBase<State> {
               startPointer = newStartPointer;
             }
             return chunks;
-          }
+          }*/
 
           let base64full = ''
-          Streamlit.setComponentValue(createChunks)
+          Streamlit.setComponentValue(blobChunks)
 
           // for alle chunks in createChunks convert und an string adden
           // vor dem add to string "data:audio/wav;base64," vorne entfernen
 
-          for (var i = 0; i < createChunks.length; i++) {
-              var chunk = createChunks[i]
+          for (var i = 0; i < blobChunks.length; i++) {
+              var chunk = blobChunks[i]
               var reader = new FileReader();
               reader.readAsDataURL(chunk)
               reader.onloadend = () => {
