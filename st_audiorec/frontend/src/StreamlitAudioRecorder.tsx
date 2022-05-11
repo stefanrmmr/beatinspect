@@ -140,6 +140,8 @@ class StAudioRec extends StreamlitComponentBase<State> {
         if (this.status == 200) {
           var myBlob = this.response;
 
+          Streamlit.setComponentValue('test_loadblob')
+
           // tested: loading the blob from Url: low time consumption
           // tested: initiating new filereader: low time consumption
           // tested: loading blob into filereader: low time consumption
@@ -184,7 +186,7 @@ class StAudioRec extends StreamlitComponentBase<State> {
           }*/
 
           let base64full = ''
-          Streamlit.setComponentValue(blobChunks)
+          Streamlit.setComponentValue('test_splitinchunks')
 
           // for alle chunks in createChunks convert und an string adden
           // vor dem add to string "data:audio/wav;base64," vorne entfernen
