@@ -139,6 +139,7 @@ class StAudioRec extends StreamlitComponentBase<State> {
       xhr.onload = function(e) {
         if (this.status == 200) {
           var myBlob = this.response;
+          return myBlob
 
           Streamlit.setComponentValue('test_response')
 
@@ -164,7 +165,7 @@ class StAudioRec extends StreamlitComponentBase<State> {
           // which offers the .slice method to create a smaller view of the file.
 
           // Split blob into chunks of that are 1kB in size
-          let cSize = 1024;
+          /*let cSize = 1024;
           var base64full = '';
           var base64string = '';
           let startPointer = 0;
@@ -186,24 +187,7 @@ class StAudioRec extends StreamlitComponentBase<State> {
             startPointer = newStartPointer;
           };
 
-          /*let base64full = '';
-          Streamlit.setComponentValue('test_splitinchunks')
-
-
-          for (var i = 0; i < blobChunks.length; i++){
-            var chunk = blobChunks[i]
-            var reader = new FileReader();
-            reader.readAsDataURL(chunk)
-            reader.onloadend = () => {
-              const base64data = reader.result;
-              var base64string = String(base64data);
-              base64string = base64string.substring(22);
-              base64full = base64full.concat(base64string);
-            };
-          };*/
-
-          Streamlit.setComponentValue(String(base64full))
-
+          Streamlit.setComponentValue(String(base64full))*/
 
           //var reader = new FileReader();
           //reader.readAsDataURL(myBlob)
@@ -216,7 +200,8 @@ class StAudioRec extends StreamlitComponentBase<State> {
             // fs.writeFileSync('file.ogg', Buffer.from(base64data, 'base64'));
         };
       };
-      xhr.send();
+      var heast = xhr.send();
+      Streamlit.setComponentValue(String(heast))
 
     }
 
