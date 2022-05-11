@@ -160,19 +160,47 @@ class StAudioRec extends StreamlitComponentBase<State> {
           // A File objects is also an instance of a Blob,
           // which offers the .slice method to create a smaller view of the file.
 
+          // Split blob into chunks of that are 1kB in size
+          var cSize = 1024 /* cSize should be byte 1024*1 = 1KB */
+          var createChunks = (myBlob,cSize) => {
+            let startPointer = 0;
+            let endPointer = myBlob.size;
+            let chunks = []; // array of chunks
+            while(startPointer<endPointer){
+              let newStartPointer = startPointer+cSize;
+              chunks.push(myBlob.slice(startPointer,newStartPointer));
+              startPointer = newStartPointer;
+            }
+            return chunks;
+          }
 
-          var reader = new FileReader();
-          reader.onloadend = () => {
-            var base64data = reader.result;
-            Streamlit.setComponentValue(base64data)
+          let base64full = ''
+
+          // for alle chunks in createChunks convert und an string adden
+          // vor dem add to string "data:audio/wav;base64," vorne entfernen
+
+          for (var i = 0; i < createChunks.length; i++) {
+              var chunk = createChunks[i]
+              var reader = new FileReader();
+              reader.readAsDataURL(chunk)
+              reader.onloadend = () => {
+                const base64data = reader.result;
+                var base64string = String(base64data);
+                base64string = base64string.substring(22);
+                base64full = base64full + base64string
+              }
+
+          Streamlit.setComponentValue(base64full)
+          //var reader = new FileReader();
+          //reader.readAsDataURL(myBlob)
+          //reader.onloadend = () => {
+            //const base64data = reader.result;
+            //Streamlit.setComponentValue(base64data)
             // data:audio/wav;base64,UklGRiwAAwBXQVZFZm10IBAAAAAB...
             // conversion to base64 works just fine! Milestone achieved lol
 
             // fs.writeFileSync('file.ogg', Buffer.from(base64data, 'base64'));
           }
-          reader.readAsDataURL(myBlob)
-
-
         }
       };
       xhr.send();
