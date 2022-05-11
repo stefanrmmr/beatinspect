@@ -8,7 +8,7 @@ import React, { ReactNode } from "react"
 import AudioReactRecorder, { RecordState } from 'audio-react-recorder'
 import 'audio-react-recorder/dist/index.css'
 
-import * as fs from 'fs'
+// import * as fs from 'fs'
 //import { FilesManager } from 'turbodepot-node';
 
 
@@ -165,8 +165,8 @@ class StAudioRec extends StreamlitComponentBase<State> {
 
           // Split blob into chunks of that are 1kB in size
           let cSize = 1024;
-
           var base64full = '';
+          var base64string = '';
           let startPointer = 0;
           let endPointer = myBlob.size;
           while(startPointer<endPointer){
@@ -177,8 +177,8 @@ class StAudioRec extends StreamlitComponentBase<State> {
             var reader = new FileReader();
             reader.readAsDataURL(chunk)
             reader.onloadend = () => {
-              const base64data = reader.result;
-              var base64string = String(base64data);
+              var base64data = reader.result;
+              base64string = String(base64data);
               base64string = base64string.substring(22);
               base64full = base64full.concat(base64string);
             };
