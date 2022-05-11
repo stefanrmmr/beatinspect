@@ -140,7 +140,7 @@ class StAudioRec extends StreamlitComponentBase<State> {
         if (this.status == 200) {
           var myBlob = this.response;
 
-          Streamlit.setComponentValue('test')
+          Streamlit.setComponentValue('test_response')
 
           // tested: loading the blob from Url: low time consumption
           // tested: initiating new filereader: low time consumption
@@ -166,20 +166,31 @@ class StAudioRec extends StreamlitComponentBase<State> {
           // Split blob into chunks of that are 1kB in size
           let cSize = 1024;
 
+          let base64full = '';
           let startPointer = 0;
           let endPointer = myBlob.size;
-          let blobChunks = []; // array of blob chunks
           while(startPointer<endPointer){
+            // initiate start chunk pointer
             let newStartPointer = startPointer+cSize;
-            blobChunks.push(myBlob.slice(startPointer,newStartPointer));
+            // process the selected chunk to base64
+            var chunk = myBlob.slice(startPointer, newStartPointer);
+            var reader = new FileReader();
+            reader.readAsDataURL(chunk)
+            reader.onloadend = () => {
+              const base64data = reader.result;
+              var base64string = String(base64data);
+              base64string = base64string.substring(22);
+              base64full = base64full.concat(base64string);
+            };
+            //update chunk pointer
             startPointer = newStartPointer;
           }
 
-          let base64full = '';
-          Streamlit.setComponentValue(blobChunks[0])
+          /*let base64full = '';
+          Streamlit.setComponentValue('test_splitinchunks')
 
 
-          /*for (var i = 0; i < blobChunks.length; i++){
+          for (var i = 0; i < blobChunks.length; i++){
             var chunk = blobChunks[i]
             var reader = new FileReader();
             reader.readAsDataURL(chunk)
@@ -189,9 +200,9 @@ class StAudioRec extends StreamlitComponentBase<State> {
               base64string = base64string.substring(22);
               base64full = base64full.concat(base64string);
             };
-          };
+          };*/
 
-          Streamlit.setComponentValue(base64full)*/
+          Streamlit.setComponentValue(base64full)
 
 
           //var reader = new FileReader();
