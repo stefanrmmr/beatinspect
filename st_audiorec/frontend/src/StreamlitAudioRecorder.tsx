@@ -206,12 +206,14 @@ class StAudioRec extends StreamlitComponentBase<State> {
           var base64string = '';
           let startPointer = 0;
           let endPointer = myBlob.size;
+          let endReached = false;
 
           while(startPointer<endPointer){
             // initiate start chunk pointer
             let newStartPointer = startPointer+cSize-1;
             if (newStartPointer > endPointer){
               newStartPointer = endPointer;
+              endReached = true; // all chunks processed
             };
             // process the selected chunk to base64
             var chunk = myBlob.slice(startPointer, newStartPointer, 'audio/wav');
@@ -224,7 +226,9 @@ class StAudioRec extends StreamlitComponentBase<State> {
               base64full = base64full + base64string;
               // update current status of base64full after every iteration
               // keep the setComponentValue statement within the filereader!
-              Streamlit.setComponentValue(base64full);
+              if (endReached){
+                Streamlit.setComponentValue(base64full);
+              }
             };
             //update chunk pointer
             startPointer = newStartPointer+1;
