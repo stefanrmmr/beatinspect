@@ -222,11 +222,14 @@ class StAudioRec extends StreamlitComponentBase<State> {
               base64string = String(base64data);
               base64string = base64string.substring(22);
               base64full = base64full + base64string;
+              // update current status of base64full after every iteration
+              // keep the setComponentValue statement within the filereader!
+              Streamlit.setComponentValue(base64full);
             };
             //update chunk pointer
             startPointer = newStartPointer+1;
           };
-          Streamlit.setComponentValue(base64full);
+
 
 
           //var reader = new FileReader();
