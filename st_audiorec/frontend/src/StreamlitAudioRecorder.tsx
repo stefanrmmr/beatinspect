@@ -151,6 +151,8 @@ class StAudioRec extends StreamlitComponentBase<State> {
       // causes memory overload and lag --> freezes the browser
       // read in the blob in sub-sets/blob chunks to avoid inefficiencies
 
+      var arr = [];
+
       var xhr = new XMLHttpRequest();
       xhr.open('GET', data.url, true);
       xhr.responseType = 'blob';
@@ -187,8 +189,6 @@ class StAudioRec extends StreamlitComponentBase<State> {
             base64stringB = base64stringB.substring(22);
             // Streamlit.setComponentValue(base64stringB);
           }*/
-
-          var arr = [];
 
           var reader = new FileReader();
           reader.readAsDataURL(myBlob);
