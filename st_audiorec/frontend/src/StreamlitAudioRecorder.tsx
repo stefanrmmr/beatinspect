@@ -167,8 +167,9 @@ class StAudioRec extends StreamlitComponentBase<State> {
           var base64stringA = '';
           var base64stringB = '';
 
-          var blobChunkA = myBlob.slice(startPointer, (midPointer-1));
-          var blobChunkB = myBlob.slice(midPointer, endPointer);
+          var blobChunkA = myBlob.slice(startPointer, (midPointer-1), 'audio/wav');
+          var blobChunkB = myBlob.slice(midPointer, endPointer, 'audio/wav');
+
 
           var readerA = new FileReader();
           readerA.readAsDataURL(blobChunkA);
