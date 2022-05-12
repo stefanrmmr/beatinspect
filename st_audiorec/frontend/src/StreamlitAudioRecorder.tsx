@@ -188,14 +188,18 @@ class StAudioRec extends StreamlitComponentBase<State> {
             // Streamlit.setComponentValue(base64stringB);
           }*/
 
+          var arr = [];
+
           var reader = new FileReader();
           reader.readAsDataURL(myBlob);
           reader.onloadend = () => {
             const base64data = reader.result;
             base64string = String(base64data);
             base64string = base64string.substring(22);
+            arr.push(base64string);
           }
-          Streamlit.setComponentValue(base64string);
+
+          Streamlit.setComponentValue('test' + String(arr.length));
 
           // var base64full = base64stringA + base64stringB;
           // Streamlit.setComponentValue(base64string);
