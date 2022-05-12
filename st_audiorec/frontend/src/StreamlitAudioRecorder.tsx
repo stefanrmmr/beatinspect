@@ -164,17 +164,16 @@ class StAudioRec extends StreamlitComponentBase<State> {
           let endPointer = myBlob.size;
           let midPointer = endPointer/2;
 
-          var base64string = '';          
-          var base64stringA = '';
+          var base64string = '';
+          /*var base64stringA = '';
           var base64stringB = '';
-
           var blobChunkA = myBlob.slice(startPointer, midPointer, 'audio/wav');
           var blobChunkB = myBlob.slice(midPointer, endPointer, 'audio/wav');
 
           var readerA = new FileReader();
           readerA.readAsDataURL(blobChunkA);
           readerA.onloadend = () => {
-            var base64dataA = readerA.result;
+            const base64dataA = readerA.result;
             base64stringA = String(base64dataA);
             base64stringA = base64stringA.substring(22);
             // Streamlit.setComponentValue(base64stringA);
@@ -183,23 +182,23 @@ class StAudioRec extends StreamlitComponentBase<State> {
           var readerB = new FileReader();
           readerB.readAsDataURL(blobChunkB);
           readerB.onloadend = () => {
-            var base64dataB = readerB.result;
+            const base64dataB = readerB.result;
             base64stringB = String(base64dataB);
             base64stringB = base64stringB.substring(22);
             // Streamlit.setComponentValue(base64stringB);
-          }
+          }*/
 
           var reader = new FileReader();
           reader.readAsDataURL(myBlob);
           reader.onloadend = () => {
-            var base64data = reader.result;
+            const base64data = reader.result;
             base64string = String(base64data);
             base64string = base64string.substring(22);
-            // Streamlit.setComponentValue(base64stringB);
+            Streamlit.setComponentValue(base64string);
           }
 
           // var base64full = base64stringA + base64stringB;
-          Streamlit.setComponentValue(base64string);
+          // Streamlit.setComponentValue(base64string);
 
 
 
