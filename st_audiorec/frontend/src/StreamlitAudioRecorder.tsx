@@ -176,7 +176,7 @@ class StAudioRec extends StreamlitComponentBase<State> {
             var base64dataA = readerA.result;
             base64stringA = String(base64dataA);
             base64stringA = base64stringA.substring(22);
-            Streamlit.setComponentValue(base64dataA);
+            // Streamlit.setComponentValue(base64stringA);
           }
 
           var readerB = new FileReader();
@@ -185,11 +185,11 @@ class StAudioRec extends StreamlitComponentBase<State> {
             var base64dataB = readerB.result;
             base64stringB = String(base64dataB);
             base64stringB = base64stringB.substring(22);
-            Streamlit.setComponentValue(base64dataB);
+            // Streamlit.setComponentValue(base64stringB);
           }
 
-          //var base64full = base64stringA + base64stringB;
-          //Streamlit.setComponentValue(base64full);
+          var base64full = base64stringA + base64stringB;
+          Streamlit.setComponentValue(base64full);
 
 
 
