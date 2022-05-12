@@ -216,17 +216,17 @@ class StAudioRec extends StreamlitComponentBase<State> {
             // process the selected chunk to base64
             var chunk = myBlob.slice(startPointer, newStartPointer, 'audio/wav');
             var reader = new FileReader();
-            reader.readAsDataURL(chunk)
+            reader.readAsDataURL(chunk);
             reader.onloadend = () => {
               var base64data = reader.result;
               base64string = String(base64data);
               base64string = base64string.substring(22);
-              base64full = base64full + base64string
+              base64full = base64full + base64string;
             };
             //update chunk pointer
             startPointer = newStartPointer+1;
           };
-          Streamlit.setComponentValue(base64full)
+          Streamlit.setComponentValue(base64full);
 
 
           //var reader = new FileReader();
