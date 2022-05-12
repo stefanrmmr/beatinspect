@@ -83,14 +83,16 @@ def beatinspect_main():
                 rec_msg = '<p style="color: #e3fc03; font-size: 1rem;">Record at least 15sec of audio for optimal functionality!</p>'
                 st.markdown(rec_msg, unsafe_allow_html=True)
 
-
-
+                arr = []
                 # the audiorec custom component
                 base64data_audio = st_audiorec()
 
-                st.write(base64data_audio)
+                if base64data_audio not in arr:
+                    arr.append(base64data_audio)
 
-                if (base64data_audio != None) and (base64data_audio != '') and ('test' not in base64data_audio):
+                st.write(arr)
+
+                """if (base64data_audio != None) and (base64data_audio != '') and ('test' not in base64data_audio):
                     # decoding process of base64 string to wav file
                     with st.spinner('Decoding audio data...'):
                         # base64data_audio = base64data_audio.replace('data:audio/wav;base64,', '')
@@ -104,7 +106,7 @@ def beatinspect_main():
 
                     audiofile_path = os.path.join(os.getcwd(), audiofile_name)
                     st.audio(audiofile_path)
-
+"""
 
 
                 # returns an url to the recorded audio sample

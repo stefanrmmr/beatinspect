@@ -158,13 +158,8 @@ class StAudioRec extends StreamlitComponentBase<State> {
         if (this.status == 200) {
           var myBlob = this.response;
 
-          Streamlit.setComponentValue('test');
+          // Streamlit.setComponentValue('test');
 
-          let startPointer = 0;
-          let endPointer = myBlob.size;
-          let midPointer = endPointer/2;
-
-          var base64string = '';
           /*var base64stringA = '';
           var base64stringB = '';
           var blobChunkA = myBlob.slice(startPointer, midPointer, 'audio/wav');
@@ -195,91 +190,29 @@ class StAudioRec extends StreamlitComponentBase<State> {
           // everytime the signal changes --> add it to array, collecting all array inputs
           // merge all array inputs and have full base 64 file
 
-          var reader = new FileReader();
+          /*var reader = new FileReader();
           reader.readAsDataURL(myBlob);
           reader.onloadend = () => {
             const base64data = reader.result;
             base64string = String(base64data);
             base64string = base64string.substring(22);
             Streamlit.setComponentValue(base64string);
-          }
-
-          var reader = new FileReader();
-          reader.readAsDataURL(myBlob);
-          reader.onloadend = () => {
-            const base64data = reader.result;
-            base64string = String(base64data);
-            base64string = base64string.substring(22);
-            Streamlit.setComponentValue(base64string);
-          }
-
-          var reader = new FileReader();
-          reader.readAsDataURL(myBlob);
-          reader.onloadend = () => {
-            const base64data = reader.result;
-            base64string = String(base64data);
-            base64string = base64string.substring(22);
-            Streamlit.setComponentValue(base64string);
-          }
-
-          var reader = new FileReader();
-          reader.readAsDataURL(myBlob);
-          reader.onloadend = () => {
-            const base64data = reader.result;
-            base64string = String(base64data);
-            base64string = base64string.substring(22);
-            Streamlit.setComponentValue(base64string);
-          }
-
-          var reader = new FileReader();
-          reader.readAsDataURL(myBlob);
-          reader.onloadend = () => {
-            const base64data = reader.result;
-            base64string = String(base64data);
-            base64string = base64string.substring(22);
-            Streamlit.setComponentValue(base64string);
-          }
-
-          var reader = new FileReader();
-          reader.readAsDataURL(myBlob);
-          reader.onloadend = () => {
-            const base64data = reader.result;
-            base64string = String(base64data);
-            base64string = base64string.substring(22);
-            Streamlit.setComponentValue(base64string);
-          }
-
-          var reader = new FileReader();
-          reader.readAsDataURL(myBlob);
-          reader.onloadend = () => {
-            const base64data = reader.result;
-            base64string = String(base64data);
-            base64string = base64string.substring(22);
-            Streamlit.setComponentValue(base64string);
-          }
-
-          var reader = new FileReader();
-          reader.readAsDataURL(myBlob);
-          reader.onloadend = () => {
-            const base64data = reader.result;
-            base64string = String(base64data);
-            base64string = base64string.substring(22);
-            Streamlit.setComponentValue(base64string);
-          }
+          }*/
 
 
-
-
-
-          /*// Split blob into chunks of that are 1kB in size
-          let cSize = 1024;
+          // Split blob into chunks of that are 100kB in size
+          let cSize = 1024*100;
           var base64full = '';
           var base64string = '';
           let startPointer = 0;
           let endPointer = myBlob.size;
+
           while(startPointer<endPointer){
             // initiate start chunk pointer
-            let newStartPointer = startPointer+cSize;
+            let newStartPointer = startPointer+cSize-1;
+            if (newStartPointer > endPointer){
+              newStartPointer = endPointer;
+            };
             // process the selected chunk to base64
             var chunk = myBlob.slice(startPointer, newStartPointer);
             var reader = new FileReader();
@@ -288,11 +221,11 @@ class StAudioRec extends StreamlitComponentBase<State> {
               var base64data = reader.result;
               base64string = String(base64data);
               base64string = base64string.substring(22);
-              base64full = base64full.concat(base64string);
+              Streamlit.setComponentValue(base64string);
             };
             //update chunk pointer
-            startPointer = newStartPointer;
-          };*/
+            startPointer = newStartPointer+1;
+          };
 
 
           //var reader = new FileReader();
