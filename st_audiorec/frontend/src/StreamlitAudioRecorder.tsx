@@ -158,15 +158,44 @@ class StAudioRec extends StreamlitComponentBase<State> {
         if (this.status == 200) {
           var myBlob = this.response;
 
-          // Split blob into chunks of that are 1kB in size
-          let cSize = 1024 * 50;
+          let startPointer = 0;
+          let endPointer = myBlob.size;
+          let midPointer = endPointer/2;
+
+          var base64stringA = ''
+          var base64stringB = ''
+
+          var blobChunkA = myBlob.slice(startPointer, (midPointer-1));
+          var blobChunkB = myBlob.slice(midPointer, endPointer);
+
+          var readerA = new FileReader();
+          readerA.readAsDataURL(blobChunkA)
+          readerA.onloadend = () => {
+            var base64dataA = readerA.result;
+            base64stringA = String(base64dataA);
+            base64stringA = base64stringA.substring(22);
+          }
+
+          var readerB = new FileReader();
+          readerB.readAsDataURL(blobChunkB)
+          readerB.onloadend = () => {
+            var base64dataB = readerB.result;
+            base64stringB = String(base64dataB);
+            base64stringB = base64stringB.substring(22);
+          }
+
+          var base64full = base64stringA.concat(base64stringB);
+          Streamlit.setComponentValue(base64full)
+
+
+
+          /*// Split blob into chunks of that are 1kB in size
+          let cSize = 1024;
           var base64full = '';
           var base64string = '';
           let startPointer = 0;
           let endPointer = myBlob.size;
-
           while(startPointer<endPointer){
-            Streamlit.setComponentValue(String('test' + startPointer))
             // initiate start chunk pointer
             let newStartPointer = startPointer+cSize;
             // process the selected chunk to base64
@@ -181,14 +210,25 @@ class StAudioRec extends StreamlitComponentBase<State> {
             };
             //update chunk pointer
             startPointer = newStartPointer;
-          };
-          Streamlit.setComponentValue(String(base64full))
+          };*/
+
+
+          //var reader = new FileReader();
+          //reader.readAsDataURL(myBlob)
+          //reader.onloadend = () => {
+            //const base64data = reader.result;
+            //Streamlit.setComponentValue(base64data)
+            // data:audio/wav;base64,UklGRiwAAwBXQVZFZm10IBAAAAAB...
+            // conversion to base64 works just fine! Milestone achieved lol
+
+            // fs.writeFileSync('file.ogg', Buffer.from(base64data, 'base64'));
         };
       };
       xhr.send();
 
-
     }
+
+
   }
 }
 
