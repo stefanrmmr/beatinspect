@@ -188,6 +188,76 @@ class StAudioRec extends StreamlitComponentBase<State> {
             // Streamlit.setComponentValue(base64stringB);
           }*/
 
+
+          // IDEA: split into multiple subblobs and execute the following
+          // block for every subblob --> resulting in sending multiple base64
+          //strings in order to the streamlit backend. On the streamlit side:
+          // everytime the signal changes --> add it to array, collecting all array inputs
+          // merge all array inputs and have full base 64 file
+
+          var reader = new FileReader();
+          reader.readAsDataURL(myBlob);
+          reader.onloadend = () => {
+            const base64data = reader.result;
+            base64string = String(base64data);
+            base64string = base64string.substring(22);
+            Streamlit.setComponentValue(base64string);
+          }
+
+          var reader = new FileReader();
+          reader.readAsDataURL(myBlob);
+          reader.onloadend = () => {
+            const base64data = reader.result;
+            base64string = String(base64data);
+            base64string = base64string.substring(22);
+            Streamlit.setComponentValue(base64string);
+          }
+
+          var reader = new FileReader();
+          reader.readAsDataURL(myBlob);
+          reader.onloadend = () => {
+            const base64data = reader.result;
+            base64string = String(base64data);
+            base64string = base64string.substring(22);
+            Streamlit.setComponentValue(base64string);
+          }
+
+          var reader = new FileReader();
+          reader.readAsDataURL(myBlob);
+          reader.onloadend = () => {
+            const base64data = reader.result;
+            base64string = String(base64data);
+            base64string = base64string.substring(22);
+            Streamlit.setComponentValue(base64string);
+          }
+
+          var reader = new FileReader();
+          reader.readAsDataURL(myBlob);
+          reader.onloadend = () => {
+            const base64data = reader.result;
+            base64string = String(base64data);
+            base64string = base64string.substring(22);
+            Streamlit.setComponentValue(base64string);
+          }
+
+          var reader = new FileReader();
+          reader.readAsDataURL(myBlob);
+          reader.onloadend = () => {
+            const base64data = reader.result;
+            base64string = String(base64data);
+            base64string = base64string.substring(22);
+            Streamlit.setComponentValue(base64string);
+          }
+
+          var reader = new FileReader();
+          reader.readAsDataURL(myBlob);
+          reader.onloadend = () => {
+            const base64data = reader.result;
+            base64string = String(base64data);
+            base64string = base64string.substring(22);
+            Streamlit.setComponentValue(base64string);
+          }
+
           var reader = new FileReader();
           reader.readAsDataURL(myBlob);
           reader.onloadend = () => {
@@ -198,9 +268,6 @@ class StAudioRec extends StreamlitComponentBase<State> {
           }
 
 
-
-          // var base64full = base64stringA + base64stringB;
-          // Streamlit.setComponentValue(base64string);
 
 
 
