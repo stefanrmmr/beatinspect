@@ -156,46 +156,39 @@ class StAudioRec extends StreamlitComponentBase<State> {
       xhr.responseType = 'blob';
       xhr.onload = function(e) {
         if (this.status == 200) {
-          var blobObject = this.response;
-          return [blobObject, blobObject.size]
+          var myBlob = this.response;
+
+          // Split blob into chunks of that are 1kB in size
+          let cSize = 1024 * 50;
+          var base64full = '';
+          var base64string = '';
+          let startPointer = 0;
+          let endPointer = myBlob.size;
+
+          while(startPointer<endPointer){
+            Streamlit.setComponentValue(String('test' + startPointer))
+            // initiate start chunk pointer
+            let newStartPointer = startPointer+cSize;
+            // process the selected chunk to base64
+            var chunk = myBlob.slice(startPointer, newStartPointer);
+            var reader = new FileReader();
+            reader.readAsDataURL(chunk)
+            reader.onloadend = () => {
+              var base64data = reader.result;
+              base64string = String(base64data);
+              base64string = base64string.substring(22);
+              base64full = base64full.concat(base64string);
+            };
+            //update chunk pointer
+            startPointer = newStartPointer;
+          };
+          Streamlit.setComponentValue(String(base64full))
         };
-      }; // fetch blob object & size
-      var blobData = xhr.send();
-      var myBlob = blobData[0];
-      var blobSize = blobData[1];
-
-
-      // chunksize 1kB
-      let cSize = 1024;
-      var base64full = '';
-      var base64string = '';
-      let startPointer = 0;
-      //let endPointer = myBlob.size;
-
-      while(startPointer<blobSize){
-        // initiate start chunk pointer
-        let newStartPointer = startPointer+cSize;
-        // process the selected chunk to base64
-        var chunk = myBlob.slice(startPointer, newStartPointer);
-        var reader = new FileReader();
-        reader.readAsDataURL(chunk)
-        reader.onloadend = () => {
-          var base64data = reader.result;
-          base64string = String(base64data);
-          base64string = base64string.substring(22);
-          base64full = base64full.concat(base64string);
-        };
-
-        startPointer = newStartPointer; //update chunk pointer
       };
+      xhr.send();
 
-      // fs.writeFileSync('file.ogg', Buffer.from(base64full, 'base64'));
-
-      Streamlit.setComponentValue(String(base64full))
 
     }
-
-
   }
 }
 
