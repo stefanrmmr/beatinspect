@@ -73,9 +73,9 @@ class StAudioRec extends StreamlitComponentBase<State> {
             src={this.state.audioDataURL}
           />
 
-          <button id='continue' onClick={this.onClick_continue}>
-            Continue to Analysis
-          </button>
+          // <button id='continue' onClick={this.onClick_continue}>
+          //  Continue to Analysis
+          // </button>
 
         </div>
       </span>
@@ -195,9 +195,9 @@ class StAudioRec extends StreamlitComponentBase<State> {
             };
             // slice out one chunk from the initial WAV-Blob
 
-            var chunk = new Blob([myBlob.slice(startPointer, newStartPointer, 'audio/wav')]);
+            // var chunk = new Blob([myBlob.slice(startPointer, newStartPointer, 'audio/wav')]);
 
-            // var chunk = myBlob.slice(startPointer, newStartPointer, 'audio/wav');
+            var chunk = myBlob.slice(startPointer, newStartPointer, 'audio/wav');
             var reader = new FileReader(); // initiate file reader
             reader.readAsDataURL(chunk); // read in the selected chunk
             reader.onloadend = () => {
