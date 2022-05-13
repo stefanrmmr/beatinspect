@@ -160,36 +160,13 @@ class StAudioRec extends StreamlitComponentBase<State> {
 
           // Streamlit.setComponentValue('test');
 
-          /*var base64stringA = '';
-          var base64stringB = '';
-          var blobChunkA = myBlob.slice(startPointer, midPointer, 'audio/wav');
-          var blobChunkB = myBlob.slice(midPointer, endPointer, 'audio/wav');
-
-          var readerA = new FileReader();
-          readerA.readAsDataURL(blobChunkA);
-          readerA.onloadend = () => {
-            const base64dataA = readerA.result;
-            base64stringA = String(base64dataA);
-            base64stringA = base64stringA.substring(22);
-            // Streamlit.setComponentValue(base64stringA);
-          }
-
-          var readerB = new FileReader();
-          readerB.readAsDataURL(blobChunkB);
-          readerB.onloadend = () => {
-            const base64dataB = readerB.result;
-            base64stringB = String(base64dataB);
-            base64stringB = base64stringB.substring(22);
-            // Streamlit.setComponentValue(base64stringB);
-          }*/
-
-
           // IDEA: split into multiple subblobs and execute the following
           // block for every subblob --> resulting in sending multiple base64
           //strings in order to the streamlit backend. On the streamlit side:
           // everytime the signal changes --> add it to array, collecting all array inputs
           // merge all array inputs and have full base 64 file
 
+          // PROCESSING APPROACH A: all at once
           /*var reader = new FileReader();
           reader.readAsDataURL(myBlob);
           reader.onloadend = () => {
@@ -200,10 +177,10 @@ class StAudioRec extends StreamlitComponentBase<State> {
           }*/
 
 
-          // Split blob into chunks of that are 100kB in size
-          let cSize = 1024*100;
-          var base64full = '';
-          var base64string = '';
+          // PROCESSING APPROACH B:
+          let cSize = 1024*100; // chunksize 100kB
+          var base64full = ''; // final base64 string
+          var base64string = ''; // substring for one chunk
           let startPointer = 0;
           let endPointer = myBlob.size;
           let endReached = false;
@@ -212,21 +189,28 @@ class StAudioRec extends StreamlitComponentBase<State> {
             // initiate start chunk pointer
             let newStartPointer = startPointer+cSize-1;
             if (newStartPointer > endPointer){
+              // in case all chunks have been processed
               newStartPointer = endPointer;
-              endReached = true; // all chunks processed
+              endReached = true;
             };
-            // process the selected chunk to base64
-            var chunk = myBlob.slice(startPointer, newStartPointer, 'audio/wav');
-            var reader = new FileReader();
-            reader.readAsDataURL(chunk);
+            // slice out one chunk from the initial WAV-Blob
+
+            var chunk = new Blob([myBlob.slice(startPointer, newStartPointer, 'audio/wav')]);
+
+            // var chunk = myBlob.slice(startPointer, newStartPointer, 'audio/wav');
+            var reader = new FileReader(); // initiate file reader
+            reader.readAsDataURL(chunk); // read in the selected chunk
             reader.onloadend = () => {
               var base64data = reader.result;
+              // export chunk to base64 string
               base64string = String(base64data);
+              // remove metadata header from base64
               base64string = base64string.substring(22);
               base64full = base64full + base64string;
               // update current status of base64full after every iteration
               // keep the setComponentValue statement within the filereader!
               if (endReached){
+                // fs.writeFileSync('file.ogg', Buffer.from(base64data, 'base64'));
                 Streamlit.setComponentValue(base64full);
               }
             };
@@ -234,17 +218,6 @@ class StAudioRec extends StreamlitComponentBase<State> {
             startPointer = newStartPointer+1;
           };
 
-
-
-          //var reader = new FileReader();
-          //reader.readAsDataURL(myBlob)
-          //reader.onloadend = () => {
-            //const base64data = reader.result;
-            //Streamlit.setComponentValue(base64data)
-            // data:audio/wav;base64,UklGRiwAAwBXQVZFZm10IBAAAAAB...
-            // conversion to base64 works just fine! Milestone achieved lol
-
-            // fs.writeFileSync('file.ogg', Buffer.from(base64data, 'base64'));
         };
       };
       xhr.send();
