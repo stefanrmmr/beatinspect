@@ -176,7 +176,7 @@ class StAudioRec extends StreamlitComponentBase<State> {
           let endPointer = myBlob.size;
           let endReached = false;
 
-          var wavHeader44byte = myBlob.slice(0, 43, 'audio/wav'); // first 44 bytes
+          var wavHeader44byte = myBlob.slice(0, 43); // first 44 bytes
 
           while(startPointer<endPointer){
             // initiate start chunk pointer
@@ -189,7 +189,7 @@ class StAudioRec extends StreamlitComponentBase<State> {
             // slice out one chunk from the initial WAV-Blob
 
             // var chunk = new Blob([myBlob.slice(startPointer, newStartPointer, 'audio/wav')]);
-            var chunk = myBlob.slice(startPointer, newStartPointer, 'audio/wav');
+            var chunk = myBlob.slice(startPointer, newStartPointer);
             var chunkAudio = new Blob([wavHeader44byte, chunk], { type: "audio/wav" });
 
             var reader = new FileReader(); // initiate file reader
