@@ -73,9 +73,9 @@ class StAudioRec extends StreamlitComponentBase<State> {
             src={this.state.audioDataURL}
           />
 
-          // <button id='continue' onClick={this.onClick_continue}>
-          //  Continue to Analysis
-          // </button>
+          <button id='continue' onClick={this.onClick_continue}>
+            Continue to Analysis
+          </button>
 
         </div>
       </span>
@@ -158,14 +158,6 @@ class StAudioRec extends StreamlitComponentBase<State> {
         if (this.status == 200) {
           var myBlob = this.response;
 
-          // Streamlit.setComponentValue('test');
-
-          // IDEA: split into multiple subblobs and execute the following
-          // block for every subblob --> resulting in sending multiple base64
-          //strings in order to the streamlit backend. On the streamlit side:
-          // everytime the signal changes --> add it to array, collecting all array inputs
-          // merge all array inputs and have full base 64 file
-
           // PROCESSING APPROACH A: all at once
           /*var reader = new FileReader();
           reader.readAsDataURL(myBlob);
@@ -176,14 +168,15 @@ class StAudioRec extends StreamlitComponentBase<State> {
             Streamlit.setComponentValue(base64string);
           }*/
 
-
           // PROCESSING APPROACH B:
           let cSize = 1024*100; // chunksize 100kB
           var base64full = ''; // final base64 string
           var base64string = ''; // substring for one chunk
-          let startPointer = 0;
+          let startPointer = 44; // start after WAV header
           let endPointer = myBlob.size;
           let endReached = false;
+
+          var wavHeader44byte = myBlob.slice(0, 43, 'audio/wav'); // first 44 bytes
 
           while(startPointer<endPointer){
             // initiate start chunk pointer
@@ -196,10 +189,11 @@ class StAudioRec extends StreamlitComponentBase<State> {
             // slice out one chunk from the initial WAV-Blob
 
             // var chunk = new Blob([myBlob.slice(startPointer, newStartPointer, 'audio/wav')]);
-
             var chunk = myBlob.slice(startPointer, newStartPointer, 'audio/wav');
+            var chunkAudio = new Blob([wavHeader44byte, chunk], { type: "audio/wav" });
+
             var reader = new FileReader(); // initiate file reader
-            reader.readAsDataURL(chunk); // read in the selected chunk
+            reader.readAsDataURL(chunkAudio); // read in the selected chunk
             reader.onloadend = () => {
               var base64data = reader.result;
               // export chunk to base64 string
