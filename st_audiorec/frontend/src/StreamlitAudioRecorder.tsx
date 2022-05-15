@@ -248,17 +248,11 @@ class StAudioRec extends StreamlitComponentBase<State> {
                 //Streamlit.setComponentValue('test_buffers2');
                 myFinalBuffer.set(new Uint8Array(myBuffer2), myBuffer1.byteLength);
 
-                //Streamlit.setComponentValue('test_buffers3');
+                Streamlit.setComponentValue('test_buffers3');
 
 
 
-
-
-
-
-
-
-
+                /*
                 var options = {isFloat: false, numChannels: 2, sampleRate: 44100};
 
                 const type = options.isFloat ? Float32Array : Uint16Array;
@@ -344,7 +338,7 @@ class StAudioRec extends StreamlitComponentBase<State> {
                    binary += String.fromCharCode(bytes[k]);
                  };
                 base64full = window.btoa(binary);
-
+                */
 
 
               };
