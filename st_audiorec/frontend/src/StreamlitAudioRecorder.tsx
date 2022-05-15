@@ -82,6 +82,15 @@ class StAudioRec extends StreamlitComponentBase<State> {
     )
   }
 
+  //
+
+
+
+
+
+  //
+
+
   private onClick_start = () => {
     this.setState({
       reset: false,
@@ -201,9 +210,136 @@ class StAudioRec extends StreamlitComponentBase<State> {
               var base64data = reader.result;
               // export chunk to string of base64 WAV Audio including header
               base64string = String(base64data);
-              // remove base64 WAV header "data:audio/wav;base64,"
-              base64string = base64string.substring(22);
 
+
+
+              if (base64full == ''){
+                base64full = base64string;
+              } else {
+
+                // convert base64string to ArrayBuffer
+                var myB64Data1  = base64string.split(',');
+                var myB64Chunk1 = myB64Data1[1];
+                var binary_string1 = window.atob(myB64Chunk1);
+                var len1 = binary_string1.length;
+                var bytes1 = new Uint8Array(len1);
+                for (var i = 0; i < len1; i++) {
+                    bytes1[i] = binary_string1.charCodeAt(i);
+                  }
+                var myBuffer1 = bytes1.buffer;
+
+                // convert base64full to ArrayBuffer
+                var myB64Data2  = base64full.split(',');
+                var myB64Chunk2 = myB64Data2[1];
+                var binary_string2 = window.atob(myB64Chunk2);
+                var len2 = binary_string2.length;
+                var bytes2 = new Uint8Array(len2);
+                for (var j = 0; j < len2; j++) {
+                    bytes2[i] = binary_string2.charCodeAt(j);
+                  }
+                var myBuffer2 = bytes2.buffer;
+
+                // create final full array buffer
+                var myFinalBuffer = new Uint8Array(myBuffer1.byteLength + myBuffer2.byteLength);
+                myFinalBuffer.set(new Uint8Array(myBuffer1), 0);
+                myFinalBuffer.set(new Uint8Array(myBuffer2), myBuffer1.byteLength);
+
+
+                var options = {isFloat: false, numChannels: 2, sampleRate: 44100}
+
+                const type = options.isFloat ? Float32Array : Uint16Array
+                const numFrames = myFinalBuffer.byteLength / type.BYTES_PER_ELEMENT
+
+                options = Object.assign({}, options, { numFrames })
+
+                const numChannels =    options.numChannels || 2;
+                const sampleRate =     options.sampleRate || 44100;
+                const bytesPerSample = options.isFloat? 4 : 2;
+                const format =         options.isFloat? 3 : 1;
+
+                const blockAlign = numChannels * bytesPerSample;
+                const byteRate = sampleRate * blockAlign;
+                const dataSize = numFrames * blockAlign;
+
+                const bufferHeader = new ArrayBuffer(44);
+                const dv = new DataView(bufferHeader);
+
+                let p = 0;
+                let s = '';
+
+                s = 'RIFF'; // ChunkID
+                for (let i = 0; i < s.length; i++) {
+                  dv.setUint8(p + i, s.charCodeAt(i));};
+                p += s.length;
+
+                dv.setUint32(p, (dataSize + 36), true);
+                p += 4; // ChunkSize
+
+                s = 'WAVE'; // Format
+                for (let i = 0; i < s.length; i++) {
+                  dv.setUint8(p + i, s.charCodeAt(i));};
+                p += s.length;
+
+                s = 'fmt '; // Subchunk1ID
+                for (let i = 0; i < s.length; i++) {
+                  dv.setUint8(p + i, s.charCodeAt(i));};
+                p += s.length;
+
+                dv.setUint32(p, 16, true);
+                p += 4; // Subchunk1Size
+
+                dv.setUint16(p, format, true);
+                p += 2; // AudioFormat
+
+                dv.setUint16(p, numChannels, true);
+                p += 2; // NumChannels
+
+                dv.setUint32(p, sampleRate, true);
+                p += 4; // SampleRate
+
+                dv.setUint32(p, byteRate, true);
+                p += 4; // ByteRate
+
+                dv.setUint16(p, blockAlign, true);
+                p += 2; // BlockAlign
+
+                dv.setUint16(p, (bytesPerSample * 8), true);
+                p += 2; // BitsPerSample
+
+                s = 'data'; // Subchunk2ID
+                for (let i = 0; i < s.length; i++) {
+                  dv.setUint8(p + i, s.charCodeAt(i));};
+                p += s.length;
+
+                dv.setUint32(p, dataSize, true);
+                p += 4; // Subchunk2Size
+
+                const headerBytes = new Uint8Array(bufferHeader);
+
+                const wavBytes = new Uint8Array(headerBytes.length + myFinalBuffer.byteLength);
+
+                // prepend header, then add pcmBytes
+                wavBytes.set(headerBytes, 0)
+                wavBytes.set(new Uint8Array(myFinalBuffer), headerBytes.length)
+
+                myFinalBuffer = wavBytes;
+
+                var binary = '';
+                var bytes = new Uint8Array(myFinalBuffer);
+                var len = bytes.byteLength;
+                for (var k = 0; k < len; k++) {
+                   binary += String.fromCharCode(bytes[k]);
+                 };
+                base64full = window.btoa(binary);
+
+
+
+              };
+
+
+
+              /*// remove base64 WAV header "data:audio/wav;base64,"
+              base64string = base64string.substring(22);
 
               // **BAUSTELLE 2**
               // concatenate two base64 strings
@@ -217,11 +353,7 @@ class StAudioRec extends StreamlitComponentBase<State> {
                 var bothData64 = btoa(bothData); // base64 encoded
                 //base64full = //version of bothData64 without the header
                 base64full = bothData64;
-              }
-
-
-
-
+              };*/
 
 
               // update current status of base64full after every iteration
