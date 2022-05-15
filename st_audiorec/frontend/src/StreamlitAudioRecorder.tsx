@@ -82,14 +82,6 @@ class StAudioRec extends StreamlitComponentBase<State> {
     )
   }
 
-  //
-
-
-
-
-
-  //
-
 
   private onClick_start = () => {
     this.setState({
@@ -167,6 +159,7 @@ class StAudioRec extends StreamlitComponentBase<State> {
         if (this.status == 200) {
           var myBlob = this.response;
 
+
           // PROCESSING APPROACH A: all at once
           /*var reader = new FileReader();
           reader.readAsDataURL(myBlob);
@@ -178,18 +171,19 @@ class StAudioRec extends StreamlitComponentBase<State> {
           }*/
 
           // PROCESSING APPROACH B:
-          let cSize = 1024*100; // chunksize 100kB
+          let cSize = 1024*10; // chunksize 10kB
           var base64full = ''; // final base64 string
           var base64string = ''; // substring for one chunk
           let startPointer = 44; // start after WAV header
           let endPointer = myBlob.size;
           let endReached = false;
 
-          var wavHeader44byte = myBlob.slice(0, 43); // first 44 bytes
+          var wavHeader44byte = myBlob.slice(0, 44); // first 44 bytes
+          // the end byte is NOT included (exclusive byte44)
 
           while(startPointer<endPointer){
             // initiate start chunk pointer
-            let newStartPointer = startPointer+cSize-1;
+            let newStartPointer = startPointer+cSize;
             if (newStartPointer > endPointer){
               // in case all chunks have been processed
               newStartPointer = endPointer;
@@ -202,8 +196,8 @@ class StAudioRec extends StreamlitComponentBase<State> {
 
             // var chunk = new Blob([myBlob.slice(startPointer, newStartPointer, 'audio/wav')]);
             var chunk = myBlob.slice(startPointer, newStartPointer);
-            //var chunkAudio = new Blob([wavHeader44byte, chunk], { type: "audio/wav" });
-            var chunkAudio = new Blob([wavHeader44byte, chunk]);
+            var chunkAudio = new Blob([wavHeader44byte, chunk], { type: "audio/wav" });
+            // var chunkAudio = new Blob([wavHeader44byte, chunk]);
 
             var reader = new FileReader(); // initiate file reader
             reader.readAsDataURL(chunkAudio); // read in the chunk
@@ -336,9 +330,7 @@ class StAudioRec extends StreamlitComponentBase<State> {
                  };
                 base64full = window.btoa(binary);
 
-
-
-              };
+              }; // close else
 
 
 
@@ -365,11 +357,11 @@ class StAudioRec extends StreamlitComponentBase<State> {
               if (endReached){
                 // fs.writeFileSync('file.ogg', Buffer.from(base64data, 'base64'));
                 // base64full is returned WITHOUT the base64 header "data:audio/wav;base64,"
-                // Streamlit.setComponentValue(base64full);
+                Streamlit.setComponentValue(base64full);
               }
             };
             //update chunk pointer
-            startPointer = newStartPointer+1;
+            startPointer = newStartPointer;
           };
 
         };
