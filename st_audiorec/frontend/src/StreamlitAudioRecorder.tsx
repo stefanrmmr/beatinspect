@@ -114,11 +114,12 @@ class StAudioRec extends StreamlitComponentBase<State> {
       //var content = fs.readFileSync('file.ogg');
       //Streamlit.setComponentValue(content)
 
-      // get datetime
-      var datetime = new Date().toLocaleString();
-      
-      var filename = 'beatinspect_recording' + datetime + '.wav';
-
+      // get datetime string for filename
+      let datetime = new Date().toLocaleString();
+      datetime = datetime.replace(' ', '');
+      datetime = datetime.replace(',', '-');
+      datetime = datetime.replace('_', '-');
+      var filename = 'beatinspect_recording_' + datetime + '.wav';
 
       const a = document.createElement('a');
       a.style.display = 'none';
