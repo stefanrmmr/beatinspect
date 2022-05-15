@@ -186,25 +186,48 @@ class StAudioRec extends StreamlitComponentBase<State> {
               newStartPointer = endPointer;
               endReached = true;
             };
+
+            // **BAUSTELLE 1**
             // slice out one chunk from the initial WAV-Blob
+            // concatenate sliced out chunk with header bytes
 
             // var chunk = new Blob([myBlob.slice(startPointer, newStartPointer, 'audio/wav')]);
             var chunk = myBlob.slice(startPointer, newStartPointer);
             var chunkAudio = new Blob([wavHeader44byte, chunk], { type: "audio/wav" });
 
             var reader = new FileReader(); // initiate file reader
-            reader.readAsDataURL(chunkAudio); // read in the selected chunk
+            reader.readAsDataURL(chunkAudio); // read in the chunk
             reader.onloadend = () => {
               var base64data = reader.result;
-              // export chunk to base64 string
+              // export chunk to string of base64 WAV Audio including header
               base64string = String(base64data);
-              // remove metadata header from base64
-              base64string = base64string.substring(22);
-              base64full = base64full + base64string;
+              // base64string = base64string.substring(22);
+
+              base64full = base64string
+
+              // **BAUSTELLE 2**
+              // concatenate two base64 strings
+
+              /*
+              if (base64full == ''){
+                base64full = base64string;
+              } else {
+
+                var bothData = atob(base64full) + atob(base64string); // binary string
+                var bothData64 = btoa(bothData); // base64 encoded
+                base64full = //version of bothData64 without the header
+              }*/
+
+
+
+
+
+
               // update current status of base64full after every iteration
               // keep the setComponentValue statement within the filereader!
               if (endReached){
                 // fs.writeFileSync('file.ogg', Buffer.from(base64data, 'base64'));
+                // base64full is returned WITHOUT the base64 header
                 Streamlit.setComponentValue(base64full);
               }
             };
