@@ -202,7 +202,8 @@ class StAudioRec extends StreamlitComponentBase<State> {
 
             // var chunk = new Blob([myBlob.slice(startPointer, newStartPointer, 'audio/wav')]);
             var chunk = myBlob.slice(startPointer, newStartPointer);
-            var chunkAudio = new Blob([wavHeader44byte, chunk], { type: "audio/wav" });
+            //var chunkAudio = new Blob([wavHeader44byte, chunk], { type: "audio/wav" });
+            var chunkAudio = new Blob([wavHeader44byte, chunk]);
 
             var reader = new FileReader(); // initiate file reader
             reader.readAsDataURL(chunkAudio); // read in the chunk
@@ -226,7 +227,7 @@ class StAudioRec extends StreamlitComponentBase<State> {
                 for (var i = 0; i < len1; i++) {
                     bytes1[i] = binary_string1.charCodeAt(i);
                   }
-                var myBuffer1 = bytes1;
+                var myBuffer1 = bytes1.buffer;
 
                 // convert base64string to ArrayBuffer
                 var myB64Data2  = base64string.split(',');
@@ -237,34 +238,24 @@ class StAudioRec extends StreamlitComponentBase<State> {
                 for (var j = 0; j < len2; j++) {
                     bytes2[i] = binary_string2.charCodeAt(j);
                   }
-                var myBuffer2 = bytes2;
+                var myBuffer2 = bytes2.buffer;
 
                 Streamlit.setComponentValue('test_buffers');
 
-
-
-
-
-                /*
-
                 // create final full array buffer
-                var myFinalBuffer = new Uint8Array(myBuffer1.length + myBuffer2.length);
-                //Streamlit.setComponentValue('test_buffers1');
-                myFinalBuffer.set(myBuffer1, 0);
-                //Streamlit.setComponentValue('test_buffers2');
-                myFinalBuffer.set(myBuffer2, myBuffer1.length);
+                var myFinalBuffer = new Uint8Array(myBuffer1.byteLength + myBuffer2.byteLength);
+                myFinalBuffer.set(new Uint8Array(myBuffer1), 0);
+                myFinalBuffer.set(new Uint8Array(myBuffer2), myBuffer1.byteLength);
 
-                Streamlit.setComponentValue('test_buffers3');
+                Streamlit.setComponentValue('test_buffers_concat');
 
 
+                var options = {isFloat: false, numChannels: 2, sampleRate: 44100}
 
-                /*
-                var options = {isFloat: false, numChannels: 2, sampleRate: 44100};
+                const type = options.isFloat ? Float32Array : Uint16Array
+                const numFrames = myFinalBuffer.byteLength / type.BYTES_PER_ELEMENT
 
-                const type = options.isFloat ? Float32Array : Uint16Array;
-                const numFrames = myFinalBuffer.byteLength / type.BYTES_PER_ELEMENT;
-
-                options = Object.assign({}, options, { numFrames });
+                options = Object.assign({}, options, { numFrames })
 
                 const numChannels =    options.numChannels || 2;
                 const sampleRate =     options.sampleRate || 44100;
@@ -344,7 +335,7 @@ class StAudioRec extends StreamlitComponentBase<State> {
                    binary += String.fromCharCode(bytes[k]);
                  };
                 base64full = window.btoa(binary);
-                */
+
 
 
               };
