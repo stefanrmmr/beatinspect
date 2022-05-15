@@ -239,6 +239,8 @@ class StAudioRec extends StreamlitComponentBase<State> {
                   }
                 var myBuffer2 = bytes2.buffer;
 
+                Streamlit.setComponentValue('test_buffers');
+
                 // create final full array buffer
                 var myFinalBuffer = new Uint8Array(myBuffer1.byteLength + myBuffer2.byteLength);
                 myFinalBuffer.set(new Uint8Array(myBuffer1), 0);
@@ -315,7 +317,6 @@ class StAudioRec extends StreamlitComponentBase<State> {
                 p += 4; // Subchunk2Size
 
                 const headerBytes = new Uint8Array(bufferHeader);
-
                 const wavBytes = new Uint8Array(headerBytes.length + myFinalBuffer.byteLength);
 
                 // prepend header, then add pcmBytes
@@ -361,7 +362,7 @@ class StAudioRec extends StreamlitComponentBase<State> {
               if (endReached){
                 // fs.writeFileSync('file.ogg', Buffer.from(base64data, 'base64'));
                 // base64full is returned WITHOUT the base64 header "data:audio/wav;base64,"
-                Streamlit.setComponentValue(base64full);
+                // Streamlit.setComponentValue(base64full);
               }
             };
             //update chunk pointer
