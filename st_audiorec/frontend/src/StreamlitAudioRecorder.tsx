@@ -114,10 +114,16 @@ class StAudioRec extends StreamlitComponentBase<State> {
       //var content = fs.readFileSync('file.ogg');
       //Streamlit.setComponentValue(content)
 
+      // get datetime
+      var datetime = new Date().toLocaleString();
+      
+      var filename = 'beatinspect_recording' + datetime + '.wav';
+
+
       const a = document.createElement('a');
       a.style.display = 'none';
       a.href = this.state.audioDataURL;
-      a.download = 'test.wav';
+      a.download = filename;
       document.body.appendChild(a);
       a.click();
     }
