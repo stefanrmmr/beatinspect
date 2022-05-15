@@ -245,7 +245,7 @@ class StAudioRec extends StreamlitComponentBase<State> {
 
 
 
-
+                /*
 
                 // create final full array buffer
                 var myFinalBuffer = new Uint8Array(myBuffer1.length + myBuffer2.length);
