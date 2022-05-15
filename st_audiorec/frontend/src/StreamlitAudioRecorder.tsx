@@ -222,10 +222,11 @@ class StAudioRec extends StreamlitComponentBase<State> {
                 base64full = base64string;
               } else {
                 // both need to be header free before
-                var bothData = atob(base64full) + atob(base64string); // binary string
-                var bothData64 = btoa(bothData); // base64 encoded
+                //var bothData = atob(base64full) + atob(base64string); // binary string
+                // var bothData64 = btoa(bothData); // base64 encoded
                 //base64full = //version of bothData64 without the header
-                base64full = bothData64;
+                // base64full = bothData64;
+                base64full = base64full + base64string;
               };
 
 
