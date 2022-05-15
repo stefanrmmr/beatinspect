@@ -239,12 +239,16 @@ class StAudioRec extends StreamlitComponentBase<State> {
                   }
                 var myBuffer2 = bytes2.buffer;
 
+                Streamlit.setComponentValue('test_buffers');
+
                 // create final full array buffer
                 var myFinalBuffer = new Uint8Array(myBuffer1.byteLength + myBuffer2.byteLength);
+                Streamlit.setComponentValue('test_buffers1');
                 myFinalBuffer.set(new Uint8Array(myBuffer1), 0);
+                Streamlit.setComponentValue('test_buffers2');
                 myFinalBuffer.set(new Uint8Array(myBuffer2), myBuffer1.byteLength);
 
-                Streamlit.setComponentValue('test_buffers');
+                Streamlit.setComponentValue('test_buffers3');
 
 
                 var options = {isFloat: false, numChannels: 2, sampleRate: 44100}
