@@ -201,22 +201,23 @@ class StAudioRec extends StreamlitComponentBase<State> {
               var base64data = reader.result;
               // export chunk to string of base64 WAV Audio including header
               base64string = String(base64data);
-              // base64string = base64string.substring(22);
+              // remove base64 WAV header "data:audio/wav;base64,"
+              base64string = base64string.substring(22);
 
-              base64full = base64string
 
               // **BAUSTELLE 2**
               // concatenate two base64 strings
+              // ? or export as arraybuffers that are concatenated and then transformed to base64
 
-              /*
               if (base64full == ''){
                 base64full = base64string;
               } else {
 
                 var bothData = atob(base64full) + atob(base64string); // binary string
                 var bothData64 = btoa(bothData); // base64 encoded
-                base64full = //version of bothData64 without the header
-              }*/
+                //base64full = //version of bothData64 without the header
+                base64full = bothData64;
+              }
 
 
 
@@ -227,7 +228,7 @@ class StAudioRec extends StreamlitComponentBase<State> {
               // keep the setComponentValue statement within the filereader!
               if (endReached){
                 // fs.writeFileSync('file.ogg', Buffer.from(base64data, 'base64'));
-                // base64full is returned WITHOUT the base64 header
+                // base64full is returned WITHOUT the base64 header "data:audio/wav;base64,"
                 Streamlit.setComponentValue(base64full);
               }
             };
