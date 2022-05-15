@@ -217,8 +217,8 @@ class StAudioRec extends StreamlitComponentBase<State> {
                 base64full = base64string;
               } else {
 
-                // convert base64string to ArrayBuffer
-                var myB64Data1  = base64string.split(',');
+                // convert base64full to ArrayBuffer
+                var myB64Data1  = base64full.split(',');
                 var myB64Chunk1 = myB64Data1[1];
                 var binary_string1 = window.atob(myB64Chunk1);
                 var len1 = binary_string1.length;
@@ -228,8 +228,8 @@ class StAudioRec extends StreamlitComponentBase<State> {
                   }
                 var myBuffer1 = bytes1.buffer;
 
-                // convert base64full to ArrayBuffer
-                var myB64Data2  = base64full.split(',');
+                // convert base64string to ArrayBuffer
+                var myB64Data2  = base64string.split(',');
                 var myB64Chunk2 = myB64Data2[1];
                 var binary_string2 = window.atob(myB64Chunk2);
                 var len2 = binary_string2.length;
