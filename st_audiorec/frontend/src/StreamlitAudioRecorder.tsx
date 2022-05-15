@@ -226,7 +226,7 @@ class StAudioRec extends StreamlitComponentBase<State> {
                 for (var i = 0; i < len1; i++) {
                     bytes1[i] = binary_string1.charCodeAt(i);
                   }
-                var myBuffer1 = bytes1.buffer;
+                var myBuffer1 = bytes1;
 
                 // convert base64string to ArrayBuffer
                 var myB64Data2  = base64string.split(',');
@@ -237,16 +237,22 @@ class StAudioRec extends StreamlitComponentBase<State> {
                 for (var j = 0; j < len2; j++) {
                     bytes2[i] = binary_string2.charCodeAt(j);
                   }
-                var myBuffer2 = bytes2.buffer;
+                var myBuffer2 = bytes2;
 
                 Streamlit.setComponentValue('test_buffers');
 
+
+
+
+
+
+
                 // create final full array buffer
-                var myFinalBuffer = new Uint8Array(myBuffer1.byteLength + myBuffer2.byteLength);
+                var myFinalBuffer = new Uint8Array(myBuffer1.length + myBuffer2.length);
                 //Streamlit.setComponentValue('test_buffers1');
-                myFinalBuffer.set(new Uint8Array(myBuffer1), 0);
+                myFinalBuffer.set(myBuffer1, 0);
                 //Streamlit.setComponentValue('test_buffers2');
-                myFinalBuffer.set(new Uint8Array(myBuffer2), myBuffer1.byteLength);
+                myFinalBuffer.set(myBuffer2, myBuffer1.length);
 
                 Streamlit.setComponentValue('test_buffers3');
 
