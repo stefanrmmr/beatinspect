@@ -216,7 +216,7 @@ class StAudioRec extends StreamlitComponentBase<State> {
               if (base64full == ''){
                 base64full = base64string;
               } else {
-
+                Streamlit.setComponentValue('test_buffers');
                 // convert base64string to ArrayBuffer
                 var myB64Data1  = base64string.split(',');
                 var myB64Chunk1 = myB64Data1[1];
