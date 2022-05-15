@@ -208,6 +208,32 @@ class StAudioRec extends StreamlitComponentBase<State> {
 
 
 
+
+              // **BAUSTELLE 2**
+              // concatenate two base64 strings
+
+              // ATTEMPT REMOVE BASE64
+              // remove base64 WAV header "data:audio/wav;base64,"
+              var base64stringArr = base64string.split(',');
+              //base64string = base64string.substring(22);
+              base64string = base64stringArr[1];
+
+              if (base64full == ''){
+                base64full = base64string;
+              } else {
+                // both need to be header free before
+                var bothData = atob(base64full) + atob(base64string); // binary string
+                var bothData64 = btoa(bothData); // base64 encoded
+                //base64full = //version of bothData64 without the header
+                base64full = bothData64;
+              };
+
+
+
+
+
+              /*
+              // ATTEMPT CONCAT BASE64 main
               if (base64full == ''){
                 base64full = base64string;
               } else {
@@ -331,25 +357,7 @@ class StAudioRec extends StreamlitComponentBase<State> {
                 base64full = window.btoa(binary);
 
               }; // close else
-
-
-
-              /*// remove base64 WAV header "data:audio/wav;base64,"
-              base64string = base64string.substring(22);
-
-              // **BAUSTELLE 2**
-              // concatenate two base64 strings
-              // ? or export as arraybuffers that are concatenated and then transformed to base64
-
-              if (base64full == ''){
-                base64full = base64string;
-              } else {
-
-                var bothData = atob(base64full) + atob(base64string); // binary string
-                var bothData64 = btoa(bothData); // base64 encoded
-                //base64full = //version of bothData64 without the header
-                base64full = bothData64;
-              };*/
+              */
 
 
               // update current status of base64full after every iteration
