@@ -54,6 +54,7 @@ button:hover{
 }
 
 audio {
+  margin-top:0.75rem;
   width: 450px;
   height: 45px;
 }
