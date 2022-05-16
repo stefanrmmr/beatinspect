@@ -109,8 +109,8 @@ class StAudioRec extends StreamlitComponentBase<State> {
       // get datetime string for filename
       let datetime = new Date().toLocaleString();
       datetime = datetime.replace(' ', '');
-      datetime = datetime.replace('_', '-');
-      datetime = datetime.replace(',', '-');
+      datetime = datetime.split('_').join('');
+      datetime = datetime.replace(',', '');
       var filename = 'beatinspect_rec_' + datetime + '.wav';
 
       // auromatically trigger download
