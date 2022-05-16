@@ -8,11 +8,6 @@ import React, { ReactNode } from "react"
 import AudioReactRecorder, { RecordState } from 'audio-react-recorder'
 import 'audio-react-recorder/dist/index.css'
 
-// import * as fs from 'fs'
-//import { FilesManager } from 'turbodepot-node';
-
-
-
 interface State {
   isFocused: boolean
   recordState: null
@@ -111,22 +106,24 @@ class StAudioRec extends StreamlitComponentBase<State> {
   private onClick_continue = () => {
     if (this.state.audioDataURL !== '')
     {
-      //var content = fs.readFileSync('file.ogg');
-      //Streamlit.setComponentValue(content)
-
       // get datetime string for filename
       let datetime = new Date().toLocaleString();
       datetime = datetime.replace(' ', '');
-      datetime = datetime.replace(',', '-');
       datetime = datetime.replace('_', '-');
-      var filename = 'beatinspect_recording_' + datetime + '.wav';
+      datetime = datetime.replace(',', '-');
+      var filename = 'beatinspect_rec_' + datetime + '.wav';
 
+      // auromatically trigger download
       const a = document.createElement('a');
       a.style.display = 'none';
       a.href = this.state.audioDataURL;
       a.download = filename;
       document.body.appendChild(a);
       a.click();
+
+      // export info to Streamlit
+      // var content = fs.readFileSync('file.ogg');
+      // Streamlit.setComponentValue()
     }
   }
 

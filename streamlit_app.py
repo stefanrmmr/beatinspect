@@ -80,41 +80,28 @@ def beatinspect_main():
             elif 'Record' in choice:
                 audiofile = None
 
-                rec_msg = '<p style="color: #e3fc03; font-size: 1rem;">Record at least 15sec of audio for optimal functionality!</p>'
+                rec_msg = '<p style="color: #e3fc03; font-size: 1rem;">Record at least 15sec of audio for optimal functionality! <br/>Save your recording and upload it to receive audio analytics.</p>'
                 st.markdown(rec_msg, unsafe_allow_html=True)
 
                 # the audiorec custom component
                 base64data_audio = st_audiorec()
-                st.write(base64data_audio)
 
-                if (base64data_audio != None) and (base64data_audio != '') and ('test' not in base64data_audio):
+                # APPROACH: DECODE BASE64 DATA FROM return value
+                # st.write(base64data_audio)
+                # if (base64data_audio != None) and (base64data_audio != '') and ('test' not in base64data_audio):
                     # decoding process of base64 string to wav file
-                    with st.spinner('Decoding audio data...'):
+                    # with st.spinner('Decoding audio data...'):
                         # base64data_audio = base64data_audio.replace('data:audio/wav;base64,', '')
                         # TODOOOOOOOOO
-                        st.write(base64data_audio)  # remove metadata header of base64 string
+                        # st.write(base64data_audio)  # remove metadata header of base64 string
 
-                        audiofile_name = "temp.wav"
-                        wav_file = open(audiofile_name, "wb")
-                        decode_string = base64.b64decode(base64data_audio+'==')
-                        wav_file.write(decode_string)
+                        # audiofile_name = "temp.wav"
+                        # wav_file = open(audiofile_name, "wb")
+                        # decode_string = base64.b64decode(base64data_audio+'==')
+                        # wav_file.write(decode_string)
 
-                    audiofile_path = os.path.join(os.getcwd(), audiofile_name)
-                    st.audio(audiofile_path)
-
-
-                # returns an url to the recorded audio sample
-
-                # if (returned_audio_url != None) and (returned_audio_url != ''):
-                    # st.write(returned_audio_url)
-                    # r = requests.get(returned_audio_url, allow_redirects=True)
-                    # st.write(r)
-                    # open('recorded_audio.wav', 'wb').write(r.content)
-
-                    # TODO not working: the call of the url yields 404 :(
-                    # can I even call the blob content from within the python part?
-                    # there needs to a be a conversion from blob to wav within the app
-                    # return final wav file to python (or downloadlink if possible)
+                    # audiofile_path = os.path.join(os.getcwd(), audiofile_name)
+                    # st.audio(audiofile_path)
 
 
     # ANALYTICS for Audio File
