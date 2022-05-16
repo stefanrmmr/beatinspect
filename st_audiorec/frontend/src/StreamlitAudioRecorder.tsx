@@ -41,7 +41,13 @@ class StAudioRec extends StreamlitComponentBase<State> {
 
     return (
       <span>
-        <div>
+        <div
+          style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          }}
+        >
           <AudioReactRecorder
             state={recordState}
             onStop={this.onStop_audio}
