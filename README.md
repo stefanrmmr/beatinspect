@@ -12,10 +12,12 @@ To insure that the implemented functionality provides real value to aspiring art
 
 ### Functionality Overview
 - Musical Attributes Analytics (BPM rate classification, Musical key & scale detection)
+- Record WAV-Audio directly within your browser, ready to be analyzed immediately
 - Technical Overview (Audio file format, quality, resolution, audio channels dimension)
 - Waveform and RMS Spectrogram Insights (view Amplitude/RMS spectrum over time)<br/><br/>
 - TO BE IMPLEMENTED SOON: upcoming features
-  - Recording Audio to be analyzed from your Browser<br/>(currently work in progress, not functional yet)
+  - Spectrum Analytics for specific frequency-bands
+  - 3D Interactive visualizations of audio spectrograms
   - Conversion to .wav file with predefined settings<br/>(provided by using convertio.co's API features)<br/>
   - Meta data information encoded in the output file
   - Bringing beatinspect to mobile browsers/devices
