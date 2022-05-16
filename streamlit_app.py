@@ -80,7 +80,7 @@ def beatinspect_main():
             elif 'Record' in choice:
                 audiofile = None
 
-                rec_msg = '<p style="color: #e3fc03; font-size: 1rem;">Record at least 15 seconds of audio for optimal functionality! <br/>Save and upload your recorded audio file to beatinspect.</p>'
+                rec_msg = '<p style="color: #e3fc03; font-size: 1rem;">Use this audio-recorder to generate files that can be analyzed using beatinspect! <br/> Record at least 15 seconds of audio for optimal functionality!</p>'
                 st.markdown(rec_msg, unsafe_allow_html=True)
 
                 # the audiorec custom component
