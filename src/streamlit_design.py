@@ -4,7 +4,7 @@ import streamlit as st
 def design_setup():
 
     # Design page layout and browser window details
-    st.set_page_config(layout="centered",
+    st.set_page_config(layout="wide",  # centered
                        page_icon="resources/rs_logo_transparent_yellow.png",
                        page_title="beat inspect")
 
