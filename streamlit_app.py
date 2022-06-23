@@ -46,8 +46,8 @@ def beatinspect_main():
     header_col1, header_col2, header_col3 = st.columns([10, 2.5, 2.5])
     with header_col1:
         st.title('beat inspect ™')
-        st.markdown('Version 1.4.0 - June 2022 - '
-            '[@GitHub](https://github.com/stefanrmmr/beatinspect) '
+        st.markdown('Version 1.4.0 - June 2022 - '+
+            '[@GitHub](https://github.com/stefanrmmr/beatinspect) '+
             '[@Instagram](https://www.instagram.com/beatinspect)')
     with header_col3:
         st.write('')  # add spacing
@@ -84,9 +84,9 @@ def beatinspect_main():
             elif 'Record' in choice:
                 audiofile = None
 
-                rec_msg = '<p style="color: #e3fc03; font-size: 1rem;">'
-                          'Use this audio-recorder to generate files that '
-                          'can be analyzed using beatinspect - min. 15 seconds '
+                rec_msg = '<p style="color: #e3fc03; font-size: 1rem;">'+
+                          'Use this audio-recorder to generate files that '+
+                          'can be analyzed using beatinspect - min. 15 seconds '+
                           'for optimal functionality!</p>'
                 st.markdown(rec_msg, unsafe_allow_html=True)
 
@@ -193,8 +193,8 @@ def beatinspect_main():
         with st.expander("SECTION - Waveform and Spectrogram Insights",
                          expanded=True):
             if not advanced_analytics:
-                analytics_msg = '<p style="color: #e3fc03; font-size: 1rem;">'
-                                'Only available for audio files provided '
+                analytics_msg = '<p style="color: #e3fc03; font-size: 1rem;">'+
+                                'Only available for audio files provided '+
                                 'via "Audio File Upload"</p>'
                 st.markdown(analytics_msg, unsafe_allow_html=True)
             if advanced_analytics:  # only if audio file uploaded
