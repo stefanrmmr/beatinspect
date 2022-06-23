@@ -86,8 +86,8 @@ def beatinspect_main():
 
                 rec_msg = '<p style="color: #e3fc03; font-size: 1rem;">'\
                           'Use this audio-recorder to generate files that '\
-                          'can be analyzed using beatinspect - min. 15 seconds '\
-                          'for optimal functionality!</p>'
+                          'can be analyzed using beatinspect - min. 15 '\
+                          'seconds for optimal functionality!</p>'
                 st.markdown(rec_msg, unsafe_allow_html=True)
 
                 # the audiorec custom component
@@ -194,8 +194,8 @@ def beatinspect_main():
                          expanded=True):
             if not advanced_analytics:
                 analytics_msg = '<p style="color: #e3fc03; font-size: 1rem;">'\
-                                'Only available for audio files provided '\
-                                'via "Audio File Upload"</p>'
+                                'Only available for original audio files provided '\
+                                'via "Audio File Upload" (excluding beatinspect recordings)</p>'
                 st.markdown(analytics_msg, unsafe_allow_html=True)
             if advanced_analytics:  # only if audio file uploaded
                 # Generate graphs/plots for RMS & Amplitude over time
