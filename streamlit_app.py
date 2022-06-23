@@ -26,11 +26,15 @@ import src.detect_keyscale as detect_keyscale
 # import design augmentation for streamlit UX/UI
 import src.streamlit_design as streamlit_design
 
+st.set_page_config(layout="wide")
+
 # custom component for recording client audio in browser
 parent_dir = os.path.dirname(os.path.abspath(__file__))
 build_dir = os.path.join(parent_dir, "st_audiorec/frontend/build")
 # specify directory and initialize st_audiorec object functionality
 st_audiorec = components.declare_component("st_audiorec", path=build_dir)
+
+
 
 
 def beatinspect_main():
