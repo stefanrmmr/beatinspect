@@ -46,7 +46,7 @@ def beatinspect_main():
     header_col1, header_col2, header_col3 = st.columns([10, 2.5, 2.5])
     with header_col1:
         st.title('beat inspect ™')
-        st.markdown('Version 1.3.2 - April 2022 - '
+        st.markdown('Version 1.4.0 - June 2022 - '
             '[@GitHub](https://github.com/stefanrmmr/beatinspect) '
             '[@Instagram](https://www.instagram.com/beatinspect)')
     with header_col3:
@@ -70,9 +70,13 @@ def beatinspect_main():
             if 'Upload' in choice:
                 audiofile = st.file_uploader("", type='wav')
                 if audiofile is not None:
-                    advanced_analytics = True
-                    # enable advanced analytics bc uploaded
+                    # only enable advanced analytics for files
+                    # that have not been recorded with beatinspect
                     audiofile_name = audiofile.name
+                    if not "beatinspect_rec_" in audiofile_name:
+                        advanced_analytics = True
+                        # enable advanced analytics bc uploaded
+
                     # Save to main dir to be called via path
                     with open(audiofile_name,"wb") as f:
                         f.write(audiofile.getbuffer())
@@ -80,7 +84,10 @@ def beatinspect_main():
             elif 'Record' in choice:
                 audiofile = None
 
-                rec_msg = '<p style="color: #e3fc03; font-size: 1rem;">Use this audio-recorder to generate files that can be analyzed using beatinspect - min. 15 seconds for optimal functionality!</p>'
+                rec_msg = '<p style="color: #e3fc03; font-size: 1rem;">'
+                          'Use this audio-recorder to generate files that '
+                          'can be analyzed using beatinspect - min. 15 seconds '
+                          'for optimal functionality!</p>'
                 st.markdown(rec_msg, unsafe_allow_html=True)
 
                 # the audiorec custom component
@@ -114,7 +121,7 @@ def beatinspect_main():
             # update session state and order new calc of attr
             st.session_state.audiofile_name = audiofile_name
             # reset session state for selected amp/rms plot
-            st.session_state.spectrum = 'RMS Spectrum'
+            st.session_state.spectrum2d = 'RMS Spectrum'
             new_audiofile = True # new audiofile --> update session sates
 
         # Musical and Tech Specs Overview
@@ -186,7 +193,9 @@ def beatinspect_main():
         with st.expander("SECTION - Waveform and Spectrogram Insights",
                          expanded=True):
             if not advanced_analytics:
-                analytics_msg = '<p style="color: #e3fc03; font-size: 1rem;">Only available for audio files provided via "Audio File Upload"</p>'
+                analytics_msg = '<p style="color: #e3fc03; font-size: 1rem;">'
+                                'Only available for audio files provided '
+                                'via "Audio File Upload"</p>'
                 st.markdown(analytics_msg, unsafe_allow_html=True)
             if advanced_analytics:  # only if audio file uploaded
                 # Generate graphs/plots for RMS & Amplitude over time
@@ -209,13 +218,13 @@ def beatinspect_main():
                     times, rms = st.session_state.times, st.session_state.rms
 
                 # display the selected spectrum plot
-                spectrum_coice = st.session_state.spectrum
+                spectrum_coice = st.session_state.spectrum2d
                 # due to the session state only updating after Selection
                 # these plot calls need to be inversed/swapped like below
                 if 'AMP' in spectrum_coice:  # generate rms spectrum plots
                     with st.spinner('generating RMS spectrum plot'):
                         plots.rms_spectrum(times, rms)
-                else:  # generate amp spectrum plots
+                if 'RMS' in spectrum_coice:  # generate amp spectrum plots
                     with st.spinner('generating AMP spectrum plot'):
                         plots.amp_spectrum(y,sr)
 
@@ -223,7 +232,7 @@ def beatinspect_main():
                 streamlit_design.radiobutton_horizontal()  # switch alignment
                 sradio_col1, sradio_col2 = st.columns([0.03, 1.5])
                 with sradio_col2:
-                    st.session_state.spectrum = st.radio('Please select your spectrum of choice',
+                    st.session_state.spectrum2d = st.radio('Please select your spectrum of choice',
                                                          ['AMP Spectrum  ', 'RMS Spectrum  '])
                 st.write('')  # add spacing
 
@@ -234,17 +243,6 @@ def beatinspect_main():
                 # nur wenn kleiner gleich 20 sec wird das zweite bild generiert
                 # das mel spektrum gibt es nur für bestimmte abschnitte nicht ganzer track!
 
-                # darunter custom select max 20 sec spectrum viewer !
-                # INTERACTVE 3D spectrogram (turn and zoom in) for the selected timeframe
-                # https://librosa.org/doc/0.9.1/generated/librosa.feature.rms.html
-
-
-                # TODO select a section of the track (or the whole track) and analyze for sections that are above ZERO level
-                # TODO for these sections that are "übersteuern" --> find out in which frequency bands they need to be decreased in amplitude
-                # PLOT amplitude over frequency --> classical EQ view --> Spectrogram
-                # Step 1 Select slider timeframe from overall plotted audio file (AMP oder time)
-                # Step 2 Use the timeframe to calculate the Spectrogram (AMP(frequency))
-                # Step 3 Plot Spectrogram plot with yellow vertical bars at frequencies where AMP too high!
 
 
     # FOOTER Content and Coop logos etc
@@ -268,8 +266,12 @@ def beatinspect_main():
 if __name__ == '__main__':
 
     # initialize spectrum choice session state
-    if "spectrum" not in st.session_state:
-        st.session_state.spectrum = 'RMS Spectrum'
+    if "spectrum2d" not in st.session_state:
+        st.session_state.spectrum2d = 'RMS Spectrum'
+
+    # initialize session state channel coice
+    if "audio_channel" not in st.session_state:
+        st.session_state.audio_channel = 'left'
 
     # initialize session state for audiofile.name
     if "audiofile_name" not in st.session_state:
@@ -294,12 +296,6 @@ if __name__ == '__main__':
         st.session_state.rms = None
     if "times" not in st.session_state:
         st.session_state.times = None
-
-    # initialize session states for plots
-    if "plot_spectrum_amp" not in st.session_state:
-        st.session_state.plot_spectrum_amp = None
-    if "plot_spectrum_rms" not in st.session_state:
-        st.session_state.plot_spectrum_rms = None
 
     # call main function
     beatinspect_main()
