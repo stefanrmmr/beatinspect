@@ -194,8 +194,8 @@ def beatinspect_main():
                          expanded=True):
             if not advanced_analytics:
                 analytics_msg = '<p style="color: #e3fc03; font-size: 1rem;">'\
-                                'Only available for original audio files provided '\
-                                'via "Audio File Upload" (excluding beatinspect recordings)</p>'
+                                'Only available for original audio files '\
+                                '(excluding beatinspect recordings)</p>'
                 st.markdown(analytics_msg, unsafe_allow_html=True)
             if advanced_analytics:  # only if audio file uploaded
                 # Generate graphs/plots for RMS & Amplitude over time
@@ -206,7 +206,7 @@ def beatinspect_main():
                     with st.spinner('calculating spectrogram insights'):
                         # calc spectrum data for plotting framework
                         y,sr = librosa.load(audiofile_path, sr=sampling_freq)
-                        y_stft = librosa.stft(y)  # STFT of y
+                        y_stft = librosa.stft(y)  # STFT of y audio signal
                         scale_db = librosa.amplitude_to_db(np.abs(y_stft), ref=np.max)
                         spectrogram_magn, phase = librosa.magphase(librosa.stft(y))
                         rms = librosa.feature.rms(S=spectrogram_magn)  # calculating rms
