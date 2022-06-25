@@ -10,6 +10,8 @@ import matplotlib.ticker as tkr
 import plotly.graph_objects as go
 # has classes for tick-locating and -formatting
 
+streamlit_dark = '#0F1116'  # rgb(15,17,22) default dark theme
+
 def numfmt(x, pos):
     # your custom formatter function: divide by 2
     s = '{}'.format(x / 2)
@@ -292,7 +294,7 @@ def melspectrogram_plotly3d(y, sr):
 
     # background and axis label colors and dimensions
     fig.update_layout(autosize=True, width=950, height=700,
-                      paper_bgcolor='rgb(11,11,11)',
+                      paper_bgcolor=streamlit_dark,  # rgb(15,17,22)
                       font_family= 'Arial', # "Courier New",
                       font_color="white",
                       legend_title_font_color="white")
@@ -308,13 +310,13 @@ def melspectrogram_plotly3d(y, sr):
                       scene_zaxis = dict(
                         gridcolor="rgb(055, 055, 055)",
                         showbackground=True,
-                        backgroundcolor="rgb(0, 0, 0)",
+                        backgroundcolor=streamlit_dark,
                         title = 'Volume [dB]'),
 
                       scene_xaxis = dict(
                         gridcolor="rgb(055, 055, 055)",
                         showbackground=True,
-                        backgroundcolor="rgb(0, 0, 0)",
+                        backgroundcolor=streamlit_dark,
                         title = 'Time [secs]',
                         tickvals = x_tickvals,
                         ticktext = x_ticktext,
@@ -323,7 +325,7 @@ def melspectrogram_plotly3d(y, sr):
                       scene_yaxis = dict(
                         gridcolor="rgb(055, 055, 055)",
                         showbackground=True,
-                        backgroundcolor="rgb(0, 0, 0)",
+                        backgroundcolor=streamlit_dark,
                         title = 'Frequency [Hz]',
                         tickvals = y_tickvals,
                         ticktext = y_ticktext,)
