@@ -259,10 +259,10 @@ def melspectrogram_plotly3d(y, sr):
 
     # CALC correct 3D MEl Spectrogram Y-AXIS Tick label texts & positions
     y_tickvals, yvalue = [], 0
-    y_ticktext = ["0", "512", "1024", "2048", "4096", "8192", "16384"]
+    y_ticktext = ["0", "512", "1024", "2048", "4096", "8192", "16384", "32768"]
     while (yvalue <= yvalues_count+1):
         y_tickvals.append(round(yvalue,1))
-        yvalue += (yvalues_count/6)
+        yvalue += (yvalues_count/7)
 
 
     # PLOTLY GRPAH OBJECT GENERATE PLOT
