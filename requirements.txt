@@ -10,3 +10,4 @@ sounddevice
 wavio
 pydub
 ffmpeg
+plotly
