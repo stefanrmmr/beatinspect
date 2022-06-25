@@ -195,7 +195,7 @@ def melspectrogram_plotly3d(y, sr):
     # decibel is measured using the np.max(S) value as a reference point
     mel_data = librosa.power_to_db(S, ref=np.max) # convert spectrum to dB
 
-    # data fro plotting spectrogram with log scale instead of mel
+    # data for plotting spectrogram with log scale instead of mel
     log_data = librosa.amplitude_to_db(np.abs(librosa.stft(y)), ref=np.max)
 
     # caculate sample points for adequate tick labels in plot
@@ -228,9 +228,9 @@ def melspectrogram_plotly3d(y, sr):
                       eye=dict(x=1, y=1, z=1))
 
     # create custom colorscale for surfaceplot
-    colorscale_melspectrum = [[0, streamlit_dark],
+    colorscale_melspectrum = [[0, 'rgb(0,0,0)'],
                               [0.005, 'rgb(100,100,100)'],
-                              [0.01, streamlit_dark],
+                              [0.01, 'rgb(0,0,0)'],
                               [0.3, 'rgb(30,30,30)'],
                               [0.4, 'rgb(50,50,50)'],
                               [0.5, 'rgb(80,80,80)'],
@@ -243,19 +243,14 @@ def melspectrogram_plotly3d(y, sr):
     colorscale_flat = [[0, 'white'],[1, 'white']]
 
     # contour height level rings for values > treshold
-    contours = {"z": {"show": mark_peaks,
-                      "start": zvalue_treshold_mel,
+    contours = {"z": {"show": mark_peaks, "start": zvalue_treshold_mel,
                       "end": 0, "size": 1, "color":"black"}}
 
-
     # CALC correct 3D MEl Spectrogram X-AXIS Tick label texts & positions
-    x_tickvals = []
-    x_ticktext = []
-
+    x_tickvals, x_ticktext = [], []
     timestep = duration/(10)  # 10x timeslots
     xvaluestep = xvalues_count/(10)  # 10x timeslots
     xvalue, timevalue = 0, 0
-
     while (xvalue < xvalues_count):
         x_tickvals.append(round(xvalue,2))
         x_ticktext.append(round(timevalue,2))
@@ -265,7 +260,6 @@ def melspectrogram_plotly3d(y, sr):
     # CALC correct 3D MEl Spectrogram Y-AXIS Tick label texts & positions
     y_tickvals, yvalue = [], 0
     y_ticktext = ["0", "512", "1024", "2048", "4096", "8192", "16384"]
-
     while (yvalue <= yvalues_count+1):
         y_tickvals.append(round(yvalue,1))
         yvalue += (yvalues_count/6)
@@ -328,17 +322,15 @@ def melspectrogram_plotly3d(y, sr):
                         backgroundcolor=streamlit_dark,
                         title = 'Frequency [Hz]',
                         tickvals = y_tickvals,
-                        ticktext = y_ticktext,)
+                        ticktext = y_ticktext)
                      )
 
     # enable x-axis traces without permanent projection
     fig.update_traces(contours_x=dict(show=False, usecolormap=False,
                                       highlightcolor= "#e3fc03", #"#ff008d",
-                                      highlightwidth=15,
-                                      project_x=True))
+                                      highlightwidth=15, project_x=True))
 
     # define colorbar descriptive title
     fig.data[0].colorbar.title = "Amplitude [dB]"
 
-    st.plotly_chart(fig, use_container_width=True, config=config
-    )
+    st.plotly_chart(fig, use_container_width=True, config=config)
