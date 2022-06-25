@@ -340,4 +340,5 @@ def melspectrogram_plotly3d(y, sr):
     # define colorbar descriptive title
     fig.data[0].colorbar.title = "Amplitude [dB]"
 
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, use_container_width=True, config=config
+    )
