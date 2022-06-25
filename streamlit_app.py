@@ -219,7 +219,14 @@ def beatinspect_main():
                     y, sr = st.session_state.y, st.session_state.sr
                     times, rms = st.session_state.times, st.session_state.rms
 
-                # display the selected spectrum plot
+
+                # plot 3D interactivemel spectrogram
+                plots.melspectrogram_plotly3d(y, sr)
+                # TODOOO maybe implement double sided slider so that a subsection
+                # of the track is selected for the mel spectrogram
+
+
+                # display the selected 2D spectrum plot
                 spectrum_coice = st.session_state.spectrum2d
                 # due to the session state only updating after Selection
                 # these plot calls need to be inversed/swapped like below
@@ -237,17 +244,6 @@ def beatinspect_main():
                     st.session_state.spectrum2d = st.radio('Please select your spectrum of choice',
                                                          ['AMP Spectrum  ', 'RMS Spectrum  '])
                 st.write('')  # add spacing
-
-                plots.melspectrogram_plotly3d(y, sr)
-
-
-                # img2 = librosa.display.specshow(scale_db, ax=ax2, sr=sr, x_axis='time', y_axis='log')
-                # fig.colorbar(img2, ax=ax2, format="%+2.f dB")
-
-                # STREAMLIT double sided slider mit info dass max 20sec
-                # nur wenn kleiner gleich 20 sec wird das zweite bild generiert
-                # das mel spektrum gibt es nur für bestimmte abschnitte nicht ganzer track!
-
 
 
     # FOOTER Content and Coop logos etc
