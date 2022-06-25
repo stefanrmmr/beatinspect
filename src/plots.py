@@ -10,7 +10,7 @@ import matplotlib.ticker as tkr
 import plotly.graph_objects as go
 # has classes for tick-locating and -formatting
 
-streamlit_dark = '#0F1116'  # rgb(15,17,22) default dark theme
+streamlit_dark = 'rgb(15,17,22)'  # #0F1116' default dark theme
 
 def numfmt(x, pos):
     # your custom formatter function: divide by 2
@@ -228,9 +228,9 @@ def melspectrogram_plotly3d(y, sr):
                       eye=dict(x=1, y=1, z=1))
 
     # create custom colorscale for surfaceplot
-    colorscale_melspectrum = [[0, 'rgb(0,0,0)'],
+    colorscale_melspectrum = [[0, streamlit_dark],
                               [0.005, 'rgb(100,100,100)'],
-                              [0.01, 'rgb(0,0,0)'],
+                              [0.01, streamlit_dark],
                               [0.3, 'rgb(30,30,30)'],
                               [0.4, 'rgb(50,50,50)'],
                               [0.5, 'rgb(80,80,80)'],
