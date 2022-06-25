@@ -181,8 +181,8 @@ def amprms_spectrum(y, sr, times, rms):
 
 def melspectrogram_plotly3d(y, sr):
 
-    mels_count = 200
-    max_freq = 16384*2  # Hz
+    mels_count = 300
+    max_freq = 32768  # Hz
     zvalue_treshold_mel = -15  # dB
     mark_peaks = False
     camera_mode_3d = False
