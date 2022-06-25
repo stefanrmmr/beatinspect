@@ -184,8 +184,8 @@ def melspectrogram_plotly3d(y, sr):
     mels_count = 200
     max_freq = 16384  # Hz
     zvalue_treshold_mel = -15  # dB
-    mark_peaks = True
-    camera_mode_3d = True
+    mark_peaks = False
+    camera_mode_3d = False
 
     # calc playtime duration in seconds
     duration = librosa.get_duration(y=y, sr=sr)
