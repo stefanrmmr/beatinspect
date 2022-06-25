@@ -207,7 +207,7 @@ def beatinspect_main():
                     # calculate the necessray data for further plotting
                     with st.spinner('calculating spectrogram insights'):
                         # calc spectrum data for plotting framework
-                        y,sr = librosa.load(audiofile_path, sr=sampling_freq)
+                        y, sr = librosa.load(audiofile_path, sr=sampling_freq)
                         y_stft = librosa.stft(y)  # STFT of y audio signal
                         scale_db = librosa.amplitude_to_db(np.abs(y_stft), ref=np.max)
                         spectrogram_magn, phase = librosa.magphase(librosa.stft(y))
@@ -237,6 +237,9 @@ def beatinspect_main():
                     st.session_state.spectrum2d = st.radio('Please select your spectrum of choice',
                                                          ['AMP Spectrum  ', 'RMS Spectrum  '])
                 st.write('')  # add spacing
+
+                plots.melspectrogram_plotly3d(y, sr)
+
 
                 # img2 = librosa.display.specshow(scale_db, ax=ax2, sr=sr, x_axis='time', y_axis='log')
                 # fig.colorbar(img2, ax=ax2, format="%+2.f dB")
