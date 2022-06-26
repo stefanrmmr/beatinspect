@@ -330,9 +330,9 @@ def melspectrogram_plotly3d(y, sr):
                                       highlightcolor= "#e3fc03", #"#ff008d",
                                       highlightwidth=15, project_x=True))
 
-    # define colorbar descriptive title
+    # define colorbar descriptive title and orientation
     fig.data[0].colorbar.title = "Amplitude [dB]"
-    fig.data[0].colorbar.orientation = "h"
+    fig.data[0].colorbar.orientation = "v"
     fig.update_coloraxes(colorbar_orientation="h")  # instead of vertical
 
     st.plotly_chart(fig, use_container_width=True, config=config)

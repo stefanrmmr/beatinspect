@@ -220,11 +220,11 @@ def beatinspect_main():
                     times, rms = st.session_state.times, st.session_state.rms
 
 
-                # plot 3D interactivemel spectrogram
-                plots.melspectrogram_plotly3d(y, sr)
-                # TODOOO maybe implement double sided slider so that a subsection
-                # of the track is selected for the mel spectrogram
-
+                with st.spinner('generating 3D mel frequency spectrogram'):
+                    # plot 3D interactivemel spectrogram
+                    plots.melspectrogram_plotly3d(y, sr)
+                    # TODOOO maybe implement double sided slider so that a subsection
+                    # of the track is selected for the mel spectrogram
 
                 # display the selected 2D spectrum plot
                 spectrum_coice = st.session_state.spectrum2d
