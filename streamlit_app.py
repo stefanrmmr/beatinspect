@@ -242,10 +242,10 @@ def beatinspect_main():
                 streamlit_design.radiobutton_horizontal()  # switch alignment
                 sradio1_col1, sradio1_col2 = st.columns([0.03, 1.5])
                 with sradio1_col2:
-                    st.session_state.spectrum3d = st.radio('Please select your prefered viewing mode',
-                                                         ['Default', 'Peaks Detection  '])
-
-
+                    st.session_state.spectrum3d = st.radio('Please select your prefered Mel-Spectrum viewing mode.',
+                                                         ['Default Top View  ', 'Peaks Detection  '])
+                st.write('')
+                
 
                 # display the selected 2D spectrum plot
                 spectrum_coice = st.session_state.spectrum2d
@@ -262,7 +262,7 @@ def beatinspect_main():
                 streamlit_design.radiobutton_horizontal()  # switch alignment
                 sradio2_col1, sradio2_col2 = st.columns([0.03, 1.5])
                 with sradio2_col2:
-                    st.session_state.spectrum2d = st.radio('Please select your spectrum of choice',
+                    st.session_state.spectrum2d = st.radio('Please select your Volume-Spectrum of choice.',
                                                          ['AMP Spectrum  ', 'RMS Spectrum  '])
                 st.write('')  # add spacing
 
