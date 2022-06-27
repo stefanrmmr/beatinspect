@@ -201,6 +201,7 @@ def beatinspect_main():
                                 'Only available for original audio files '\
                                 '(excluding beatinspect recordings)</p>'
                 st.markdown(analytics_msg, unsafe_allow_html=True)
+
             if advanced_analytics:  # only if audio file uploaded
                 # Generate graphs/plots for RMS & Amplitude over time
                 st.audio(audiofile)  # display web audio player UX/UI
@@ -259,6 +260,7 @@ def beatinspect_main():
                                 'Only available for original audio files '\
                                 '(excluding beatinspect recordings)</p>'
                 st.markdown(analytics_msg, unsafe_allow_html=True)
+                
             if advanced_analytics:  # only if audio file uploaded
                 # Generate graphs/plots for RMS & Amplitude over time
                 st.audio(audiofile)  # display web audio player UX/UI
