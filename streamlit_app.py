@@ -194,7 +194,7 @@ def beatinspect_main():
 
 
         # Inspect Audio File Specifications
-        with st.expander("SECTION - 3D MEL Spectrogram Insights",
+        with st.expander("SECTION - 3D MEL Spectrogram & Peak Detection",
                          expanded=True):
             if not advanced_analytics:
                 analytics_msg = '<p style="color: #e3fc03; font-size: 1rem;">'\
@@ -235,10 +235,12 @@ def beatinspect_main():
 
                 # radio button selection for spectrum plot over time
                 streamlit_design.radiobutton_horizontal()  # switch alignment
-                sradio1_col1, sradio1_col2 = st.columns([0.03, 1.5])
+                sradio1_col1, sradio1_col2, sradio1_col3 = st.columns([0.03, 1.5, 2])
                 with sradio1_col2:
                     st.session_state.spectrum3d = st.radio('Please select your prefered Mel-Spectrum viewing mode.',
                                                          ['Default Top View  ', 'Peaks Detection  '])
+                with sradio1_col3:
+                    st.session_state.mel_treshold = st.slider('Peak Detection Treshold Selection', -50, 0, -15)
                 st.write('')
 
 
