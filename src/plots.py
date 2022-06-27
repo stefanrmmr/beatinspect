@@ -179,13 +179,13 @@ def amprms_spectrum(y, sr, times, rms):
     st.pyplot(fig)
 
 
-def melspectrogram_plotly3d(y, sr):
+def melspectrogram_plotly3d(y, sr, mark_peaks, camera_mode_3d, zvalue_treshold):
 
     mels_count = 300
     max_freq = 32768  # Hz
-    zvalue_treshold_mel = -15  # dB
-    mark_peaks = False
-    camera_mode_3d = False
+    # zvalue_treshold = -15  # dB
+    # mark_peaks = False
+    # camera_mode_3d = False
 
     # calc playtime duration in seconds
     duration = librosa.get_duration(y=y, sr=sr)
@@ -202,7 +202,7 @@ def melspectrogram_plotly3d(y, sr):
     xvalues_count, yvalues_count = len(mel_data[0]), len(mel_data)  # 764, 200
 
     # flat surface on level of zvalue treshold
-    flat_data = np.full((len(mel_data), len(mel_data[0])), zvalue_treshold_mel)
+    flat_data = np.full((len(mel_data), len(mel_data[0])), zvalue_treshold)
 
 
     # PLOT CONFIG
@@ -243,7 +243,7 @@ def melspectrogram_plotly3d(y, sr):
     colorscale_flat = [[0, 'white'],[1, 'white']]
 
     # contour height level rings for values > treshold
-    contours = {"z": {"show": mark_peaks, "start": zvalue_treshold_mel,
+    contours = {"z": {"show": mark_peaks, "start": zvalue_treshold,
                       "end": 0, "size": 1, "color":"black"}}
 
     # CALC correct 3D MEl Spectrogram X-AXIS Tick label texts & positions
@@ -273,7 +273,7 @@ def melspectrogram_plotly3d(y, sr):
                                          hovertemplate='<br>%{z} dB<extra></extra>',
                                          opacity=1, contours=contours), # colormapped opaque surface
                               go.Surface(z=flat_data, name=f'<br>amplitude<br>treshold',
-                                         # name=f'<br>amplitude<br>treshold<br>{zvalue_treshold_mel} dB',
+                                         # name=f'<br>amplitude<br>treshold<br>{zvalue_treshold} dB',
                                          showscale=False, colorscale=colorscale_flat,
                                          # hovertemplate='<br>%{x} sec<br>%{y} Hz<br>%{z} dB',
                                          hovertemplate='<br>%{z} dB',

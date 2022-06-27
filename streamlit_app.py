@@ -220,11 +220,32 @@ def beatinspect_main():
                     times, rms = st.session_state.times, st.session_state.rms
 
 
-                with st.spinner('generating 3D mel frequency spectrogram'):
-                    # plot 3D interactivemel spectrogram
-                    plots.melspectrogram_plotly3d(y, sr)
-                    # TODOOO maybe implement double sided slider so that a subsection
-                    # of the track is selected for the mel spectrogram
+
+
+
+
+
+
+                mel_treshold = st.session_state.mel_spectrum_treshold
+                mel_spectrum_choice = st.session_state.spectrum3d
+                if 'Peaks' in mel_spectrum_choice:
+                    with st.spinner('generating 3D mel frequency spectrogram'):
+                        # plot 3D interactivemel spectrogram
+                        plots.melspectrogram_plotly3d(y, sr, True, True, mel_treshold)
+                if 'Default' in mel_spectrum_choice:
+                    with st.spinner('generating 3D mel frequency spectrogram'):
+                        # plot 3D interactivemel spectrogram
+                        plots.melspectrogram_plotly3d(y, sr, False, False, mel_treshold)
+
+
+                # radio button selection for spectrum plot over time
+                streamlit_design.radiobutton_horizontal()  # switch alignment
+                sradio1_col1, sradio1_col2 = st.columns([0.03, 1.5])
+                with sradio1_col2:
+                    st.session_state.spectrum3d = st.radio('Please select your prefered viewing mode',
+                                                         ['Default', 'Peaks Detection  '])
+
+
 
                 # display the selected 2D spectrum plot
                 spectrum_coice = st.session_state.spectrum2d
@@ -239,8 +260,8 @@ def beatinspect_main():
 
                 # radio button selection for spectrum plot over time
                 streamlit_design.radiobutton_horizontal()  # switch alignment
-                sradio_col1, sradio_col2 = st.columns([0.03, 1.5])
-                with sradio_col2:
+                sradio2_col1, sradio2_col2 = st.columns([0.03, 1.5])
+                with sradio2_col2:
                     st.session_state.spectrum2d = st.radio('Please select your spectrum of choice',
                                                          ['AMP Spectrum  ', 'RMS Spectrum  '])
                 st.write('')  # add spacing
@@ -268,11 +289,18 @@ if __name__ == '__main__':
 
     # initialize spectrum choice session state
     if "spectrum2d" not in st.session_state:
-        st.session_state.spectrum2d = 'RMS Spectrum'
+        st.session_state.spectrum2d = 'AMP Spectrum'  # "RMS Spectrum"
 
-    # initialize session state channel coice
-    if "audio_channel" not in st.session_state:
-        st.session_state.audio_channel = 'left'
+    # initialize mel-spectrum choice session state
+    if "spectrum3d" not in st.session_state:
+        st.session_state.spectrum3d = 'Peaks'  # "Default"
+
+    if "mel_spectrum_3dcam" not in st.session_state:
+        st.session_state.mel_spectrum_3dcam = False
+    if "mel_spectrum_markpeaks" not in st.session_state:
+        st.session_state.mel_spectrum_markpeaks = False
+    if "mel_spectrum_treshold" not in st.session_state:
+        st.session_state.mel_spectrum_treshold = -15
 
     # initialize session state for audiofile.name
     if "audiofile_name" not in st.session_state:
