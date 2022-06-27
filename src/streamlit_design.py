@@ -71,7 +71,7 @@ def design_setup():
         unsafe_allow_html=True)
 
     # Design change slider margins for suitable alignment
-    st.markdown('<style>.css-1bzhtc9.e1tzin5v2 {margin-top: -2rem;} </style>',
+    st.markdown('<style>.css-1aacnsr.e1tzin5v2 {margin-top: -2rem;} </style>',
         unsafe_allow_html=True)
 
 
