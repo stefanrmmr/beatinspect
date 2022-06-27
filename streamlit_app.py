@@ -280,7 +280,7 @@ def beatinspect_main():
                 with sradio1_col2:
                     st.radio('Please select your prefered Mel-Spectrum viewing mode.',
                               ['Default Top View  ', 'Peaks Detection  '],
-                              key='radiobuttons1', onclick=radiobuttons1_switch, args=[])
+                              key='radiobuttons1', onclick=radiobuttons1_switch(), args=[])
 
                 with sradio1_col3:
                     st.session_state.mel_spectrum_treshold = int(st.slider('Peaks Detection Treshold Selection [dB]', -25, 0, -10, key='slider1'))
@@ -319,7 +319,7 @@ def beatinspect_main():
                 with sradio2_col2:
                     st.radio('Please select your Volume-Spectrum of choice.',
                               ['AMP Spectrum  ', 'RMS Spectrum  '],
-                              key='radiobuttons2', onclick=radiobuttons2_switch, args=[])
+                              key='radiobuttons2', onclick=radiobuttons2_switch(), args=[])
                 st.write('')  # add spacing
 
 
