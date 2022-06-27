@@ -287,8 +287,8 @@ def melspectrogram_plotly3d(y, sr, mark_peaks, camera_mode_3d, zvalue_treshold):
                                          opacity=1, contours=contours)], layout=layout)
 
     # background and axis label colors and dimensions
-    fig.update_layout(autosize=True, width=950, height=700,
-                      margin=dict(t=0, r=0, l=20, b=0),  # margins
+    fig.update_layout(autosize=True, width=950, height=600,
+                      margin=dict(t=0, r=0, l=30, b=0),  # margins
                       paper_bgcolor=streamlit_dark,  # rgb(15,17,22)
                       font_family= 'Arial', # "Courier New",
                       font_color="white",
