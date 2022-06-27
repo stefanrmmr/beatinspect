@@ -33,6 +33,20 @@ build_dir = os.path.join(parent_dir, "st_audiorec/frontend/build")
 st_audiorec = components.declare_component("st_audiorec", path=build_dir)
 
 
+def radiobuttons1_switch():
+    if "Default" in st.session_state.spectrum3d:
+        st.session_state.spectrum3d = "Peaks"
+    else: # if "Peaks" in st.session_state.spectrum3d:
+        st.session_state.spectrum3d = "Default"
+
+
+def radiobuttons2_switch():
+    if "AMP" in st.session_state.spectrum2d:
+        st.session_state.spectrum2d = "RMS"
+    else: # if "Peaks" in st.session_state.spectrum2d:
+        st.session_state.spectrum2d = "AMP"
+
+
 
 
 def beatinspect_main():
@@ -264,10 +278,12 @@ def beatinspect_main():
                 streamlit_design.radiobutton_horizontal()  # switch alignment
                 sradio1_col1, sradio1_col2, sradio1_col3, sradio_col4 = st.columns([0.08, 1.5, 1.5, 0.1])
                 with sradio1_col2:
-                    st.session_state.spectrum3d = st.radio('Please select your prefered Mel-Spectrum viewing mode.',
-                                                         ['Default Top View  ', 'Peaks Detection  '])
+                    st.radio('Please select your prefered Mel-Spectrum viewing mode.',
+                              key='radiobuttons1', onclick=radiobuttons1_switch, args=[],
+                              ['Default Top View  ', 'Peaks Detection  '])
+
                 with sradio1_col3:
-                    st.session_state.mel_spectrum_treshold = int(st.slider('Peaks Detection Treshold Selection [dB]', -25, 0, -10))
+                    st.session_state.mel_spectrum_treshold = int(st.slider('Peaks Detection Treshold Selection [dB]', -25, 0, -10, key='slider1'))
                 st.write('')
 
 
@@ -291,18 +307,19 @@ def beatinspect_main():
                 if 'AMP' in st.session_state.spectrum2d:  # generate rms spectrum plots
                     with st.spinner('generating AMP spectrum plot'):
                         time.sleep(0.3)  # add delay for spinner
-                        plots.amp_spectrum(times, rms)
+                        plots.amp_spectrum(y, sr)
                 if 'RMS' in st.session_state.spectrum2d:  # generate amp spectrum plots
                     with st.spinner('generating RMS spectrum plot'):
                         time.sleep(0.3)  # add delay for spinner
-                        plots.rms_spectrum(y,sr)
+                        plots.rms_spectrum(times, rms)
 
                 # radio button selection for spectrum plot over time
                 streamlit_design.radiobutton_horizontal()  # switch alignment
                 sradio2_col1, sradio2_col2 = st.columns([0.03, 1.5])
                 with sradio2_col2:
-                    st.session_state.spectrum2d = st.radio('Please select your Volume-Spectrum of choice.',
-                                                         ['AMP Spectrum  ', 'RMS Spectrum  '])
+                    st.radio('Please select your Volume-Spectrum of choice.',
+                              key='radiobuttons2', onclick=radiobuttons2_switch, args=[],
+                              ['AMP Spectrum  ', 'RMS Spectrum  '])
                 st.write('')  # add spacing
 
 
@@ -361,6 +378,19 @@ if __name__ == '__main__':
         st.session_state.rms = None
     if "times" not in st.session_state:
         st.session_state.times = None
+
+    # everytime something on a streamlit app interface is clicked it is automatically run again!
+    # Callbacks are run before the app script run. On clicking/dragging any slider or button,
+    # via the callback, the relevant session state values are updated before the script is run again
+
+    # NORMAL button that updates a session state after it has been clicked.
+    # --> click --> something has changed --> rerun st.app (using current session state value) --> update session states
+    # *this configuration is lagging behind*
+
+    # button using CALLBACK that updates a related session state variable
+    # --> click --> session state update --> something has changed --> rerun st.app (using current session state value)
+    # *this configuration is NOT lagging behind*
+
 
     # call main function
     beatinspect_main()
