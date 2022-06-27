@@ -71,7 +71,7 @@ def design_setup():
         unsafe_allow_html=True)
 
     # Design change slider margins for suitable alignment
-    st.markdown('<style>div.row-widget.stSlider {margin-top: -2rem;} </style>',
+    st.markdown('<style>.stSlider {margin-top: -2rem;} </style>',
         unsafe_allow_html=True)
 
 
