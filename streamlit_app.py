@@ -127,7 +127,7 @@ def beatinspect_main():
             # RESET critical selection values in case of file change
             st.session_state.spectrum2d = 'AMP Spectrum'
             st.session_state.spectrum3d = 'Peaks Detection'
-            st.session_state.mel_spectrum_treshold = -15
+            st.session_state.mel_spectrum_treshold = -10
 
             new_audiofile = True # new audiofile --> update session sates
 
@@ -249,13 +249,13 @@ def beatinspect_main():
 
 
                 if 'Peaks' in st.session_state.spectrum3d:
-                    with st.spinner('generating 3D Mel Spectrogram - DEFAULT MODE'):
+                    with st.spinner('generating 3D Mel Spectrogram - PEAKS DETECTION'):
                         # plot 3D interactive mel spectrogram
                         plots.melspectrogram_plotly3d(y, sr, True, True,
                             st.session_state.mel_spectrum_treshold)
 
                 if 'Default' in st.session_state.spectrum3d:
-                    with st.spinner('generating 3D Mel Spectrogram - PEAKS DETECTION'):
+                    with st.spinner('generating 3D Mel Spectrogram - DEFAULT MODE'):
                         # plot 3D interactive mel spectrogram
                         plots.melspectrogram_plotly3d(y, sr, False, False,
                             st.session_state.mel_spectrum_treshold)
@@ -267,7 +267,7 @@ def beatinspect_main():
                     st.session_state.spectrum3d = st.radio('Please select your prefered Mel-Spectrum viewing mode.',
                                                          ['Default Top View  ', 'Peaks Detection  '])
                 with sradio1_col3:
-                    st.session_state.mel_spectrum_treshold = int(st.slider('Peaks Detection Treshold Selection [dB]', -25, 0, -15))
+                    st.session_state.mel_spectrum_treshold = int(st.slider('Peaks Detection Treshold Selection [dB]', -25, 0, -10))
                 st.write('')
 
 
@@ -286,18 +286,16 @@ def beatinspect_main():
                 st.audio(audiofile)  # display web audio player UX/UI
 
 
-                # display the selected 2D spectrum plot
-                spectrum_coice = st.session_state.spectrum2d
                 # due to the session state only updating after Selection
                 # these plot calls need to be inversed/swapped like below
-                if 'AMP' in spectrum_coice:  # generate rms spectrum plots
-                    with st.spinner('generating RMS spectrum plot'):
-                        time.sleep(0.3)  # add delay for spinner
-                        plots.rms_spectrum(times, rms)
-                if 'RMS' in spectrum_coice:  # generate amp spectrum plots
+                if 'AMP' in st.session_state.spectrum2d:  # generate rms spectrum plots
                     with st.spinner('generating AMP spectrum plot'):
                         time.sleep(0.3)  # add delay for spinner
-                        plots.amp_spectrum(y,sr)
+                        plots.amp_spectrum(times, rms)
+                if 'RMS' in st.session_state.spectrum2d:  # generate amp spectrum plots
+                    with st.spinner('generating RMS spectrum plot'):
+                        time.sleep(0.3)  # add delay for spinner
+                        plots.rms_spectrum(y,sr)
 
                 # radio button selection for spectrum plot over time
                 streamlit_design.radiobutton_horizontal()  # switch alignment
@@ -338,7 +336,7 @@ if __name__ == '__main__':
         st.session_state.spectrum3d = 'Peaks Detection'  # "Default"
 
     if "mel_spectrum_treshold" not in st.session_state:
-        st.session_state.mel_spectrum_treshold = -15
+        st.session_state.mel_spectrum_treshold = -10
 
     # initialize session state for audiofile.name
     if "audiofile_name" not in st.session_state:
