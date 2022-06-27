@@ -206,8 +206,8 @@ def beatinspect_main():
                 st.audio(audiofile)  # display web audio player UX/UI
 
                 fullscreen_msg = '<p style="color: #e3fc03; font-size: 1rem;">'\
-                                'Drag the graph to explore 3D viewing angles & zooming!'\
-                                ' - Works best in fullscreen mode! ⇩⇩'
+                                '   Drag the graph to explore 3D viewing angles & zooming!'\
+                                ' - Works best in fullscreen mode! ⇩'
                 st.markdown(fullscreen_msg, unsafe_allow_html=True)
 
                 if new_audiofile: # new audiofile --> update session sates
@@ -226,16 +226,18 @@ def beatinspect_main():
                     y, sr = st.session_state.y, st.session_state.sr
                     times, rms = st.session_state.times, st.session_state.rms
 
-                mel_treshold = st.session_state.mel_spectrum_treshold
+                # mel_treshold = st.session_state.mel_spectrum_treshold
                 mel_spectrum_choice = st.session_state.spectrum3d
                 if 'Peaks' in mel_spectrum_choice:
-                    with st.spinner('generating 3D mel spectrogram - DEFAULT MODE'):
+                    with st.spinner('generating 3D Mel Spectrogram - DEFAULT MODE'):
                         # plot 3D interactivemel spectrogram
-                        plots.melspectrogram_plotly3d(y, sr, False, False, mel_treshold)
+                        plots.melspectrogram_plotly3d(y, sr, False, False,
+                            st.session_state.mel_spectrum_treshold)
                 if 'Default' in mel_spectrum_choice:
-                    with st.spinner('generating 3D mMel spectrogram - PEAKS DETECTION'):
+                    with st.spinner('generating 3D Mel Spectrogram - PEAKS DETECTION'):
                         # plot 3D interactivemel spectrogram
-                        plots.melspectrogram_plotly3d(y, sr, True, True, mel_treshold)
+                        plots.melspectrogram_plotly3d(y, sr, True, True,
+                            st.session_state.mel_spectrum_treshold)
 
 
                 # radio button selection for spectrum plot over time
