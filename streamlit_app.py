@@ -278,9 +278,8 @@ def beatinspect_main():
                 streamlit_design.radiobutton_horizontal()  # switch alignment
                 sradio1_col1, sradio1_col2, sradio1_col3, sradio_col4 = st.columns([0.08, 1.5, 1.5, 0.1])
                 with sradio1_col2:
-                    st.radio('Please select your prefered Mel-Spectrum viewing mode.',
-                              ['Default Top View  ', 'Peaks Detection  '],
-                              key='radiobuttons1', on_click=radiobuttons1_switch(), args=[])
+                    st.radio('Please select your prefered Mel-Spectrum viewing mode.', ['Default Top View  ', 'Peaks Detection  '],
+                              key='radiobuttons1', on_change=radiobuttons1_switch())
 
                 with sradio1_col3:
                     st.session_state.mel_spectrum_treshold = int(st.slider('Peaks Detection Treshold Selection [dB]', -25, 0, -10, key='slider1'))
@@ -319,7 +318,7 @@ def beatinspect_main():
                 with sradio2_col2:
                     st.radio('Please select your Volume-Spectrum of choice.',
                               ['AMP Spectrum  ', 'RMS Spectrum  '],
-                              key='radiobuttons2', on_click=radiobuttons2_switch(), args=[])
+                              key='radiobuttons2', on_change=radiobuttons2_switch())
                 st.write('')  # add spacing
 
 
