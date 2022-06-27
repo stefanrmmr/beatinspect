@@ -288,7 +288,7 @@ def melspectrogram_plotly3d(y, sr):
 
     # background and axis label colors and dimensions
     fig.update_layout(autosize=True, width=950, height=700,
-                      margin=dict(t=400, r=0, l=20, b=20),
+                      margin=dict(t=0, r=0, l=0, b=0),  # margins 
                       paper_bgcolor=streamlit_dark,  # rgb(15,17,22)
                       font_family= 'Arial', # "Courier New",
                       font_color="white",
