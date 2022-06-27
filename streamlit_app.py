@@ -41,10 +41,11 @@ def radiobuttons1_switch():
 
 
 def radiobuttons2_switch():
-    if "AMP" in st.session_state.spectrum2d:
+    """if "AMP" in st.session_state.spectrum2d:
         st.session_state.spectrum2d = "RMS"
     else: # if "Peaks" in st.session_state.spectrum2d:
-        st.session_state.spectrum2d = "AMP"
+        st.session_state.spectrum2d = "AMP""""
+    pass
 
 
 
