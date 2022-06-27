@@ -123,8 +123,12 @@ def beatinspect_main():
             # update session state and order new calc of attr
             st.session_state.audiofile_name = audiofile_name
             # reset session state for selected amp/rms plot
+
+            # RESET critical selection values in case of file change
             st.session_state.spectrum2d = 'AMP Spectrum'
             st.session_state.spectrum3d = 'Peaks Detection'
+            st.session_state.mel_spectrum_treshold = -15
+
             new_audiofile = True # new audiofile --> update session sates
 
         # Musical and Tech Specs Overview
@@ -194,39 +198,54 @@ def beatinspect_main():
 
 
 
+
+
+        if advanced_analytics:
+            # calculate the necessary spectrum data for in-depth insights
+            # however only calc data in case the file is suitable/qualified
+
+            if new_audiofile:
+                # new audiofile --> update session states
+                with st.spinner('calculating spectrogram insights'):
+                    y, sr = librosa.load(audiofile_path, sr=sampling_freq)
+                    y_stft = librosa.stft(y)  # STFT of y audio signal
+                    scale_db = librosa.amplitude_to_db(np.abs(y_stft), ref=np.max)
+                    spectrogram_magn, phase = librosa.magphase(librosa.stft(y))
+                    rms = librosa.feature.rms(S=spectrogram_magn)  # calculating rms
+                    times = librosa.times_like(rms) #extracting rms timestamps
+                    st.session_state.y, st.session_state.sr = y, sr
+                    st.session_state.times, st.session_state.rms = times, rms
+
+            if not new_audiofile:
+                # same audiofile --> load from session_state
+                y, sr = st.session_state.y, st.session_state.sr
+                times, rms = st.session_state.times, st.session_state.rms
+
+
+
+
+
+
+
+
+
         # Inspect Audio File Specifications
         with st.expander("SECTION - 3D MEL Spectrogram & Peak Detection",
                          expanded=True):
+
             if not advanced_analytics:
                 analytics_msg = '<p style="color: #e3fc03; font-size: 1rem;">'\
                                 'Only available for original audio files '\
                                 '(excluding beatinspect recordings)</p>'
                 st.markdown(analytics_msg, unsafe_allow_html=True)
-
             if advanced_analytics:  # only if audio file uploaded
                 # Generate graphs/plots for RMS & Amplitude over time
                 st.audio(audiofile)  # display web audio player UX/UI
-
                 fullscreen_msg = '<p style="color: #e3fc03; font-size: 1rem;">'\
                                 'Drag the graph to explore 3D viewing angles & zooming!'\
                                 ' - Works best in fullscreen mode!'
                 st.markdown(fullscreen_msg, unsafe_allow_html=True)
 
-                if new_audiofile: # new audiofile --> update session sates
-                    # calculate the necessray data for further plotting
-                    with st.spinner('calculating spectrogram insights'):
-                        # calc spectrum data for plotting framework
-                        y, sr = librosa.load(audiofile_path, sr=sampling_freq)
-                        y_stft = librosa.stft(y)  # STFT of y audio signal
-                        scale_db = librosa.amplitude_to_db(np.abs(y_stft), ref=np.max)
-                        spectrogram_magn, phase = librosa.magphase(librosa.stft(y))
-                        rms = librosa.feature.rms(S=spectrogram_magn)  # calculating rms
-                        times = librosa.times_like(rms) #extracting rms timestamps
-                        st.session_state.y, st.session_state.sr = y, sr
-                        st.session_state.times, st.session_state.rms = times, rms
-                else:  # same audiofile --> load from session_state
-                    y, sr = st.session_state.y, st.session_state.sr
-                    times, rms = st.session_state.times, st.session_state.rms
 
                 # mel_treshold = st.session_state.mel_spectrum_treshold
                 mel_spectrum_choice = st.session_state.spectrum3d
@@ -241,7 +260,6 @@ def beatinspect_main():
                         plots.melspectrogram_plotly3d(y, sr, True, True,
                             st.session_state.mel_spectrum_treshold)
 
-
                 # radio button selection for spectrum plot over time
                 streamlit_design.radiobutton_horizontal()  # switch alignment
                 sradio1_col1, sradio1_col2, sradio1_col3, sradio_col4 = st.columns([0.08, 1.5, 1.5, 0.1])
@@ -253,34 +271,19 @@ def beatinspect_main():
                 st.write('')
 
 
+
         # Inspect Audio File Specifications
         with st.expander("SECTION - Loudness Amplitude Analytics",
                          expanded=True):
+
             if not advanced_analytics:
                 analytics_msg = '<p style="color: #e3fc03; font-size: 1rem;">'\
                                 'Only available for original audio files '\
                                 '(excluding beatinspect recordings)</p>'
                 st.markdown(analytics_msg, unsafe_allow_html=True)
-
             if advanced_analytics:  # only if audio file uploaded
                 # Generate graphs/plots for RMS & Amplitude over time
                 st.audio(audiofile)  # display web audio player UX/UI
-
-                if new_audiofile: # new audiofile --> update session sates
-                    # calculate the necessray data for further plotting
-                    with st.spinner('calculating spectrogram insights'):
-                        # calc spectrum data for plotting framework
-                        y, sr = librosa.load(audiofile_path, sr=sampling_freq)
-                        y_stft = librosa.stft(y)  # STFT of y audio signal
-                        scale_db = librosa.amplitude_to_db(np.abs(y_stft), ref=np.max)
-                        spectrogram_magn, phase = librosa.magphase(librosa.stft(y))
-                        rms = librosa.feature.rms(S=spectrogram_magn)  # calculating rms
-                        times = librosa.times_like(rms) #extracting rms timestamps
-                        st.session_state.y, st.session_state.sr = y, sr
-                        st.session_state.times, st.session_state.rms = times, rms
-                else:  # same audiofile --> load from session_state
-                    y, sr = st.session_state.y, st.session_state.sr
-                    times, rms = st.session_state.times, st.session_state.rms
 
 
                 # display the selected 2D spectrum plot
