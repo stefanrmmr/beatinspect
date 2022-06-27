@@ -240,7 +240,7 @@ def beatinspect_main():
 
                 # radio button selection for spectrum plot over time
                 streamlit_design.radiobutton_horizontal()  # switch alignment
-                sradio1_col1, sradio1_col2, sradio1_col3 = st.columns([0.04, 1.5, 1])
+                sradio1_col1, sradio1_col2, sradio1_col3, sradio_col4 = st.columns([0.04, 1.5, 1.5, 0.1])
                 with sradio1_col2:
                     st.session_state.spectrum3d = st.radio('Please select your prefered Mel-Spectrum viewing mode.',
                                                          ['Default Top View  ', 'Peaks Detection  '])
