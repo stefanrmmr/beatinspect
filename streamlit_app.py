@@ -191,8 +191,59 @@ def beatinspect_main():
                 st.write('')  # add spacing
 
 
+
+
         # Inspect Audio File Specifications
-        with st.expander("SECTION - Waveform and Spectrogram Insights",
+        with st.expander("SECTION - 3D MEL Spectrogram Insights",
+                         expanded=True):
+            if not advanced_analytics:
+                analytics_msg = '<p style="color: #e3fc03; font-size: 1rem;">'\
+                                'Only available for original audio files '\
+                                '(excluding beatinspect recordings)</p>'
+                st.markdown(analytics_msg, unsafe_allow_html=True)
+            if advanced_analytics:  # only if audio file uploaded
+                # Generate graphs/plots for RMS & Amplitude over time
+                st.audio(audiofile)  # display web audio player UX/UI
+
+                if new_audiofile: # new audiofile --> update session sates
+                    # calculate the necessray data for further plotting
+                    with st.spinner('calculating spectrogram insights'):
+                        # calc spectrum data for plotting framework
+                        y, sr = librosa.load(audiofile_path, sr=sampling_freq)
+                        y_stft = librosa.stft(y)  # STFT of y audio signal
+                        scale_db = librosa.amplitude_to_db(np.abs(y_stft), ref=np.max)
+                        spectrogram_magn, phase = librosa.magphase(librosa.stft(y))
+                        rms = librosa.feature.rms(S=spectrogram_magn)  # calculating rms
+                        times = librosa.times_like(rms) #extracting rms timestamps
+                        st.session_state.y, st.session_state.sr = y, sr
+                        st.session_state.times, st.session_state.rms = times, rms
+                else:  # same audiofile --> load from session_state
+                    y, sr = st.session_state.y, st.session_state.sr
+                    times, rms = st.session_state.times, st.session_state.rms
+
+                mel_treshold = st.session_state.mel_spectrum_treshold
+                mel_spectrum_choice = st.session_state.spectrum3d
+                if 'Peaks' in mel_spectrum_choice:
+                    with st.spinner('generating 3D mel spectrogram - DEFAULT MODE'):
+                        # plot 3D interactivemel spectrogram
+                        plots.melspectrogram_plotly3d(y, sr, False, False, mel_treshold)
+                if 'Default' in mel_spectrum_choice:
+                    with st.spinner('generating 3D mMel spectrogram - PEAKS DETECTION'):
+                        # plot 3D interactivemel spectrogram
+                        plots.melspectrogram_plotly3d(y, sr, True, True, mel_treshold)
+
+
+                # radio button selection for spectrum plot over time
+                streamlit_design.radiobutton_horizontal()  # switch alignment
+                sradio1_col1, sradio1_col2 = st.columns([0.03, 1.5])
+                with sradio1_col2:
+                    st.session_state.spectrum3d = st.radio('Please select your prefered Mel-Spectrum viewing mode.',
+                                                         ['Default Top View  ', 'Peaks Detection  '])
+                st.write('')
+
+
+        # Inspect Audio File Specifications
+        with st.expander("SECTION - Loudness Amplitude Analytics",
                          expanded=True):
             if not advanced_analytics:
                 analytics_msg = '<p style="color: #e3fc03; font-size: 1rem;">'\
@@ -220,33 +271,6 @@ def beatinspect_main():
                     times, rms = st.session_state.times, st.session_state.rms
 
 
-
-
-
-
-
-
-                mel_treshold = st.session_state.mel_spectrum_treshold
-                mel_spectrum_choice = st.session_state.spectrum3d
-                if 'Peaks' in mel_spectrum_choice:
-                    with st.spinner('generating 3D mel spectrogram - DEFAULT MODE'):
-                        # plot 3D interactivemel spectrogram
-                        plots.melspectrogram_plotly3d(y, sr, False, False, mel_treshold)
-                if 'Default' in mel_spectrum_choice:
-                    with st.spinner('generating 3D mMel spectrogram - PEAKS DETECTION'):
-                        # plot 3D interactivemel spectrogram
-                        plots.melspectrogram_plotly3d(y, sr, True, True, mel_treshold)
-
-
-                # radio button selection for spectrum plot over time
-                streamlit_design.radiobutton_horizontal()  # switch alignment
-                sradio1_col1, sradio1_col2 = st.columns([0.03, 1.5])
-                with sradio1_col2:
-                    st.session_state.spectrum3d = st.radio('Please select your prefered Mel-Spectrum viewing mode.',
-                                                         ['Default Top View  ', 'Peaks Detection  '])
-                st.write('')
-                
-
                 # display the selected 2D spectrum plot
                 spectrum_coice = st.session_state.spectrum2d
                 # due to the session state only updating after Selection
@@ -267,23 +291,24 @@ def beatinspect_main():
                 st.write('')  # add spacing
 
 
-    # FOOTER Content and Coop logos etc
-    foot_col1, foot_col2, foot_col3, foot_col4, foot_col5 = st.columns([2,1.5,1.5,1.5,2])
-    with foot_col2:
-        essentia_html = utils.get_img_with_href('img/powered_by_essentia.png',
-                                                'https://essentia.upf.edu/')
-        st.markdown(essentia_html, unsafe_allow_html=True)
-        # st.image('img/powered_by_essentia.png')
-    with foot_col3:
-        ustu_html = utils.get_img_with_href('img/coop_utility_studio.png',
-                                            'https://utility-studio.com/')
-        st.markdown(ustu_html, unsafe_allow_html=True)
-        # st.image('img/coop_utility_studio.png')
-    with foot_col4:
-        librosa_html = utils.get_img_with_href('img/powered_by_librosa.png',
-                                            'https://librosa.org/')
-        st.markdown(librosa_html, unsafe_allow_html=True)
-        # st.image('img/coop_utility_studio.png')
+    with st.spinner('footer logos'):
+        # FOOTER Content and Coop logos etc
+        foot_col1, foot_col2, foot_col3, foot_col4, foot_col5 = st.columns([2,1.5,1.5,1.5,2])
+        with foot_col2:
+            essentia_html = utils.get_img_with_href('img/powered_by_essentia.png',
+                                                    'https://essentia.upf.edu/')
+            st.markdown(essentia_html, unsafe_allow_html=True)
+            # st.image('img/powered_by_essentia.png')
+        with foot_col3:
+            ustu_html = utils.get_img_with_href('img/coop_utility_studio.png',
+                                                'https://utility-studio.com/')
+            st.markdown(ustu_html, unsafe_allow_html=True)
+            # st.image('img/coop_utility_studio.png')
+        with foot_col4:
+            librosa_html = utils.get_img_with_href('img/powered_by_librosa.png',
+                                                'https://librosa.org/')
+            st.markdown(librosa_html, unsafe_allow_html=True)
+            # st.image('img/coop_utility_studio.png')
 
 if __name__ == '__main__':
 
