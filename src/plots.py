@@ -335,6 +335,6 @@ def melspectrogram_plotly3d(y, sr, mark_peaks, camera_mode_3d, zvalue_treshold):
     fig.data[0].colorbar.title = "Amp [dB]"  # title text
     fig.data[0].colorbar.orientation = "v"  # orientation
     fig.data[0].colorbar.thickness = 25  # colorbar width
-    fig.data[0].colorbar.len = 0.5  # colorbar length
+    fig.data[0].colorbar.len = 0.6  # colorbar length
 
     st.plotly_chart(fig, use_container_width=True, config=config)

@@ -247,17 +247,17 @@ def beatinspect_main():
                 st.markdown(fullscreen_msg, unsafe_allow_html=True)
 
 
-                # mel_treshold = st.session_state.mel_spectrum_treshold
-                mel_spectrum_choice = st.session_state.spectrum3d
-                if 'Peaks' in mel_spectrum_choice:
+
+                if 'Peaks' in st.session_state.spectrum3d:
                     with st.spinner('generating 3D Mel Spectrogram - DEFAULT MODE'):
-                        # plot 3D interactivemel spectrogram
-                        plots.melspectrogram_plotly3d(y, sr, False, False,
-                            st.session_state.mel_spectrum_treshold)
-                if 'Default' in mel_spectrum_choice:
-                    with st.spinner('generating 3D Mel Spectrogram - PEAKS DETECTION'):
-                        # plot 3D interactivemel spectrogram
+                        # plot 3D interactive mel spectrogram
                         plots.melspectrogram_plotly3d(y, sr, True, True,
+                            st.session_state.mel_spectrum_treshold)
+
+                if 'Default' in st.session_state.spectrum3d:
+                    with st.spinner('generating 3D Mel Spectrogram - PEAKS DETECTION'):
+                        # plot 3D interactive mel spectrogram
+                        plots.melspectrogram_plotly3d(y, sr, False, False,
                             st.session_state.mel_spectrum_treshold)
 
                 # radio button selection for spectrum plot over time
@@ -267,7 +267,7 @@ def beatinspect_main():
                     st.session_state.spectrum3d = st.radio('Please select your prefered Mel-Spectrum viewing mode.',
                                                          ['Default Top View  ', 'Peaks Detection  '])
                 with sradio1_col3:
-                    st.session_state.mel_spectrum_treshold = int(st.slider('Peak Detection Treshold Selection [dB]', -50, 0, -15))
+                    st.session_state.mel_spectrum_treshold = int(st.slider('Peaks Detection Treshold Selection [dB]', -25, 0, -15))
                 st.write('')
 
 
@@ -292,9 +292,11 @@ def beatinspect_main():
                 # these plot calls need to be inversed/swapped like below
                 if 'AMP' in spectrum_coice:  # generate rms spectrum plots
                     with st.spinner('generating RMS spectrum plot'):
+                        time.sleep(0.3)  # add delay for spinner
                         plots.rms_spectrum(times, rms)
                 if 'RMS' in spectrum_coice:  # generate amp spectrum plots
                     with st.spinner('generating AMP spectrum plot'):
+                        time.sleep(0.3)  # add delay for spinner
                         plots.amp_spectrum(y,sr)
 
                 # radio button selection for spectrum plot over time
