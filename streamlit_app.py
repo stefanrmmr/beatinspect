@@ -126,7 +126,7 @@ def beatinspect_main():
 
             # RESET critical selection values in case of file change
             st.session_state.spectrum2d = 'AMP Spectrum'
-            st.session_state.spectrum3d = 'Peaks Detection'
+            st.session_state.spectrum3d = 'Default'
             st.session_state.mel_spectrum_treshold = -10
 
             new_audiofile = True # new audiofile --> update session sates
@@ -333,7 +333,7 @@ if __name__ == '__main__':
 
     # initialize mel-spectrum choice session state
     if "spectrum3d" not in st.session_state:
-        st.session_state.spectrum3d = 'Peaks Detection'  # "Default"
+        st.session_state.spectrum3d = 'Default'  # "Default"
 
     if "mel_spectrum_treshold" not in st.session_state:
         st.session_state.mel_spectrum_treshold = -10
