@@ -282,7 +282,8 @@ def beatinspect_main():
                               key='radiobuttons1', on_change=radiobuttons1_switch())
 
                 with sradio1_col3:
-                    st.session_state.mel_spectrum_treshold = int(st.slider('Peaks Detection Treshold Selection [dB]', -25, 0, -10, key='slider1'))
+                    # st.session_state.mel_spectrum_treshold = int(st.slider('Peaks Detection Treshold Selection [dB]', -25, 0, -10, key='slider1'))
+                    st.write('dB slider implementation soon!')
                 st.write('')
 
 
