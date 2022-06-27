@@ -206,8 +206,8 @@ def beatinspect_main():
                 st.audio(audiofile)  # display web audio player UX/UI
 
                 fullscreen_msg = '<p style="color: #e3fc03; font-size: 1rem;">'\
-                                'Works best in fullscreen mode! Click scale symbol at the top right of the plot.'\
-                                '(Drag the graph to explore 3D viewing angles & zooming!)</p>'
+                                'Drag the graph to explore 3D viewing angles & zooming.'\
+                                'Works best in fullscreen mode!</p>'
                 st.markdown(fullscreen_msg, unsafe_allow_html=True)
 
                 if new_audiofile: # new audiofile --> update session sates
