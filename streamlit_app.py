@@ -229,13 +229,13 @@ def beatinspect_main():
                 mel_treshold = st.session_state.mel_spectrum_treshold
                 mel_spectrum_choice = st.session_state.spectrum3d
                 if 'Peaks' in mel_spectrum_choice:
-                    with st.spinner('generating 3D mel frequency spectrogram'):
-                        # plot 3D interactivemel spectrogram
-                        plots.melspectrogram_plotly3d(y, sr, True, True, mel_treshold)
-                if 'Default' in mel_spectrum_choice:
-                    with st.spinner('generating 3D mel frequency spectrogram'):
+                    with st.spinner('generating 3D mel spectrogram - DEFAULT MODE'):
                         # plot 3D interactivemel spectrogram
                         plots.melspectrogram_plotly3d(y, sr, False, False, mel_treshold)
+                if 'Default' in mel_spectrum_choice:
+                    with st.spinner('generating 3D mMel spectrogram - PEAKS DETECTION'):
+                        # plot 3D interactivemel spectrogram
+                        plots.melspectrogram_plotly3d(y, sr, True, True, mel_treshold)
 
 
                 # radio button selection for spectrum plot over time
@@ -295,10 +295,6 @@ if __name__ == '__main__':
     if "spectrum3d" not in st.session_state:
         st.session_state.spectrum3d = 'Peaks'  # "Default"
 
-    if "mel_spectrum_3dcam" not in st.session_state:
-        st.session_state.mel_spectrum_3dcam = False
-    if "mel_spectrum_markpeaks" not in st.session_state:
-        st.session_state.mel_spectrum_markpeaks = False
     if "mel_spectrum_treshold" not in st.session_state:
         st.session_state.mel_spectrum_treshold = -15
 
