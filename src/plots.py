@@ -225,7 +225,7 @@ def melspectrogram_plotly3d(y, sr, mark_peaks, camera_mode_3d, zvalue_treshold):
         # 3D camera positioning: PERSPECTIVE VIEW
         camera = dict(up=dict(x=0, y=0, z=0),
                       center=dict(x=0, y=0, z=0),
-                      eye=dict(x=1, y=1, z=1))
+                      eye=dict(x=1, y=1, z=0.8))
 
     # create custom colorscale for surfaceplot
     colorscale_melspectrum = [[0, 'rgb(0,0,0)'],

@@ -123,7 +123,8 @@ def beatinspect_main():
             # update session state and order new calc of attr
             st.session_state.audiofile_name = audiofile_name
             # reset session state for selected amp/rms plot
-            st.session_state.spectrum2d = 'RMS Spectrum'
+            st.session_state.spectrum2d = 'AMP Spectrum'
+            st.session_state.spectrum3d = 'Peaks Detection'
             new_audiofile = True # new audiofile --> update session sates
 
         # Musical and Tech Specs Overview
@@ -207,8 +208,8 @@ def beatinspect_main():
                 st.audio(audiofile)  # display web audio player UX/UI
 
                 fullscreen_msg = '<p style="color: #e3fc03; font-size: 1rem;">'\
-                                '   Drag the graph to explore 3D viewing angles & zooming!'\
-                                ' - Works best in fullscreen mode! ⇩'
+                                'Drag the graph to explore 3D viewing angles & zooming!'\
+                                ' - Works best in fullscreen mode!'
                 st.markdown(fullscreen_msg, unsafe_allow_html=True)
 
                 if new_audiofile: # new audiofile --> update session sates
@@ -260,7 +261,7 @@ def beatinspect_main():
                                 'Only available for original audio files '\
                                 '(excluding beatinspect recordings)</p>'
                 st.markdown(analytics_msg, unsafe_allow_html=True)
-                
+
             if advanced_analytics:  # only if audio file uploaded
                 # Generate graphs/plots for RMS & Amplitude over time
                 st.audio(audiofile)  # display web audio player UX/UI
@@ -329,7 +330,7 @@ if __name__ == '__main__':
 
     # initialize mel-spectrum choice session state
     if "spectrum3d" not in st.session_state:
-        st.session_state.spectrum3d = 'Peaks'  # "Default"
+        st.session_state.spectrum3d = 'Peaks Detection'  # "Default"
 
     if "mel_spectrum_treshold" not in st.session_state:
         st.session_state.mel_spectrum_treshold = -15
