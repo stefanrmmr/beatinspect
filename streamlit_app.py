@@ -245,7 +245,7 @@ def beatinspect_main():
                     st.session_state.spectrum3d = st.radio('Please select your prefered Mel-Spectrum viewing mode.',
                                                          ['Default Top View  ', 'Peaks Detection  '])
                 with sradio1_col3:
-                    st.session_state.mel_treshold = int(st.slider('Peak Detection Treshold Selection [dB]', -50, 0, -15))
+                    st.session_state.mel_spectrum_treshold = int(st.slider('Peak Detection Treshold Selection [dB]', -50, 0, -15))
                 st.write('')
 
 
