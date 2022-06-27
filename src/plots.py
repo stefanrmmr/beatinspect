@@ -288,7 +288,7 @@ def melspectrogram_plotly3d(y, sr):
 
     # background and axis label colors and dimensions
     fig.update_layout(autosize=True, width=950, height=700,
-                      margin=dict(t=0, r=0, l=0, b=0),  # margins 
+                      margin=dict(t=0, r=0, l=20, b=0),  # margins
                       paper_bgcolor=streamlit_dark,  # rgb(15,17,22)
                       font_family= 'Arial', # "Courier New",
                       font_color="white",
@@ -335,6 +335,6 @@ def melspectrogram_plotly3d(y, sr):
     fig.data[0].colorbar.title = "Amp [dB]"  # title text
     fig.data[0].colorbar.orientation = "v"  # orientation
     fig.data[0].colorbar.thickness = 25  # colorbar width
-    fig.data[0].colorbar.len = 0.75  # colorbar length
+    fig.data[0].colorbar.len = 0.5  # colorbar length
 
     st.plotly_chart(fig, use_container_width=True, config=config)
