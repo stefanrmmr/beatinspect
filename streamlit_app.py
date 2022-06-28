@@ -251,7 +251,7 @@ def beatinspect_main():
                 # Generate graphs/plots for RMS & Amplitude over time
                 # st.audio(audiofile)  # display web audio player UX/UI
 
-
+                streamlit_design.add_spacing(1)  # add linebreak
                 # due to the session state only updating after Selection
                 # these plot calls need to be inversed/swapped like below
                 if 'AMP' in st.session_state.spectrum2d:  # generate rms spectrum plots
@@ -316,14 +316,13 @@ def beatinspect_main():
                 if 'Peaks' in st.session_state.spectrum3d:
                     with st.spinner('generating 3D Mel Spectrogram - PEAKS DETECTION'):
                         # plot 3D interactive mel spectrogram
-                        plots_pltl.melspectrogram_plotly3d(y_slice, sr_slice, True, True,
-                            st.session_state.melspec_treshold)
-
+                        plots_pltl.melspectrogram_plotly3d(y_slice, sr_slice, sec_range[0],  # add sec_offset
+                                                           True, True, st.session_state.melspec_treshold)
                 if 'Default' in st.session_state.spectrum3d:
                     with st.spinner('generating 3D Mel Spectrogram - DEFAULT MODE'):
                         # plot 3D interactive mel spectrogram
-                        plots_pltl.melspectrogram_plotly3d(y_slice, sr_slice, False, False,
-                            st.session_state.melspec_treshold)
+                        plots_pltl.melspectrogram_plotly3d(y_slice, sr_slice, sec_range[0],  # add sec_offset
+                                                           False, False, st.session_state.melspec_treshold)
 
                 fullscreen_msg = '<p style="color: #e3fc03; font-size: 1rem;">'\
                                 'Drag the graph to explore 3D viewing angles & zooming!'\

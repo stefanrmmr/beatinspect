@@ -12,7 +12,7 @@ import plotly.graph_objects as go
 
 streamlit_dark = 'rgb(15,17,22)'  # #0F1116' default dark theme
 
-def melspectrogram_plotly3d(y, sr, mark_peaks, camera_mode_3d, zvalue_treshold):
+def melspectrogram_plotly3d(y, sr, mark_peaks, sec_offset, camera_mode_3d, zvalue_treshold):
 
     mels_count = 300
     max_freq = 32768  # Hz
@@ -89,6 +89,9 @@ def melspectrogram_plotly3d(y, sr, mark_peaks, camera_mode_3d, zvalue_treshold):
         x_ticktext.append(round(timevalue,2))
         xvalue += xvaluestep
         timevalue += timestep
+
+    # FACTOR IN OFFSET from timeframe selection
+    [x + sec_offset for x in x_ticktext]
 
 
     # CALC correct 3D MEl Spectrogram Y-AXIS Tick label texts & positions
