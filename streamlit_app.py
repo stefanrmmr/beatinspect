@@ -299,15 +299,13 @@ def beatinspect_main():
                 # AUDIO TIMEFRAME Selection for Mel-Spectrogram
                 slider0_col1, slider0_col2, slider0_col3 = st.columns([0.45, 2, 0.3])
                 with slider0_col2:  # add columns for sufficient padding
-                    # streamlit_design.add_spacing(1)  # add linebreak
+                    streamlit_design.add_spacing(1)  # add linebreak
 
                     if duration > 30:  # if audio is longer than 30 sec --> performance limited
                         # Select Timeframe for the spectrogram - Limited Performance if longer than 30 sec!
-                        sec_range = st.slider('',
-                                              0, int(duration), (0, 30), format="%d sec")  # only select first 30 sec
+                        sec_range = st.slider('', 0, int(duration), (0, 30), format="%d sec")  # only select first 30 sec
                     else:  # if the audio file is shorter than 30 sec  --> no performance loss
-                        sec_range = st.slider('',
-                                              0, int(duration), (0, int(duration)), format="%d sec")  # full timeframe
+                        sec_range = st.slider('', 0, int(duration), (0, int(duration)), format="%d sec")  # full timeframe
 
                     y_slice, sr_slice = librosa.load(audiofile_path, sr=sampling_freq, offset=sec_range[0], duration=sec_range[1] - sec_range[0])
 
@@ -322,11 +320,14 @@ def beatinspect_main():
 
                 fullscreen_msg = '<p style="color: #e3fc03; font-size: 1rem;">'\
                                 'Drag the graph to explore 3D viewing angles & zooming!'\
-                                ' - Works best in fullscreen mode!'
+                                ' - Works best in fullscreen mode!<br>'\
+                                'Use the top Slider to select a specific Timeframe '\
+                                '(Limited Performance if longer than 30 sec!)'
                 mardown1_col1, mardown1_col2 = st.columns([0.05, 3])
                 with mardown1_col2:  # add padding for the markdown text
                     streamlit_design.add_spacing(1)  # add linebreak
                     st.markdown(fullscreen_msg, unsafe_allow_html=True)
+                    streamlit_design.add_spacing(1)  # add linebreak
 
 
                 # radio button selection for spectrum plot over time
