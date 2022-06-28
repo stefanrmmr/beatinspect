@@ -310,9 +310,8 @@ def beatinspect_main():
                     peak_normalized_audio = pyln.normalize.peak(wav_data, 0)  # peak normalize audio to 0 dB
                     loudness = meter.integrated_loudness(peak_normalized_audio) # measure loudness
 
-                    loudness_msg = '<p style="color: #e3fc03; font-size: 1rem;">'\
-                                    f'Audio Loudness: {loudness} dB</p>'
-                    st.markdown(loudness_msg, unsafe_allow_html=True)
+                    st.metric(label="", value=f"{round(loudness, 2)} dB",
+                              delta=f'Audio Loudness', delta_color="off")
 
                 st.write('')  # add spacing
 
