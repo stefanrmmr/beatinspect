@@ -275,11 +275,8 @@ def beatinspect_main():
                 with sradio1_col2:
                     st.radio('Please select your prefered Mel-Spectrum viewing mode.', ['Default Top View  ', 'Peaks Detection  '],
                               key='radiobuttons1_value', on_change=radiobuttons1_callback)
-
-
                 with sradio1_col3:
-                    st.slider('Peaks Detection Treshold Selection [dB]', -25, 0, -10, key='slider1_value', on_change=slider1_callback))
-                    st.write('dB slider implementation soon!')
+                    st.slider('Peaks Detection Treshold Selection [dB]', -25, 0, -10, key='slider1_value', on_change=slider1_callback)
                 st.write('')
 
 
