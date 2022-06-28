@@ -91,7 +91,7 @@ def melspectrogram_plotly3d(y, sr, sec_offset, mark_peaks, camera_mode_3d, zvalu
         timevalue += timestep
 
     # FACTOR IN OFFSET from timeframe selection
-    [x + sec_offset for x in x_ticktext]
+    [(tick + sec_offset) for tick in x_ticktext]
 
 
     # CALC correct 3D MEl Spectrogram Y-AXIS Tick label texts & positions
