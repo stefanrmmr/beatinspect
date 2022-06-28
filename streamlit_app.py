@@ -73,12 +73,21 @@ def beatinspect_main():
 
         audio_col0, audio_col1, audio_col2 = st.columns([0.03,0.5,1])
         with audio_col1:
-            streamlit_design.add_spacing(3)  # add linebreaks
+            streamlit_design.add_spacing(2)  # add linebreaks
             choice = st.radio('',[' Audio File Upload',
-                                  ' Record via Microphone'])
+                                  ' Record via Microphone',
+                                  ' Demo Mode Example Audio'])
             # choice = st.radio('',[' Audio File Upload'])
             st.write('')  # add spacing
         with audio_col2:
+            if 'Demo' in choice:
+                audiofile_name = 'demo\beatinspect_demo_audio.wav'
+                advanced_analytics = True
+                
+                # Save to main dir to be called via path
+                with open(audiofile_name,"wb") as f:
+                    f.write(audiofile.getbuffer())
+
             if 'Upload' in choice:
                 audiofile = st.file_uploader("", type='wav')
                 if audiofile is not None:
@@ -111,7 +120,6 @@ def beatinspect_main():
                     # decoding process of base64 string to wav file
                     # with st.spinner('Decoding audio data...'):
                         # base64data_audio = base64data_audio.replace('data:audio/wav;base64,', '')
-                        # TODOOOOOOOOO
                         # st.write(base64data_audio)  # remove metadata header of base64 string
 
                         # audiofile_name = "temp.wav"
@@ -330,7 +338,7 @@ def beatinspect_main():
                                 ' - Works best in fullscreen mode!'
                 mardown1_col1, mardown1_col2 = st.columns([0.05, 3])
                 with mardown1_col2:  # add padding for the markdown text
-                    streamlit_design.add_spacing(1)  # add linebreak 
+                    streamlit_design.add_spacing(1)  # add linebreak
                     st.markdown(fullscreen_msg, unsafe_allow_html=True)
 
 
