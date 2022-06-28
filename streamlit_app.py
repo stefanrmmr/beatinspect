@@ -149,6 +149,7 @@ def beatinspect_main():
             # extract technical specifications about wav file
             # no needfor session_state saving bc instant calc
             wav_specs = sf.SoundFile(audiofile_path)
+            wav_data, _ = sf.read(audiofile_path)
             bit_depth = int(str(wav_specs.subtype)[4:])
             sampling_freq = wav_specs.samplerate
             channels = wav_specs.channels
@@ -260,7 +261,7 @@ def beatinspect_main():
 
                 # radio button selection for spectrum plot over time
                 streamlit_design.radiobutton_horizontal()  # switch alignment
-                sradio1_col1, sradio1_col2, sradio1_col3, sradio_col4 = st.columns([0.08, 1.5, 1.5, 0.1])
+                sradio1_col1, sradio1_col2, sradio1_col3, sradio1_col4 = st.columns([0.08, 1.5, 1.5, 0.1])
                 with sradio1_col2:
                     st.radio('Please select your prefered Mel-Spectrum viewing mode.', ['Peaks Detection  ', 'Default Top View  '],
                               key='radiobuttons1_value', on_change=radiobuttons1_callback)
@@ -297,11 +298,21 @@ def beatinspect_main():
 
                 # radio button selection for spectrum plot over time
                 streamlit_design.radiobutton_horizontal()  # switch alignment
-                sradio2_col1, sradio2_col2 = st.columns([0.03, 1.5])
+                sradio2_col1, sradio2_col2, sradio2_col3, sradio2_col4 = st.columns([0.08, 1.5, 1.5, 0.1])
                 with sradio2_col2:
                     st.radio('Please select your Volume-Spectrum of choice.',
                               ['RMS Spectrum  ', 'AMP Spectrum  '],
                               key='radiobuttons2_value', on_change=radiobuttons2_callback)
+
+                with sradio2_col3:
+                    meter = pyln.Meter(sampling_freq) # create BS.1770 meter --> international standard
+                    peak_normalized_audio = pyln.normalize.peak(wav_data, 0)  # peak normalize audio to 0 dB
+                    loudness = meter.integrated_loudness(peak_normalized_audio) # measure loudness
+
+                    loudness_msg = '<p style="color: #e3fc03; font-size: 1rem;">'\
+                                    f'Audio Loudness: {loudness} dB</p>'
+                    st.markdown(loudness_msg, unsafe_allow_html=True)
+
                 st.write('')  # add spacing
 
 

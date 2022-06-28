@@ -19,6 +19,7 @@ To insure that the implemented functionality provides real value to aspiring art
 - TO BE IMPLEMENTED SOON: upcoming features
   - Conversion to .wav file with predefined settings<br/>(provided by using convertio.co's API features)<br/>
   - Meta data information encoded in the output file
-  - Bringing beatinspect to mobile browsers/devices
+  - use youtube links as a form of providing input data
+  - Bringing beatinspect to mobile browsers/devices<br/><br/>
 
 <img width="658" alt="ux_screenshot" src="https://user-images.githubusercontent.com/82606558/163827628-f27058de-5d44-4002-a12d-a3c041720231.png">
