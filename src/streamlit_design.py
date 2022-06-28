@@ -10,7 +10,7 @@ def add_spacing(spaces):
 def design_setup():
 
     # Design page layout and browser window details
-    st.set_page_config(layout="centered",  # centered
+    st.set_page_config(layout="wide",  # centered
                        page_icon="resources/rs_logo_transparent_yellow.png",
                        page_title="beat inspect")
 
