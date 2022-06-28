@@ -360,13 +360,14 @@ def beatinspect_main():
             st.markdown(librosa_html, unsafe_allow_html=True)
             # st.image('img/coop_utility_studio.png')
 
-    col_test1, col_test2 = st.columns([1,1])
-    with col_test1:
-        with st.expander('expander left'):
-            st.write('servus')
-    with col_test2:
-        with st.expander('expander right'):
-            st.write('servus')
+    # CONCEPT FOR ONE PAGE WITH TWO GIANT COLUMNS 
+    # col_test1, col_test2 = st.columns([1,1])
+    # with col_test1:
+        # with st.expander('expander left'):
+            # st.write('servus')
+    # with col_test2:
+        # with st.expander('expander right'):
+            # st.write('servus')
 
 if __name__ == '__main__':
 
