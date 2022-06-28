@@ -73,9 +73,7 @@ def beatinspect_main():
 
         audio_col0, audio_col1, audio_col2 = st.columns([0.03,0.5,1])
         with audio_col1:
-            st.write('')  # add spacing
-            st.write('')  # add spacing
-            st.write('')  # add spacing
+            streamlit_design.add_spacing(3)  # add linebreaks
             choice = st.radio('',[' Audio File Upload',
                                   ' Record via Microphone'])
             # choice = st.radio('',[' Audio File Upload'])
@@ -151,6 +149,7 @@ def beatinspect_main():
             # no needfor session_state saving bc instant calc
             wav_specs = sf.SoundFile(audiofile_path)
             wav_data, _ = sf.read(audiofile_path)
+            duration = librosa.get_duration(y=y, sr=sr)
             try:
                 bit_depth = int(str(wav_specs.subtype)[4:])
             except:
@@ -243,9 +242,26 @@ def beatinspect_main():
                                 'Only available for original audio files '\
                                 '(excluding beatinspect recordings)</p>'
                 st.markdown(analytics_msg, unsafe_allow_html=True)
+
             if advanced_analytics:  # only if audio file uploaded
                 # Generate graphs/plots for RMS & Amplitude over time
                 st.audio(audiofile)  # display web audio player UX/UI
+
+
+
+
+
+
+                sec_range = st.slider('Select a range of values', 0, duration,
+                                      (int(duration*0.25), int(duration*0.75)))
+
+                audio_slice_duration = (sec_range[1] - sec_range[0])
+
+                y_, sr_ = librosa.load(audiofile_path, sr=sampling_freq, offset=sec_range[0], duration=audio_slice_duration)
+
+
+
+
                 fullscreen_msg = '<p style="color: #e3fc03; font-size: 1rem;">'\
                                 'Drag the graph to explore 3D viewing angles & zooming!'\
                                 ' - Works best in fullscreen mode!'
@@ -254,13 +270,13 @@ def beatinspect_main():
                 if 'Peaks' in st.session_state.spectrum3d:
                     with st.spinner('generating 3D Mel Spectrogram - PEAKS DETECTION'):
                         # plot 3D interactive mel spectrogram
-                        plots_pltl.melspectrogram_plotly3d(y, sr, True, True,
+                        plots_pltl.melspectrogram_plotly3d(y_, sr_, True, True,
                             st.session_state.melspec_treshold)
 
                 if 'Default' in st.session_state.spectrum3d:
                     with st.spinner('generating 3D Mel Spectrogram - DEFAULT MODE'):
                         # plot 3D interactive mel spectrogram
-                        plots_pltl.melspectrogram_plotly3d(y, sr, False, False,
+                        plots_pltl.melspectrogram_plotly3d(y_, sr_, False, False,
                             st.session_state.melspec_treshold)
 
                 # radio button selection for spectrum plot over time
@@ -284,6 +300,7 @@ def beatinspect_main():
                                 'Only available for original audio files '\
                                 '(excluding beatinspect recordings)</p>'
                 st.markdown(analytics_msg, unsafe_allow_html=True)
+
             if advanced_analytics:  # only if audio file uploaded
                 # Generate graphs/plots for RMS & Amplitude over time
                 # st.audio(audiofile)  # display web audio player UX/UI
@@ -304,8 +321,7 @@ def beatinspect_main():
                 streamlit_design.radiobutton_horizontal()  # switch alignment
                 sradio2_col1, sradio2_col2, sradio2_col3, sradio2_col4 = st.columns([0.08, 1.5, 1.5, 0.1])
                 with sradio2_col2:
-                    st.write('')  # add spacing
-                    st.write('')  # add spacing
+                    streamlit_design.add_spacing(2)  # add linebreaks
                     st.radio('Please select your Volume-Spectrum of choice.',
                               ['RMS Spectrum  ', 'AMP Spectrum  '],
                               key='radiobuttons2_value', on_change=radiobuttons2_callback)

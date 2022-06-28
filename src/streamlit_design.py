@@ -1,6 +1,10 @@
 # DESIGN CHOICES
 import streamlit as st
 
+def add_spacing(spaces):
+    while count < int(spaces):
+        st.write('')
+
 def design_setup():
 
     # Design page layout and browser window details
