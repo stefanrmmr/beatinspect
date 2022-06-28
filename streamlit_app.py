@@ -275,7 +275,6 @@ def beatinspect_main():
                     meter = pyln.Meter(sampling_freq) # create BS.1770 meter --> international standard
                     peak_normalized_audio = pyln.normalize.peak(wav_data, 0)  # peak normalize audio to 0 dB
                     loudness = meter.integrated_loudness(peak_normalized_audio) # measure loudness
-
                     st.metric(label="", value=f"{round(loudness, 2)} dB",
                               delta=f'Audio Loudness', delta_color="off")
 
@@ -297,10 +296,6 @@ def beatinspect_main():
                 st.audio(audiofile)  # display web audio player UX/UI
 
 
-
-                # TODO slider default values set to be at 30sec when duration larger than 1min
-                #      otherwise use the -25% on both ends approach as listed below
-
                 # AUDIO TIMEFRAME Selection for Mel-Spectrogram
                 slider0_col1, slider0_col2, slider0_col3 = st.columns([0.45, 2, 0.3])
                 with slider0_col2:  # add columns for sufficient padding
@@ -308,10 +303,10 @@ def beatinspect_main():
 
                     if duration > 30:  # if audio is longer than 30 sec --> performance limited
                         sec_range = st.slider('Select Timeframe for the spectrogram - Limited Performance if longer than 30 sec!',
-                                              0, int(duration), (0, 30))  # only select first 30 sec
+                                              0, int(duration), (0, 30), format="%d sec")  # only select first 30 sec
                     else:  # if the audio file is shorter than 30 sec  --> no performance loss
                         sec_range = st.slider('Select Timeframe for the spectrogram - Limited Performance if longer than 30 sec!',
-                                              0, int(duration), (0, int(duration)))  # full timeframe
+                                              0, int(duration), (0, int(duration)), format="%d sec")  # full timeframe
 
                     y_slice, sr_slice = librosa.load(audiofile_path, sr=sampling_freq, offset=sec_range[0], duration=sec_range[1] - sec_range[0])
 
