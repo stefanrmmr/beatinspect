@@ -165,7 +165,7 @@ def melspectrogram_plotly3d(y, sr, sec_offset, mark_peaks, camera_mode_3d, zvalu
                                       highlightwidth=15, project_x=True))
 
     # define colorbar attributes
-    fig.data[0].colorbar.title = "Amp [dB]"  # title text
+    fig.data[0].colorbar.title = "Amp [dB]<br><br>"  # title text
     fig.data[0].colorbar.orientation = "v"  # orientation
     fig.data[0].colorbar.thickness = 25  # colorbar width
     fig.data[0].colorbar.len = 0.6  # colorbar length
