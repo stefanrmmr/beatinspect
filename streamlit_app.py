@@ -75,19 +75,10 @@ def beatinspect_main():
         with audio_col1:
             streamlit_design.add_spacing(2)  # add linebreaks
             choice = st.radio('',[' Audio File Upload',
-                                  ' Record via Microphone',
-                                  ' Demo Mode Example Audio'])
+                                  ' Record via Microphone'])
             # choice = st.radio('',[' Audio File Upload'])
             st.write('')  # add spacing
         with audio_col2:
-            if 'Demo' in choice:
-                audiofile_name = 'demo\beatinspect_demo_audio.wav'
-                advanced_analytics = True
-                
-                # Save to main dir to be called via path
-                with open(audiofile_name,"wb") as f:
-                    f.write(audiofile.getbuffer())
-
             if 'Upload' in choice:
                 audiofile = st.file_uploader("", type='wav')
                 if audiofile is not None:
