@@ -256,7 +256,7 @@ def beatinspect_main():
 
 
 
-                sec_range = st.slider('Select a range of values', 0, duration,
+                sec_range = st.slider('Select a range of values', 0, int(duration),
                                       (int(duration*0.25), int(duration*0.75)))
 
                 audio_slice_duration = (sec_range[1] - sec_range[0])
