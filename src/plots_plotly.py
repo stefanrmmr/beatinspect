@@ -12,7 +12,7 @@ import plotly.graph_objects as go
 
 streamlit_dark = 'rgb(15,17,22)'  # #0F1116' default dark theme
 
-def melspectrogram_plotly3d(y, sr, mark_peaks, sec_offset, camera_mode_3d, zvalue_treshold):
+def melspectrogram_plotly3d(y, sr, sec_offset, mark_peaks, camera_mode_3d, zvalue_treshold):
 
     mels_count = 300
     max_freq = 32768  # Hz
