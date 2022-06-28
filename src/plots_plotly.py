@@ -90,6 +90,7 @@ def melspectrogram_plotly3d(y, sr, mark_peaks, camera_mode_3d, zvalue_treshold):
         xvalue += xvaluestep
         timevalue += timestep
 
+
     # CALC correct 3D MEl Spectrogram Y-AXIS Tick label texts & positions
     y_tickvals, yvalue = [], 0
     y_ticktext = ["0", "512", "1024", "2048", "4096", "8192", "16384", "32768"]

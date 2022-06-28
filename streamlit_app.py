@@ -253,17 +253,17 @@ def beatinspect_main():
 
 
 
+                # TODO adapt MEL X TICKS so that they adhere to the timeslot selection!!!
 
+                # TODO slider default values set to be at 30sec when duration larger than 1min
+                #      otherwise use the -25% on both ends approach as listed below
 
-
-                sec_range = st.slider('Select a range of values', 0, int(duration),
-                                      (int(duration*0.25), int(duration*0.75)))
-
-                audio_slice_duration = (sec_range[1] - sec_range[0])
-
-                y_, sr_ = librosa.load(audiofile_path, sr=sampling_freq, offset=sec_range[0], duration=audio_slice_duration)
-
-
+                # AUDIO TIMEFRAME Selection for Mel-Spectrogram
+                streamlit_design.add_spacing(3)  # add linebreaks
+                sec_range = st.slider('Select Timeframe for the spectrogram (limited performance if larger than 30sec)',
+                                      0, int(duration), (int(duration*0.25), int(duration*0.75)))
+                y_slice, sr_slice = librosa.load(audiofile_path, sr=sampling_freq, offset=sec_range[0],
+                                                 duration=sec_range[1] - sec_range[0])
 
 
                 fullscreen_msg = '<p style="color: #e3fc03; font-size: 1rem;">'\
@@ -274,13 +274,13 @@ def beatinspect_main():
                 if 'Peaks' in st.session_state.spectrum3d:
                     with st.spinner('generating 3D Mel Spectrogram - PEAKS DETECTION'):
                         # plot 3D interactive mel spectrogram
-                        plots_pltl.melspectrogram_plotly3d(y_, sr_, True, True,
+                        plots_pltl.melspectrogram_plotly3d(y_slice, sr_slice, True, True,
                             st.session_state.melspec_treshold)
 
                 if 'Default' in st.session_state.spectrum3d:
                     with st.spinner('generating 3D Mel Spectrogram - DEFAULT MODE'):
                         # plot 3D interactive mel spectrogram
-                        plots_pltl.melspectrogram_plotly3d(y_, sr_, False, False,
+                        plots_pltl.melspectrogram_plotly3d(y_slice, sr_slice, False, False,
                             st.session_state.melspec_treshold)
 
                 # radio button selection for spectrum plot over time
