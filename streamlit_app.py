@@ -4,6 +4,7 @@
 # Version 1.2 add music scale detection & design tweaks
 # Version 1.3 add amp & rms spectrum, session states, bit_depth
 # Version 1.4 add live recording feature via custom component
+# Version 1.5 add 3d mel spectrum analyzer with peaks detection
 
 import streamlit as st
 import streamlit.components.v1 as components
@@ -19,8 +20,8 @@ import numpy as np
 import soundfile as sf
 import essentia.standard as es
 
-import src.plots_matplotlib as plots_mtpl  # plotting framework A
-import src.plots_plotly as plots_pltl  # plotting framework B
+import src.plots_matplotlib as plots_mtpl  # plotting framework matplotly
+import src.plots_plotly as plots_pltl  # plotting framework plotly dash
 import src.utils as utils  # utility functions
 import src.detect_keyscale as detect_keyscale
 
@@ -34,6 +35,7 @@ build_dir = os.path.join(parent_dir, "st_audiorec/frontend/build")
 st_audiorec = components.declare_component("st_audiorec", path=build_dir)
 
 
+# CALLBACK FUNCTIONS & Session States
 def radiobuttons1_callback():
     st.session_state.spectrum3d = st.session_state['radiobuttons1_value']
 
@@ -42,7 +44,6 @@ def radiobuttons2_callback():
 
 def slider1_callback():
     st.session_state.melspec_treshold = st.session_state['slider1_value']
-
 
 
 def beatinspect_main():
@@ -58,7 +59,7 @@ def beatinspect_main():
     header_col1, header_col2, header_col3 = st.columns([10, 2.5, 2.5])
     with header_col1:
         st.title('beat inspect ™')
-        st.markdown('Version 1.4.0 - June 2022 - '+
+        st.markdown('Version 1.5.0 - June 2022 - '+
             '[@GitHub](https://github.com/stefanrmmr/beatinspect) '+
             '[@Instagram](https://www.instagram.com/beatinspect)')
     with header_col3:
@@ -206,10 +207,6 @@ def beatinspect_main():
                 st.write('')  # add spacing
 
 
-
-
-
-
         if advanced_analytics:
             # calculate the necessary spectrum data for in-depth insights
             # however only calc data in case the file is suitable/qualified
@@ -232,13 +229,6 @@ def beatinspect_main():
                 times, rms = st.session_state.times, st.session_state.rms
 
 
-
-
-
-
-
-
-
         # Inspect Audio File Specifications
         with st.expander("SECTION - 3D MEL Spectrogram & Peak Detection",
                          expanded=True):
@@ -255,8 +245,6 @@ def beatinspect_main():
                                 'Drag the graph to explore 3D viewing angles & zooming!'\
                                 ' - Works best in fullscreen mode!'
                 st.markdown(fullscreen_msg, unsafe_allow_html=True)
-
-
 
                 if 'Peaks' in st.session_state.spectrum3d:
                     with st.spinner('generating 3D Mel Spectrogram - PEAKS DETECTION'):
