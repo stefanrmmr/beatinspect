@@ -314,8 +314,7 @@ def beatinspect_main():
                         sec_range = st.slider('Select Timeframe for the spectrogram - Limited Performance if longer than 30 sec!',
                                               0, int(duration), 0, int(duration))  # full timeframe
 
-                    y_slice, sr_slice = librosa.load(audiofile_path, sr=sampling_freq, offset=sec_range[0],
-                                                     duration=sec_range[1] - sec_range[0])
+                    y_slice, sr_slice = librosa.load(audiofile_path, sr=sampling_freq, offset=sec_range[0], duration=sec_range[1] - sec_range[0])
 
                 if 'Peaks' in st.session_state.spectrum3d:
                     with st.spinner('generating 3D Mel Spectrogram - PEAKS DETECTION'):
