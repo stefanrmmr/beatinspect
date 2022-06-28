@@ -238,6 +238,52 @@ def beatinspect_main():
 
 
         # Inspect Audio File Specifications
+        with st.expander("SECTION - Loudness Amplitude Analytics",
+                         expanded=True):
+
+            if not advanced_analytics:
+                analytics_msg = '<p style="color: #e3fc03; font-size: 1rem;">'\
+                                'Only available for original audio files '\
+                                '(excluding beatinspect recordings)</p>'
+                st.markdown(analytics_msg, unsafe_allow_html=True)
+
+            if advanced_analytics:  # only if audio file uploaded
+                # Generate graphs/plots for RMS & Amplitude over time
+                # st.audio(audiofile)  # display web audio player UX/UI
+
+
+                # due to the session state only updating after Selection
+                # these plot calls need to be inversed/swapped like below
+                if 'AMP' in st.session_state.spectrum2d:  # generate rms spectrum plots
+                    with st.spinner('generating AMP spectrum plot'):
+                        # time.sleep(0.3)  # add delay for spinner
+                        plots_mtpl.amp_spectrum(y, sr)
+                if 'RMS' in st.session_state.spectrum2d:  # generate amp spectrum plots
+                    with st.spinner('generating RMS spectrum plot'):
+                        # time.sleep(0.3)  # add delay for spinner
+                        plots_mtpl.rms_spectrum(times, rms)
+
+                # radio button selection for spectrum plot over time
+                streamlit_design.radiobutton_horizontal()  # switch alignment
+                sradio2_col1, sradio2_col2, sradio2_col3, sradio2_col4 = st.columns([0.08, 1.5, 1.5, 0.1])
+                with sradio2_col2:
+                    streamlit_design.add_spacing(2)  # add linebreaks
+                    st.radio('Please select your Volume-Spectrum of choice.',
+                              ['RMS Spectrum  ', 'AMP Spectrum  '],
+                              key='radiobuttons2_value', on_change=radiobuttons2_callback)
+
+                with sradio2_col3:
+                    meter = pyln.Meter(sampling_freq) # create BS.1770 meter --> international standard
+                    peak_normalized_audio = pyln.normalize.peak(wav_data, 0)  # peak normalize audio to 0 dB
+                    loudness = meter.integrated_loudness(peak_normalized_audio) # measure loudness
+
+                    st.metric(label="", value=f"{round(loudness, 2)} dB",
+                              delta=f'Audio Loudness', delta_color="off")
+
+                st.write('')  # add spacing
+
+
+        # Inspect Audio File Specifications
         with st.expander("SECTION - 3D MEL Spectrogram & Peak Detection",
                          expanded=True):
 
@@ -282,7 +328,7 @@ def beatinspect_main():
                 fullscreen_msg = '<p style="color: #e3fc03; font-size: 1rem;">'\
                                 'Drag the graph to explore 3D viewing angles & zooming!'\
                                 ' - Works best in fullscreen mode!'
-                mardown1_col1, mardown1_col2 = st.columns([0.1, 3])
+                mardown1_col1, mardown1_col2 = st.columns([0.06, 3])
                 with mardown1_col2:  # add padding for the markdown text
                     st.markdown(fullscreen_msg, unsafe_allow_html=True)
 
@@ -299,50 +345,7 @@ def beatinspect_main():
 
 
 
-        # Inspect Audio File Specifications
-        with st.expander("SECTION - Loudness Amplitude Analytics",
-                         expanded=True):
 
-            if not advanced_analytics:
-                analytics_msg = '<p style="color: #e3fc03; font-size: 1rem;">'\
-                                'Only available for original audio files '\
-                                '(excluding beatinspect recordings)</p>'
-                st.markdown(analytics_msg, unsafe_allow_html=True)
-
-            if advanced_analytics:  # only if audio file uploaded
-                # Generate graphs/plots for RMS & Amplitude over time
-                # st.audio(audiofile)  # display web audio player UX/UI
-
-
-                # due to the session state only updating after Selection
-                # these plot calls need to be inversed/swapped like below
-                if 'AMP' in st.session_state.spectrum2d:  # generate rms spectrum plots
-                    with st.spinner('generating AMP spectrum plot'):
-                        # time.sleep(0.3)  # add delay for spinner
-                        plots_mtpl.amp_spectrum(y, sr)
-                if 'RMS' in st.session_state.spectrum2d:  # generate amp spectrum plots
-                    with st.spinner('generating RMS spectrum plot'):
-                        # time.sleep(0.3)  # add delay for spinner
-                        plots_mtpl.rms_spectrum(times, rms)
-
-                # radio button selection for spectrum plot over time
-                streamlit_design.radiobutton_horizontal()  # switch alignment
-                sradio2_col1, sradio2_col2, sradio2_col3, sradio2_col4 = st.columns([0.08, 1.5, 1.5, 0.1])
-                with sradio2_col2:
-                    streamlit_design.add_spacing(2)  # add linebreaks
-                    st.radio('Please select your Volume-Spectrum of choice.',
-                              ['RMS Spectrum  ', 'AMP Spectrum  '],
-                              key='radiobuttons2_value', on_change=radiobuttons2_callback)
-
-                with sradio2_col3:
-                    meter = pyln.Meter(sampling_freq) # create BS.1770 meter --> international standard
-                    peak_normalized_audio = pyln.normalize.peak(wav_data, 0)  # peak normalize audio to 0 dB
-                    loudness = meter.integrated_loudness(peak_normalized_audio) # measure loudness
-
-                    st.metric(label="", value=f"{round(loudness, 2)} dB",
-                              delta=f'Audio Loudness', delta_color="off")
-
-                st.write('')  # add spacing
 
 
     with st.spinner('footer logos'):
