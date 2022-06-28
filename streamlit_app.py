@@ -319,10 +319,10 @@ def beatinspect_main():
                         plots_pltl.melspectrogram_plotly3d(y_slice, sr_slice, sec_range[0], False, False, st.session_state.melspec_treshold)
 
                 fullscreen_msg = '<p style="color: #e3fc03; font-size: 1rem;">'\
-                                'Drag the graph to explore 3D viewing angles & zooming!'\
-                                ' - Works best in fullscreen mode!<br>'\
-                                'Use the top Slider to select a specific Timeframe '\
-                                '(Limited Performance if longer than 30 sec!)'
+                                'Select a specific Timeframe using the top Slider.'\
+                                ' - limited performance if >> 30 seconds!)'\
+                                'Drag the graph to explore 3D viewing angles & zooming.'\
+                                ' - works best in fullscreen mode!<br>'
                 mardown1_col1, mardown1_col2 = st.columns([0.05, 3])
                 with mardown1_col2:  # add padding for the markdown text
                     streamlit_design.add_spacing(1)  # add linebreak
