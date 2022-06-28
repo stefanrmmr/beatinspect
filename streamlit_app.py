@@ -259,7 +259,7 @@ def beatinspect_main():
                 #      otherwise use the -25% on both ends approach as listed below
 
                 # AUDIO TIMEFRAME Selection for Mel-Spectrogram
-                slider0_col1, slider0_col2, slider0_col3 = st.columns([0.5, 2, 0.4])
+                slider0_col1, slider0_col2, slider0_col3 = st.columns([0.45, 2, 0.3])
                 with slider0_col2:  # add columns for sufficient padding
                     streamlit_design.add_spacing(3)  # add linebreaks
                     sec_range = st.slider('Select Timeframe for the spectrogram (limited performance if larger than 30sec)',
