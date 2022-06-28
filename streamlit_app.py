@@ -320,9 +320,9 @@ def beatinspect_main():
 
                 fullscreen_msg = '<p style="color: #e3fc03; font-size: 1rem;">'\
                                 'Select a specific Timeframe using the top Slider.'\
-                                ' - limited performance if >> 30 seconds!)'\
+                                ' ➱ limited performance if >> 30 seconds!)<br>'\
                                 'Drag the graph to explore 3D viewing angles & zooming.'\
-                                ' - works best in fullscreen mode!<br>'
+                                ' ➱ works best in fullscreen mode!'
                 mardown1_col1, mardown1_col2 = st.columns([0.05, 3])
                 with mardown1_col2:  # add padding for the markdown text
                     streamlit_design.add_spacing(1)  # add linebreak
