@@ -151,7 +151,10 @@ def beatinspect_main():
             # no needfor session_state saving bc instant calc
             wav_specs = sf.SoundFile(audiofile_path)
             wav_data, _ = sf.read(audiofile_path)
-            bit_depth = 'hello' # int(str(wav_specs.subtype)[4:])
+            try:
+                bit_depth = int(str(wav_specs.subtype)[4:])
+            except:
+                bit_depth = ''
             sampling_freq = wav_specs.samplerate
             channels = wav_specs.channels
             frames = wav_specs.frames
