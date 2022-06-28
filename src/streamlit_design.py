@@ -5,6 +5,7 @@ def add_spacing(spaces):
     count = 0
     while count < int(spaces):
         st.write('')
+        count += 1
 
 def design_setup():
 
