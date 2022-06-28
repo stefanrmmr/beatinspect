@@ -67,11 +67,11 @@ def design_setup():
     # Design change radio button title div size to zero height
     st.markdown('''<style>.css-16huue1 {min-height: 0rem;}</style>''',
         unsafe_allow_html=True)
-    st.markdown('<style>div.row-widget.stRadio {margin-top: -2rem;} </style>',
+    st.markdown('<style>div.row-widget.stRadio {margin-top: -1.5rem;} </style>',
         unsafe_allow_html=True)
 
     # Design change slider margins for suitable alignment
-    st.markdown('<style>.stSlider {margin-top: -2rem;} </style>',
+    st.markdown('<style>.stSlider {margin-top: -1.5rem;} </style>',
         unsafe_allow_html=True)
 
 
