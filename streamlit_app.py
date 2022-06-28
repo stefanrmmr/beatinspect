@@ -34,11 +34,11 @@ st_audiorec = components.declare_component("st_audiorec", path=build_dir)
 
 
 def radiobuttons1_switch():
-    st.session_state.spectrum3d = st.session_state.radiobuttons1_value
+    st.session_state.spectrum3d = st.session_state['radiobuttons1_value']
 
 
 def radiobuttons2_switch():
-    st.session_state.spectrum2d = st.session_state.radiobuttons2_value
+    st.session_state.spectrum2d = st.session_state['radiobuttons2_value']
 
 
 
@@ -256,13 +256,13 @@ def beatinspect_main():
 
 
 
-                if 'Peaks' in st.session_state.radiobuttons1_value:
+                if 'Peaks' in st.session_state.spectrum3d:
                     with st.spinner('generating 3D Mel Spectrogram - PEAKS DETECTION'):
                         # plot 3D interactive mel spectrogram
                         plots.melspectrogram_plotly3d(y, sr, True, True,
                             st.session_state.mel_spectrum_treshold)
 
-                else:#  'Default' in st.session_state.radiobuttons1_value:
+                if 'Default' in st.session_state.spectrum3d:
                     with st.spinner('generating 3D Mel Spectrogram - DEFAULT MODE'):
                         # plot 3D interactive mel spectrogram
                         plots.melspectrogram_plotly3d(y, sr, False, False,
@@ -273,7 +273,7 @@ def beatinspect_main():
                 sradio1_col1, sradio1_col2, sradio1_col3, sradio_col4 = st.columns([0.08, 1.5, 1.5, 0.1])
                 with sradio1_col2:
                     st.radio('Please select your prefered Mel-Spectrum viewing mode.', ['Default Top View  ', 'Peaks Detection  '],
-                              key='radiobuttons1_value') #, on_change=radiobuttons1_switch())
+                              key='radiobuttons1_value', on_change=radiobuttons1_switch())
 
                 with sradio1_col3:
                     # st.session_state.mel_spectrum_treshold = int(st.slider('Peaks Detection Treshold Selection [dB]', -25, 0, -10, key='slider1'))
@@ -298,11 +298,11 @@ def beatinspect_main():
 
                 # due to the session state only updating after Selection
                 # these plot calls need to be inversed/swapped like below
-                if 'AMP' in st.session_state.radiobuttons2_value:  # generate rms spectrum plots
+                if 'AMP' in st.session_state.spectrum2d:  # generate rms spectrum plots
                     with st.spinner('generating AMP spectrum plot'):
                         # time.sleep(0.3)  # add delay for spinner
                         plots.amp_spectrum(y, sr)
-                else: # 'RMS' in st.session_state.radiobuttons2_value:  # generate amp spectrum plots
+                if 'RMS' in st.session_state.spectrum2d:  # generate amp spectrum plots
                     with st.spinner('generating RMS spectrum plot'):
                         # time.sleep(0.3)  # add delay for spinner
                         plots.rms_spectrum(times, rms)
@@ -313,7 +313,7 @@ def beatinspect_main():
                 with sradio2_col2:
                     st.radio('Please select your Volume-Spectrum of choice.',
                               ['AMP Spectrum  ', 'RMS Spectrum  '],
-                              key='radiobuttons2_value') # , # on_change=radiobuttons2_switch()
+                              key='radiobuttons2_value', on_change=radiobuttons2_switch())
                 st.write('')  # add spacing
 
 
