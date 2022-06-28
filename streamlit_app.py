@@ -328,8 +328,9 @@ def beatinspect_main():
                 fullscreen_msg = '<p style="color: #e3fc03; font-size: 1rem;">'\
                                 'Drag the graph to explore 3D viewing angles & zooming!'\
                                 ' - Works best in fullscreen mode!'
-                mardown1_col1, mardown1_col2 = st.columns([0.06, 3])
+                mardown1_col1, mardown1_col2 = st.columns([0.05, 3])
                 with mardown1_col2:  # add padding for the markdown text
+                    streamlit_design.add_spacing(1)  # add linebreak 
                     st.markdown(fullscreen_msg, unsafe_allow_html=True)
 
 
@@ -342,10 +343,6 @@ def beatinspect_main():
                 with sradio1_col3:
                     st.slider('Peaks Detection Treshold Selection [dB]', -25, 0, -10, key='slider1_value', on_change=slider1_callback)
                 st.write('')
-
-
-
-
 
 
     with st.spinner('footer logos'):
