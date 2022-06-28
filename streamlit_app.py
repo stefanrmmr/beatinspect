@@ -306,17 +306,13 @@ def beatinspect_main():
                 slider0_col1, slider0_col2, slider0_col3 = st.columns([0.45, 2, 0.3])
                 with slider0_col2:  # add columns for sufficient padding
                     streamlit_design.add_spacing(1)  # add linebreak
-                    st.write(duration)  # TODOO
-
 
                     if duration > 30:  # if audio is longer than 30 sec --> performance limited
                         sec_range = st.slider('Select Timeframe for the spectrogram - Limited Performance if longer than 30 sec!',
-                                              0, int(duration), 0.0, 30.0)  # only select first 30 sec
-                        st.write(sec_range)
+                                              0, int(duration), (0, 30))  # only select first 30 sec
                     else:  # if the audio file is shorter than 30 sec  --> no performance loss
                         sec_range = st.slider('Select Timeframe for the spectrogram - Limited Performance if longer than 30 sec!',
-                                              0, int(duration), 0.0, int(duration))  # full timeframe
-                        st.write(sec_range)
+                                              0, int(duration), (0, int(duration)))  # full timeframe
 
                     y_slice, sr_slice = librosa.load(audiofile_path, sr=sampling_freq, offset=sec_range[0], duration=sec_range[1] - sec_range[0])
 
