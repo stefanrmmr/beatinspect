@@ -262,7 +262,7 @@ def beatinspect_main():
                         plots.melspectrogram_plotly3d(y, sr, True, True,
                             st.session_state.mel_spectrum_treshold)
 
-                if 'Default' in st.session_state.radiobuttons1_value:
+                else:#  'Default' in st.session_state.radiobuttons1_value:
                     with st.spinner('generating 3D Mel Spectrogram - DEFAULT MODE'):
                         # plot 3D interactive mel spectrogram
                         plots.melspectrogram_plotly3d(y, sr, False, False,
@@ -302,7 +302,7 @@ def beatinspect_main():
                     with st.spinner('generating AMP spectrum plot'):
                         # time.sleep(0.3)  # add delay for spinner
                         plots.amp_spectrum(y, sr)
-                if 'RMS' in st.session_state.radiobuttons2_value:  # generate amp spectrum plots
+                else: # 'RMS' in st.session_state.radiobuttons2_value:  # generate amp spectrum plots
                     with st.spinner('generating RMS spectrum plot'):
                         # time.sleep(0.3)  # add delay for spinner
                         plots.rms_spectrum(times, rms)
