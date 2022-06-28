@@ -18,6 +18,7 @@ import librosa
 import requests
 import numpy as np
 import soundfile as sf
+import pyloudnorm as pyln
 import essentia.standard as es
 
 import src.plots_matplotlib as plots_mtpl  # plotting framework matplotly

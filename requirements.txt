@@ -11,3 +11,4 @@ wavio
 pydub
 ffmpeg
 plotly
+pyloudnorm
