@@ -73,7 +73,7 @@ def beatinspect_main():
 
         audio_col0, audio_col1, audio_col2 = st.columns([0.03,0.5,1])
         with audio_col1:
-            streamlit_design.add_spacing(2)  # add linebreaks
+            streamlit_design.add_spacing(3)  # add linebreaks
             choice = st.radio('',[' Audio File Upload',
                                   ' Record via Microphone'])
             # choice = st.radio('',[' Audio File Upload'])
