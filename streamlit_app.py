@@ -149,7 +149,6 @@ def beatinspect_main():
             # no needfor session_state saving bc instant calc
             wav_specs = sf.SoundFile(audiofile_path)
             wav_data, _ = sf.read(audiofile_path)
-            duration = librosa.get_duration(y=y, sr=sr)
             try:
                 bit_depth = int(str(wav_specs.subtype)[4:])
             except:
@@ -157,14 +156,16 @@ def beatinspect_main():
             sampling_freq = wav_specs.samplerate
             channels = wav_specs.channels
             frames = wav_specs.frames
-            seconds = frames/sampling_freq
+            # seconds = frames/sampling_freq
 
             pref_col0, pref_col1, pref_col2, pref_col3 = st.columns([0.2, 1, 1, 1])
 
             with pref_col1:  # metrics: generating insights on tech specs
-                if int(channels) == 1:  # single channel .wav
+                if int(channels) == 1:
+                    # single channel .wav
                     channels = 'MONO'
-                elif int(channels) == 2:  # double channel .wav
+                elif int(channels) == 2:
+                    # double channel .wav
                     channels = 'STEREO'
                 else:  # multi channel .wav
                     channels = str(channels) + ' Channel'
@@ -208,7 +209,7 @@ def beatinspect_main():
 
                 st.metric(label="", value=f"{round(bpm_essentia, 1)} BPM",
                           delta=f'Beat Tempo', delta_color="off")
-                st.write('')  # add spacing
+                streamlit_design.add_spacing(1)  # add linebreak
 
 
         if advanced_analytics:
@@ -224,13 +225,16 @@ def beatinspect_main():
                     spectrogram_magn, phase = librosa.magphase(librosa.stft(y))
                     rms = librosa.feature.rms(S=spectrogram_magn)  # calculating rms
                     times = librosa.times_like(rms) #extracting rms timestamps
+                    duration = librosa.get_duration(y=y, sr=sr)
                     st.session_state.y, st.session_state.sr = y, sr
                     st.session_state.times, st.session_state.rms = times, rms
+                    st.session_state.duration = duration
 
             if not new_audiofile:
                 # same audiofile --> load from session_state
                 y, sr = st.session_state.y, st.session_state.sr
                 times, rms = st.session_state.times, st.session_state.rms
+                duration = st.session_state.duration
 
 
         # Inspect Audio File Specifications
@@ -392,6 +396,8 @@ if __name__ == '__main__':
         st.session_state.rms = None
     if "times" not in st.session_state:
         st.session_state.times = None
+    if "duration" not in st.session_state:
+        st.session_state.duration = None
 
     # everytime something on a streamlit app interface is clicked it is automatically run again!
     # Callbacks are run before the app script run. On clicking/dragging any slider or button,
