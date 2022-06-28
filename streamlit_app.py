@@ -33,13 +33,14 @@ build_dir = os.path.join(parent_dir, "st_audiorec/frontend/build")
 st_audiorec = components.declare_component("st_audiorec", path=build_dir)
 
 
-def radiobuttons1_switch():
+def radiobuttons1_callback():
     st.session_state.spectrum3d = st.session_state['radiobuttons1_value']
 
-
-def radiobuttons2_switch():
+def radiobuttons2_callback():
     st.session_state.spectrum2d = st.session_state['radiobuttons2_value']
 
+def slider1_callback():
+    st.session_state.melspec_treshold = st.session_state['slider1_value']
 
 
 
@@ -135,7 +136,7 @@ def beatinspect_main():
             # RESET critical selection values in case of file change
             st.session_state.spectrum2d = 'AMP Spectrum'
             st.session_state.spectrum3d = 'Default'
-            st.session_state.mel_spectrum_treshold = -10
+            st.session_state.melspec_treshold = -10
 
             new_audiofile = True # new audiofile --> update session sates
 
@@ -260,24 +261,24 @@ def beatinspect_main():
                     with st.spinner('generating 3D Mel Spectrogram - PEAKS DETECTION'):
                         # plot 3D interactive mel spectrogram
                         plots.melspectrogram_plotly3d(y, sr, True, True,
-                            st.session_state.mel_spectrum_treshold)
+                            st.session_state.melspec_treshold)
 
                 if 'Default' in st.session_state.spectrum3d:
                     with st.spinner('generating 3D Mel Spectrogram - DEFAULT MODE'):
                         # plot 3D interactive mel spectrogram
                         plots.melspectrogram_plotly3d(y, sr, False, False,
-                            st.session_state.mel_spectrum_treshold)
+                            st.session_state.melspec_treshold)
 
                 # radio button selection for spectrum plot over time
                 streamlit_design.radiobutton_horizontal()  # switch alignment
                 sradio1_col1, sradio1_col2, sradio1_col3, sradio_col4 = st.columns([0.08, 1.5, 1.5, 0.1])
                 with sradio1_col2:
                     st.radio('Please select your prefered Mel-Spectrum viewing mode.', ['Default Top View  ', 'Peaks Detection  '],
-                              key='radiobuttons1_value', on_change=radiobuttons1_switch)
+                              key='radiobuttons1_value', on_change=radiobuttons1_callback)
 
 
                 with sradio1_col3:
-                    # st.session_state.mel_spectrum_treshold = int(st.slider('Peaks Detection Treshold Selection [dB]', -25, 0, -10, key='slider1'))
+                    st.slider('Peaks Detection Treshold Selection [dB]', -25, 0, -10, key='slider1_value', on_change=slider1_callback))
                     st.write('dB slider implementation soon!')
                 st.write('')
 
@@ -314,7 +315,7 @@ def beatinspect_main():
                 with sradio2_col2:
                     st.radio('Please select your Volume-Spectrum of choice.',
                               ['AMP Spectrum  ', 'RMS Spectrum  '],
-                              key='radiobuttons2_value', on_change=radiobuttons2_switch)
+                              key='radiobuttons2_value', on_change=radiobuttons2_callback)
                 st.write('')  # add spacing
 
 
@@ -347,8 +348,8 @@ if __name__ == '__main__':
     if "spectrum3d" not in st.session_state:
         st.session_state.spectrum3d = 'Default'  # "Default"
 
-    if "mel_spectrum_treshold" not in st.session_state:
-        st.session_state.mel_spectrum_treshold = -10
+    if "melspec_treshold" not in st.session_state:
+        st.session_state.melspec_treshold = -10
 
     # initialize session state for audiofile.name
     if "audiofile_name" not in st.session_state:
