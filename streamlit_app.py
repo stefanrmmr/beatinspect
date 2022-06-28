@@ -261,17 +261,12 @@ def beatinspect_main():
                 # AUDIO TIMEFRAME Selection for Mel-Spectrogram
                 slider0_col1, slider0_col2, slider0_col3 = st.columns([0.45, 2, 0.3])
                 with slider0_col2:  # add columns for sufficient padding
-                    streamlit_design.add_spacing(3)  # add linebreaks
+                    streamlit_design.add_spacing(2)  # add linebreaks
                     sec_range = st.slider('Select Timeframe for the spectrogram (limited performance if larger than 30sec)',
                                           0, int(duration), (int(duration*0.25), int(duration*0.75)))
                     y_slice, sr_slice = librosa.load(audiofile_path, sr=sampling_freq, offset=sec_range[0],
                                                      duration=sec_range[1] - sec_range[0])
 
-
-                fullscreen_msg = '<p style="color: #e3fc03; font-size: 1rem;">'\
-                                'Drag the graph to explore 3D viewing angles & zooming!'\
-                                ' - Works best in fullscreen mode!'
-                st.markdown(fullscreen_msg, unsafe_allow_html=True)
 
                 if 'Peaks' in st.session_state.spectrum3d:
                     with st.spinner('generating 3D Mel Spectrogram - PEAKS DETECTION'):
@@ -284,6 +279,13 @@ def beatinspect_main():
                         # plot 3D interactive mel spectrogram
                         plots_pltl.melspectrogram_plotly3d(y_slice, sr_slice, False, False,
                             st.session_state.melspec_treshold)
+
+
+                fullscreen_msg = '<p style="color: #e3fc03; font-size: 1rem;">'\
+                                'Drag the graph to explore 3D viewing angles & zooming!'\
+                                ' - Works best in fullscreen mode!'
+                st.markdown(fullscreen_msg, unsafe_allow_html=True)
+
 
                 # radio button selection for spectrum plot over time
                 streamlit_design.radiobutton_horizontal()  # switch alignment
