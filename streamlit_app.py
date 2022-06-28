@@ -299,8 +299,6 @@ def beatinspect_main():
 
 
 
-                # TODO adapt MEL X TICKS so that they adhere to the timeslot selection!!!
-
                 # TODO slider default values set to be at 30sec when duration larger than 1min
                 #      otherwise use the -25% on both ends approach as listed below
 
@@ -308,19 +306,26 @@ def beatinspect_main():
                 slider0_col1, slider0_col2, slider0_col3 = st.columns([0.45, 2, 0.3])
                 with slider0_col2:  # add columns for sufficient padding
                     streamlit_design.add_spacing(1)  # add linebreak
-                    sec_range = st.slider('Select Timeframe for the spectrogram - Limited Performance if larger than 30 sec!',
-                                          0, int(duration), (int(duration*0.25), int(duration*0.75)))
+
+                    if duration > 30:  # if audio is longer than 30 sec
+                        sec_range = st.slider('Select Timeframe for the spectrogram - Limited Performance if larger than 30 sec!',
+                                              0, int(duration), 0, 30)  # select first 30 sec
+                    else:  # if the audio file is shorter than 30 sec
+                        sec_range = [0, duration]  # select whole duration
+
                     y_slice, sr_slice = librosa.load(audiofile_path, sr=sampling_freq, offset=sec_range[0],
                                                      duration=sec_range[1] - sec_range[0])
 
                 if 'Peaks' in st.session_state.spectrum3d:
                     with st.spinner('generating 3D Mel Spectrogram - PEAKS DETECTION'):
                         # plot 3D interactive mel spectrogram
-                        plots_pltl.melspectrogram_plotly3d(y_slice, sr_slice, sec_range[0], True, True, st.session_state.melspec_treshold)
+                        plots_pltl.melspectrogram_plotly3d(y_slice, sr_slice, sec_range[0], True, True,
+                                                           st.session_state.melspec_treshold)
                 if 'Default' in st.session_state.spectrum3d:
                     with st.spinner('generating 3D Mel Spectrogram - DEFAULT MODE'):
                         # plot 3D interactive mel spectrogram
-                        plots_pltl.melspectrogram_plotly3d(y_slice, sr_slice, sec_range[0], False, False, st.session_state.melspec_treshold)
+                        plots_pltl.melspectrogram_plotly3d(y_slice, sr_slice, sec_range[0], False, False,
+                                                           st.session_state.melspec_treshold)
 
                 fullscreen_msg = '<p style="color: #e3fc03; font-size: 1rem;">'\
                                 'Drag the graph to explore 3D viewing angles & zooming!'\
