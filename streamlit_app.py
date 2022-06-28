@@ -19,7 +19,8 @@ import numpy as np
 import soundfile as sf
 import essentia.standard as es
 
-import src.plots as plots  # plotting framework
+import src.plots_matplotlib as plots_mtpl  # plotting framework A
+import src.plots_mplotly as plots_pltl  # plotting framework B
 import src.utils as utils  # utility functions
 import src.detect_keyscale as detect_keyscale
 
@@ -260,13 +261,13 @@ def beatinspect_main():
                 if 'Peaks' in st.session_state.spectrum3d:
                     with st.spinner('generating 3D Mel Spectrogram - PEAKS DETECTION'):
                         # plot 3D interactive mel spectrogram
-                        plots.melspectrogram_plotly3d(y, sr, True, True,
+                        plots_pltl.melspectrogram_plotly3d(y, sr, True, True,
                             st.session_state.melspec_treshold)
 
                 if 'Default' in st.session_state.spectrum3d:
                     with st.spinner('generating 3D Mel Spectrogram - DEFAULT MODE'):
                         # plot 3D interactive mel spectrogram
-                        plots.melspectrogram_plotly3d(y, sr, False, False,
+                        plots_pltl.melspectrogram_plotly3d(y, sr, False, False,
                             st.session_state.melspec_treshold)
 
                 # radio button selection for spectrum plot over time
@@ -300,11 +301,11 @@ def beatinspect_main():
                 if 'AMP' in st.session_state.spectrum2d:  # generate rms spectrum plots
                     with st.spinner('generating AMP spectrum plot'):
                         # time.sleep(0.3)  # add delay for spinner
-                        plots.amp_spectrum(y, sr)
+                        plots_mtpl.amp_spectrum(y, sr)
                 if 'RMS' in st.session_state.spectrum2d:  # generate amp spectrum plots
                     with st.spinner('generating RMS spectrum plot'):
                         # time.sleep(0.3)  # add delay for spinner
-                        plots.rms_spectrum(times, rms)
+                        plots_mtpl.rms_spectrum(times, rms)
 
                 # radio button selection for spectrum plot over time
                 streamlit_design.radiobutton_horizontal()  # switch alignment
