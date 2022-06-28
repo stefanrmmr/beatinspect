@@ -134,8 +134,8 @@ def beatinspect_main():
             # reset session state for selected amp/rms plot
 
             # RESET critical selection values in case of file change
-            st.session_state.spectrum2d = 'AMP Spectrum'
-            st.session_state.spectrum3d = 'Default'
+            st.session_state.spectrum2d = 'RMS Spectrum'
+            st.session_state.spectrum3d = 'Peaks'
             st.session_state.melspec_treshold = -10
 
             new_audiofile = True # new audiofile --> update session sates
@@ -339,11 +339,11 @@ if __name__ == '__main__':
 
     # initialize spectrum choice session state
     if "spectrum2d" not in st.session_state:
-        st.session_state.spectrum2d = 'AMP Spectrum'  # "RMS Spectrum"
+        st.session_state.spectrum2d = 'RMS Spectrum'  # "RMS Spectrum"
 
     # initialize mel-spectrum choice session state
     if "spectrum3d" not in st.session_state:
-        st.session_state.spectrum3d = 'Default'  # "Default"
+        st.session_state.spectrum3d = 'Peaks'  # "Default"
 
     if "melspec_treshold" not in st.session_state:
         st.session_state.melspec_treshold = -10
