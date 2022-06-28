@@ -151,7 +151,7 @@ def beatinspect_main():
             # no needfor session_state saving bc instant calc
             wav_specs = sf.SoundFile(audiofile_path)
             wav_data, _ = sf.read(audiofile_path)
-            bit_depth = int(str(wav_specs.subtype)[4:])
+            bit_depth = 'hello' # int(str(wav_specs.subtype)[4:])
             sampling_freq = wav_specs.samplerate
             channels = wav_specs.channels
             frames = wav_specs.frames
@@ -302,7 +302,7 @@ def beatinspect_main():
                 sradio2_col1, sradio2_col2, sradio2_col3, sradio2_col4 = st.columns([0.08, 1.5, 1.5, 0.1])
                 with sradio2_col2:
                     st.write('')  # add spacing
-                    st.write('')  # add spacing 
+                    st.write('')  # add spacing
                     st.radio('Please select your Volume-Spectrum of choice.',
                               ['RMS Spectrum  ', 'AMP Spectrum  '],
                               key='radiobuttons2_value', on_change=radiobuttons2_callback)
