@@ -20,7 +20,7 @@ import soundfile as sf
 import essentia.standard as es
 
 import src.plots_matplotlib as plots_mtpl  # plotting framework A
-import src.plots_mplotly as plots_pltl  # plotting framework B
+import src.plots_plotly as plots_pltl  # plotting framework B
 import src.utils as utils  # utility functions
 import src.detect_keyscale as detect_keyscale
 
