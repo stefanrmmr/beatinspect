@@ -134,7 +134,7 @@ def beatinspect_main():
             # reset session state for selected amp/rms plot
 
             # RESET critical selection values in case of file change
-            st.session_state.spectrum2d = 'RMS Spectrum'
+            st.session_state.spectrum2d = 'AMP Spectrum'
             st.session_state.spectrum3d = 'Peaks'
             st.session_state.melspec_treshold = -10
 
@@ -268,7 +268,7 @@ def beatinspect_main():
                 with sradio2_col2:
                     streamlit_design.add_spacing(2)  # add linebreaks
                     st.radio('Please select your Volume-Spectrum of choice.',
-                              ['RMS Spectrum  ', 'AMP Spectrum  '],
+                              ['AMP Spectrum  ', 'RMS Spectrum  '],
                               key='radiobuttons2_value', on_change=radiobuttons2_callback)
 
                 with sradio2_col3:
@@ -360,7 +360,7 @@ def beatinspect_main():
             st.markdown(librosa_html, unsafe_allow_html=True)
             # st.image('img/coop_utility_studio.png')
 
-    # CONCEPT FOR ONE PAGE WITH TWO GIANT COLUMNS 
+    # CONCEPT FOR ONE PAGE WITH TWO GIANT COLUMNS
     # col_test1, col_test2 = st.columns([1,1])
     # with col_test1:
         # with st.expander('expander left'):
@@ -373,7 +373,7 @@ if __name__ == '__main__':
 
     # initialize spectrum choice session state
     if "spectrum2d" not in st.session_state:
-        st.session_state.spectrum2d = 'RMS Spectrum'  # "RMS Spectrum"
+        st.session_state.spectrum2d = 'AMP Spectrum'  # "RMS Spectrum"
 
     # initialize mel-spectrum choice session state
     if "spectrum3d" not in st.session_state:
