@@ -18,8 +18,11 @@ To insure that the implemented functionality provides real value to aspiring art
 - 3D Interactive Mel-Spectrogram Visualizer with integrated Signal Peak Detection mode<br/><br/>
 - TO BE IMPLEMENTED SOON: upcoming features
   - Conversion to .wav file with predefined settings<br/>(provided by using convertio.co's API features)<br/>
-  - Meta data information encoded in the output file
+  - AI-based reasoning and advanced audio analytics
+  - AI-based generation of related synthetic audio data
   - use youtube links as a form of providing input data
   - Bringing beatinspect to mobile browsers/devices<br/><br/>
 
 <img width="658" alt="ux_screenshot" src="https://user-images.githubusercontent.com/82606558/163827628-f27058de-5d44-4002-a12d-a3c041720231.png">
+<img width="777" alt="github2_beatinspect" src="https://user-images.githubusercontent.com/82606558/176327046-1c4219d4-146a-40b1-aeac-76748ae48245.png">
+<img width="829" alt="Screenshot at Jun 29 01-58-39" src="https://user-images.githubusercontent.com/82606558/176327052-98dfbbbd-b511-46b2-b408-49c910d54c5a.png">
