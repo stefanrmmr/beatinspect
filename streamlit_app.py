@@ -21,13 +21,13 @@ import soundfile as sf
 import pyloudnorm as pyln
 import essentia.standard as es
 
-import src.plots_matplotlib as plots_mtpl  # plotting framework matplotly
-import src.plots_plotly as plots_pltl  # plotting framework plotly dash
-import src.utils as utils  # utility functions
-import src.detect_keyscale as detect_keyscale
+import src_visual.plots_matplotlib as plots_mtpl  # plotting framework matplotly
+import src_visual.plots_plotly as plots_pltl  # plotting framework plotly dash
+import src_algo.utils as utils  # utility functions
+import src_algo.detect_keyscale as detect_keyscale
 
 # import design augmentation for streamlit UX/UI
-import src.streamlit_design as streamlit_design
+import src_visual.streamlit_design as streamlit_design
 
 # custom component for recording client audio in browser
 parent_dir = os.path.dirname(os.path.abspath(__file__))
