@@ -1,6 +1,4 @@
-<img width="1169" alt="bannerbeatinspectgithub" src="https://user-images.githubusercontent.com/82606558/165094162-2e72b004-86bb-4552-8b74-e2f0ed569935.png">
-<img width="777" alt="github2_beatinspect" src="https://user-images.githubusercontent.com/82606558/176327046-1c4219d4-146a-40b1-aeac-76748ae48245.png">
-<br>
+![beatinspect_screenshot_advert](https://user-images.githubusercontent.com/82606558/180895397-ce5fd812-4b38-4f5a-81d8-4fd3bdaa4f4c.png)
 
 ### Click here to be re-directed to the Beat Inspect [Streamlit Web-App](https://share.streamlit.io/stefanrmmr/beatinspect/main)<br/>
 
